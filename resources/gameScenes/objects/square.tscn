@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ssj6vlqexxt"]
+
+[ext_resource type="Texture2D" uid="uid://co4qouneuj438" path="res://resources/gameAssets/tiles/tile_32_white.png" id="1_8brb4"]
+[ext_resource type="Script" path="res://resources/gameScripts/objects/square.gd" id="1_rmkx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8mij"]
+size = Vector2(32, 32)
+
+[node name="square" type="CharacterBody2D"]
+script = ExtResource("1_rmkx6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_k8mij")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.862745, 0.419608, 1)
+self_modulate = Color(1, 1, 1, 0.419608)
+texture = ExtResource("1_8brb4")
+centered = false

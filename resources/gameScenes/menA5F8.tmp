@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bclhgweq1x3fk"]
+
+[ext_resource type="Script" path="res://resources/gameScripts/menuObject.gd" id="1_fhpe1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdgyf"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="menuObject" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchor_right = 0.031
+anchor_bottom = 0.056
+offset_right = 0.32
+offset_bottom = -0.32
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fhpe1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_mdgyf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "j"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
