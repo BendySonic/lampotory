@@ -1,6 +1,13 @@
-class_name fileManager extends Node
+#################################
+#author:BendySonic
+#last_edited:BendySonic
+#################################
+#file_manager.gd
+#script for file save/load
+#################################
+class_name file_manager extends Node
 
-#public
+#public functions
 static func save_file(content:String, fileName:String):
 	var file = FileAccess.open("resources/gameSaves/" + fileName, FileAccess.WRITE)
 	file.store_string(content)

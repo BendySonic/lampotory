@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cynpbwokss7fq"]
+[gd_scene load_steps=9 format=3 uid="uid://cn7mr4jlk35nl"]
 
-[ext_resource type="Script" path="res://resources/gameScripts/menu_tab.gd" id="1_oamba"]
-[ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/gameAssets/godotStyles/tabButton.tres" id="1_q13p5"]
-[ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/gameAssets/iconMechanic.png" id="1_u3byg"]
-[ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/gameAssets/iconElectro.tres" id="3_bxqno"]
-[ext_resource type="Texture2D" uid="uid://copq4rd5dvub3" path="res://resources/gameAssets/iconElectro.png" id="3_h47jv"]
+[ext_resource type="Script" path="res://resources/gameScripts/panel.gd" id="1_i6ns4"]
+[ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/gameAssets/godotStyles/tabButton.tres" id="2_of1dh"]
+[ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/gameAssets/iconMechanic.png" id="3_07wwa"]
+[ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/gameAssets/iconElectro.tres" id="4_wxwtq"]
+[ext_resource type="Texture2D" uid="uid://copq4rd5dvub3" path="res://resources/gameAssets/iconElectro.png" id="5_vv1fr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd1bj"]
 bg_color = Color(0.870588, 0.858824, 0.854902, 1)
@@ -24,7 +24,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="workspace_UI" type="Control"]
+[node name="WorkspaceUI" type="Control"]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="VBox_1" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,82 +42,82 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBox_1" type="HBoxContainer" parent="VBox_1"]
+[node name="HBox1" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.75
 
-[node name="HBox_2" type="HBoxContainer" parent="VBox_1"]
+[node name="HBox2" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="menu" type="PanelContainer" parent="VBox_1/HBox_2"]
+[node name="Panel" type="PanelContainer" parent="VBox/HBox2"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xd1bj")
-script = ExtResource("1_oamba")
+script = ExtResource("1_i6ns4")
 
-[node name="margin" type="MarginContainer" parent="VBox_1/HBox_2/menu"]
+[node name="Margin" type="MarginContainer" parent="VBox/HBox2/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox_1" type="VBoxContainer" parent="VBox_1/HBox_2/menu/margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox2/Panel/Margin"]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox_1/HBox_2/menu/margin/VBox_1"]
+[node name="HBox" type="HBoxContainer" parent="VBox/HBox2/Panel/Margin/VBox"]
 layout_mode = 2
 
-[node name="mech" type="Button" parent="VBox_1/HBox_2/menu/margin/VBox_1/HBox"]
+[node name="ButtonMech" type="Button" parent="VBox/HBox2/Panel/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(120, 28)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("1_q13p5")
+theme_override_styles/normal = ExtResource("2_of1dh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3npon")
-theme_override_styles/pressed = ExtResource("1_q13p5")
-theme_override_styles/disabled = ExtResource("1_q13p5")
-theme_override_styles/focus = ExtResource("1_q13p5")
+theme_override_styles/pressed = ExtResource("2_of1dh")
+theme_override_styles/disabled = ExtResource("2_of1dh")
+theme_override_styles/focus = ExtResource("2_of1dh")
 toggle_mode = true
 text = "Механика"
-icon = ExtResource("1_u3byg")
+icon = ExtResource("3_07wwa")
 
-[node name="electro" type="Button" parent="VBox_1/HBox_2/menu/margin/VBox_1/HBox"]
+[node name="ButtonElectro" type="Button" parent="VBox/HBox2/Panel/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(125, 28)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("3_bxqno")
+theme_override_styles/normal = ExtResource("4_wxwtq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ebtwe")
-theme_override_styles/pressed = ExtResource("3_bxqno")
-theme_override_styles/disabled = ExtResource("3_bxqno")
-theme_override_styles/focus = ExtResource("3_bxqno")
+theme_override_styles/pressed = ExtResource("4_wxwtq")
+theme_override_styles/disabled = ExtResource("4_wxwtq")
+theme_override_styles/focus = ExtResource("4_wxwtq")
 toggle_mode = true
 text = "Электрика"
-icon = ExtResource("3_h47jv")
+icon = ExtResource("5_vv1fr")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox_1/HBox_2/menu/margin/VBox_1"]
+[node name="Margin" type="MarginContainer" parent="VBox/HBox2/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Grid" type="GridContainer" parent="VBox_1/HBox_2/menu/margin/VBox_1/MarginContainer"]
+[node name="Grid" type="GridContainer" parent="VBox/HBox2/Panel/Margin/VBox/Margin"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 columns = 6
 
-[node name="empty" type="Container" parent="VBox_1/HBox_2"]
+[node name="ContainerEmpty" type="Container" parent="VBox/HBox2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.1
 
-[connection signal="mouse_entered" from="VBox_1/HBox_2/menu" to="VBox_1/HBox_2/menu" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="VBox_1/HBox_2/menu" to="VBox_1/HBox_2/menu" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="VBox/HBox2/Panel" to="VBox/HBox2/Panel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="VBox/HBox2/Panel" to="VBox/HBox2/Panel" method="_on_mouse_exited"]

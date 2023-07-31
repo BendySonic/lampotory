@@ -1,15 +1,21 @@
-class_name menuObject extends Control
+#################################
+#author:BendySonic
+#last_edited:BendySonic
+#################################
+#grid_widget.gd
+#script for widget in menu grid in workspace interface
+#################################
+class_name grid_widget extends Control
 
-#private
+#private variables
 var object_name:String
 
 var mouse_inside:bool = false
 var event_type:InputEventMouse
 var follow_mouse:bool = false
 
-func _ready():
-	pass
 
+#private functions
 func _process(delta):
 	if follow_mouse:
 		global_position = get_global_mouse_position() - Vector2(16, 16)
@@ -26,7 +32,7 @@ func _on_mouse_exited():
 func set_label(argName:String):
 	$Label.text = argName
 
-#public
+#public functions
 func construct(argName:String):
 	object_name = argName
 	set_label(argName)

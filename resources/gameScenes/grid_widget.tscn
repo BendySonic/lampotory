@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bclhgweq1x3fk"]
+[gd_scene load_steps=3 format=3 uid="uid://b0b67lj6khtwh"]
 
-[ext_resource type="Script" path="res://resources/gameScripts/grid_object.gd" id="1_fhpe1"]
+[ext_resource type="Script" path="res://resources/gameScripts/grid_widget.gd" id="1_ephbe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdgyf"]
 bg_color = Color(1, 1, 1, 1)
@@ -9,7 +9,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="menuObject" type="Control"]
+[node name="GridWidget" type="Control"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 3
 anchor_right = 0.031
@@ -19,7 +19,7 @@ offset_bottom = -0.32
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_fhpe1")
+script = ExtResource("1_ephbe")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
