@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cynpbwokss7fq"]
 
-[ext_resource type="Script" path="res://resources/gameScripts/menuTab.gd" id="1_oamba"]
+[ext_resource type="Script" path="res://resources/gameScripts/menu_tab.gd" id="1_oamba"]
 [ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/gameAssets/godotStyles/tabButton.tres" id="1_q13p5"]
 [ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/gameAssets/iconMechanic.png" id="1_u3byg"]
 [ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/gameAssets/iconElectro.tres" id="3_bxqno"]
