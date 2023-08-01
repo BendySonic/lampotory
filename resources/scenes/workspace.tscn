@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dv2j8pqgbo8gr"]
 
-[ext_resource type="Script" path="res://resources/gameScripts/workspace.gd" id="1_k14se"]
+[ext_resource type="Script" path="res://resources/scripts/workspace.gd" id="1_p7jqr"]
 
 [node name="Workspace" type="Node2D"]
-script = ExtResource("1_k14se")
+script = ExtResource("1_p7jqr")
 
 [node name="LayerUI" type="CanvasLayer" parent="."]
 layer = 2

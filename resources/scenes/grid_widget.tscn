@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0b67lj6khtwh"]
 
-[ext_resource type="Script" path="res://resources/gameScripts/grid_widget.gd" id="1_ephbe"]
+[ext_resource type="Script" path="res://resources/scripts/grid_widget.gd" id="1_rurtq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdgyf"]
 bg_color = Color(1, 1, 1, 1)
@@ -19,7 +19,7 @@ offset_bottom = -0.32
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_ephbe")
+script = ExtResource("1_rurtq")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

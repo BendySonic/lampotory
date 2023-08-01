@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx67m1b8w6nte"
-path="res://.godot/imported/iconMechanic.png-5c1e3bc8563045d67fda47e6fb376f54.ctex"
+uid="uid://co4qouneuj438"
+path="res://.godot/imported/tile_32_white.png-79c1881ea007de5def7acd51382fbe4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/gameAssets/iconMechanic.png"
-dest_files=["res://.godot/imported/iconMechanic.png-5c1e3bc8563045d67fda47e6fb376f54.ctex"]
+source_file="res://resources/assets/tiles/tile_32_white.png"
+dest_files=["res://.godot/imported/tile_32_white.png-79c1881ea007de5def7acd51382fbe4f.ctex"]
 
 [params]
 

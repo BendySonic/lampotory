@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmhmxhm5pxrdw"
-path="res://.godot/imported/tile_red.png-b36fb527b99d9eb90b46932522f4a96d.ctex"
+uid="uid://cis41m7gopu1m"
+path="res://.godot/imported/icon.svg-305b672091780d093b892ba8652d7193.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/gameAssets/tiles/tile_red.png"
-dest_files=["res://.godot/imported/tile_red.png-b36fb527b99d9eb90b46932522f4a96d.ctex"]
+source_file="res://icon/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-305b672091780d093b892ba8652d7193.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

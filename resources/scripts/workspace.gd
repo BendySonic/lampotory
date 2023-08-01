@@ -60,6 +60,6 @@ func load_scenes():
 
 func load_resources():
 	loads = {
-		"ui": preload("res://resources/gameScenes/workspace_ui.tscn") ,
-		"grid_widget": preload("res://resources/gameScenes/grid_widget.tscn"),
+		"ui": preload("res://resources/scenes/workspace_ui.tscn") ,
+		"grid_widget": preload("res://resources/scenes/grid_widget.tscn"),
 	}
