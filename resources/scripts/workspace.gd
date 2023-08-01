@@ -32,7 +32,12 @@ func _input(event):
 				
 		#widget_cursor release
 		if !event.is_pressed() and bool(layer_choose.get_child_count()):
-			layer_choose.remove_child(layer_choose.get_child(0))
+			var widget_cursor = layer_choose.get_child(0)
+			layer_choose.remove_child(widget_cursor)
+			widget_cursor.queue_free()
+			
+			
+			
 
 
 func _ready():
@@ -62,4 +67,6 @@ func load_resources():
 	loads = {
 		"ui": preload("res://resources/scenes/workspace_ui.tscn") ,
 		"grid_widget": preload("res://resources/scenes/grid_widget.tscn"),
+		
+		"square_body": preload("res://resources/scenes/bodies/square_body.tscn"),
 	}
