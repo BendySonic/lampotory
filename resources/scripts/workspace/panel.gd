@@ -18,5 +18,5 @@ func _on_mouse_exited():
 	mouse_inside = false
 	
 #public functions
-func is_mouse_inside():
+func is_mouse_inside() -> bool:
 	return mouse_inside

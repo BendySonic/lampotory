@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv2j8pqgbo8gr"]
+
+[ext_resource type="Script" path="res://resources/scripts/workspace/workspace.gd" id="1_i833f"]
+
+[node name="Workspace" type="Node2D"]
+script = ExtResource("1_i833f")
+
+[node name="LayerUI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="LayerSelected" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="LayerWorkspace" type="Node2D" parent="."]

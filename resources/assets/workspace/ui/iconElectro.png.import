@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxew36inrqcxb"
-path="res://.godot/imported/play.png-3e0947c300f93641a626041ea6a4b2b4.ctex"
+uid="uid://copq4rd5dvub3"
+path="res://.godot/imported/iconElectro.png-ab334fb06597540fbffa1b50da1835f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/assets/play.png"
-dest_files=["res://.godot/imported/play.png-3e0947c300f93641a626041ea6a4b2b4.ctex"]
+source_file="res://resources/assets/workspace/ui/iconElectro.png"
+dest_files=["res://.godot/imported/iconElectro.png-ab334fb06597540fbffa1b50da1835f3.ctex"]
 
 [params]
 

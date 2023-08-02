@@ -7,41 +7,33 @@
 #################################
 class_name grid_widget extends Control
 
+
 #private variables
 var object_name:String
+var object_icon:Resource
 
 var mouse_inside:bool = false
-var event_type:InputEventMouse
-var follow_mouse:bool = false
 
 
 #private functions
-func _process(delta):
-	if follow_mouse:
-		global_position = get_global_mouse_position() - Vector2(16, 16)
-
-func _on_gui_input(event):
-	event_type = event
-
 func _on_mouse_entered():
 	mouse_inside = true
 	
 func _on_mouse_exited():
 	mouse_inside = false
 	
-func set_label(argName:String):
-	$Label.text = argName
+func set_icon(body_icon:Resource):
+	$TextureRect.texture = body_icon
+
 
 #public functions
-func construct(argName:String):
-	object_name = argName
-	set_label(argName)
+func construct(res:body_resource):
+	object_name = res.body_name
+	object_icon = res.body_icon
+	set_icon(res.body_icon)
 
-func is_mouse_inside():
+func is_mouse_inside() -> bool:
 	return mouse_inside
 	
-func get_info():
+func get_widget_name() -> String:
 	return object_name
-	
-func set_follow_mouse():
-	follow_mouse = true

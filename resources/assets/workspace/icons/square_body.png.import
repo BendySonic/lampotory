@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx67m1b8w6nte"
-path="res://.godot/imported/iconMechanic.png-bceefe4b268cf227fba2982862a0ffa3.ctex"
+uid="uid://ei0ultrsnkum"
+path="res://.godot/imported/square_body.png-1680ed4292e5d09905f732421c50de09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/assets/iconMechanic.png"
-dest_files=["res://.godot/imported/iconMechanic.png-bceefe4b268cf227fba2982862a0ffa3.ctex"]
+source_file="res://resources/assets/workspace/icons/square_body.png"
+dest_files=["res://.godot/imported/square_body.png-1680ed4292e5d09905f732421c50de09.ctex"]
 
 [params]
 

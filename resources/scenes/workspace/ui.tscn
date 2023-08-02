@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://mwmuckip5lrn"]
 
-[ext_resource type="Script" path="res://resources/scripts/panel.gd" id="1_onun1"]
-[ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/assets/godotStyles/tabButton.tres" id="2_3llkd"]
-[ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/assets/iconMechanic.png" id="3_oxlco"]
-[ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/assets/iconElectro.tres" id="4_xac67"]
-[ext_resource type="Texture2D" uid="uid://copq4rd5dvub3" path="res://resources/assets/iconElectro.png" id="5_i35ki"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/panel.gd" id="1_y1ueg"]
+[ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/assets/godot_styles/tabButton.tres" id="2_8xcr0"]
+[ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/assets/workspace/ui/iconMechanic.png" id="3_p8cu8"]
+[ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/assets/godot_styles/iconElectro.tres" id="4_dyl6j"]
+[ext_resource type="Texture2D" uid="uid://copq4rd5dvub3" path="res://resources/assets/workspace/ui/iconElectro.png" id="5_2nhdr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd1bj"]
 bg_color = Color(0.870588, 0.858824, 0.854902, 1)
@@ -57,7 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xd1bj")
-script = ExtResource("1_onun1")
+script = ExtResource("1_y1ueg")
 
 [node name="Margin" type="MarginContainer" parent="VBox/HBox2/Panel"]
 layout_mode = 2
@@ -77,28 +77,28 @@ custom_minimum_size = Vector2(120, 28)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("2_3llkd")
+theme_override_styles/normal = ExtResource("2_8xcr0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3npon")
-theme_override_styles/pressed = ExtResource("2_3llkd")
-theme_override_styles/disabled = ExtResource("2_3llkd")
-theme_override_styles/focus = ExtResource("2_3llkd")
+theme_override_styles/pressed = ExtResource("2_8xcr0")
+theme_override_styles/disabled = ExtResource("2_8xcr0")
+theme_override_styles/focus = ExtResource("2_8xcr0")
 toggle_mode = true
 text = "Механика"
-icon = ExtResource("3_oxlco")
+icon = ExtResource("3_p8cu8")
 
 [node name="ButtonElectro" type="Button" parent="VBox/HBox2/Panel/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(125, 28)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("4_xac67")
+theme_override_styles/normal = ExtResource("4_dyl6j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ebtwe")
-theme_override_styles/pressed = ExtResource("4_xac67")
-theme_override_styles/disabled = ExtResource("4_xac67")
-theme_override_styles/focus = ExtResource("4_xac67")
+theme_override_styles/pressed = ExtResource("4_dyl6j")
+theme_override_styles/disabled = ExtResource("4_dyl6j")
+theme_override_styles/focus = ExtResource("4_dyl6j")
 toggle_mode = true
 text = "Электрика"
-icon = ExtResource("5_i35ki")
+icon = ExtResource("5_2nhdr")
 
 [node name="Margin" type="MarginContainer" parent="VBox/HBox2/Panel/Margin/VBox"]
 layout_mode = 2
@@ -112,7 +112,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
-columns = 6
+columns = 3
 
 [node name="ContainerEmpty" type="Container" parent="VBox/HBox2"]
 layout_mode = 2

@@ -10,11 +10,8 @@ size = Vector2(32, 32)
 script = ExtResource("1_wsgl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_k8mij")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0.862745, 0.419608, 1)
-self_modulate = Color(1, 1, 1, 0.419608)
 texture = ExtResource("2_rhhvs")
-centered = false
