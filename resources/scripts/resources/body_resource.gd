@@ -7,7 +7,7 @@
 #body_resource.gd
 #script for "body_resource" Resource
 #################################
-class_name body_resource extends Resource
+class_name BodyResource extends Resource
 
 
 #data

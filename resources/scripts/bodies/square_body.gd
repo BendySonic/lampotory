@@ -1,4 +1,4 @@
-class_name square_body extends CharacterBody2D
+class_name SquareBody extends CharacterBody2D
 
 func _ready():
 	pass

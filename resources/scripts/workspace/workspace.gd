@@ -5,28 +5,36 @@
 #workspace.gd
 #script for laboratory workspace
 #################################
-class_name workspace extends Node2D
+class_name Workspace extends Node2D
 
 #private variables
+#Константы путей папок - сцен рабочей области, ресурсов тел, сцен тел.
 const SCENES_PATH = "res://resources/scenes/workspace/"
-const RESOURCES_PATH = "res://resources/godot_resources/body_resources/"
+const RESOURCES_PATH = "res://resources/scenes/resources/body_resources/"
 const BODIES_PATH = "res://resources/scenes/bodies/"
 
+#Список сцен, тел
 const SCENES = ["ui", "grid_widget", "widget_cursor"]
 const BODIES = ["square_body"]
 
+#Константы панели и грид контейнера внутри панели
 const GRID_PATH = "VBox/HBox2/Panel/Margin/VBox/Margin/Grid"
 const PANEL_PATH = "VBox/HBox2/Panel"
 
+#Словари, хранящие загруженные ресурсы сцен рабочей области,
+#ресурсов тел, сцен тел
 var scenes:Dictionary
 var resources:Dictionary
 var bodies:Dictionary
-var choosen_res:body_resource
+#Активный ресурс тела
+var choosen_res:BodyResource
 
+#Удобные обращаения к нодам из загруженных сцен рабочей области
 var ui:Node
 var grid:Node
 var panel:Node
 
+#Удобное обращение к слоям рабочей области
 @onready var layer_ui:CanvasLayer = $LayerUI
 @onready var layer_selected:CanvasLayer = $LayerSelected
 @onready var layer_workspace:Node2D = $LayerWorkspace
@@ -45,9 +53,10 @@ func _input(event):
 				
 		#widget_cursor release / create body
 		if not event.is_pressed() and bool(layer_selected.get_child_count()):
-			var body = bodies["square_body"].instantiate()
+			var body = bodies[choosen_res.body_name].instantiate()
 			body.position = get_global_mouse_position()
 			layer_workspace.add_child(body)
+			
 			var widget_cursor = layer_selected.get_child(0)
 			layer_selected.remove_child(widget_cursor)
 			widget_cursor.queue_free()
@@ -80,7 +89,6 @@ func set_scenes():
 func load_scenes():
 	for scene_name in SCENES:
 		scenes[scene_name] = load(SCENES_PATH + scene_name + ".tscn")
-
 
 func load_body_resources():
 	for body_name in BODIES:

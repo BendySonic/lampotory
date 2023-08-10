@@ -2,10 +2,10 @@
 #author:BendySonic
 #last_edited:BendySonic
 #################################
-#file_manager.gd
+#lamp_file_manager.gd
 #script for file save/load
 #################################
-class_name file_manager extends Object
+extends Object
 
 #public functions
 static func save_file(content:String, file_name:String):

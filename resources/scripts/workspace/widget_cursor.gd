@@ -5,10 +5,12 @@
 #widget_cursor.gd
 #script for lighter object while hold grid_widget
 #################################
-class_name widget_cursor extends Node2D
+class_name WidgetCursor extends Node2D
 
 
 #private variables
+var body_name:String
+
 var follow_mouse:bool = false
 
 
@@ -21,6 +23,6 @@ func set_icon(body_icon:Resource):
 
 
 #public functions
-func construct(res:body_resource):
+func construct(res:BodyResource):
 	set_icon(res.body_icon)
 

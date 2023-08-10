@@ -16,6 +16,11 @@ run/main_scene="res://resources/scenes/workspace/workspace.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon/icon.svg"
 
+[autoload]
+
+LampFileManager="*res://resources/scripts/singletones/lamp_file_manager.gd"
+LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280
