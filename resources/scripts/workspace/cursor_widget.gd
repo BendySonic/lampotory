@@ -9,8 +9,8 @@ class_name CursorWidget extends Node2D
 
 
 #private variables
-var body_name:String
-
+var object_name:String
+var object_icon:Resource
 var follow_mouse:bool = false
 
 
@@ -23,6 +23,8 @@ func set_icon(body_icon:Resource):
 
 
 #public functions
-func construct(res:BodyResource):
-	set_icon(res.body_icon)
+func construct(body_name:String, body_icon:Resource):
+	object_name = body_name
+	object_icon = body_icon
+	set_icon(body_icon)
 

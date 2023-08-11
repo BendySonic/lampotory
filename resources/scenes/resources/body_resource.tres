@@ -1,8 +1,25 @@
-[gd_resource type="Resource" script_class="body_resource" load_steps=2 format=3 uid="uid://bmaqyxsoj2wf1"]
+[gd_resource type="Resource" script_class="BodyResource" load_steps=2 format=3 uid="uid://bmaqyxsoj2wf1"]
 
 [ext_resource type="Script" path="res://resources/scripts/resources/body_resource.gd" id="1_igw01"]
 
 [resource]
 script = ExtResource("1_igw01")
+body_id = {
+"can_change": false,
+"info": "Идентификатор объекта в проекте",
+"name": "Номер",
+"value": 0
+}
+widget_name = {
+"can_change": false,
+"info": "Тип объекта (Например, 'Обычное тело', 	'Округлое тело')",
+"name": "Тип",
+"value": "Обычное тело"
+}
+speed = {
+"can_change": true,
+"info": "Скорость тела в м/c (метр в секунду) 	на момент старта",
+"name": "Скорость",
+"value": 0
+}
 body_name = ""
-body_widget_name = ""

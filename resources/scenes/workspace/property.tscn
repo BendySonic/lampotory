@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://0a0diqvi7s17"]
+[gd_scene load_steps=4 format=3 uid="uid://0a0diqvi7s17"]
 
 [ext_resource type="Script" path="res://resources/scripts/workspace/property.gd" id="1_qe2ff"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brnb4"]
-bg_color = Color(0.619608, 0.631373, 0.678431, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8d1fm"]
+bg_color = Color(0.566406, 0.609375, 0.6875, 1)
+border_color = Color(0.570313, 0.613281, 0.691406, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsqcy"]
+bg_color = Color(0.415686, 0.454902, 0.533333, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
 
 [node name="Property" type="PanelContainer"]
-theme_override_styles/panel = SubResource("StyleBoxFlat_brnb4")
+offset_right = 122.0
+offset_bottom = 35.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8d1fm")
 script = ExtResource("1_qe2ff")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -30,6 +46,7 @@ clip_text = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_lsqcy")
 placeholder_text = "Ввод"
 max_length = 20
 

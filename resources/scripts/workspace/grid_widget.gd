@@ -24,9 +24,9 @@ func set_icon(body_icon:Resource):
 
 
 #public functions
-func construct(res:BodyResource):
-	object_name = res.body_name
-	object_icon = res.body_icon
+func construct(body_name:String, body_icon:Resource):
+	object_name = body_name
+	object_icon = body_icon
 	set_icon(object_icon)
 
 func get_widget_name() -> String:

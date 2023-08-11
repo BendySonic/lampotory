@@ -25,10 +25,10 @@ const PROPERTIES_PATH = ("VBox/HBox2/PanelContainer/HBoxContainer/MarginContaine
 #Словари, хранящие загруженные ресурсы сцен рабочей области,
 #ресурсов тел, сцен тел
 var scenes:Dictionary
-var resources:Dictionary
+var data:Dictionary = {
+	"workspace_base_body": preload("res://resources/assets/workspace/icons/square_body.png")
+}
 var bodies:Dictionary
-#Активный ресурс тела
-var choosen_res:BodyResource
 #Число объектов в проекте
 var body_count:int = 0
 
@@ -47,7 +47,6 @@ var panel:Node
 #private functions
 func _ready():
 	load_scenes()
-	load_body_resources()
 	load_body_scene()
 	set_scenes()
 	
@@ -73,17 +72,12 @@ func set_scenes():
 	for widget_name in BODIES:
 		var widget = scenes["grid_widget"].instantiate()
 		grid.add_child(widget)
-		widget.construct(resources[widget_name])
+		widget.construct(widget_name, data[widget_name])
 
 
 func load_scenes():
 	for scene_name in SCENES:
 		scenes[scene_name] = load(SCENES_PATH + scene_name + ".tscn")
-
-
-func load_body_resources():
-	for body_name in BODIES:
-		resources[body_name] = load(RESOURCES_PATH + body_name + ".tres")
 
 
 func load_body_scene():
@@ -95,21 +89,18 @@ func on_grid_widget_gui_input(event:InputEventMouse, grid_widget:GridWidget):
 	if event is InputEventMouseButton:
 		#GridWidget pressed
 		if event.is_pressed():
-			choosen_res = resources[grid_widget.get_widget_name()]
-			
 			var cursor_widget = scenes["cursor_widget"].instantiate()
 			layer_selected.add_child(cursor_widget)
-			cursor_widget.construct(choosen_res)
+			cursor_widget.construct(grid_widget.object_name, grid_widget.object_icon)
 				
 		#GridWidget released / body create
 		if not event.is_pressed():
 			body_count += 1
-			choosen_res.body_id["value"] = body_count
 			
-			var body = bodies[choosen_res.body_name].instantiate()
+			var body = bodies[grid_widget.object_name].instantiate()
 			layer_workspace.add_child(body)
 			body.position = get_global_mouse_position()
-			body.construct(choosen_res)
+			body.construct(grid_widget.object_name)
 			
 			var cursor_widget = layer_selected.get_child(0)
 			layer_selected.remove_child(cursor_widget)
@@ -121,7 +112,6 @@ func on_body_gui_input(res:BodyResource):
 		for child in properties.get_children():
 			child.queue_free()
 	for property in res.properties:
-		print(property["name"])
 		var property_scene = scenes["property"].instantiate()
 		properties.add_child(property_scene)
 		property_scene.property_name.text = property["name"]
