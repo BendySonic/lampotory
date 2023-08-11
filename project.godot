@@ -26,6 +26,10 @@ LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 
+[editor]
+
+movie_writer/movie_file="C:/Users/nurba/programming/godot/lampotory/documents/videos/1.avi"
+
 [input]
 
 create={

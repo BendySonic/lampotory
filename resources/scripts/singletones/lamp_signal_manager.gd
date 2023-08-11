@@ -3,6 +3,12 @@
 #last_edited:BendySonic
 #################################
 #lamp_signal_manager.gd
-#script for signal manage
+#global singletone for signal manager
 #################################
-extends Object
+extends Node
+
+#GridWidget
+signal widget_input(event, widget_cursor)
+
+#WorkspaceBaseBody
+signal body_input(res)

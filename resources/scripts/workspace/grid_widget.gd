@@ -17,15 +17,8 @@ var mouse_inside:bool = false
 
 #private functions
 func _on_gui_input(event):
-	if event is InputEventMouseButton:
-		print("clicked_widget")
+	LampSignalManager.emit_signal("widget_input", event, self)
 
-func _on_mouse_entered():
-	mouse_inside = true
-	
-func _on_mouse_exited():
-	mouse_inside = false
-	
 func set_icon(body_icon:Resource):
 	$TextureRect.texture = body_icon
 
@@ -36,8 +29,5 @@ func construct(res:BodyResource):
 	object_icon = res.body_icon
 	set_icon(object_icon)
 
-func is_mouse_inside() -> bool:
-	return mouse_inside
-	
 func get_widget_name() -> String:
 	return object_name

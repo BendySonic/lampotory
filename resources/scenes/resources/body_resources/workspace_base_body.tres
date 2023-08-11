@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BodyResource" load_steps=3 format=3 uid="uid://w13rmkf2j04k"]
+
+[ext_resource type="Texture2D" uid="uid://ei0ultrsnkum" path="res://resources/assets/workspace/icons/square_body.png" id="1_hm3q8"]
+[ext_resource type="Script" path="res://resources/scripts/resources/body_resource.gd" id="2_kmvk8"]
+
+[resource]
+script = ExtResource("2_kmvk8")
+body_id = {
+"value": 0
+}
+widget_name = null
+speed = null
+body_name = "workspace_base_body"
+body_icon = ExtResource("1_hm3q8")

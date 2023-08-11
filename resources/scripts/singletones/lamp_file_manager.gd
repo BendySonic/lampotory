@@ -5,7 +5,7 @@
 #lamp_file_manager.gd
 #script for file save/load
 #################################
-extends Object
+extends Node
 
 #public functions
 static func save_file(content:String, file_name:String):

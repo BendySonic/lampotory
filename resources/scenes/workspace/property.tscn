@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://0a0diqvi7s17"]
+
+[ext_resource type="Script" path="res://resources/scripts/workspace/property.gd" id="1_qe2ff"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brnb4"]
+bg_color = Color(0.619608, 0.631373, 0.678431, 1)
+
+[node name="Property" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_brnb4")
+script = ExtResource("1_qe2ff")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "Имя"
+clip_text = true
+
+[node name="ValueEdit" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Ввод"
+max_length = 20
+
+[node name="ValueLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
