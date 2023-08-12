@@ -11,4 +11,9 @@ extends Node
 signal widget_input(event, widget_cursor)
 
 #WorkspaceBaseBody
-signal body_input(res)
+signal body_input(res_properties, id)
+signal data_changed(new_data, property_name, value_type, id)
+
+#WorkspaceUI
+signal play()
+signal pause()

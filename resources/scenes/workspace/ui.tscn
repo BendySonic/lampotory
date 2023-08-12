@@ -1,50 +1,45 @@
-[gd_scene load_steps=14 format=3 uid="uid://mwmuckip5lrn"]
+[gd_scene load_steps=10 format=3 uid="uid://mwmuckip5lrn"]
 
 [ext_resource type="StyleBox" uid="uid://b7q50unjctfxi" path="res://resources/assets/godot_styles/tab_body_style.tres" id="1_b34fo"]
 [ext_resource type="Script" path="res://resources/scripts/workspace/panel.gd" id="1_y1ueg"]
-[ext_resource type="StyleBox" uid="uid://x4vnr54ruy2t" path="res://resources/assets/godot_styles/tabButton.tres" id="2_8xcr0"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/ui.gd" id="1_ymhxb"]
 [ext_resource type="StyleBox" uid="uid://5kmb0ohy85tr" path="res://resources/assets/godot_styles/tab_name_style.tres" id="3_g5yy5"]
-[ext_resource type="Texture2D" uid="uid://dx67m1b8w6nte" path="res://resources/assets/workspace/ui/iconMechanic.png" id="3_p8cu8"]
-[ext_resource type="StyleBox" uid="uid://q587pv6rixdi" path="res://resources/assets/godot_styles/iconElectro.tres" id="4_dyl6j"]
-[ext_resource type="Texture2D" uid="uid://copq4rd5dvub3" path="res://resources/assets/workspace/ui/iconElectro.png" id="5_2nhdr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up2bn"]
-bg_color = Color(0.580392, 0.627451, 0.694118, 1)
+bg_color = Color(0, 0.480469, 0.917969, 1)
 corner_radius_top_right = 15
 expand_margin_top = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im1c0"]
-bg_color = Color(0.721569, 0.756863, 0.807843, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_right = 15
 expand_margin_top = 4.0
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 12
+shadow_offset = Vector2(5, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j37b1"]
-bg_color = Color(0.580392, 0.627451, 0.694118, 1)
+bg_color = Color(0, 0.482353, 0.921569, 1)
 expand_margin_top = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwmhs"]
-bg_color = Color(0.45098, 0.494118, 0.576471, 1)
+bg_color = Color(0.384314, 0.556863, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3npon"]
-bg_color = Color(0.803922, 0.443137, 0.121569, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebtwe"]
-bg_color = Color(0.396078, 0.486275, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bq8ib"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.219608)
+shadow_size = 3
+shadow_offset = Vector2(1, -1)
 
 [node name="WorkspaceUI" type="Control"]
-clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_ymhxb")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -97,12 +93,13 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Play" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_jwmhs")
 
-[node name="Panel2" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Pause" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jwmhs")
@@ -130,6 +127,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_b34fo")
 script = ExtResource("1_y1ueg")
@@ -162,35 +160,15 @@ layout_mode = 2
 [node name="HBox" type="HBoxContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox"]
 layout_mode = 2
 
-[node name="ButtonMech" type="Button" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/HBox"]
-custom_minimum_size = Vector2(28, 28)
+[node name="LineEdit" type="LineEdit" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/HBox"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("2_8xcr0")
-theme_override_styles/hover = SubResource("StyleBoxFlat_3npon")
-theme_override_styles/pressed = ExtResource("2_8xcr0")
-theme_override_styles/disabled = ExtResource("2_8xcr0")
-theme_override_styles/focus = ExtResource("2_8xcr0")
-toggle_mode = true
-text = "
-"
-icon = ExtResource("3_p8cu8")
-
-[node name="ButtonElectro" type="Button" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/HBox"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("4_dyl6j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ebtwe")
-theme_override_styles/pressed = ExtResource("4_dyl6j")
-theme_override_styles/disabled = ExtResource("4_dyl6j")
-theme_override_styles/focus = ExtResource("4_dyl6j")
-toggle_mode = true
-text = "
-"
-icon = ExtResource("5_2nhdr")
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.388235, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_bq8ib")
+placeholder_text = "Поиск"
 
 [node name="Margin" type="MarginContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox"]
 layout_mode = 2
@@ -213,7 +191,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_b34fo")
-script = ExtResource("1_y1ueg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties"]
 layout_mode = 2
@@ -231,10 +208,10 @@ text = " Свойства"
 [node name="Margin" type="MarginContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="VBox" type="VBoxContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer/Margin"]
 layout_mode = 2
@@ -244,7 +221,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
+[connection signal="gui_input" from="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_gui_input"]
+[connection signal="gui_input" from="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Pause" to="." method="_on_pause_gui_input"]
 [connection signal="mouse_entered" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties" method="_on_mouse_exited"]

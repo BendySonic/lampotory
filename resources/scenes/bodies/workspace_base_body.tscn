@@ -6,6 +6,4 @@
 input_pickable = true
 script = ExtResource("1_1fv5q")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]

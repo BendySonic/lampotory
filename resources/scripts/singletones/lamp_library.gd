@@ -2,8 +2,8 @@
 #author:BendySonic
 #last_edited:BendySonic
 #################################
-#lamp_file_manager.gd
-#script for helpful functions
+#workspace.gd
+#script for libraries and static functions
 #################################
 extends Node
 

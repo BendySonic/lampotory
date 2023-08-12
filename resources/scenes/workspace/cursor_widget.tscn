@@ -6,4 +6,4 @@
 script = ExtResource("1_aktjb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.109804, 0.776471, 0.458824, 1)
+modulate = Color(0, 0.717647, 0.933333, 0.592157)

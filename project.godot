@@ -20,7 +20,7 @@ config/icon="res://icon/icon.svg"
 
 LampFileManager="*res://resources/scripts/singletones/lamp_file_manager.gd"
 LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
-LampLibrary="*res://resources/scripts/singletones/lamp_library.gd"
+LL="*res://resources/scripts/singletones/lamp_library.gd"
 
 [display]
 
@@ -48,4 +48,4 @@ clear={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.94902, 0.94902, 0.94902, 1)
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
