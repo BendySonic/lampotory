@@ -1,20 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxbtxpdoj80km"]
+[gd_scene load_steps=2 format=3 uid="uid://cxbtxpdoj80km"]
 
 [ext_resource type="Script" path="res://resources/scripts/bodies/workspace_base_body.gd" id="1_1fv5q"]
-[ext_resource type="Texture2D" uid="uid://co4qouneuj438" path="res://resources/assets/tiles/tile_32_white.png" id="2_ooeil"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8mij"]
-size = Vector2(32, 32)
 
 [node name="WorkspaceBaseBody" type="CharacterBody2D"]
 input_pickable = true
 script = ExtResource("1_1fv5q")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_k8mij")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0.862745, 0.419608, 1)
-texture = ExtResource("2_ooeil")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
