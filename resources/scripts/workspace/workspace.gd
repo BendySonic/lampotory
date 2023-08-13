@@ -29,6 +29,7 @@ var resources:Dictionary
 var bodies:Dictionary
 #Активный ресурс тела (Обновляется перед созданием нового тела)
 var choosen_res:BodyResource
+var playing:bool = false
 #Число объектов в рабочей области (Идентификатор)
 var body_count:int = 0
 
@@ -58,7 +59,7 @@ func set_signals():
 	LampSignalManager.widget_input.connect(on_grid_widget_gui_input)
 	LampSignalManager.body_input.connect(on_body_gui_input)
 	LampSignalManager.play.connect(on_play)
-	LampSignalManager.pause.connect(on_pause)
+	LampSignalManager.reload.connect(on_reload)
 
 #Установка побочных сцен в сцене рабочей области
 func set_scenes():
@@ -157,11 +158,17 @@ func on_body_gui_input(res_properties:Array[Dictionary], id:int):
 				property_scene.x_value_label.visible = true
 				property_scene.x_value_label.text = str(property["value_x"])
 
-
+#Воспроизведение и остановка сцены
 func on_play():
+	playing = !playing
 	for body in layer_workspace.get_children():
-		body.play()
+		if playing:
+			body.play()
+		else:
+			body.pause()
 
 
-func on_pause():
-	pass
+func on_reload():
+	playing = false
+	for body in layer_workspace.get_children():
+		body.reload()

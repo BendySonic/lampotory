@@ -10,7 +10,7 @@ func _on_play_gui_input(event):
 			LampSignalManager.emit_signal("play")
 
 
-func _on_pause_gui_input(event):
+func _on_reload_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			LampSignalManager.emit_signal("play")
+			LampSignalManager.emit_signal("reload")

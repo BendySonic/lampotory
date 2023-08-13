@@ -16,7 +16,7 @@ var res_properties:Array[Dictionary]
 
 #private functions
 func _process(delta):
-	move_and_slide()
+	move_and_collide(velocity * delta)
 
 
 func set_signals():
@@ -35,18 +35,23 @@ func on_data_change(new_data, property_name, value_type, id):
 		for property in res_properties:
 			if property["name"] == property_name:
 				property[value_type] = new_data
-				body_update()
+				reload()
 	else:
 		return 0
-
-
-func body_update():
-	position = Vector2(res.position["value_x"], res.position["value_y"])
 
 #public functions
 func construct(res_arg:BodyResource):
 	res = res_arg
 
-
+#Проигрывание движения согласно скоростти
 func play():
 	velocity = Vector2(res.speed["value_x"], res.speed["value_y"])
+
+#Пауза движения
+func pause():
+	velocity = Vector2(0, 0)
+
+#Перезагрузка характеристик
+func reload():
+	pause()
+	position = Vector2(res.position["value_x"], res.position["value_y"])

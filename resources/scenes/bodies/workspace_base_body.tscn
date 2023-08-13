@@ -4,6 +4,7 @@
 
 [node name="WorkspaceBaseBody" type="CharacterBody2D"]
 input_pickable = true
+slide_on_ceiling = false
 script = ExtResource("1_1fv5q")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -16,4 +16,4 @@ signal data_changed(new_data, property_name, value_type, id)
 
 #WorkspaceUI
 signal play()
-signal pause()
+signal reload()

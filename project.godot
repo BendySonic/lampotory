@@ -29,7 +29,8 @@ window/size/viewport_height=720
 
 [editor]
 
-movie_writer/movie_file="C:/Users/nurba/programming/godot/lampotory/documents/videos/1.avi"
+movie_writer/speaker_mode=1
+movie_writer/movie_file="C:/Users/nurba/programming/godot/lampotory-indev/documents/videos/vid.avi"
 
 [input]
 

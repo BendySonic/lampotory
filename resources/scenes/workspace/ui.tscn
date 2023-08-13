@@ -99,7 +99,7 @@ layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_jwmhs")
 
-[node name="Pause" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Reload" type="Panel" parent="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jwmhs")
@@ -222,6 +222,6 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
 [connection signal="gui_input" from="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_gui_input"]
-[connection signal="gui_input" from="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Pause" to="." method="_on_pause_gui_input"]
+[connection signal="gui_input" from="VBox/HBox2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Reload" to="." method="_on_reload_gui_input"]
 [connection signal="mouse_entered" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" to="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies" method="_on_mouse_exited"]
