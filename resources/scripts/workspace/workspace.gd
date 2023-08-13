@@ -8,29 +8,25 @@
 class_name Workspace extends Node2D
 
 #private variables
-#Константы путей папок - сцен рабочей области, ресурсов тел, сцен тел.
-const SCENES_PATH = "res://resources/scenes/workspace/"
-const RESOURCES_PATH = "res://resources/scenes/resources/body_resources/"
-const BODIES_PATH = "res://resources/scenes/bodies/"
-
-#Список сцен, тел
+#Сцены рабочей облатси
+const SCENES_PATH = "res://resources/scenes/workspace/ui/"
 const SCENES = ["ui", "grid_widget", "cursor_widget", "property"]
-const BODIES = ["mechanic_body"]
 
-#Константы панели, грид контейнера внутри панели, контейнера свойств
+#Элементы интерфейса
 const GRID_PATH = ("VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/Margin/Grid")
 const PANEL_PATH = "VBox/HBox2/PanelContainer"
 const PROPERTIES_PATH = ("VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer/Margin/VBox")
 
-#Словари, хранящие загруженные ресурсы сцен рабочей области,
-#ресурсов тел, сцен тел
+#Настройки режима рабочей области
+const MODE_RESOURCE_PATH = "res://resources/scenes/workspace/mode_resources/"
+const MODE_NAMES = ["one_mechanic", "two_mechanic"]
+
+var mode_num:int = 0
+var mode_resource:ModeResource
 var scenes:Dictionary
-var resources:Dictionary
-var bodies:Dictionary
-#Активный ресурс тела (Обновляется перед созданием нового тела)
+
 var choosen_res:BodyResource
 var playing:bool = false
-#Число объектов в рабочей области (Идентификатор)
 var body_count:int = 0
 
 #Удобные обращаения к нодам из загруженных сцен рабочей области
@@ -47,10 +43,12 @@ var panel:Node
 
 #private functions
 func _ready():
-	load_scenes()
+	set_workspace_mode()
+	
+	load_body_scenes()
 	load_body_resources()
-	load_body_scene()
-	set_scenes()
+	load_workspace_scenes()
+	set_workspace_scenes()
 	
 	set_signals()
 
@@ -61,8 +59,29 @@ func set_signals():
 	LampSignalManager.play.connect(on_play)
 	LampSignalManager.reload.connect(on_reload)
 
-#Установка побочных сцен в сцене рабочей области
-func set_scenes():
+
+func set_workspace_mode():
+	mode_resource = load(MODE_RESOURCE_PATH + MODE_NAMES[mode_num] + ".tres").duplicate()
+
+
+func load_body_scenes():
+	for body_name in mode_resource.body_names:
+		mode_resource.body_scenes[body_name] = (
+			load(mode_resource.body_path + body_name + ".tscn"))
+
+
+func load_body_resources():
+	for body_name in mode_resource.body_names:
+		mode_resource.resources[body_name] = (
+			load(mode_resource.body_resource_path + body_name + ".tres"))
+
+
+func load_workspace_scenes():
+	for scene_name in SCENES:
+		scenes[scene_name] = load(SCENES_PATH + scene_name + ".tscn")
+
+#Установка побочных сцен в рабочей области
+func set_workspace_scenes():
 	#ui
 	ui = scenes["ui"].instantiate()
 	layer_ui.add_child(ui)
@@ -73,32 +92,21 @@ func set_scenes():
 	properties = ui.get_node(PROPERTIES_PATH)
 	
 	#GridWidget's
-	for widget_name in BODIES:
+	for widget_name in mode_resource.body_scenes:
 		var widget = scenes["grid_widget"].instantiate()
 		grid.add_child(widget)
-		widget.construct(resources[widget_name])
+		widget.construct(mode_resource.resources[widget_name])
 
 
-func load_scenes():
-	for scene_name in SCENES:
-		scenes[scene_name] = load(SCENES_PATH + scene_name + ".tscn")
-
-
-func load_body_resources():
-	for body_name in BODIES:
-		resources[body_name] = load(RESOURCES_PATH + body_name + ".tres")
-
-
-func load_body_scene():
-	for body_name in BODIES:
-		bodies[body_name] = load(BODIES_PATH + body_name + ".tscn")
+func set_grid():
+	pass
 
 #При взаимодействии с элементом таблицы объектов
 func on_grid_widget_gui_input(event:InputEventMouse, grid_widget:GridWidget):
 	if event is InputEventMouseButton:
 		#GridWidget нажат
 		if event.is_pressed():
-			choosen_res = resources[grid_widget.get_widget_name()].duplicate()
+			choosen_res = grid_widget.res.duplicate()
 			
 			var cursor_widget = scenes["cursor_widget"].instantiate()
 			layer_selected.add_child(cursor_widget)
@@ -107,16 +115,15 @@ func on_grid_widget_gui_input(event:InputEventMouse, grid_widget:GridWidget):
 		#GridWidget отпущен / создание тела
 		if not event.is_pressed():
 			body_count += 1
-			choosen_res.body_id["value_x"] = body_count
-			
-			var body = bodies[choosen_res.body_name].instantiate()
-			body.position = get_global_mouse_position()
-			choosen_res.position["value_x"] = body.position.x
-			choosen_res.position["value_y"] = body.position.y
-			body.construct(choosen_res)
+			choosen_res.body_id["value_1"] = body_count
+			#Тело
+			var body = mode_resource.body_scenes[choosen_res.body_name].instantiate()
 			body.name = str(body_count)
+			body.position = Vector2(get_global_mouse_position().x, 0)
+			choosen_res.position["value_1"] = body.position.x
+			body.construct(choosen_res)
 			layer_workspace.add_child(body)
-			
+			#Курсор
 			var cursor_widget = layer_selected.get_child(0)
 			layer_selected.remove_child(cursor_widget)
 			cursor_widget.queue_free()
@@ -141,25 +148,28 @@ func on_body_gui_input(res_properties:Array[Dictionary], id:int):
 		property_scene.property.text = property["name"]
 		property_scene.type = property["value_type"]
 		property_scene.body_id = id
+		
 		if property["vector"]:
 			property_scene.down_container.visible = true
-			if property["can_change"]:
-				property_scene.x_edit.visible = true
-				property_scene.x_label.visible = true
-				property_scene.x_edit.text = str(property["value_x"])
-				property_scene.y_edit.visible = true
-				property_scene.y_label.visible = true
-				property_scene.y_edit.text = str(property["value_y"])
+			
+			property_scene.x_edit.visible = true
+			property_scene.x_label.visible = true
+			property_scene.x_edit.text = str(property["value_x"])
+				
+			property_scene.y_edit.visible = true
+			property_scene.y_label.visible = true
+			property_scene.y_edit.text = str(property["value_y"])
 		else:
 			if property["can_change"]:
 				property_scene.x_edit.visible = true
-				property_scene.x_edit.text = str(property["value_x"])
+				property_scene.x_edit.text = str(property["value_1"])
 			else:
 				property_scene.x_value_label.visible = true
-				property_scene.x_value_label.text = str(property["value_x"])
+				property_scene.x_value_label.text = str(property["value_1"])
 
 #Воспроизведение и остановка сцены
 func on_play():
+	print("play")
 	playing = !playing
 	for body in layer_workspace.get_children():
 		if playing:

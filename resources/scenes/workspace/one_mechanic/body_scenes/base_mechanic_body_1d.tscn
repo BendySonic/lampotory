@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxbtxpdoj80km"]
 
-[ext_resource type="Script" path="res://resources/scripts/bodies/workspace_base_body.gd" id="1_1fv5q"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/one_mechanic/body_scenes/base_mechanic_body_1d.gd" id="1_ykbev"]
 
 [node name="WorkspaceBaseBody" type="CharacterBody2D"]
 input_pickable = true
 slide_on_ceiling = false
-script = ExtResource("1_1fv5q")
+script = ExtResource("1_ykbev")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

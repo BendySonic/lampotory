@@ -27,13 +27,16 @@ func _on_input_event(viewport, event, shape_idx):
 	#Отправка сигнала после нажатия на объект для окна свойств
 	if event is InputEventMouseButton:
 		if !event.is_pressed():
-			LampSignalManager.emit_signal("body_input", res_properties, res.body_id["value_x"])
+			LampSignalManager.emit_signal("body_input", res_properties, res.body_id["value_1"])
 
 
 func on_data_change(new_data, property_name, value_type, id):
-	if res.body_id["value_x"] == id:
+	print("data_changed")
+	if res.body_id["value_1"] == id:
+		print("ok")
 		for property in res_properties:
 			if property["name"] == property_name:
+				print(property_name)
 				property[value_type] = new_data
 				reload()
 	else:
@@ -45,7 +48,8 @@ func construct(res_arg:BodyResource):
 
 #Проигрывание движения согласно скоростти
 func play():
-	velocity = Vector2(res.speed["value_x"], res.speed["value_y"])
+	print(res.speed["value_1"])
+	velocity.x = res.speed["value_1"]
 
 #Пауза движения
 func pause():
@@ -54,4 +58,4 @@ func pause():
 #Перезагрузка характеристик
 func reload():
 	pause()
-	position = Vector2(res.position["value_x"], res.position["value_y"])
+	position.x = res.position["value_1"]

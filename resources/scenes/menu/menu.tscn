@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqywyb043aery"]
+
+[ext_resource type="Script" path="res://resources/scripts/menu/menu.gd" id="1_xv8bd"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_xv8bd")
+
+[node name="Label1D" type="Label" parent="."]
+offset_left = 265.0
+offset_top = 315.0
+offset_right = 396.0
+offset_bottom = 401.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "1D"
+
+[node name="Label2D" type="Label" parent="."]
+offset_left = 777.0
+offset_top = 318.0
+offset_right = 908.0
+offset_bottom = 404.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "2D"
+
+[connection signal="gui_input" from="Label1D" to="." method="_on_label_1d_gui_input"]
+[connection signal="gui_input" from="Label2D" to="." method="_on_label_2d_gui_input"]

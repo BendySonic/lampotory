@@ -12,3 +12,5 @@ layer = 2
 layer = 3
 
 [node name="LayerWorkspace" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]

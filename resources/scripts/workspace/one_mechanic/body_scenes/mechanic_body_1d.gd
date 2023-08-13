@@ -16,11 +16,7 @@ func _ready():
 	collision.polygon = pva
 	
 	res_properties = [res.base, res.body_id, res.widget_name,
-			res.position, res.size, res.data, res.speed]
-
-
-#func _process(delta):
-	#print(res.speed["value"])
+			res.position, res.mass, res.data, res.speed, res.acceleration]
 
 
 func _on_area_2d_body_entered(body):

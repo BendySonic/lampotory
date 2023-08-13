@@ -9,9 +9,7 @@ class_name GridWidget extends Control
 
 
 #private variables
-var object_name:String
-var widget_name:String
-var object_icon:Resource
+var res:BodyResource
 
 var mouse_inside:bool = false
 
@@ -22,17 +20,13 @@ var mouse_inside:bool = false
 func _on_gui_input(event):
 	LampSignalManager.emit_signal("widget_input", event, self)
 
+
 func set_view():
-	icon.texture = object_icon
-	label.text = widget_name
+	icon.texture = res.body_icon
+	label.text = res.widget_name["value_1"]
 
 
 #public functions
-func construct(res:BodyResource):
-	object_name = res.body_name
-	widget_name = res.widget_name["value_x"]
-	object_icon = res.body_icon
+func construct(res_arg:BodyResource):
+	res = res_arg
 	set_view()
-
-func get_widget_name() -> String:
-	return object_name

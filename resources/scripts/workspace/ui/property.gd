@@ -38,7 +38,7 @@ func _on_value_edit_text_submitted(new_text):
 		result = float(new_text)
 	else:
 		result = new_text
-	LampSignalManager.emit_signal("data_changed", result, property.text, "value_x", body_id)
+	LampSignalManager.emit_signal("data_changed", result, property.text, "value_1", body_id)
 
 
 func _on_value_edit_2_text_changed(new_text):
@@ -53,4 +53,4 @@ func _on_value_edit_2_text_submitted(new_text):
 		result = float(new_text)
 	else:
 		result = new_text
-	LampSignalManager.emit_signal("data_changed", result, property.text, "value_y", body_id)
+	LampSignalManager.emit_signal("data_changed", result, property.text, "value_2", body_id)

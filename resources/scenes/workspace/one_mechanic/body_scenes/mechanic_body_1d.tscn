@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bm0f5yab2fysc"]
 
-[ext_resource type="Script" path="res://resources/scripts/bodies/mechanic_body.gd" id="1_nwoq3"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/one_mechanic/body_scenes/mechanic_body_1d.gd" id="1_bo1yh"]
 
 [node name="MechanicBody" type="CharacterBody2D"]
 input_pickable = true
-script = ExtResource("1_nwoq3")
+slide_on_ceiling = false
+script = ExtResource("1_bo1yh")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.639216, 0.639216, 0.639216, 1)

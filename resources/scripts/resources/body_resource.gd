@@ -1,5 +1,3 @@
-## Resource for body (workspace)
-
 ################################
 #author:BendySonic
 #last_edited:BendySonic
@@ -17,7 +15,7 @@ var base:Dictionary = {
 var body_id:Dictionary = {
 	"name": "Номер",
 	"info": "Идентификатор объекта в проекте",
-	"value_x": 0,
+	"value_1": 0,
 	"vector": false,
 	"value_type": 1,
 	"can_change": false,
@@ -25,26 +23,16 @@ var body_id:Dictionary = {
 var widget_name:Dictionary = {
 	"name": "Тип",
 	"info": "Тип объекта (Например, 'Обычное тело', \t'Округлое тело')",
-	"value_x": "Обычное тело",
+	"value_1": "Обычное тело",
 	"vector": false,
 	"value_type": 0,
 	"can_change": false,
 }
 var position:Dictionary = {
 	"name": "Положение",
-	"info": "Позиция тела в метрах по координатам \tx - по горизонтале, y - по вертикале",
-	"value_x": 0,
-	"value_y": 0,
-	"vector": true,
-	"value_type": 1,
-	"can_change": true,
-}
-var size:Dictionary = {
-	"name": "Размер",
-	"info": "Размер тела в метрах\tx - по горизонтале, y - по вертикале",
-	"value_x": 0,
-	"value_y": 0,
-	"vector": true,
+	"info": "Позиция тела в метрах по координате x",
+	"value_1": 0,
+	"vector": false,
 	"value_type": 1,
 	"can_change": true,
 }
@@ -52,16 +40,30 @@ var data:Dictionary = {
 	"name": "Поведение",
 	"value_type": -1,
 }
-var speed:Dictionary = {
-	"name": "Скорость",
-	"info": "Скорость тела в м/c (метр в секунду) \tна момент старта \tx - по горизонтале, y - по вертикале",
-	"value_x": 0,
-	"value_y": 0,
-	"vector": true,
+var mass:Dictionary = {
+	"name": "Масса",
+	"info": "Масса тела в килограммах",
+	"value_1": 1,
+	"vector": false,
 	"value_type": 1,
 	"can_change": true,
 }
-
+var speed:Dictionary = {
+	"name": "Скорость",
+	"info": "Скорость тела в м/c (метр в секунду) \tна момент старта",
+	"value_1": 0,
+	"vector": false,
+	"value_type": 1,
+	"can_change": true,
+}
+var acceleration:Dictionary = {
+	"name": "Ускорение",
+	"info": "Ускорение тела в м/c(2) (метр в секунду \tв квадрате) на момент старта",
+	"value_1": 0,
+	"vector": false,
+	"value_type": 1,
+	"can_change": true,
+}
 
 #data
 @export var body_name:String
