@@ -12,14 +12,25 @@ config_version=5
 
 config/name="Lampotory"
 config/tags=PackedStringArray("активный_проект", "программа")
-run/main_scene="res://resources/gameScenes/workspace.tscn"
+run/main_scene="res://resources/scenes/workspace/workspace.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://icon/icon.svg"
+
+[autoload]
+
+LampFileManager="*res://resources/scripts/singletones/lamp_file_manager.gd"
+LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
+LL="*res://resources/scripts/singletones/lamp_library.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[editor]
+
+movie_writer/speaker_mode=1
+movie_writer/movie_file="C:/Users/nurba/programming/godot/lampotory-indev/documents/videos/vid.avi"
 
 [input]
 
@@ -38,4 +49,4 @@ clear={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.94902, 0.94902, 0.94902, 1)
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)

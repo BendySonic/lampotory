@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm0f5yab2fysc"]
+
+[ext_resource type="Script" path="res://resources/scripts/workspace/body_mechanic_1d.gd" id="1_6uio0"]
+
+[node name="MechanicBody" type="CharacterBody2D"]
+input_pickable = true
+slide_on_ceiling = false
+script = ExtResource("1_6uio0")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.639216, 0.639216, 0.639216, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
