@@ -5,7 +5,7 @@
 #panel.gd
 #script for panel in workspace interface
 #################################
-class_name WorkspacePanel extends PanelContainer
+class_name UIPanel extends PanelContainer
 
 #private variables
 var mouse_inside:bool = false

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="BodyResource" load_steps=3 format=3 uid="uid://du7inomg2dhgc"]
-
-[ext_resource type="Texture2D" uid="uid://co4qouneuj438" path="res://resources/assets/tiles/tile_32_white.png" id="1_18aua"]
-[ext_resource type="Script" path="res://resources/scripts/resources/body_resource.gd" id="1_smoqd"]
-
-[resource]
-script = ExtResource("1_smoqd")
-body_name = "mechanic_body_1d"
-body_icon = ExtResource("1_18aua")

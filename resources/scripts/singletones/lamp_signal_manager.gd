@@ -1,19 +1,13 @@
-#################################
-#author:BendySonic
-#last_edited:BendySonic
-#################################
-#lamp_signal_manager.gd
-#global singletone for signal manager
-#################################
 extends Node
 
-#GridWidget
-signal widget_input(event, widget_cursor)
+# Workspace signals:
+# GridWidget.
+signal widget_input(event:InputEventMouse, cursor_widget:UICursorWidget)
 
-#WorkspaceBaseBody
-signal body_input(res_properties, id)
-signal data_changed(new_data, property_name, value_type, id)
+# BodyBase.
+signal body_input(properties:Dictionary)
+signal data_changed(new_data, property_name, id)
 
-#WorkspaceUI
+# UI.
 signal play()
 signal reload()

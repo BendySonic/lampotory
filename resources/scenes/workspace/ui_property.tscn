@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://0a0diqvi7s17"]
 
-[ext_resource type="Script" path="res://resources/scripts/workspace/ui/property.gd" id="1_atrfk"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/ui_property.gd" id="1_dc56d"]
 [ext_resource type="StyleBox" uid="uid://btujmem0e2lf6" path="res://resources/assets/godot_styles/property.tres" id="2_nh2et"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnlh8"]
@@ -31,7 +31,7 @@ spacing_bottom = -5
 offset_right = 183.0
 offset_bottom = 69.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pnlh8")
-script = ExtResource("1_atrfk")
+script = ExtResource("1_dc56d")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false

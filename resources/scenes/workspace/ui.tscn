@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://mwmuckip5lrn"]
 
-[ext_resource type="Script" path="res://resources/scripts/workspace/ui/ui.gd" id="1_5relt"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/ui.gd" id="1_pojtu"]
 [ext_resource type="StyleBox" uid="uid://b7q50unjctfxi" path="res://resources/assets/godot_styles/tab_body_style.tres" id="2_b2b2d"]
-[ext_resource type="Script" path="res://resources/scripts/workspace/ui/panel.gd" id="3_5ln3a"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/ui_panel.gd" id="3_0rry8"]
 [ext_resource type="StyleBox" uid="uid://5kmb0ohy85tr" path="res://resources/assets/godot_styles/tab_name_style.tres" id="4_gc6pl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up2bn"]
@@ -39,7 +39,7 @@ shadow_color = Color(0, 0, 0, 0.219608)
 shadow_size = 3
 shadow_offset = Vector2(1, -1)
 
-[node name="WorkspaceUI" type="Control"]
+[node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_5relt")
+script = ExtResource("1_pojtu")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -130,7 +130,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("2_b2b2d")
-script = ExtResource("3_5ln3a")
+script = ExtResource("3_0rry8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies"]
 layout_mode = 2

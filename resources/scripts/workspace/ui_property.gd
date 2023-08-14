@@ -1,15 +1,11 @@
-#################################
-#author:BendySonic
-#last_edited:BendySonic
-#################################
-#workspace.gd
-#script for property in "properties" panel
-#################################
-class_name Property extends Control
+class_name UIProperty extends Control
 
-enum TYPE {STR, INT}
+enum MODES {MECHANIC_1D, MECHANIC_2D}
+var mode:int
+enum TYPE {STR, INT, VECTOR_STR, VECTOR_INT}
 var type:int = TYPE.STR
 var body_id:int
+var is_vector:bool
 
 @onready var title_panel = get_node("PanelContainer2")
 @onready var property_panel = get_node("PanelContainer")
@@ -26,6 +22,37 @@ var body_id:int
 @onready var down_container = get_node("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2")
 
 
+func construct(
+	base_property:Dictionary, properties:Dictionary, property_name:String):
+	# Title property.
+	if base_property["value_type"] == -1:
+		title_panel.visible = true
+		title.text = base_property["name"]
+		return 0
+	# Simple property.
+	property_panel.visible = true
+	property.text = base_property["name"]
+	type = base_property["value_type"]
+	body_id = properties["id"]
+	if base_property["vector"]:
+		down_container.visible = true
+		
+		x_edit.visible = true
+		x_label.visible = true
+		x_edit.text = str(properties[property_name].x)
+			
+		y_edit.visible = true
+		y_label.visible = true
+		y_edit.text = str(properties[property_name].y)
+	else:
+		if base_property["can_change"]:
+			x_edit.visible = true
+			x_edit.text = str(properties[property_name])
+		else:
+			x_value_label.visible = true
+			x_value_label.text = str(properties[property_name])
+
+
 func _on_value_edit_text_changed(new_text):
 	if ( (type == TYPE.INT and LL.has_abc(new_text)) or
 		(type == TYPE.STR and LL.has_123(new_text)) ):
@@ -38,7 +65,7 @@ func _on_value_edit_text_submitted(new_text):
 		result = float(new_text)
 	else:
 		result = new_text
-	LampSignalManager.emit_signal("data_changed", result, property.text, "value_1", body_id)
+	LampSignalManager.emit_signal("data_changed", result, property.text, body_id)
 
 
 func _on_value_edit_2_text_changed(new_text):
@@ -53,4 +80,4 @@ func _on_value_edit_2_text_submitted(new_text):
 		result = float(new_text)
 	else:
 		result = new_text
-	LampSignalManager.emit_signal("data_changed", result, property.text, "value_2", body_id)
+	LampSignalManager.emit_signal("data_changed", result, property.text, body_id)
