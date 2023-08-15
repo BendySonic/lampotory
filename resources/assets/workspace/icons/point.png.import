@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ei0ultrsnkum"
-path="res://.godot/imported/square_body.png-1680ed4292e5d09905f732421c50de09.ctex"
+uid="uid://dh3yc3gyjps1j"
+path="res://.godot/imported/point.png-79a5f5fc6e99aaece3378b6c7aad52ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/assets/workspace/icons/square_body.png"
-dest_files=["res://.godot/imported/square_body.png-1680ed4292e5d09905f732421c50de09.ctex"]
+source_file="res://resources/assets/workspace/icons/point.png"
+dest_files=["res://.godot/imported/point.png-79a5f5fc6e99aaece3378b6c7aad52ea.ctex"]
 
 [params]
 

@@ -1,11 +1,8 @@
-class_name BodyMechanic1D
-extends BodyBase
+class_name PointMechanic1D
+extends BodyBaseMechanic1D
 
 # -----------------------------------------------------------------------------
-const MY_PROPERTIES = ["mass", "speed", "acceleration"]
-
-@onready var form = get_node("Polygon2D")
-@onready var collision = get_node("CollisionPolygon2D")
+const MY_PROPERTIES = ["speed", "acceleration"]
 
 # -----------------------------------------------------------------------------
 func _ready():
@@ -25,29 +22,6 @@ func _ready():
 				_properties[dictionary["id"]] = " "
 	# Set properties values / Set object form
 	_set_values()
-	_set_form()
-
-
-func play():
-	velocity.x = _properties["speed"]
-
-
-func pause():
-	velocity = Vector2(0, 0)
-
-
-func reload():
-	pause()
-	position.x = _properties["position"]
-
-
-func _set_form():
-	var pva:PackedVector2Array = [Vector2(-16, -16), Vector2(16, -16),
-			Vector2(16, 16), Vector2(-16, 16)]
-	var pva2:PackedVector2Array = [Vector2(-17, -17), Vector2(17, -17),
-			Vector2(17, 17), Vector2(-17, 17)]
-	form.polygon = pva
-	collision.polygon = pva
 
 
 func _set_values():

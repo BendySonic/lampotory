@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_gf0fl")
 body_resource_path = "res://resources/scenes/workspace/body_resources/"
-body_path = "res://resources/scenes/workspace/"
-body_names = PackedStringArray("body_mechanic_1d")
+body_path = "res://resources/scenes/workspace/body_scenes/"
+body_names = PackedStringArray("body_mechanic_1d", "point_mechanic_1d")
 mode = 0

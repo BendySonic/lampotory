@@ -113,7 +113,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_xj34i")
 theme_override_font_sizes/font_size = 15
 text = "0"
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 visible = false

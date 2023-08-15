@@ -25,6 +25,7 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if !event.is_pressed():
 			LampSignalManager.emit_signal("body_input", _properties)
+			LampSignalManager.emit_signal("g", _properties)
 
 
 func _on_data_change(new_data, property_id, id):

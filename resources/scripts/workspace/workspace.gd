@@ -11,6 +11,8 @@ var _body_data: BodyResource
 var _body_count: int = 0
 var _is_playing: bool = false
 
+var g_properties: Dictionary
+
 @onready var ui = $LayerUI/UI
 @onready var layer_ui = $LayerUI
 @onready var layer_selected = $LayerSelected
@@ -44,6 +46,11 @@ func _ready():
 	LampSignalManager.body_input.connect(_on_body_input)
 	LampSignalManager.play_pressed.connect(_on_play_pressed)
 	LampSignalManager.reload_pressed.connect(_on_reload_pressed)
+	LampSignalManager.g.connect(on_g)
+
+
+func _process(delta):
+	print(g_properties)
 
 
 func _on_grid_widget_input(event:InputEventMouse, grid_widget:UIGridWidget):
@@ -109,3 +116,6 @@ func _on_reload_pressed():
 	_is_playing = false
 	for body in layer_workspace.get_children():
 		body.reload()
+
+func on_g(properties: Dictionary):
+	g_properties = properties
