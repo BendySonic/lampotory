@@ -1,10 +1,3 @@
-#################################
-#author:BendySonic
-#last_edited:BendySonic
-#################################
-#workspace.gd
-#script for libraries and static functions
-#################################
 extends Node
 
 

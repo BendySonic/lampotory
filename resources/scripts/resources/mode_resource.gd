@@ -1,16 +1,14 @@
 class_name ModeResource extends Resource
 
-enum MODES {MECHANIC_1D, MECHANIC_2D}
+enum MODES { MECHANIC_1D, MECHANIC_2D }
 
 @export var body_resource_path:String
 @export var body_path:String
-
 @export var body_names:PackedStringArray
+@export var mode:int
 
 var body_scenes:Dictionary
 var resources:Dictionary
-
-var mode:int = MODES.MECHANIC_1D
 
 var base_text:Dictionary = {
 	"id": "base_text",
