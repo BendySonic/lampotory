@@ -62,7 +62,9 @@ func _on_grid_widget_input(event:InputEventMouse, grid_widget:UIGridWidget):
 			_body_data.id = _body_count
 			
 			# Body create.
-			var body = _mode_data.body_scenes[_body_data.body_name].instantiate()
+			var body = (
+				_mode_data.body_scenes[_body_data.body_name].instantiate()
+			)
 			body.position = Vector2(get_global_mouse_position().x, 0)
 			body.construct(_body_data, _mode_data)
 			layer_workspace.add_child(body)

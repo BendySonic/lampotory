@@ -42,8 +42,8 @@ var _is_vector: bool
 		"VBoxContainer/HBoxContainer"
 )
 @onready var down_container = get_node(
-	"PanelContainer/MarginContainer/" +
-	"VBoxContainer/HBoxContainer2"
+		"PanelContainer/MarginContainer/" +
+		"VBoxContainer/HBoxContainer2"
 )
 
 # -----------------------------------------------------------------------------
@@ -61,8 +61,8 @@ func _on_line_edit_submitted(new_text):
 
 func _check_text(text: String, line_edit: LineEdit):
 	if (
-		(_type == TYPES.INT and Global.has_abc(text)) or
-		(_type == TYPES.STR and Global.has_123(text))
+			(_type == TYPES.INT and Global.has_abc(text))
+			or (_type == TYPES.STR and Global.has_123(text))
 	):
 		line_edit.delete_char_at_caret()
 
@@ -96,20 +96,20 @@ func construct(base_property: Dictionary, properties: Dictionary,
 	_type = base_property["value_type"]
 	_body_id = properties["id"]
 	_is_vector = base_property["vector"]
-	if _is_vector:
-		down_container.visible = true
-		
-		x_edit.visible = true
-		x_label.visible = true
-		x_edit.text = str(properties[property_name].x)
+	if base_property["can_change"]:
+		if _is_vector:
+			down_container.visible = true
 			
-		y_edit.visible = true
-		y_label.visible = true
-		y_edit.text = str(properties[property_name].y)
-	else:
-		if base_property["can_change"]:
+			x_edit.visible = true
+			x_label.visible = true
+			x_edit.text = str(properties[property_name].x)
+				
+			y_edit.visible = true
+			y_label.visible = true
+			y_edit.text = str(properties[property_name].y)	
+		else:
 			x_edit.visible = true
 			x_edit.text = str(properties[property_name])
-		else:
-			x_value_label.visible = true
-			x_value_label.text = str(properties[property_name])
+	else:
+		x_value_label.visible = true
+		x_value_label.text = str(properties[property_name])
