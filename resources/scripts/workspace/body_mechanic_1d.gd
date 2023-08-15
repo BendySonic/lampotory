@@ -10,8 +10,7 @@ const MY_PROPERTIES = ["mass", "speed", "acceleration"]
 # -----------------------------------------------------------------------------
 func _ready():
 	super()
-	_set_form()
-	# Set values
+	# Create properties
 	for dictionary in mode_data.properties:
 		if (
 			MY_PROPERTIES.has(dictionary["id"])
@@ -24,7 +23,9 @@ func _ready():
 					_properties[dictionary["id"]] = 0
 			else:
 				_properties[dictionary["id"]] = " "
+	# Set properties values / Set object form
 	_set_values()
+	_set_form()
 
 
 func play():
@@ -51,4 +52,5 @@ func _set_form():
 
 func _set_values():
 	_properties["id"] = _data.id
+	_properties["name"] = _data.widget_name
 	_properties["position"] = position.x

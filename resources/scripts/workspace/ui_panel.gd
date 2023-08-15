@@ -1,16 +1,10 @@
-#################################
-#author:BendySonic
-#last_edited:BendySonic
-#################################
-#panel.gd
-#script for panel in workspace interface
-#################################
-class_name UIPanel extends PanelContainer
+class_name UIPanel
+extends PanelContainer
 
-#private variables
-var mouse_inside:bool = false
+# -----------------------------------------------------------------------------
+var mouse_inside: bool = false
 
-#private functions
+# -----------------------------------------------------------------------------
 func _on_mouse_entered():
 	mouse_inside = true
 

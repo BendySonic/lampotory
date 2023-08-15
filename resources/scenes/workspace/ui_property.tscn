@@ -100,6 +100,7 @@ theme_override_colors/font_placeholder_color = Color(0.32549, 0.32549, 0.32549, 
 theme_override_colors/caret_color = Color(0.439216, 0.439216, 0.439216, 1)
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_m41pg")
+text = "0"
 placeholder_text = "Ввод"
 max_length = 20
 
@@ -133,7 +134,7 @@ text = "y
 "
 clip_text = true
 
-[node name="ValueEdit2" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ValueEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -142,6 +143,7 @@ theme_override_colors/font_placeholder_color = Color(0.32549, 0.32549, 0.32549, 
 theme_override_colors/caret_color = Color(0.439216, 0.439216, 0.439216, 1)
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_m41pg")
+text = "0"
 placeholder_text = "Ввод"
 max_length = 20
 
@@ -154,7 +156,7 @@ theme_override_font_sizes/font_size = 15
 text = "0"
 clip_text = true
 
-[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ValueEdit" to="." method="_on_value_edit_text_changed"]
-[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ValueEdit" to="." method="_on_value_edit_text_submitted"]
-[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ValueEdit2" to="." method="_on_value_edit_2_text_changed"]
-[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ValueEdit2" to="." method="_on_value_edit_2_text_submitted"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ValueEdit" to="." method="_on_x_edit_changed"]
+[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ValueEdit" to="." method="_on_line_edit_submitted"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ValueEdit" to="." method="_on_y_edit_changed"]
+[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ValueEdit" to="." method="_on_line_edit_submitted"]

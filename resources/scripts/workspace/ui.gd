@@ -18,10 +18,10 @@ const PROPERTIES_PATH = (
 func _on_play_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			LampSignalManager.emit_signal("play")
+			LampSignalManager.emit_signal("play_pressed")
 
 
 func _on_reload_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			LampSignalManager.emit_signal("reload")
+			LampSignalManager.emit_signal("reload_pressed")
