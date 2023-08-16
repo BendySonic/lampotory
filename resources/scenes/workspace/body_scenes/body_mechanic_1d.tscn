@@ -7,6 +7,10 @@ input_pickable = true
 slide_on_ceiling = false
 script = ExtResource("1_w16un")
 
+[node name="Select" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.117188, 0.402344, 0.753906, 1)
+
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.305882, 0.658824, 1, 1)
 

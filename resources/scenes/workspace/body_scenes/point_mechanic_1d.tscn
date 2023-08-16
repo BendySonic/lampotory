@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://djye04yrlr363"]
+[gd_scene load_steps=6 format=3 uid="uid://djye04yrlr363"]
 
 [ext_resource type="PackedScene" uid="uid://cxbtxpdoj80km" path="res://resources/scenes/workspace/body_scenes/body_base.tscn" id="1_mx410"]
 [ext_resource type="Script" path="res://resources/scripts/workspace/body_scenes/point_mechanic_1d.gd" id="2_fjfnm"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2tl0b"]
+radius = 12.0
+height = 24.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dwabv"]
 radius = 8.0
 height = 16.0
 
@@ -16,9 +20,14 @@ collision_mask = 0
 safe_margin = 0.001
 script = ExtResource("2_fjfnm")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." index="0"]
-modulate = Color(0.176471, 0.588235, 0.976471, 1)
+[node name="Select" type="MeshInstance2D" parent="." index="0"]
+visible = false
+modulate = Color(0.117647, 0.403922, 0.756863, 1)
 mesh = SubResource("SphereMesh_2tl0b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." index="1"]
+modulate = Color(0.176471, 0.588235, 0.976471, 1)
+mesh = SubResource("SphereMesh_dwabv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_mwcua")

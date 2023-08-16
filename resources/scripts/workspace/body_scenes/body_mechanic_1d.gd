@@ -1,29 +1,18 @@
 class_name BodyMechanic1D
 extends BodyBaseMechanic1D
+# Classic Body1D for 1D movement with mass, speed, acceleration
 
 # -----------------------------------------------------------------------------
-const MY_PROPERTIES = ["mass", "speed", "acceleration"]
-
 @onready var form = get_node("Polygon2D")
+@onready var outline = get_node("Select")
 @onready var collision = get_node("CollisionPolygon2D")
 
 # -----------------------------------------------------------------------------
 func _ready():
 	super()
-	# Create properties
-	for dictionary in mode_data.properties:
-		if (
-			MY_PROPERTIES.has(dictionary["id"])
-			or BASE_PROPERTIES.has(dictionary["id"])
-		):
-			if dictionary["value_type"] != -1:
-				if dictionary["vector"]:
-					_properties[dictionary["id"]] = Vector2(0, 0)
-				else:
-					_properties[dictionary["id"]] = 0
-			else:
-				_properties[dictionary["id"]] = " "
-	# Set properties values / Set object form
+	_extra_properties = ["mass", "speed", "acceleration"]
+	# Create properties and add to "_properties" (BaseBody class)
+	_add_properties()
 	_set_values()
 	_set_form()
 
@@ -31,13 +20,17 @@ func _ready():
 func _process(delta):
 	super(delta)
 	if _state == STATES.PLAY:
-		_properties["speed"] += _properties["acceleration"] * delta
-		velocity.x = _properties["speed"]
+		_realtime_properties["speed"] += (
+				_realtime_properties["acceleration"] * delta)
+		velocity.x = _realtime_properties["speed"]
 
 
 func _set_form():
 	var pva:PackedVector2Array = [Vector2(-16, -16), Vector2(16, -16),
 			Vector2(16, 16), Vector2(-16, 16)]
+	var pva2:PackedVector2Array = [Vector2(-20, -20), Vector2(20, -20),
+			Vector2(20, 20), Vector2(-20, 20)]
+	outline.polygon = pva2
 	form.polygon = pva
 	collision.polygon = pva
 

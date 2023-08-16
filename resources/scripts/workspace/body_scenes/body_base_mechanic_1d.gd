@@ -1,10 +1,10 @@
 class_name BodyBaseMechanic1D
 extends BodyBase
-
+## Base class for ALL "mechanic_1d" bodies
 
 func play():
 	_state = STATES.PLAY
-	velocity.x = _properties["speed"]
+	velocity.x = _realtime_properties["speed"]
 
 
 func pause():
@@ -14,5 +14,6 @@ func pause():
 
 func reload():
 	_state = STATES.START
-	pause()
+	velocity = Vector2(0, 0)
+	_realtime_properties = _properties.duplicate()
 	position.x = _properties["position"]

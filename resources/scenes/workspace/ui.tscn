@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://mwmuckip5lrn"]
 
-[ext_resource type="Script" path="res://resources/scripts/workspace/layer_ui.gd" id="1_6oau5"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/ui.gd" id="1_1b05y"]
 [ext_resource type="StyleBox" uid="uid://b7q50unjctfxi" path="res://resources/assets/godot_styles/tab_body_style.tres" id="2_b2b2d"]
 [ext_resource type="StyleBox" uid="uid://5kmb0ohy85tr" path="res://resources/assets/godot_styles/tab_name_style.tres" id="4_gc6pl"]
 
@@ -46,7 +46,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_6oau5")
+script = ExtResource("1_1b05y")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -243,5 +243,9 @@ text = "Скорость: 0
 Пройденный путь: 0"
 horizontal_alignment = 2
 
+[node name="Select" type="CanvasLayer" parent="."]
+layer = 3
+
 [connection signal="gui_input" from="VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_gui_input"]
 [connection signal="gui_input" from="VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Reload" to="." method="_on_reload_gui_input"]
+[connection signal="gui_input" from="VBox/HBox2/MarginContainer" to="." method="_on_workspace_area_gui_input"]
