@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv2j8pqgbo8gr"]
+[gd_scene load_steps=4 format=3 uid="uid://dv2j8pqgbo8gr"]
 
 [ext_resource type="Script" path="res://resources/scripts/workspace/workspace.gd" id="1_i833f"]
 [ext_resource type="PackedScene" uid="uid://mwmuckip5lrn" path="res://resources/scenes/workspace/ui.tscn" id="2_yyosi"]
+[ext_resource type="Script" path="res://resources/scripts/workspace/layer_objects.gd" id="3_etweb"]
 
 [node name="Workspace" type="Node2D"]
 script = ExtResource("1_i833f")
@@ -11,9 +12,10 @@ layer = 2
 
 [node name="UI" parent="LayerUI" instance=ExtResource("2_yyosi")]
 
-[node name="LayerSelected" type="CanvasLayer" parent="."]
+[node name="LayerSelect" type="CanvasLayer" parent="."]
 layer = 3
 
-[node name="LayerWorkspace" type="Node2D" parent="."]
+[node name="LayerObjects" type="Node2D" parent="."]
+script = ExtResource("3_etweb")
 
 [node name="Camera2D" type="Camera2D" parent="."]

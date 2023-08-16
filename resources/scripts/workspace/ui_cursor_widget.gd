@@ -2,8 +2,9 @@ class_name UICursorWidget
 extends Node2D
 
 # -----------------------------------------------------------------------------
-func _process(delta):
+func _process(_delta):
 	position = get_global_mouse_position()
+
 
 func _set_icon(body_icon:Resource):
 	$Sprite2D.texture = body_icon

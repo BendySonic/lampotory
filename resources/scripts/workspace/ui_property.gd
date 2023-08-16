@@ -2,7 +2,6 @@ class_name UIProperty
 extends Control
 
 # -----------------------------------------------------------------------------
-enum MODES {MECHANIC_1D, MECHANIC_2D}
 enum TYPES {STR, INT, VECTOR_STR, VECTOR_INT}
 
 var _type: int = TYPES.STR
@@ -55,18 +54,20 @@ func _on_y_edit_changed(new_text):
 	_check_text(new_text, y_edit)
 
 
-func _on_line_edit_submitted(new_text):
+func _on_line_edit_submitted(_new_text):
 	_send_text(x_edit.text, y_edit.text)
 
 
+# Check text for numbers and letters
 func _check_text(text: String, line_edit: LineEdit):
 	if (
-			(_type == TYPES.INT and Global.has_abc(text))
-			or (_type == TYPES.STR and Global.has_123(text))
+			(_type == TYPES.INT and LampLib.has_abc(text))
+			or (_type == TYPES.STR and LampLib.has_123(text))
 	):
 		line_edit.delete_char_at_caret()
 
 
+# Send text like String/Vector2/float
 func _send_text(x_text: String, y_text: String):
 	var result
 	if _type == TYPES.INT:
@@ -76,7 +77,7 @@ func _send_text(x_text: String, y_text: String):
 			result = float(x_text)
 	else:
 		result = x_text
-		
+	
 	LampSignalManager.emit_signal(
 		"data_changed", result, _property_id, _body_id
 	)

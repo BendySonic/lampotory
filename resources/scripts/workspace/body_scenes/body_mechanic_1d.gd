@@ -31,14 +31,13 @@ func _ready():
 func _process(delta):
 	super(delta)
 	if _state == STATES.PLAY:
-		velocity.x += _properties["acceleration"] * delta
+		_properties["speed"] += _properties["acceleration"] * delta
+		velocity.x = _properties["speed"]
 
 
 func _set_form():
 	var pva:PackedVector2Array = [Vector2(-16, -16), Vector2(16, -16),
 			Vector2(16, 16), Vector2(-16, 16)]
-	var pva2:PackedVector2Array = [Vector2(-17, -17), Vector2(17, -17),
-			Vector2(17, 17), Vector2(-17, 17)]
 	form.polygon = pva
 	collision.polygon = pva
 

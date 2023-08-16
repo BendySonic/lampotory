@@ -20,7 +20,6 @@ config/icon="res://icon/icon.svg"
 
 LampFileManager="*res://resources/scripts/singletones/lamp_file_manager.gd"
 LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
-Global="*res://resources/scripts/singletones/lamp_library.gd"
 
 [display]
 

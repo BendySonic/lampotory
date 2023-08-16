@@ -1,7 +1,8 @@
-extends Node
+class_name LampLib
+extends Object
 
 
-static func has_abc(text:String):
+static func has_abc(text: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("\\D$")
 	var regex2 = RegEx.new()
@@ -12,7 +13,7 @@ static func has_abc(text:String):
 		return false
 
 
-static func has_123(text:String):
+static func has_123(text: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("\\d")
 	if (regex.search(text)):
