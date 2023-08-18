@@ -2,6 +2,7 @@ class_name LampLib
 extends Object
 
 
+# String methods
 static func has_abc(text: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("\\D$")
@@ -22,5 +23,19 @@ static func has_123(text: String) -> bool:
 		return false
 
 
+# trim_fraction
+# trfr("1.245", 1) = 1.2
+# trfr("1.245", 2) = 1.24
+static func trfr(text: String, count: int) -> String:
+	var regex_dot = RegEx.new()
+	if not text.find(".") == -1:
+		var regex = RegEx.new()
+		regex.compile("\\d+.\\d{" + str(count) + "}")
+		return regex.search(text).get_string()
+	else:
+		return text
+
+
+# Node methods
 static func has_child(node: Node) -> bool:
 	return bool(node.get_child_count())

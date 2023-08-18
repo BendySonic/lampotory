@@ -17,12 +17,10 @@ func _ready():
 	_set_form()
 
 
-func _process(delta):
-	super(delta)
-	if _state == STATES.PLAY:
-		_realtime_properties["speed"] += (
-				_realtime_properties["acceleration"] * delta)
-		velocity.x = _realtime_properties["speed"]
+func _set_values():
+	_properties["id"] = _data.id
+	_properties["name"] = _data.widget_name
+	_properties["position"] = position.x
 
 
 func _set_form():
@@ -33,9 +31,3 @@ func _set_form():
 	outline.polygon = pva2
 	form.polygon = pva
 	collision.polygon = pva
-
-
-func _set_values():
-	_properties["id"] = _data.id
-	_properties["name"] = _data.widget_name
-	_properties["position"] = position.x

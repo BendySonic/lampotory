@@ -4,11 +4,11 @@ extends Node2D
 
 # -----------------------------------------------------------------------------
 enum STATES {STATIC, PLAY, PAUSE}
-
+# Objects states
 var state: int = STATES.STATIC
 var count: int = 0
-var selected: bool = false
-
+var has_selected_object: bool = false
+# Main workspace node
 var workspace: Node
 
 # -----------------------------------------------------------------------------
@@ -43,13 +43,14 @@ func create_body(body_data: BodyResource):
 
 
 func deselect_bodies():
-	selected = false
+	has_selected_object = false
 	for body in get_children():
 		body.deselect_body()
 
 
 func select_body(body_id:int):
+	deselect_bodies()
 	for body in get_children():
 		if body.get_id() == body_id:
-			selected = true
+			has_selected_object = true
 			body.select_body()
