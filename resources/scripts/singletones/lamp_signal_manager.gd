@@ -1,8 +1,7 @@
 extends Node
 
-# Workspace signals:
-# GridWidget.
-signal widget_input(event: InputEventMouse, cursor_widget: UICursorWidget)
+# GUI GridWidget.
+signal widget_input(event: InputEventMouse, cursor_widget: GUICursorWidget)
 
 # BodyBase.
 signal body_input(properties: Dictionary, body_id: int)

@@ -1,0 +1,254 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1ftc2bsnc28r"]
+
+[ext_resource type="Script" path="res://resources/scripts/main/main.gd" id="1_wc1fj"]
+[ext_resource type="Script" path="res://resources/scripts/main/gui.gd" id="2_7moc6"]
+[ext_resource type="StyleBox" uid="uid://b7q50unjctfxi" path="res://resources/assets/godot_styles/tab_body_style.tres" id="3_6fbos"]
+[ext_resource type="StyleBox" uid="uid://5kmb0ohy85tr" path="res://resources/assets/godot_styles/tab_name_style.tres" id="4_4jh51"]
+[ext_resource type="Script" path="res://resources/scripts/main/world.gd" id="5_sxfb7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oq0f4"]
+bg_color = Color(0, 0.480469, 0.917969, 1)
+corner_radius_top_right = 15
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wo1my"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 15
+expand_margin_top = 4.0
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 12
+shadow_offset = Vector2(5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlkxd"]
+bg_color = Color(0, 0.482353, 0.921569, 1)
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3upuq"]
+bg_color = Color(0.384314, 0.556863, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lb40"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.219608)
+shadow_size = 3
+shadow_offset = Vector2(1, -1)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_wc1fj")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_7moc6")
+
+[node name="VBox" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBox2" type="HBoxContainer" parent="GUI/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.07
+theme_override_styles/panel = SubResource("StyleBoxFlat_oq0f4")
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_wo1my")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wlkxd")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Panel" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3upuq")
+
+[node name="Reload" type="Panel" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3upuq")
+
+[node name="Panel3" type="Panel" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3upuq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelBodies" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("3_6fbos")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme_override_styles/panel = ExtResource("4_4jh51")
+
+[node name="Label" type="Label" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Объекты
+"
+
+[node name="Margin" type="MarginContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/HBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.388235, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lb40")
+placeholder_text = "Поиск"
+
+[node name="Margin" type="MarginContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Grid" type="GridContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelBodies/VBoxContainer/Margin/VBox/Margin"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 2
+
+[node name="PanelProperties" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("3_6fbos")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme_override_styles/panel = ExtResource("4_4jh51")
+
+[node name="Label" type="Label" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = " Свойства"
+
+[node name="Margin" type="MarginContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Properties" type="VBoxContainer" parent="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/PanelProperties/VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+mouse_force_pass_scroll_events = false
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBox/HBox2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+alignment = 2
+
+[node name="Info" type="Label" parent="GUI/VBox/HBox2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.372549, 0.85098, 1)
+theme_override_font_sizes/font_size = 25
+text = "Скорость: 0
+Ускорение: 0
+Пройденный путь: 0"
+horizontal_alignment = 2
+
+[node name="SelectedObject" type="CanvasLayer" parent="GUI"]
+layer = 2
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("5_sxfb7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="gui_input" from="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="GUI" method="_on_play_gui_input"]
+[connection signal="gui_input" from="GUI/VBox/HBox2/VBoxContainer2/PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Reload" to="GUI" method="_on_reload_gui_input"]
+[connection signal="gui_input" from="GUI/VBox/HBox2/MarginContainer" to="GUI" method="_on_workspace_area_gui_input"]

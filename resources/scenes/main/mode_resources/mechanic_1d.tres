@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ModeResource" load_steps=2 format=3 uid="uid://cyty4hf6rscr8"]
+
+[ext_resource type="Script" path="res://resources/scripts/resources/mode_resource.gd" id="1_gf0fl"]
+
+[resource]
+script = ExtResource("1_gf0fl")
+body_resource_path = "res://resources/scenes/main/body_resources/"
+body_scene_path = "res://resources/scenes/main/body_scenes/"
+body_names = PackedStringArray("body_mechanic_1d", "point_mechanic_1d")
+mode = 0

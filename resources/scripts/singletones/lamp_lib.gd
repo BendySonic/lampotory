@@ -30,8 +30,8 @@ static func trfr(text: String, count: int) -> String:
 	var regex_dot = RegEx.new()
 	if not text.find(".") == -1:
 		var regex = RegEx.new()
-		regex.compile("\\d+.\\d{" + str(count) + "}")
-		return regex.search(text).get_string()
+		regex.compile("\\d{1,}.\\d{" + str(count) + "}")
+		return regex.search(text + "00").get_string()
 	else:
 		return text
 

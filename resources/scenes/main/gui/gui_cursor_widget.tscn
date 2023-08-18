@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://def2bkc3wpx2e"]
+
+[ext_resource type="Script" path="res://resources/scripts/main/gui/gui_cursor_widget.gd" id="1_ciayt"]
+
+[node name="WidgetCursor" type="Node2D"]
+script = ExtResource("1_ciayt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.717647, 0.933333, 0.592157)

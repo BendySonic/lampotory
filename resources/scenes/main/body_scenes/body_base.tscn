@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxbtxpdoj80km"]
+
+[ext_resource type="Script" path="res://resources/scripts/main/body_scenes/body_base.gd" id="1_ca7l5"]
+
+[node name="WorkspaceBaseBody" type="CharacterBody2D"]
+input_pickable = true
+slide_on_ceiling = false
+script = ExtResource("1_ca7l5")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

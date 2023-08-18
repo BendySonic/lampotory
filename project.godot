@@ -12,13 +12,12 @@ config_version=5
 
 config/name="Lampotory"
 config/tags=PackedStringArray("активный_проект", "программа")
-run/main_scene="res://resources/scenes/workspace/workspace.tscn"
+run/main_scene="res://resources/scenes/main/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon/icon.svg"
 
 [autoload]
 
-LampFileManager="*res://resources/scripts/singletones/lamp_file_manager.gd"
 LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
 
 [display]
