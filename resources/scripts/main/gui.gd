@@ -59,7 +59,7 @@ func _process(_delta):
 						+ "\nУскорение: " + LampLib.trfr(str(
 							body.get_realtime_properties()["acceleration"]), 2)
 						+ "\nПройденный путь: " + LampLib.trfr(str(
-							body.path), 2)
+							body.get_realtime_properties()["path"]), 2)
 				)
 
 # Check mouse input signals and clear properties/select (on release)

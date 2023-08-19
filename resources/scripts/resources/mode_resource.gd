@@ -69,7 +69,19 @@ var acceleration:Dictionary = {
 	"can_change": true,
 }
 
+
+var path:Dictionary = {
+	"id": "path",
+	"name": "Путь",
+	"vector": false,
+	"value_type": 1,
+}
+
 var properties:Array[Dictionary] = [
 		base_text, id, name, position,
 		data_text, mass, speed, acceleration
+]
+
+var realtime_properties = [
+		path
 ]

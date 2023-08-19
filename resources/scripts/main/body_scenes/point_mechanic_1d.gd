@@ -5,17 +5,12 @@ extends BodyBaseMechanic1D
 
 func _ready():
 	super()
-	_extra_properties = ["speed", "acceleration"]
+	_extra_base_properties = ["speed", "acceleration"]
+	_extra_base_realtime_properties = ["path"]
 	# Create properties and add to "_properties" (BaseBody class)
-	_add_properties()
+	_reload_properties()
+	_reload_realtime_properties()
 	_set_values()
 
 
-func _process(_delta):
-	super(_delta)
 
-
-func _set_values():
-	_properties["id"] = _data.id
-	_properties["name"] = _data.widget_name
-	_properties["position"] = position.x
