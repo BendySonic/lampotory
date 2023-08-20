@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm0f5yab2fysc"]
+[gd_scene load_steps=6 format=3 uid="uid://bm0f5yab2fysc"]
 
 [ext_resource type="Script" path="res://resources/scripts/main/body_scenes/body_mechanic_1d.gd" id="1_w16un"]
 
@@ -12,11 +12,14 @@ size = Vector2(32, 32)
 custom_solver_bias = 1.0
 size = Vector2(30, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ogod"]
+size = Vector2(4, 28)
+
 [node name="MechanicBody" type="CharacterBody2D"]
 disable_mode = 2
 input_pickable = true
 slide_on_ceiling = false
-safe_margin = 8.0
+safe_margin = 0.001
 script = ExtResource("1_w16un")
 
 [node name="Select" type="MeshInstance2D" parent="."]
@@ -31,5 +34,11 @@ mesh = SubResource("QuadMesh_hn3oy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hmn56")
 debug_color = Color(0.47451, 0.419608, 0, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(15, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2ogod")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

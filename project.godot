@@ -45,6 +45,12 @@ clear={
 ]
 }
 
+[physics]
+
+2d/run_on_separate_thread=true
+2d/physics_engine="GodotPhysics2D"
+2d/time_before_sleep=100.0
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

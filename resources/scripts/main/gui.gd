@@ -40,8 +40,8 @@ var get_mode_data: Callable
 # -----------------------------------------------------------------------------
 func _ready():
 	create_grid_widgets()
-	LampSignalManager.widget_input.connect(on_grid_widget_input)
-	LampSignalManager.body_input.connect(on_body_input)
+	LampSignalManager.widget_input.connect(_on_grid_widget_input)
+	LampSignalManager.body_input.connect(_on_body_input)
 
 func _process(_delta):
 	# Grid size managment
@@ -82,7 +82,7 @@ func _input(event):
 
 # Signals
 # GRID_WIDGET is element of body list in UI
-func on_grid_widget_input(event: InputEventMouse, grid_widget: GUIGridWidget):
+func _on_grid_widget_input(event: InputEventMouse, grid_widget: GUIGridWidget):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			# Body data is data container for new body
@@ -111,39 +111,31 @@ func _on_workspace_area_gui_input(event):
 			workspace_area_input = true
 
 # Show body properties in PROPERTIES_CONTROL
-func on_body_input(body_properties: Dictionary, body_id: int):
+func _on_body_input(body_properties: Dictionary, body_id: int):
+	var local_ru = get_mode_data.call().local_ru
+	
 	select_body.call(body_id)
-	if LampLib.has_child(properties_control):
-		for child in properties_control.get_children():
-			child.queue_free()
-	# Check for property template (Is property legit?)
-	for property in body_properties:
-		var base_property
-		for dictionary in get_mode_data.call().properties:
-			if dictionary["id"] == property:
-				base_property = dictionary
-		if base_property == null:
-			continue
-		
+	for child in properties_control.get_children():
+		child.queue_free()
+	
+	for body_property in body_properties:
 		var property_instance = property_scene.instantiate()
 		properties_control.add_child(property_instance)
-		property_instance.construct(base_property, body_properties,
-				property)
+		property_instance.construct(body_properties, body_property, local_ru)
 	# Return
 	body_input = true
 
 func _on_play_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if not event.is_pressed():
 			LampSignalManager.emit_signal("play_pressed")
 
 func _on_reload_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if not event.is_pressed():
 			LampSignalManager.emit_signal("reload_pressed")
 
 
-# Behavior
 # Grid widget is element of body list in UI
 # Every mode show own grid widgets
 func create_grid_widgets():

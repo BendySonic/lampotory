@@ -2,11 +2,9 @@ class_name GUIProperty
 extends Control
 
 # -----------------------------------------------------------------------------
-enum TYPES {STR, INT, VECTOR_STR, VECTOR_INT}
-
-var _type: int = TYPES.STR
 var _body_id: int
 var _property_id: String
+var _property_value: Variant
 var _is_vector: bool
 
 @onready var title_panel = get_node("PanelContainer2")
@@ -59,15 +57,15 @@ func _on_line_edit_submitted(_new_text):
 # Check text for numbers and letters
 func check_text(text: String, line_edit: LineEdit):
 	if (
-			(_type == TYPES.INT and LampLib.has_abc(text))
-			or (_type == TYPES.STR and LampLib.has_123(text))
+			(_property_value is int and LampLib.has_abc(text))
+			or (_property_value is String and LampLib.has_123(text))
 	):
 		line_edit.delete_char_at_caret()
 
 # Send text like String/Vector2/float
 func send_text(x_text: String, y_text: String):
 	var result
-	if _type == TYPES.INT:
+	if _property_value is int:
 		if _is_vector:
 			result = Vector2(float(x_text), float(y_text))
 		else:
@@ -80,34 +78,36 @@ func send_text(x_text: String, y_text: String):
 	)
 
 
-func construct(base_property: Dictionary, properties: Dictionary,
-		property_name: String):
+func construct(body_properties: Dictionary,
+		body_property: String, local_ru: Dictionary):
 	# Title property.
-	if base_property["value_type"] == -1:
+	if body_property == "data_text" or body_property == "behavior_text":
 		title_panel.visible = true
-		title.text = base_property["name"]
+		title.text = body_properties[body_property]
 		return 0
 	# Simple property.
 	property_panel.visible = true
-	property.text = base_property["name"]
-	_property_id = base_property["id"]
-	_type = base_property["value_type"]
-	_body_id = properties["id"]
-	_is_vector = base_property["vector"]
-	if base_property["can_change"]:
+	property.text = local_ru[body_property]
+	
+	_property_id = body_property
+	_property_value = body_properties[body_property]
+	_body_id = body_properties["id"]
+	_is_vector = body_properties[body_property] is Vector2
+	
+	if body_properties[body_property] is String:
+		x_value_label.visible = true
+		x_value_label.text = str(_property_value)
+	else:
 		if _is_vector:
 			down_container.visible = true
 			
 			x_edit.visible = true
 			x_label.visible = true
-			x_edit.text = str(properties[property_name].x)
+			x_edit.text = str(_property_value.x)
 				
 			y_edit.visible = true
 			y_label.visible = true
-			y_edit.text = str(properties[property_name].y)	
+			y_edit.text = str(_property_value.y)	
 		else:
 			x_edit.visible = true
-			x_edit.text = str(properties[property_name])
-	else:
-		x_value_label.visible = true
-		x_value_label.text = str(properties[property_name])
+			x_edit.text = str(_property_value)
