@@ -1,6 +1,6 @@
 class_name BodyBase
 extends CharacterBody2D
-## Base class for ALL bodies
+# Base class for ALL bodies
 
 
 enum STATES {START, PLAY, PAUSE}

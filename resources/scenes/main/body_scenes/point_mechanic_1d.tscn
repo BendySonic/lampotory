@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://djye04yrlr363"]
 
-[ext_resource type="PackedScene" uid="uid://cxbtxpdoj80km" path="res://resources/scenes/main/body_scenes/body_base.tscn" id="1_mx410"]
+[ext_resource type="PackedScene" uid="uid://cxbtxpdoj80km" path="res://resources/scenes/workspace/body_scenes/body_base.tscn" id="1_mx410"]
 [ext_resource type="Script" path="res://resources/scripts/main/body_scenes/point_mechanic_1d.gd" id="2_fjfnm"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2tl0b"]

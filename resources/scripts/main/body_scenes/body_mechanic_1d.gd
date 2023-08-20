@@ -1,6 +1,6 @@
 class_name BodyMechanic1D
 extends BodyBaseMechanic1D
-## Classic Body1D for 1D movement with mass, speed, acceleration
+# Classic Body1D for 1D movement with mass, speed, acceleration
 
 
 func _ready():
@@ -15,9 +15,9 @@ func _ready():
 
 # Physics interactions
 func _physics_process(delta):
-	super(delta)
 	if not kinematic_collision == null:
 		impulse_manager(kinematic_collision.get_collider())
+	super(delta)
 
 ## Body impulse manage
 func impulse_manager(target: Node2D):
