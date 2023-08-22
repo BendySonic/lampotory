@@ -14,12 +14,12 @@ var is_mode: Callable
 
 # -----------------------------------------------------------------------------
 func _ready():
-	LampSignalManager.play_pressed.connect(on_play_pressed)
-	LampSignalManager.reload_pressed.connect(on_reload_pressed)
+	LampSignalManager.play_pressed.connect(_on_play_pressed)
+	LampSignalManager.reload_pressed.connect(_on_reload_pressed)
 
 
 # Signals
-func on_play_pressed():
+func _on_play_pressed():
 	_state = STATES.PAUSE if _state == STATES.PLAY else STATES.PLAY
 	for body in get_children():
 		if _state == STATES.PLAY:
@@ -27,7 +27,7 @@ func on_play_pressed():
 		else:
 			body.pause()
 
-func on_reload_pressed():
+func _on_reload_pressed():
 	_state = STATES.STATIC
 	for body in get_children():
 		body.reload()
@@ -43,7 +43,8 @@ func create_body(body_data: BodyResource):
 	)
 	if is_mode.call("mechanic_1d"):
 		body.position = Vector2(get_global_mouse_position().x, 0)
-	body.construct(body_data, get_mode_data.call())
+	body.construct(body_data)
+	body.get_mode_data = get_mode_data
 	add_child(body)
 
 func deselect_bodies():

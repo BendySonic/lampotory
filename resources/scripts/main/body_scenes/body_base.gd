@@ -12,8 +12,8 @@ var _extra_base_realtime_properties: Array[String]
 var _data: BodyResource
 var _state = STATES.START
 var _selected: bool = false
-# Mode data
-var mode_data: ModeResource  # Reference
+# Main
+var get_mode_data: Callable
 
 @onready var select = get_node("Select")
 
@@ -41,21 +41,19 @@ func _on_data_change(new_data, property_id, body_id):
 
 # Inner methods
 func _reload_properties():
-	var properties = mode_data.properties
-	for property in properties:
-		if (
-			_extra_base_properties.has(property)
-			or _base_properties.has(property)
-		):
-			_data.properties[property] = properties[property]
+	var properties = get_mode_data.call().properties
+	_data.properties = { }
+	for property in _base_properties:
+		_data.properties[property] = properties[property]
+	for property in _extra_base_properties:
+		_data.properties[property] = properties[property]
 
 
 func _reload_realtime_properties():
-	var properties = mode_data.properties
+	var properties = get_mode_data.call().properties
 	_data.realtime_properties = _data.properties.duplicate()
-	for property in properties:
-		if _extra_base_realtime_properties.has(property):
-			_data.realtime_properties[property] = properties[property]
+	for property in _extra_base_realtime_properties:
+		_data.realtime_properties[property] = properties[property]
 
 func _set_values():
 	_data.properties["id"] = _data.id
@@ -64,9 +62,8 @@ func _set_values():
 
 
 # Constructor for body
-func construct(data_arg: BodyResource, mode_data_arg: ModeResource):
+func construct(data_arg: BodyResource):
 	_data = data_arg
-	mode_data = mode_data_arg
 
 
 # Body select
@@ -83,11 +80,17 @@ func deselect_body():
 func set_realtime_property(property_name: String, property_value):
 	_data.realtime_properties[property_name] = property_value
 # Getters
-func get_realtime_properties():
-	return _data.realtime_properties
+func get_realtime_property(property_name: String):
+	if _data.realtime_properties.has(property_name):
+		return _data.realtime_properties[property_name]
+	else:
+		return "?"
 
-func get_properties():
-	return _data.properties
+func get_property(property_name: String):
+	if _data.properties.has(property_name):
+		return _data.properties[property_name]
+	else:
+		return "?"
 
 func get_id():
 	return _data.id

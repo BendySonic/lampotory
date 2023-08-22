@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 # Class of app
 
 # -----------------------------------------------------------------------------
@@ -25,20 +25,24 @@ func _enter_tree():
 				load(_mode_data.body_resource_path + body_name + ".tres"))
 	_gui_api()
 	_world_api()
+	
+	
 
 
 # Children API
 func _gui_api():
+	# World
 	gui.get_has_selected_body = world.get_has_selected_body
 	gui.get_bodies = world.get_bodies
 	gui.get_bodies_count = world.get_bodies_count
 	gui.create_body = world.create_body
 	gui.select_body = world.select_body
 	gui.deselect_bodies = world.deselect_bodies
-	
+	# Main
 	gui.get_mode_data = get_mode_data
 
 func _world_api():
+	# Main
 	world.get_mode_data = get_mode_data
 	world.is_mode = is_mode
 

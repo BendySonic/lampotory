@@ -30,6 +30,7 @@ offset_bottom = 74.0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 modulate = Color(0, 0.466667, 0.909804, 1)
+custom_minimum_size = Vector2(40, 45)
 layout_mode = 2
 size_flags_vertical = 3
 stretch_mode = 4

@@ -1,27 +1,237 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqywyb043aery"]
+[gd_scene load_steps=19 format=3 uid="uid://d3pb6t8fbo0uc"]
 
-[ext_resource type="Script" path="res://resources/scripts/menu/menu.gd" id="1_xv8bd"]
+[ext_resource type="Script" path="res://resources/scripts/menu/menu.gd" id="1_luflt"]
+[ext_resource type="Texture2D" uid="uid://x0war6otf7m2" path="res://resources/assets/GUI/menu_icon.png" id="2_1f4ce"]
+[ext_resource type="Texture2D" uid="uid://brmasmf30mgvg" path="res://resources/assets/GUI/logo_white.png" id="2_1wbhb"]
+[ext_resource type="Theme" path="res://resources/assets/godot_themes/white.tres" id="2_e6r32"]
+[ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://resources/assets/GUI/home_icon.png" id="2_npe4k"]
+[ext_resource type="Theme" path="res://resources/assets/godot_themes/blue.tres" id="3_w8ffw"]
+[ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://resources/assets/GUI/lab_icon.png" id="4_q8r1j"]
+[ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://resources/assets/GUI/sand_icon.png" id="5_c1ai8"]
 
-[node name="Menu" type="Node2D"]
-script = ExtResource("1_xv8bd")
+[sub_resource type="Theme" id="Theme_mk0pc"]
 
-[node name="Label1D" type="Label" parent="."]
-offset_left = 265.0
-offset_top = 315.0
-offset_right = 396.0
-offset_bottom = 401.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "1D"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeoci"]
+content_margin_right = 0.0
+bg_color = Color(0.195313, 0.460938, 0.992188, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.294118, 0.627451, 0.996078, 1)
 
-[node name="Label2D" type="Label" parent="."]
-offset_left = 777.0
-offset_top = 318.0
-offset_right = 908.0
-offset_bottom = 404.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "2D"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pwii"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 5
+border_width_right = 10
+border_color = Color(0.282353, 0.580392, 0.992157, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.145098)
+shadow_size = 30
+shadow_offset = Vector2(20, 20)
 
-[connection signal="gui_input" from="Label1D" to="." method="_on_label_1d_gui_input"]
-[connection signal="gui_input" from="Label2D" to="." method="_on_label_2d_gui_input"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40ddf"]
+bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
+border_width_bottom = 5
+corner_radius_top_left = 50
+corner_radius_top_right = 40
+shadow_color = Color(0, 0, 0, 0.176471)
+shadow_offset = Vector2(10, 10)
+
+[sub_resource type="Theme" id="Theme_s2lug"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17f20"]
+content_margin_left = 15.0
+content_margin_right = 20.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy6f1"]
+content_margin_left = 15.0
+content_margin_right = 20.0
+bg_color = Color(0.141176, 0.45098, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k47h"]
+bg_color = Color(0.243137, 0.552941, 1, 1)
+border_width_top = 5
+border_width_right = 10
+border_color = Color(0.403922, 0.643137, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 12
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="FontVariation" id="FontVariation_6kn07"]
+spacing_bottom = -5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hycjk"]
+bg_color = Color(0.292969, 0.625, 0.992188, 1)
+corner_radius_bottom_left = 50
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_luflt")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_right = 1100.0
+offset_bottom = 720.0
+size_flags_vertical = 3
+theme = SubResource("Theme_mk0pc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Menu" type="PanelContainer" parent="Panel/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("2_e6r32")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pwii")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer/Menu"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_w8ffw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40ddf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_1f4ce")
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+theme = SubResource("Theme_s2lug")
+theme_override_colors/font_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gy6f1")
+toggle_mode = true
+text = "Начало"
+icon = ExtResource("2_npe4k")
+alignment = 2
+
+[node name="Button2" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+theme = SubResource("Theme_s2lug")
+theme_override_colors/font_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gy6f1")
+toggle_mode = true
+text = "Проекты"
+icon = ExtResource("4_q8r1j")
+alignment = 2
+
+[node name="Button3" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+theme = SubResource("Theme_s2lug")
+theme_override_colors/font_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gy6f1")
+toggle_mode = true
+text = "Песочница"
+icon = ExtResource("5_c1ai8")
+alignment = 2
+
+[node name="Workspace" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/Workspace/VBoxContainer"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_1wbhb")
+expand_mode = 1
+
+[node name="Menu" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Note" type="PanelContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1k47h")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons/Note"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons/Note/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_6kn07")
+theme_override_font_sizes/font_size = 20
+text = "Начни физические опыты
+с консультацией
+виртуального помощника!"
+
+[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+size_flags_stretch_ratio = 84.85
+theme_override_styles/panel = SubResource("StyleBoxFlat_hycjk")

@@ -5,15 +5,15 @@ extends CanvasLayer
 # Mouse input handle (Based on input signals)
 # click = get signals result
 # release = check signals in "_input"
-var workspace_area_input: bool = false # Signal result
-var body_input: bool = false # Signal result
+var _workspace_area_input: bool = false # Signal result
+var _body_input: bool = false # Signal result
 # World
-var get_has_selected_body: Callable
-var get_bodies: Callable
-var get_bodies_count: Callable
 var create_body: Callable
 var select_body: Callable
 var deselect_bodies: Callable
+var get_has_selected_body: Callable
+var get_bodies: Callable
+var get_bodies_count: Callable
 # Main
 var get_mode_data: Callable
 
@@ -39,7 +39,7 @@ var get_mode_data: Callable
 
 # -----------------------------------------------------------------------------
 func _ready():
-	create_grid_widgets()
+	_create_grid_widgets()
 	LampSignalManager.widget_input.connect(_on_grid_widget_input)
 	LampSignalManager.body_input.connect(_on_body_input)
 
@@ -55,29 +55,28 @@ func _process(_delta):
 			if body._selected:
 				realtime_properties_control.text = (
 						"Скорость: " + LampLib.trfr(str(
-							body.get_realtime_properties()["speed"]), 2)
+							body.get_realtime_property("speed")), 2)
 						+ "\nУскорение: " + LampLib.trfr(str(
-							body.get_realtime_properties()["acceleration"]), 2)
+							body.get_realtime_property("acceleration")), 2)
 						+ "\nПройденный путь: " + LampLib.trfr(str(
-							body.get_realtime_properties()["path"]), 2)
-				)
+							body.get_realtime_property("path")), 2)
+					)
 
 # Check mouse input signals and clear properties/select (on release)
 func _input(event):
 	if event is InputEventMouseButton:
 		if not event.is_pressed():
 			# Check signals
-			if workspace_area_input and not body_input:
+			if _workspace_area_input and not _body_input:
 				deselect_bodies.call()
-				if LampLib.has_child(properties_control):
-					for child in properties_control.get_children():
-						child.queue_free()
+				for child in properties_control.get_children():
+					child.queue_free()
 				realtime_properties_control.text = (
 						"Скорость: 0\nУскорение: 0\nПройденный путь: 0"
 				)
 			# Restart signal results
-			workspace_area_input = false
-			body_input = false
+			_workspace_area_input = false
+			_body_input = false
 
 
 # Signals
@@ -108,7 +107,7 @@ func _on_workspace_area_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			# Return
-			workspace_area_input = true
+			_workspace_area_input = true
 
 # Show body properties in PROPERTIES_CONTROL
 func _on_body_input(body_properties: Dictionary, body_id: int):
@@ -123,7 +122,7 @@ func _on_body_input(body_properties: Dictionary, body_id: int):
 		properties_control.add_child(property_instance)
 		property_instance.construct(body_properties, body_property, local_ru)
 	# Return
-	body_input = true
+	_body_input = true
 
 func _on_play_gui_input(event):
 	if event is InputEventMouseButton:
@@ -138,7 +137,7 @@ func _on_reload_gui_input(event):
 
 # Grid widget is element of body list in UI
 # Every mode show own grid widgets
-func create_grid_widgets():
+func _create_grid_widgets():
 	for widget_name in get_mode_data.call().body_names:
 		var grid_widget = grid_widget_scene.instantiate()
 		grid_control.add_child(grid_widget)

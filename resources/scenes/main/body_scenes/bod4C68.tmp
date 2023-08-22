@@ -15,7 +15,7 @@ size = Vector2(30, 30)
 [node name="MechanicBody" type="CharacterBody2D"]
 input_pickable = true
 slide_on_ceiling = false
-safe_margin = 5.0
+safe_margin = 0.001
 script = ExtResource("1_w16un")
 
 [node name="Select" type="MeshInstance2D" parent="."]

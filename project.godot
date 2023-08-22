@@ -22,8 +22,10 @@ LampSignalManager="*res://resources/scripts/singletones/lamp_signal_manager.gd"
 
 [display]
 
-window/size/viewport_width=1280
+window/size/viewport_width=1100
 window/size/viewport_height=720
+window/size/resizable=false
+window/size/borderless=true
 
 [editor]
 
@@ -56,3 +58,5 @@ clear={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(1, 1, 1, 1)
+viewport/size/borderless=false
+viewport/defaults/default_clear_color=Color(1, 1, 1, 1)
