@@ -1,6 +1,6 @@
 # Lampotory
 <p align="center">
-    <img src="icon/logo.png" width="400" alt="Lampotory logo">
+	<img src="icons/logo.png" width="400" alt="Lampotory logo">
 </p>
 
 ## Открытая и свободная виртуальная лаборатория
