@@ -14,13 +14,15 @@ var _state = STATES.START
 var _selected: bool = false
 # Main
 var get_mode_data: Callable
+# World
+var get_speed: Callable
 
-@onready var select = get_node("Select")
+@onready var select := get_node("Select")
 
 
 func _ready():
 	_base_properties = [
-	"data_text", "id", "type", "position", "behavior_text"
+			"data_text", "id", "type", "position", "behavior_text"
 	]
 	LampSignalManager.data_changed.connect(_on_data_change)
 
@@ -29,9 +31,8 @@ func _ready():
 func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			LampSignalManager.emit_signal(
-					"body_input", _data.properties, _data.id
-			)
+			LampSignalManager.emit_signal("body_pressed",
+					_data.properties, _data.id)
 
 func _on_data_change(new_data, property_id, body_id):
 	if _data.properties["id"] == body_id:
@@ -70,10 +71,12 @@ func construct(data_arg: BodyResource):
 func select_body():
 	_selected = true
 	select.visible = true
+	z_index = 5
 
 func deselect_body():
 	_selected = false
 	select.visible = false
+	z_index = 0
 
 
 # Setters
@@ -94,3 +97,6 @@ func get_property(property_name: String):
 
 func get_id():
 	return _data.id
+
+func is_selected():
+	return _selected

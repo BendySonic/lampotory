@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3pb6t8fbo0uc"]
+[gd_scene load_steps=15 format=3 uid="uid://d3pb6t8fbo0uc"]
 
-[ext_resource type="Script" path="res://src/menu/menu.gd" id="1_2amvr"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_y1t18"]
 [ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="3_2f336"]
 [ext_resource type="Texture2D" uid="uid://x0war6otf7m2" path="res://assets/GUI/icons/menu_tab.png" id="4_1atex"]
@@ -63,16 +62,18 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_2amvr")
 
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
 offset_right = 1100.0
 offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_mk0pc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
@@ -82,10 +83,10 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 35
 
 [node name="Menu" type="PanelContainer" parent="Panel/HBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(250, 0)

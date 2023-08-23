@@ -66,6 +66,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/HBoxContainer/Play"]
 layout_mode = 2
+toggle_mode = true
 texture_normal = ExtResource("3_gerr7")
 texture_pressed = ExtResource("4_4a6pg")
 
@@ -109,7 +110,7 @@ theme = ExtResource("7_arqp3")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI/HUD/Other"]
+[node name="WorkspaceArea" type="MarginContainer" parent="GUI/HUD/Other"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -119,13 +120,13 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HUD/Other/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HUD/Other/WorkspaceArea"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 alignment = 2
 
-[node name="Info" type="Label" parent="GUI/HUD/Other/MarginContainer/VBoxContainer"]
+[node name="Info" type="Label" parent="GUI/HUD/Other/WorkspaceArea/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_jtp53")
 theme_override_font_sizes/font_size = 25
@@ -142,7 +143,7 @@ custom_minimum_size = Vector2(200, 0)
 offset_left = 50.0
 offset_top = 70.0
 offset_right = 287.0
-offset_bottom = 379.0
+offset_bottom = 320.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.75
@@ -209,9 +210,9 @@ columns = 2
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(200, 0)
 offset_left = 100.0
-offset_top = 400.0
-offset_right = 348.0
-offset_bottom = 676.0
+offset_top = 365.0
+offset_right = 344.0
+offset_bottom = 690.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
@@ -256,4 +257,6 @@ script = ExtResource("10_j6kxl")
 
 [node name="Camera" type="Camera2D" parent="."]
 
-[connection signal="gui_input" from="GUI/HUD/Other/MarginContainer" to="GUI" method="_on_workspace_area_gui_input"]
+[connection signal="toggled" from="GUI/HUD/MenuBar/HBoxContainer/Play/TextureButton" to="GUI" method="_on_play_toggled"]
+[connection signal="pressed" from="GUI/HUD/MenuBar/HBoxContainer/Reload/TextureButton" to="GUI" method="_on_reload_pressed"]
+[connection signal="gui_input" from="GUI/HUD/Other/WorkspaceArea" to="GUI" method="_on_workspace_area_gui_input"]

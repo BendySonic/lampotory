@@ -2,43 +2,40 @@ extends CanvasLayer
 # Class for GUI
 
 # -----------------------------------------------------------------------------
-# Mouse input handle (Based on input signals)
-# click = get signals result
-# release = check signals in "_input"
-var _workspace_area_input: bool = false # Signal result
-var _body_input: bool = false # Signal result
 # World
 var create_body: Callable
-var select_body: Callable
 var deselect_bodies: Callable
-var get_has_selected_body: Callable
 var get_bodies: Callable
 var get_bodies_count: Callable
 # Main
 var get_mode_data: Callable
 
-@onready var grid_widget_scene = preload("res://src/main/gui/" +
+@onready var grid_widget_scene := preload("res://src/main/gui/" +
 		"gui_grid_widget.tscn")
-@onready var cursor_widget_scene = preload("res://src/main/gui/" +
+@onready var cursor_widget_scene := preload("res://src/main/gui/" +
 		"gui_cursor_widget.tscn")
-@onready var property_scene = preload("res://src/main/gui/" +
+@onready var property_scene := preload("res://src/main/gui/" +
 		"gui_property.tscn")
 
-@onready var grid_control = get_node("ObjectsWindow/VBoxContainer/" +
+@onready var grid_control := get_node("ObjectsWindow/VBoxContainer/" +
 		"Body/VBox/Margin/Grid")
-@onready var properties_control = get_node("PropertiesWindow/" +
+@onready var properties_control := get_node("PropertiesWindow/" +
 		"VBoxContainer/Margin/Properties")
-@onready var realtime_properties_control = get_node("HUD/Other/" +
-		"MarginContainer/VBoxContainer/Info")
-@onready var workspace_area = get_node("HUD/Other/MarginContainer")
-@onready var select = get_node("SelectedObject")
+@onready var realtime_properties_control := get_node("HUD/Other/" +
+		"WorkspaceArea/VBoxContainer/Info")
+@onready var workspace_area := get_node("HUD/Other/WorkspaceArea")
+@onready var play_button := get_node("HUD/MenuBar/HBoxContainer/Play/" +
+		"TextureButton")
+@onready var reload_button := get_node("HUD/MenuBar/HBoxContainer/Reload/" +
+		"TextureButton")
+
+@onready var select := get_node("SelectedObject")
 
 
 # -----------------------------------------------------------------------------
 func _ready():
 	_create_grid_widgets()
 	LampSignalManager.widget_input.connect(_on_grid_widget_input)
-	LampSignalManager.body_input.connect(_on_body_input)
 
 func _process(_delta):
 	# Grid size managment
@@ -47,33 +44,22 @@ func _process(_delta):
 	elif grid_control.size.x >= 280:
 		grid_control.columns = 3
 	# Realtime properties managment (REALTIME_PROPERTIES_CONTROL)
-	if get_has_selected_body.call():
-		for body in get_bodies.call():
-			if body._selected:
-				realtime_properties_control.text = (
-						"Скорость: " + LampLib.trfr(str(
-							body.get_realtime_property("speed")), 2)
-						+ "\nУскорение: " + LampLib.trfr(str(
-							body.get_realtime_property("acceleration")), 2)
-						+ "\nПройденный путь: " + LampLib.trfr(str(
-							body.get_realtime_property("path")), 2)
-					)
+	for body in get_bodies.call():
+		if body.is_selected():
+			realtime_properties_control.text = (
+					"Скорость: " + LampLib.trfr(str(
+						body.get_realtime_property("speed")), 2)
+					+ "\nУскорение: " + LampLib.trfr(str(
+						body.get_realtime_property("acceleration")), 2)
+					+ "\nПройденный путь: " + LampLib.trfr(str(
+						body.get_realtime_property("path")), 2)
+				)
 
-# Check mouse input signals and clear properties/select (on release)
+# Unblock WorkspaceArea on press
 func _input(event):
 	if event is InputEventMouseButton:
-		if not event.is_pressed():
-			# Check signals
-			if _workspace_area_input and not _body_input:
-				deselect_bodies.call()
-				for child in properties_control.get_children():
-					child.queue_free()
-				realtime_properties_control.text = (
-						"Скорость: 0\nУскорение: 0\nПройденный путь: 0"
-				)
-			# Restart signal results
-			_workspace_area_input = false
-			_body_input = false
+		if event.is_pressed():
+			unblock_workspace_area_input() # Unblock body deselect on input
 
 
 # Signals
@@ -102,34 +88,18 @@ func _on_grid_widget_input(event: InputEventMouse, grid_widget: GUIGridWidget):
 
 func _on_workspace_area_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
-			# Return
-			_workspace_area_input = true
-
-# Show body properties in PROPERTIES_CONTROL
-func _on_body_input(body_properties: Dictionary, body_id: int):
-	var local_ru = get_mode_data.call().local_ru
-	
-	select_body.call(body_id)
-	for child in properties_control.get_children():
-		child.queue_free()
-	
-	for body_property in body_properties:
-		var property_instance = property_scene.instantiate()
-		properties_control.add_child(property_instance)
-		property_instance.construct(body_properties, body_property, local_ru)
-	# Return
-	_body_input = true
-
-func _on_play_gui_input(event):
-	if event is InputEventMouseButton:
 		if not event.is_pressed():
-			LampSignalManager.emit_signal("play_pressed")
+			deselect_bodies.call()
+			delete_properties()
+			realtime_properties_control.text = ("Скорость: 0" +
+					"\nУскорение: 0\nПройденный путь: 0")
 
-func _on_reload_gui_input(event):
-	if event is InputEventMouseButton:
-		if not event.is_pressed():
-			LampSignalManager.emit_signal("reload_pressed")
+func _on_play_toggled(button_pressed: bool):
+	LampSignalManager.emit_signal("play_toggled", button_pressed)
+
+func _on_reload_pressed():
+	play_button.button_pressed = false
+	LampSignalManager.emit_signal("reload_pressed")
 
 
 # Grid widget is element of body list in UI
@@ -139,3 +109,21 @@ func _create_grid_widgets():
 		var grid_widget = grid_widget_scene.instantiate()
 		grid_control.add_child(grid_widget)
 		grid_widget.construct(get_mode_data.call().body_resources[widget_name])
+
+
+func create_properties(body_properties: Dictionary, body_id: int):
+	var local_ru = get_mode_data.call().local_ru
+	for body_property in body_properties:
+		var property_instance = property_scene.instantiate()
+		properties_control.add_child(property_instance)
+		property_instance.construct(body_properties, body_property, local_ru)
+
+func delete_properties():
+	for child in properties_control.get_children():
+		child.queue_free()
+
+func unblock_workspace_area_input():
+	workspace_area.set_mouse_filter(1)
+
+func block_workspace_area_input():
+	workspace_area.set_mouse_filter(2)

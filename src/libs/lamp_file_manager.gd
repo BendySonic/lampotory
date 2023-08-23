@@ -1,4 +1,5 @@
-extends Node
+class_name LampFileManager
+extends Object
 
 #public functions
 static func save_file(content:String, file_name:String):

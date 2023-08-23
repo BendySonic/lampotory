@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccmdeixcr40il"]
+[gd_scene load_steps=6 format=3 uid="uid://ccmdeixcr40il"]
+
+[ext_resource type="Script" path="res://src/window.gd" id="1_doh4o"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="2_62v8k"]
 
 [sub_resource type="Theme" id="Theme_t73ui"]
 
@@ -12,7 +15,7 @@ border_color = Color(0.294118, 0.627451, 0.996078, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehgss"]
 bg_color = Color(0.292969, 0.625, 0.992188, 1)
-corner_radius_bottom_left = 50
+corner_radius_bottom_left = 25
 expand_margin_top = 5.0
 
 [node name="Window" type="Control"]
@@ -22,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_doh4o")
 
 [node name="Window" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -42,8 +46,9 @@ size = Vector2i(1080, 700)
 render_target_update_mode = 4
 
 [node name="WindowPanel" type="PanelContainer" parent="Window"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = ExtResource("2_62v8k")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ehgss")

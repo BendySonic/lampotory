@@ -3,7 +3,7 @@ extends BodyBaseMechanic1D
 # Classic Body1D for 1D movement with mass, speed, acceleration
 
 
-var _ready_to_collide: bool = true
+var _ready_to_collide := true
 
 
 func _ready():
