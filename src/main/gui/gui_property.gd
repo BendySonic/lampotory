@@ -74,7 +74,7 @@ func send_text(x_text: String, y_text: String):
 		result = x_text
 	
 	LampSignalManager.emit_signal(
-		"data_changed", result, _property_id, _body_id
+			"data_changed", result, _property_id, _body_id
 	)
 
 

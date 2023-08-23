@@ -98,6 +98,10 @@ func _on_play_toggled(button_pressed: bool):
 	LampSignalManager.emit_signal("play_toggled", button_pressed)
 
 func _on_reload_pressed():
+	var bodies_properties: Array[Dictionary]
+	for body in get_bodies.call():
+		bodies_properties.push_back(body.get_properties())
+	LampFileManager.save_file("data/test.json", bodies_properties)
 	play_button.button_pressed = false
 	LampSignalManager.emit_signal("reload_pressed")
 

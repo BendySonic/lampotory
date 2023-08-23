@@ -95,6 +95,10 @@ func get_property(property_name: String):
 	else:
 		return "?"
 
+
+func get_properties():
+	return _data.properties
+
 func get_id():
 	return _data.id
 

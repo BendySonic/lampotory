@@ -42,7 +42,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Window/SubViewportContainer"]
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1080, 700)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="WindowPanel" type="PanelContainer" parent="Window"]
