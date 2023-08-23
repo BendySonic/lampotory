@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bi7snntefyqbf"]
+
+[ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_xutqt"]
+
+[resource]
+script = ExtResource("1_xutqt")
+mode_resource_path = ""
+body_path = ""
+body_names = PackedStringArray()

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ModeResource" load_steps=2 format=3 uid="uid://cyty4hf6rscr8"]
+
+[ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_gf0fl"]
+
+[resource]
+script = ExtResource("1_gf0fl")
+body_resource_path = "res://src/main/body/resources/"
+body_scene_path = "res://src/main/body/scenes/"
+body_names = PackedStringArray("body_mechanic_1d", "point_mechanic_1d")
+mode = 0
+properties = {
+"acceleration": 0.0,
+"behavior_text": "Поведение",
+"data_text": "Данные",
+"id": 0.0,
+"mass": 0.0,
+"path": 0.0,
+"position": 0.0,
+"speed": 0.0,
+"type": "Тело"
+}
+local_ru = {
+"acceleration": "Ускорение",
+"id": "Номер",
+"mass": "Масса",
+"path": "Путь",
+"position": "Позиция",
+"speed": "Скорость",
+"type": "Тип"
+}

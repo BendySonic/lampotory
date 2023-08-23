@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccmdeixcr40il"]
+
+[sub_resource type="Theme" id="Theme_t73ui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jusv"]
+bg_color = Color(0.195313, 0.460938, 0.992188, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.294118, 0.627451, 0.996078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehgss"]
+bg_color = Color(0.292969, 0.625, 0.992188, 1)
+corner_radius_bottom_left = 50
+expand_margin_top = 5.0
+
+[node name="Window" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Window" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1100.0
+offset_bottom = 720.0
+size_flags_vertical = 3
+theme = SubResource("Theme_t73ui")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0jusv")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Window"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Window/SubViewportContainer"]
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(1080, 700)
+render_target_update_mode = 4
+
+[node name="WindowPanel" type="PanelContainer" parent="Window"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ehgss")

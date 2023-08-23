@@ -1,0 +1,259 @@
+[gd_scene load_steps=14 format=3 uid="uid://d1ftc2bsnc28r"]
+
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
+[ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
+[ext_resource type="Texture2D" uid="uid://cavpp7elaes7l" path="res://assets/GUI/player/play.png" id="3_gerr7"]
+[ext_resource type="Texture2D" uid="uid://careumpiracnw" path="res://assets/GUI/player/pause.png" id="4_4a6pg"]
+[ext_resource type="Texture2D" uid="uid://wtnqwogi2ar6" path="res://assets/GUI/player/rewind.png" id="5_m47vj"]
+[ext_resource type="Texture2D" uid="uid://do02k6map2qys" path="res://assets/GUI/player/reload.png" id="6_40jtk"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="7_arqp3"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="8_jtp53"]
+[ext_resource type="Texture2D" uid="uid://cn1licnpsxo0g" path="res://assets/2D/background/blue_paper.png" id="9_lpap0"]
+[ext_resource type="Script" path="res://src/main/world/world.gd" id="10_j6kxl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pligj"]
+bg_color = Color(0.294118, 0.623529, 0.992157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c1c"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 5
+border_width_right = 10
+border_color = Color(0.388235, 0.666667, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.184314)
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80iel"]
+content_margin_left = 15.0
+bg_color = Color(0, 0.480469, 0.914063, 1)
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+
+[node name="Main" type="Node"]
+script = ExtResource("1_58k2u")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_i5t1w")
+
+[node name="HUD" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBar" type="PanelContainer" parent="GUI/HUD"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pligj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="MarginContainer" parent="GUI/HUD/MenuBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/HBoxContainer/Play"]
+layout_mode = 2
+texture_normal = ExtResource("3_gerr7")
+texture_pressed = ExtResource("4_4a6pg")
+
+[node name="Rewind" type="MarginContainer" parent="GUI/HUD/MenuBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/HBoxContainer/Rewind"]
+layout_mode = 2
+texture_normal = ExtResource("5_m47vj")
+texture_pressed = ExtResource("5_m47vj")
+
+[node name="Reload" type="MarginContainer" parent="GUI/HUD/MenuBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/HBoxContainer/Reload"]
+layout_mode = 2
+texture_normal = ExtResource("6_40jtk")
+texture_pressed = ExtResource("6_40jtk")
+
+[node name="Speed" type="MarginContainer" parent="GUI/HUD/MenuBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="SpinBox" type="SpinBox" parent="GUI/HUD/MenuBar/HBoxContainer/Speed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("7_arqp3")
+
+[node name="Other" type="HBoxContainer" parent="GUI/HUD"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/HUD/Other"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+mouse_force_pass_scroll_events = false
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HUD/Other/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+alignment = 2
+
+[node name="Info" type="Label" parent="GUI/HUD/Other/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_jtp53")
+theme_override_font_sizes/font_size = 25
+text = "Скорость: 0
+Ускорение: 0
+Пройденный путь: 0"
+horizontal_alignment = 2
+
+[node name="SelectedObject" type="CanvasLayer" parent="GUI"]
+layer = 2
+
+[node name="ObjectsWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 50.0
+offset_top = 70.0
+offset_right = 287.0
+offset_bottom = 379.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
+mouse_filter = 1
+theme = ExtResource("8_jtp53")
+theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/ObjectsWindow"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="GUI/ObjectsWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("7_arqp3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
+
+[node name="Label" type="Label" parent="GUI/ObjectsWindow/VBoxContainer/Head"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Объекты
+"
+
+[node name="Body" type="MarginContainer" parent="GUI/ObjectsWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="GUI/ObjectsWindow/VBoxContainer/Body"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox"]
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox/HBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("8_jtp53")
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.388235, 1)
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Поиск"
+
+[node name="Margin" type="MarginContainer" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Grid" type="GridContainer" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox/Margin"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 2
+
+[node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 100.0
+offset_top = 400.0
+offset_right = 348.0
+offset_bottom = 676.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("8_jtp53")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("7_arqp3")
+
+[node name="Label" type="Label" parent="GUI/PropertiesWindow/VBoxContainer/Head"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = " Свойства"
+
+[node name="Margin" type="MarginContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Properties" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="Background"]
+offset_right = 1100.0
+offset_bottom = 721.0
+texture = ExtResource("9_lpap0")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("10_j6kxl")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[connection signal="gui_input" from="GUI/HUD/Other/MarginContainer" to="GUI" method="_on_workspace_area_gui_input"]
