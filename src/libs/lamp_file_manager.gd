@@ -4,17 +4,20 @@ extends Object
 ## Save file in file_path
 static func pack_data(bodies_properties: Array[Dictionary], file: FileAccess):
 	for body_properties in bodies_properties:
-		var json_line = JSON.stringify(body_properties)
-		file.store_line(json_line)
+		var json = JSON.stringify(body_properties)
+		file.store_line(json)
 
 static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 	var bodies_properties: Array[Dictionary]
 	while file.get_position() < file.get_length():
 		var line = file.get_line()
-		var json_line = JSON.new()
-		#json_line.parse_string(line)
-		json_line.parse(line)
-		bodies_properties.push_back(json_line.get_data())
+		var json = JSON.new()
+		var parse_result = json.parse(line)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(),
+					" in '", line, "' at line ", json.get_error_line())
+			continue
+		bodies_properties.push_back(json.get_data())
 	return bodies_properties
 
 static func save_file(file_path: String, bodies_properties: Array[Dictionary]):

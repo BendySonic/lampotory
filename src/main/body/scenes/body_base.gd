@@ -4,40 +4,42 @@ extends CharacterBody2D
 
 
 enum STATES {START, PLAY, PAUSE}
-# Lists
+
 var _base_properties: Array[String]
 var _extra_base_properties: Array[String]
 var _extra_base_realtime_properties: Array[String]
-# Body data
+
 var _data: BodyResource
-var _state = STATES.START
-var _selected: bool = false
-# Main
-var get_mode_data: Callable
-# World
-var get_speed: Callable
+var _state: int = STATES.START
+var _selected := false
+
+var get_mode_data: Callable # Main
+var get_speed: Callable # World
+var reload_world: Callable # World
 
 @onready var select := get_node("Select")
 
 
 func _ready():
 	_base_properties = [
-			"data_text", "id", "type", "position", "behavior_text"
+			"data_text", "id", "type",
+			"position", "behavior_text"
 	]
+	
 	LampSignalManager.data_changed.connect(_on_data_change)
 
 
 # Signals
-func _on_input_event(_viewport, event, _shape_idx):
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			LampSignalManager.emit_signal("body_pressed",
 					_data.properties, _data.id)
 
-func _on_data_change(new_data, property_id, body_id):
+func _on_data_change(new_data, property_id: String, body_id: int):
 	if _data.properties["id"] == body_id:
 		_data.properties[property_id] = float(new_data)
-		LampSignalManager.emit_signal("reload_pressed")
+		reload_world.call()
 
 
 # Inner methods
@@ -48,7 +50,6 @@ func _reload_properties():
 		_data.properties[property] = properties[property]
 	for property in _extra_base_properties:
 		_data.properties[property] = properties[property]
-
 
 func _reload_realtime_properties():
 	var properties = get_mode_data.call().properties
@@ -94,7 +95,6 @@ func get_property(property_name: String):
 		return _data.properties[property_name]
 	else:
 		return "?"
-
 
 func get_properties():
 	return _data.properties

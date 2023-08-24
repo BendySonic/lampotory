@@ -154,10 +154,11 @@ theme_override_constants/margin_top = 75
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
+[node name="Home" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
+visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/Workspace/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/Workspace/Home"]
 custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -165,35 +166,35 @@ size_flags_vertical = 0
 texture = ExtResource("8_rx81t")
 expand_mode = 1
 
-[node name="Menu" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer"]
+[node name="Menu" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/Home"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 
-[node name="Note" type="PanelContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons"]
+[node name="Note" type="PanelContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1k47h")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons/Note"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons/Note"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer/Buttons/Note/MarginContainer"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons/Note/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("FontVariation_6kn07")
@@ -202,5 +203,8 @@ text = "Начни физические опыты
 с консультацией
 виртуального помощника!"
 
-[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/VBoxContainer/Menu/HBoxContainer"]
+[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
 layout_mode = 2

@@ -3,10 +3,17 @@ extends CanvasLayer
 
 # -----------------------------------------------------------------------------
 # World
+var play_world: Callable
+var reload_world: Callable
+var save_world: Callable
+var load_world: Callable
+
 var create_body: Callable
 var deselect_bodies: Callable
 var get_bodies: Callable
 var get_bodies_count: Callable
+var get_selected_body: Callable
+var has_selected_body: Callable
 # Main
 var get_mode_data: Callable
 
@@ -38,31 +45,20 @@ func _ready():
 	LampSignalManager.widget_input.connect(_on_grid_widget_input)
 
 func _process(_delta):
-	# Grid size managment
-	if grid_control.size.x >= 180 and grid_control.size.x < 280:
-		grid_control.columns = 2
-	elif grid_control.size.x >= 280:
-		grid_control.columns = 3
-	# Realtime properties managment (REALTIME_PROPERTIES_CONTROL)
-	for body in get_bodies.call():
-		if body.is_selected():
-			realtime_properties_control.text = (
-					"Скорость: " + LampLib.trfr(str(
-						body.get_realtime_property("speed")), 2)
-					+ "\nУскорение: " + LampLib.trfr(str(
-						body.get_realtime_property("acceleration")), 2)
-					+ "\nПройденный путь: " + LampLib.trfr(str(
-						body.get_realtime_property("path")), 2)
-				)
+	_update_grid()
+	_update_realtime_properties()
 
-# Unblock WorkspaceArea on press
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			unblock_workspace_area_input() # Unblock body deselect on input
+			unblock_workspace_area_input()
+	else:
+		if Input.is_action_just_pressed("load"):
+			load_world.call("test.json")
+		elif Input.is_action_just_pressed("save"):
+			save_world.call("test.json")
 
 
-# Signals
 # GRID_WIDGET is element of body list in UI
 func _on_grid_widget_input(event: InputEventMouse, grid_widget: GUIGridWidget):
 	if event is InputEventMouseButton:
@@ -95,15 +91,11 @@ func _on_workspace_area_gui_input(event):
 					"\nУскорение: 0\nПройденный путь: 0")
 
 func _on_play_toggled(button_pressed: bool):
-	LampSignalManager.emit_signal("play_toggled", button_pressed)
+	play_world.call(button_pressed)
 
 func _on_reload_pressed():
-	var bodies_properties: Array[Dictionary]
-	for body in get_bodies.call():
-		bodies_properties.push_back(body.get_properties())
-	LampFileManager.save_file("data/test.json", bodies_properties)
 	play_button.button_pressed = false
-	LampSignalManager.emit_signal("reload_pressed")
+	reload_world.call()
 
 
 # Grid widget is element of body list in UI
@@ -114,8 +106,26 @@ func _create_grid_widgets():
 		grid_control.add_child(grid_widget)
 		grid_widget.construct(get_mode_data.call().body_resources[widget_name])
 
+func _update_grid():
+	if grid_control.size.x >= 180 and grid_control.size.x < 280:
+		grid_control.columns = 2
+	elif grid_control.size.x >= 280:
+		grid_control.columns = 3
 
-func create_properties(body_properties: Dictionary, body_id: int):
+func _update_realtime_properties():
+	if has_selected_body.call():
+		var body = get_selected_body.call()
+		realtime_properties_control.text = (
+				"Скорость: " + LampLib.trfr(str(
+					body.get_realtime_property("speed")), 2)
+				+ "\nУскорение: " + LampLib.trfr(str(
+					body.get_realtime_property("acceleration")), 2)
+				+ "\nПройденный путь: " + LampLib.trfr(str(
+					body.get_realtime_property("path")), 2)
+		)
+
+
+func create_properties(body_properties: Dictionary):
 	var local_ru = get_mode_data.call().local_ru
 	for body_property in body_properties:
 		var property_instance = property_scene.instantiate()

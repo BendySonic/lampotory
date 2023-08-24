@@ -2,9 +2,8 @@ class_name BodyBaseMechanic1D
 extends BodyBase
 # Base class for ALL "mechanic_1d" bodies
 
-
-var kinematic_collision: KinematicCollision2D
-
+var _kinematic_collision: KinematicCollision2D
+var _ready_to_collide := true
 
 # Moving
 func _physics_process(delta):
@@ -17,7 +16,7 @@ func _physics_process(delta):
 			)	
 		# Moving
 		velocity.x = _data.realtime_properties["speed"]
-		kinematic_collision = move_and_collide(
+		_kinematic_collision = move_and_collide(
 				velocity * get_speed.call()* delta, false, 0.1
 		)
 		# Path
@@ -40,6 +39,7 @@ func reload():
 	velocity.x = 0
 	
 	position.x = _data.properties["position"]
+	_ready_to_collide = true
 	_reload_realtime_properties()
 
 

@@ -1,2 +1,3 @@
-{"behavior_text":"Поведение","data_text":"Данные","id":1,"mass":1,"position":-40,"speed":100,"type":"Импульсное тело"}
-{"behavior_text":"Поведение","data_text":"Данные","id":2,"mass":1,"position":369,"speed":-100,"type":"Импульсное тело"}
+{"behavior_text":"Поведение","data_text":"Данные","id":1,"mass":0,"position":-76,"speed":55,"type":"Импульсное тело"}
+{"behavior_text":"Поведение","data_text":"Данные","id":2,"mass":0,"position":223,"speed":55,"type":"Импульсное тело"}
+{"acceleration":50,"behavior_text":"Поведение","data_text":"Данные","id":3,"position":32,"speed":0,"type":"Материальная точка"}

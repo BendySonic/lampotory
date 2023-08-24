@@ -3,14 +3,11 @@ extends BodyBaseMechanic1D
 # Classic Body1D for 1D movement with mass, speed, acceleration
 
 
-var _ready_to_collide := true
-
-
 func _ready():
 	super()
 	_extra_base_properties = ["mass", "speed"]
 	_extra_base_realtime_properties = ["path"]
-	# Create properties and add to "_properties" (BaseBody class)
+	
 	_reload_properties()
 	_reload_realtime_properties()
 	_set_values()
@@ -18,13 +15,13 @@ func _ready():
 
 # Body physics interactions
 func _physics_process(delta):
-	if kinematic_collision is KinematicCollision2D and _ready_to_collide:
-		var target = kinematic_collision.get_collider()
+	if _kinematic_collision is KinematicCollision2D and _ready_to_collide:
+		var target = _kinematic_collision.get_collider()
 		if target.position.x > position.x:
 			_ready_to_collide = false
 			_impulse_manager(target)
 	if (
-			not kinematic_collision is KinematicCollision2D
+			not _kinematic_collision is KinematicCollision2D
 			and not _ready_to_collide
 		):
 		_ready_to_collide = true
@@ -47,8 +44,3 @@ func _impulse_math(m1: float, m2: float, v1: float, v2: float) -> float:
 		return 0
 	else:
 		return result
-
-
-func play():
-	_ready_to_collide = true
-	super()

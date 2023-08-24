@@ -39,3 +39,7 @@ static func trfr(text: String, count: int) -> String:
 # Node methods
 static func has_child(node: Node) -> bool:
 	return bool(node.get_child_count())
+
+
+static func error(text: String):
+	print("Error: ", text)

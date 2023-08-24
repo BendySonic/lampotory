@@ -34,6 +34,11 @@ movie_writer/mjpeg_quality=0.65
 movie_writer/movie_file="C:/Users/nurba/programming/godot/lampotory-master/documents/video/video1.avi"
 movie_writer/fps=24
 
+[filesystem]
+
+import/blender/enabled.android=true
+import/fbx/enabled.android=true
+
 [input]
 
 create={
@@ -46,16 +51,27 @@ clear={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(133, 12),"global_position":Vector2(137, 55),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+save={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+load={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [physics]
 
 2d/run_on_separate_thread=true
 2d/physics_engine="GodotPhysics2D"
-2d/time_before_sleep=100.0
+2d/default_gravity=982.745
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 viewport/size/borderless=false
 viewport/defaults/default_clear_color=Color(1, 1, 1, 1)
