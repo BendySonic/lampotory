@@ -3,11 +3,11 @@
 	<img src="icons/logo.png" width="400" alt="Lampotory logo">
 </p>
 
-## Открытая и свободная виртуальная лаборатория
-**Lamporoty — это открытая, доступная и полностью бесплатная 2D виртуальная лаборатория.**
-Проект хочет предоставить удобный и свободный инструмент для изучения физики и других предметов.
-Давайте сделаем образование ещё доступнее! Проект на стадии **разработки**.
+## Open and free virtual laboratory
+**Lamporoty is an open, accessible and completely free 2D virtual laboratory.**
+The project wants to provide a convenient and free tool for studying physics and other subjects.
+Let's make education even more accessible! Project at the stage of **development**. Made with **Godot engine 4.1**.
 
-****О разработчике****
+****About developer****
 * Discord - buzzy
 * Telegram - @RandomBuzzy
