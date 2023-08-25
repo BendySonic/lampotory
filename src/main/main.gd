@@ -5,6 +5,7 @@ extends Node
 const MODE_RESOURCE_PATH := "res://src/main/mode/resources/"
 const MODES := ["mechanic_1d", "mechanic_2d"]
 # Project mode (type of project to app editor)
+var _project_data
 var _mode: int = 0
 var _mode_data: ModeResource
 # Children

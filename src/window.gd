@@ -1,5 +1,5 @@
 extends Control
-
+# Class for window app
 
 # Scenes
 @onready var menu_scene := preload("res://src/menu/menu.tscn")
@@ -20,8 +20,6 @@ func _init():
 
 func _ready():
 	_change_scene(menu_scene)
-	await get_tree().create_timer(5).timeout
-	_change_scene(main_scene)
 
 
 func _change_scene(packed_scene: PackedScene):

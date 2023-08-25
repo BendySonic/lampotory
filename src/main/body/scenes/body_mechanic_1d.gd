@@ -15,16 +15,20 @@ func _ready():
 
 # Body physics interactions
 func _physics_process(delta):
-	if _kinematic_collision is KinematicCollision2D and _ready_to_collide:
-		var target = _kinematic_collision.get_collider()
-		if target.position.x > position.x:
-			_ready_to_collide = false
-			_impulse_manager(target)
-	if (
-			not _kinematic_collision is KinematicCollision2D
-			and not _ready_to_collide
+	if _state == STATES.PLAY:
+		if (
+			_kinematic_collision is KinematicCollision2D
+			and _ready_to_collide
 		):
-		_ready_to_collide = true
+			var target = _kinematic_collision.get_collider()
+			if target.position.x > position.x:
+				_ready_to_collide = false
+				_impulse_manager(target)
+		if (
+				not _kinematic_collision is KinematicCollision2D
+				and not _ready_to_collide
+		):
+			_ready_to_collide = true
 	super(delta)
 
 ## Body impulse manage

@@ -7,7 +7,7 @@ var data:BodyResource
 @onready var icon = get_node("Sprite2D")
 
 # -----------------------------------------------------------------------------
-func _process(_delta):
+func _physics_process(_delta):
 	position = get_global_mouse_position()
 
 

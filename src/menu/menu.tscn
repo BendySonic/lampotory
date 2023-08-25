@@ -1,12 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3pb6t8fbo0uc"]
+[gd_scene load_steps=17 format=3 uid="uid://d3pb6t8fbo0uc"]
 
+[ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_y1t18"]
 [ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="3_2f336"]
 [ext_resource type="Texture2D" uid="uid://x0war6otf7m2" path="res://assets/GUI/icons/menu_tab.png" id="4_1atex"]
 [ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/GUI/icons/menu_home.png" id="5_nywdv"]
 [ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/GUI/icons/menu_lab.png" id="6_ej086"]
 [ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/GUI/icons/menu_sand.png" id="7_2pj5d"]
+[ext_resource type="PackedScene" uid="uid://c326smqmm383s" path="res://src/menu/gui/gui_project.tscn" id="8_ow4m1"]
 [ext_resource type="Texture2D" uid="uid://brmasmf30mgvg" path="res://assets/GUI/logo/logo_white.png" id="8_rx81t"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/GUI/icons/project_more.png" id="9_dy1je"]
 
 [sub_resource type="Theme" id="Theme_mk0pc"]
 
@@ -36,11 +39,6 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17f20"]
-content_margin_left = 15.0
-content_margin_right = 20.0
-bg_color = Color(1, 1, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k47h"]
 bg_color = Color(0.243137, 0.552941, 1, 1)
 border_width_top = 5
@@ -67,6 +65,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_bg866")
 
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -78,87 +77,89 @@ size_flags_vertical = 3
 theme = SubResource("Theme_mk0pc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="Panel" type="HBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
+[node name="Menu" type="MarginContainer" parent="Panel/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 35
 
-[node name="Menu" type="PanelContainer" parent="Panel/HBoxContainer/MarginContainer"]
+[node name="Menu" type="PanelContainer" parent="Panel/Panel/Menu"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme = ExtResource("2_y1t18")
 theme_override_styles/panel = SubResource("StyleBoxFlat_7pwii")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer/Menu"]
+[node name="Menu" type="VBoxContainer" parent="Panel/Panel/Menu/Menu"]
 layout_mode = 2
 
-[node name="Head" type="PanelContainer" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+[node name="Head" type="PanelContainer" parent="Panel/Panel/Menu/Menu/Menu"]
 layout_mode = 2
 theme = ExtResource("3_2f336")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40ddf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer/Head"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/Menu/Menu/Menu/Head"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 15
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer/Head/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel/Menu/Menu/Menu/Head/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("4_1atex")
 
-[node name="Button" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+[node name="Start" type="Button" parent="Panel/Panel/Menu/Menu/Menu"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 theme = ExtResource("2_y1t18")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
 toggle_mode = true
+button_pressed = true
 text = "Начало"
 icon = ExtResource("5_nywdv")
 alignment = 2
 
-[node name="Button2" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+[node name="Projects" type="Button" parent="Panel/Panel/Menu/Menu/Menu"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 theme = ExtResource("2_y1t18")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
 toggle_mode = true
 text = "Проекты"
 icon = ExtResource("6_ej086")
 alignment = 2
 
-[node name="Button3" type="Button" parent="Panel/HBoxContainer/MarginContainer/Menu/VBoxContainer"]
+[node name="Sanbox" type="Button" parent="Panel/Panel/Menu/Menu/Menu"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 theme = ExtResource("2_y1t18")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_17f20")
 toggle_mode = true
 text = "Песочница"
 icon = ExtResource("7_2pj5d")
 alignment = 2
 
-[node name="Workspace" type="MarginContainer" parent="Panel/HBoxContainer"]
+[node name="Workspace" type="MarginContainer" parent="Panel/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 75
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
-[node name="Home" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
-visible = false
+[node name="Start" type="VBoxContainer" parent="Panel/Panel/Workspace"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/Workspace/Home"]
+[node name="Logo" type="MarginContainer" parent="Panel/Panel/Workspace/Start"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Logo" type="TextureRect" parent="Panel/Panel/Workspace/Start/Logo"]
 custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -166,35 +167,28 @@ size_flags_vertical = 0
 texture = ExtResource("8_rx81t")
 expand_mode = 1
 
-[node name="Menu" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/Home"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 25
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu"]
+[node name="Start" type="HBoxContainer" parent="Panel/Panel/Workspace/Start"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Panel/Panel/Workspace/Start/Start"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 
-[node name="Note" type="PanelContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons"]
+[node name="Note" type="PanelContainer" parent="Panel/Panel/Workspace/Start/Start/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1k47h")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons/Note"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/Workspace/Start/Start/Buttons/Note"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer/Buttons/Note/MarginContainer"]
+[node name="Label" type="Label" parent="Panel/Panel/Workspace/Start/Start/Buttons/Note/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("FontVariation_6kn07")
@@ -203,8 +197,41 @@ text = "Начни физические опыты
 с консультацией
 виртуального помощника!"
 
-[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace/Home/Menu/HBoxContainer"]
+[node name="Projects" type="VBoxContainer" parent="Panel/Panel/Workspace/Start/Start"]
 layout_mode = 2
 
-[node name="Projects" type="VBoxContainer" parent="Panel/HBoxContainer/Workspace"]
+[node name="Projects" type="VBoxContainer" parent="Panel/Panel/Workspace"]
+visible = false
+custom_minimum_size = Vector2(550, 0)
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ProjectBar" type="HBoxContainer" parent="Panel/Panel/Workspace/Projects"]
+layout_mode = 2
+
+[node name="ProjectLabel" type="Label" parent="Panel/Panel/Workspace/Projects/ProjectBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Проекты"
+
+[node name="CreateProject" type="Button" parent="Panel/Panel/Workspace/Projects/ProjectBar"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("3_2f336")
+text = "Создать новый"
+icon = ExtResource("9_dy1je")
+alignment = 2
+
+[node name="GUIProject" parent="Panel/Panel/Workspace/Projects" instance=ExtResource("8_ow4m1")]
+layout_mode = 2
+
+[node name="GUIProject2" parent="Panel/Panel/Workspace/Projects" instance=ExtResource("8_ow4m1")]
+layout_mode = 2
+
+[node name="GUIProject3" parent="Panel/Panel/Workspace/Projects" instance=ExtResource("8_ow4m1")]
+layout_mode = 2
+
+[connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Start" to="." method="_on_start_toggled"]
+[connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Projects" to="." method="_on_projects_toggled"]
+[connection signal="pressed" from="Panel/Panel/Workspace/Projects/ProjectBar/CreateProject" to="." method="_on_create_project_pressed"]

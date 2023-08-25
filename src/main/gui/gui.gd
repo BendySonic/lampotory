@@ -31,9 +31,9 @@ var get_mode_data: Callable
 @onready var realtime_properties_control := get_node("HUD/Other/" +
 		"WorkspaceArea/VBoxContainer/Info")
 @onready var workspace_area := get_node("HUD/Other/WorkspaceArea")
-@onready var play_button := get_node("HUD/MenuBar/HBoxContainer/Play/" +
+@onready var play_button := get_node("HUD/MenuBar/Player/Play/" +
 		"TextureButton")
-@onready var reload_button := get_node("HUD/MenuBar/HBoxContainer/Reload/" +
+@onready var reload_button := get_node("HUD/MenuBar/Player/Reload/" +
 		"TextureButton")
 
 @onready var select := get_node("SelectedObject")
@@ -44,7 +44,7 @@ func _ready():
 	_create_grid_widgets()
 	LampSignalManager.widget_input.connect(_on_grid_widget_input)
 
-func _process(_delta):
+func _physics_process(_delta):
 	_update_grid()
 	_update_realtime_properties()
 

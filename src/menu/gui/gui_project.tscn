@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://c326smqmm383s"]
+
+[ext_resource type="Texture2D" uid="uid://fpopwnibvkl0" path="res://assets/GUI/icons/project_edit.png" id="1_jy0jf"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/GUI/icons/project_more.png" id="2_d06s4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yi5wb"]
+content_margin_left = 20.0
+content_margin_top = 0.0
+content_margin_right = 15.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0.372549, 0.886275, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="GUIProject" type="PanelContainer"]
+offset_right = 350.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yi5wb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -5
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Имя моего проекта"
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.431373, 0.74902, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Тема моего проекта"
+
+[node name="Edit" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Edit"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("1_jy0jf")
+texture_pressed = ExtResource("1_jy0jf")
+texture_hover = ExtResource("1_jy0jf")
+
+[node name="More" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/More"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("2_d06s4")
+texture_pressed = ExtResource("2_d06s4")
+texture_hover = ExtResource("2_d06s4")
