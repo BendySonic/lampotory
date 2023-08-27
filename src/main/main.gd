@@ -3,7 +3,7 @@ extends Node
 
 
 const MODE_RESOURCE_PATH := "res://src/main/mode/resources/"
-const MODES := ["mechanic_1d", "mechanic_2d"]
+const MODES := ["mechanic_1d"]
 # Project mode (type of project to app editor)
 var _project_data
 var _mode: int = 0
@@ -39,6 +39,7 @@ func _set_gui_api():
 	
 	gui.create_body = world.create_body
 	gui.deselect_bodies = world.deselect_bodies
+	gui.get_body = world.get_body
 	gui.get_bodies = world.get_bodies
 	gui.get_bodies_count = world.get_bodies_count
 	gui.get_selected_body = world.get_selected_body
@@ -50,7 +51,6 @@ func _set_world_api():
 	# GUI
 	world.create_properties = gui.create_properties
 	world.delete_properties = gui.delete_properties
-	world.block_workspace_area_input = gui.block_workspace_area_input
 	# Main
 	world.get_mode_data = get_mode_data
 	world.is_mode = is_mode
@@ -64,3 +64,7 @@ func is_mode(mode_name: String) -> bool:
 	return MODES[_mode] == mode_name
 
 
+
+
+func _on_item_list_item_clicked(index, at_position, mouse_button_index):
+	print(mouse_button_index)

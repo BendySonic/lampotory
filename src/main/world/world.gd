@@ -1,31 +1,23 @@
 extends Node2D
 # Class for world
 
-# -----------------------------------------------------------------------------
+
 enum STATES {STATIC, PLAY, PAUSE}
-const WORLD_PATH := "res://data"
-# Properties
+const WORLD_PATH := "res://data/"
+# Data.
 var _state: int = STATES.STATIC
 var _bodies_count: int = 0
 var _speed: float = 1
 var _has_selected_body := false
-# GUI
+# GUI.
 var create_properties: Callable
 var delete_properties: Callable
-var block_workspace_area_input: Callable
-# Main
+# Main.
 var get_mode_data: Callable
 var is_mode: Callable
 
-# -----------------------------------------------------------------------------
-func _ready():
-	LampSignalManager.body_pressed.connect(_on_body_pressed)
 
-
-#Signals
 func _on_body_pressed(body_properties: Dictionary, body_id: int):
-	block_workspace_area_input.call() # Block body deselect
-	
 	select_body(body_id)
 	delete_properties.call()
 	create_properties.call(body_properties)
@@ -65,6 +57,7 @@ func create_body(body_data: BodyResource):
 	body.get_mode_data = get_mode_data
 	body.get_speed = get_speed
 	body.reload_world = reload_world
+	body.body_pressed.connect(_on_body_pressed)
 	if is_mode.call("mechanic_1d"):
 		body.position = Vector2(get_global_mouse_position().x, 0)
 	add_child(body)
@@ -88,22 +81,26 @@ func deselect_bodies():
 
 
 # Getters
-func get_selected_body():
-	if _has_selected_body:
-		for body in get_children():
-			if body.is_selected():
-				return body
-	else:
-		return false
+func get_body(body_id: int) -> BodyBase:
+	for body in get_children():
+		if body.get_id() == body_id:
+			return body
+	return null
 
-func get_bodies_count():
+func get_selected_body() -> BodyBase:
+	for body in get_children():
+		if body.is_selected():
+			return body
+	return null
+
+func get_bodies_count() -> int:
 	return _bodies_count
 
-func has_selected_body():
+func has_selected_body() -> bool:
 	return _has_selected_body
 
-func get_bodies():
+func get_bodies() -> Array:
 	return get_children()
 
-func get_speed():
+func get_speed() -> float:
 	return _speed

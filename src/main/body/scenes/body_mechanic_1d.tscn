@@ -30,5 +30,3 @@ mesh = SubResource("QuadMesh_hn3oy")
 rotation = 4.71239
 shape = SubResource("RectangleShape2D_hmn56")
 debug_color = Color(0.47451, 0.419608, 0, 0.419608)
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]

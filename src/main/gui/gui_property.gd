@@ -4,8 +4,8 @@ extends Control
 # -----------------------------------------------------------------------------
 var _body_id: int
 var _property_id: String
-var _property_value: Variant
-var _is_vector: bool
+var _property_value
+var _vector: bool
 
 @onready var title_panel = get_node("PanelContainer2")
 @onready var property_panel = get_node("PanelContainer")
@@ -66,16 +66,14 @@ func check_text(text: String, line_edit: LineEdit):
 func send_text(x_text: String, y_text: String):
 	var result
 	if _property_value is int:
-		if _is_vector:
+		if _vector:
 			result = Vector2(float(x_text), float(y_text))
 		else:
 			result = float(x_text)
 	else:
 		result = x_text
 	
-	LampSignalManager.emit_signal(
-			"data_changed", result, _property_id, _body_id
-	)
+	Events.emit_signal("data_changed", result, _property_id, _body_id)
 
 
 func construct(body_properties: Dictionary,
@@ -92,13 +90,13 @@ func construct(body_properties: Dictionary,
 	_property_id = body_property
 	_property_value = body_properties[body_property]
 	_body_id = body_properties["id"]
-	_is_vector = body_properties[body_property] is Vector2
+	_vector = body_properties[body_property] is Vector2
 	
 	if body_properties[body_property] is String:
 		x_value_label.visible = true
 		x_value_label.text = str(_property_value)
 	else:
-		if _is_vector:
+		if _vector:
 			down_container.visible = true
 			
 			x_edit.visible = true

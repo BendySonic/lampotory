@@ -3,6 +3,7 @@ extends BodyBase
 # Base class for ALL "mechanic_1d" bodies
 
 var _kinematic_collision: KinematicCollision2D
+var _collision_test_margin := Vector2(0.1, 0)
 var _ready_to_collide := true
 
 # Moving
@@ -16,9 +17,8 @@ func _physics_process(delta):
 			)	
 		# Moving
 		velocity.x = _data.realtime_properties["speed"]
-		_kinematic_collision = move_and_collide(
-				velocity * get_speed.call()* delta, false, 0.1
-		)
+		move_and_collide(velocity * get_speed.call() * delta, false, 0.1)
+		_kinematic_collision = move_and_collide(_collision_test_margin, true)
 		# Path
 		_data.realtime_properties["path"] += (
 			absf(velocity.x) * get_speed.call() * delta

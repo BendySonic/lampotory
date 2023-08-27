@@ -55,6 +55,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(700, 45)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_pligj")
 
 [node name="Menu" type="HBoxContainer" parent="GUI/HUD/MenuBar"]

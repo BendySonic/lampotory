@@ -10,6 +10,7 @@ var load_world: Callable
 
 var create_body: Callable
 var deselect_bodies: Callable
+var get_body: Callable
 var get_bodies: Callable
 var get_bodies_count: Callable
 var get_selected_body: Callable
@@ -42,53 +43,46 @@ var get_mode_data: Callable
 # -----------------------------------------------------------------------------
 func _ready():
 	_create_grid_widgets()
-	LampSignalManager.widget_input.connect(_on_grid_widget_input)
 
 func _physics_process(_delta):
 	_update_grid()
 	_update_realtime_properties()
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			unblock_workspace_area_input()
-	else:
-		if Input.is_action_just_pressed("load"):
-			load_world.call("test.json")
-		elif Input.is_action_just_pressed("save"):
-			save_world.call("test.json")
+	if Input.is_action_just_pressed("load"):
+		load_world.call("test.json")
+	elif Input.is_action_just_pressed("save"):
+		save_world.call("test.json")
 
 
 # GRID_WIDGET is element of body list in UI
-func _on_grid_widget_input(event: InputEventMouse, grid_widget: GUIGridWidget):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			# Body data is data container for new body
-			var body_data: BodyResource = grid_widget.data.duplicate()
-			
-			# Cursor create.
-			var cursor_widget = cursor_widget_scene.instantiate()
-			select.add_child(cursor_widget)
-			cursor_widget.construct(body_data)
-		
-		elif not event.is_pressed():
-			var cursor_widget = select.get_child(0)
-			var body_data: BodyResource = cursor_widget.data
-			
-			# Cursor delete.
-			select.remove_child(cursor_widget)
-			cursor_widget.queue_free()
-			
-			# Body create.
-			create_body.call(body_data)
+func _on_grid_widget_pressed(grid_widget: GUIGridWidget):
+	# Get data container for new body
+	var body_data: BodyResource = grid_widget.get_data().duplicate()
+	# Cursor create.
+	var cursor_widget = cursor_widget_scene.instantiate()
+	select.add_child(cursor_widget)
+	cursor_widget.construct(body_data)
 
+func _on_grid_widget_released(grid_widget: GUIGridWidget):
+	var cursor_widget = select.get_child(0)
+	var body_data: BodyResource = cursor_widget.get_data()
+	# Cursor delete.
+	select.remove_child(cursor_widget)
+	cursor_widget.queue_free()
+	# Body create.
+	create_body.call(body_data)
+
+# Deselect body when 
 func _on_workspace_area_gui_input(event):
 	if event is InputEventMouseButton:
-		if not event.is_pressed():
+		if event.is_pressed():
+			for body in get_bodies.call():
+				if body.is_mouse_inside():
+					return 0
 			deselect_bodies.call()
 			delete_properties()
-			realtime_properties_control.text = ("Скорость: 0" +
-					"\nУскорение: 0\nПройденный путь: 0")
+			_reload_realtime_properties()
 
 func _on_play_toggled(button_pressed: bool):
 	play_world.call(button_pressed)
@@ -104,6 +98,8 @@ func _create_grid_widgets():
 	for widget_name in get_mode_data.call().body_names:
 		var grid_widget = grid_widget_scene.instantiate()
 		grid_control.add_child(grid_widget)
+		grid_widget.widget_pressed.connect(_on_grid_widget_pressed)
+		grid_widget.widget_released.connect(_on_grid_widget_released)
 		grid_widget.construct(get_mode_data.call().body_resources[widget_name])
 
 func _update_grid():
@@ -124,6 +120,10 @@ func _update_realtime_properties():
 					body.get_realtime_property("path")), 2)
 		)
 
+func _reload_realtime_properties():
+	realtime_properties_control.text = ("Скорость: 0" +
+						"\nУскорение: 0\nПройденный путь: 0")
+
 
 func create_properties(body_properties: Dictionary):
 	var local_ru = get_mode_data.call().local_ru
@@ -135,9 +135,3 @@ func create_properties(body_properties: Dictionary):
 func delete_properties():
 	for child in properties_control.get_children():
 		child.queue_free()
-
-func unblock_workspace_area_input():
-	workspace_area.set_mouse_filter(1)
-
-func block_workspace_area_input():
-	workspace_area.set_mouse_filter(2)
