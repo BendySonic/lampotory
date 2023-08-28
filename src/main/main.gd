@@ -9,8 +9,8 @@ var _project_data
 var _mode: int = 0
 var _mode_data: ModeResource
 # Children
-var gui: Node
-var world: Node
+var gui: GUI
+var world: World
 
 
 func _enter_tree():
@@ -39,6 +39,9 @@ func _set_gui_api():
 	
 	gui.create_body = world.create_body
 	gui.deselect_bodies = world.deselect_bodies
+	gui.set_selected_item_data = world.set_selected_item_data
+	gui.get_selected_item_data = world.get_selected_item_data
+	gui.has_selected_item_data = world.has_selected_item_data
 	gui.get_body = world.get_body
 	gui.get_bodies = world.get_bodies
 	gui.get_bodies_count = world.get_bodies_count
@@ -64,7 +67,3 @@ func is_mode(mode_name: String) -> bool:
 	return MODES[_mode] == mode_name
 
 
-
-
-func _on_item_list_item_clicked(index, at_position, mouse_button_index):
-	print(mouse_button_index)

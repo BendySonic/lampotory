@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://diawtsi40o63a"]
+
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="1_df5iy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pohht"]
+bg_color = Color(0, 0.505882, 0.901961, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuppd"]
+
+[node name="GUICreateProject" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -519.0
+offset_bottom = -336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pohht")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Top" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Создать проект"
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Название проекта:
+"
+
+[node name="NameEdit" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/NameEdit"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_df5iy")
+placeholder_text = "Лабораторная работа №1"
+alignment = 1
+
+[node name="Theme" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Тема проекта:"
+
+[node name="ThemeEdit" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/ThemeEdit"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_df5iy")
+placeholder_text = "Импульс тела"
+alignment = 1
+
+[node name="Settings" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Settings"]
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+theme_override_styles/selected = SubResource("StyleBoxFlat_tuppd")
+item_count = 2
+item_0/text = ""
+item_1/text = ""

@@ -3,6 +3,7 @@ extends Control
 
 const MENU = "Panel/Panel/Menu/Menu/Menu/"
 const WORKSPACE = "Panel/Panel/Workspace/"
+
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 @onready var main_scene := preload("res://src/main/main.tscn")
 
@@ -17,6 +18,7 @@ const WORKSPACE = "Panel/Panel/Workspace/"
 func _ready():
 	pass
 
+# TODO - Develop create project window
 func _on_create_project_pressed():
 	get_tree().change_scene_to_packed(main_scene)
 

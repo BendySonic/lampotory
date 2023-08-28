@@ -7,6 +7,7 @@ var _collision_test_margin := Vector2(0.1, 0)
 var _ready_to_collide := true
 
 # Moving
+# TODO - Develop player speed system
 func _physics_process(delta):
 	if _state == STATES.PLAY:
 		# Speed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d1ftc2bsnc28r"]
+[gd_scene load_steps=20 format=3 uid="uid://d1ftc2bsnc28r"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
@@ -37,6 +37,26 @@ border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.2)
 corner_radius_top_left = 40
 corner_radius_top_right = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rq7d"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ix2wi"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psl6t"]
+bg_color = Color(0, 0, 0, 0.12549)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2miyw"]
+bg_color = Color(0, 0.341176, 0.568627, 0.239216)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Main" type="Node"]
 script = ExtResource("1_58k2u")
@@ -172,7 +192,7 @@ layer = 2
 custom_minimum_size = Vector2(200, 0)
 offset_left = 50.0
 offset_top = 70.0
-offset_right = 287.0
+offset_right = 286.0
 offset_bottom = 320.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -226,16 +246,29 @@ placeholder_text = "Поиск"
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 10
 
-[node name="Grid" type="GridContainer" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox/Margin"]
-custom_minimum_size = Vector2(180, 0)
+[node name="ItemList" type="ItemList" parent="GUI/ObjectsWindow/VBoxContainer/Body/VBox/Margin"]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
-columns = 2
+theme_override_colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/guide_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/panel = SubResource("StyleBoxFlat_6rq7d")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ix2wi")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_psl6t")
+theme_override_styles/selected = SubResource("StyleBoxFlat_2miyw")
+theme_override_styles/selected_focus = SubResource("StyleBoxFlat_2miyw")
+max_text_lines = 2
+auto_height = true
+text_overrun_behavior = 2
+max_columns = 2
+same_column_width = true
+fixed_column_width = 90
+icon_mode = 0
+fixed_icon_size = Vector2i(50, 50)
 
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(200, 0)
@@ -281,6 +314,7 @@ layer = -1
 offset_right = 1100.0
 offset_bottom = 721.0
 texture = ExtResource("9_lpap0")
+metadata/_edit_lock_ = true
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("10_j6kxl")
@@ -290,3 +324,4 @@ script = ExtResource("10_j6kxl")
 [connection signal="toggled" from="GUI/HUD/MenuBar/Player/Play/TextureButton" to="GUI" method="_on_play_toggled"]
 [connection signal="pressed" from="GUI/HUD/MenuBar/Player/Reload/TextureButton" to="GUI" method="_on_reload_pressed"]
 [connection signal="gui_input" from="GUI/HUD/Other/WorkspaceArea" to="GUI" method="_on_workspace_area_gui_input"]
+[connection signal="item_clicked" from="GUI/ObjectsWindow/VBoxContainer/Body/VBox/Margin/ItemList" to="GUI" method="_on_item_list_item_clicked"]

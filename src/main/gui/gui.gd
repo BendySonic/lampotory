@@ -1,7 +1,14 @@
+class_name GUI
 extends CanvasLayer
 # Class for GUI
 
 # -----------------------------------------------------------------------------
+const MAIN_GUI = "res://src/main/gui/"
+const PLAYER = "HUD/MenuBar/Player/"
+const WORKSPACE_AREA = "HUD/Other/WorkspaceArea/"
+const INFO = WORKSPACE_AREA + "VBoxContainer/Info"
+const ITEM_LIST = "ObjectsWindow/VBoxContainer/Body/VBox/Margin/ItemList"
+const PROPERTIES_CONTROL = "PropertiesWindow/VBoxContainer/Margin/Properties"
 # World
 var play_world: Callable
 var reload_world: Callable
@@ -10,68 +17,71 @@ var load_world: Callable
 
 var create_body: Callable
 var deselect_bodies: Callable
+var set_selected_item_data: Callable
+var get_selected_item_data: Callable
 var get_body: Callable
 var get_bodies: Callable
 var get_bodies_count: Callable
 var get_selected_body: Callable
+var has_selected_item_data: Callable
 var has_selected_body: Callable
 # Main
 var get_mode_data: Callable
 
-@onready var grid_widget_scene := preload("res://src/main/gui/" +
-		"gui_grid_widget.tscn")
-@onready var cursor_widget_scene := preload("res://src/main/gui/" +
-		"gui_cursor_widget.tscn")
-@onready var property_scene := preload("res://src/main/gui/" +
-		"gui_property.tscn")
+@onready var grid_widget_scene := preload(MAIN_GUI + "gui_grid_widget.tscn")
+@onready var cursor_widget_scene := preload(MAIN_GUI + "gui_cursor_widget.tscn")
+@onready var property_scene := preload(MAIN_GUI + "gui_property.tscn")
 
-@onready var grid_control := get_node("ObjectsWindow/VBoxContainer/" +
-		"Body/VBox/Margin/Grid")
-@onready var properties_control := get_node("PropertiesWindow/" +
-		"VBoxContainer/Margin/Properties")
-@onready var realtime_properties_control := get_node("HUD/Other/" +
-		"WorkspaceArea/VBoxContainer/Info")
-@onready var workspace_area := get_node("HUD/Other/WorkspaceArea")
-@onready var play_button := get_node("HUD/MenuBar/Player/Play/" +
-		"TextureButton")
-@onready var reload_button := get_node("HUD/MenuBar/Player/Reload/" +
-		"TextureButton")
+@onready var item_list:ItemList = get_node(ITEM_LIST)
+@onready var properties_control := get_node(PROPERTIES_CONTROL)
+@onready var realtime_properties_control := get_node(INFO)
+@onready var workspace_area := get_node(WORKSPACE_AREA)
+@onready var play_button := get_node(PLAYER + "Play/TextureButton")
+@onready var reload_button := get_node(PLAYER + "Reload/TextureButton")
 
 @onready var select := get_node("SelectedObject")
 
-
 # -----------------------------------------------------------------------------
+# TODO - Develop save/load system by window
 func _ready():
-	_create_grid_widgets()
+	_create_items()
 
 func _physics_process(_delta):
-	_update_grid()
+	_update_item_list()
 	_update_realtime_properties()
 
-func _input(event):
-	if Input.is_action_just_pressed("load"):
-		load_world.call("test.json")
-	elif Input.is_action_just_pressed("save"):
-		save_world.call("test.json")
+# TODO - Fix body spawn (Check for another bodies)
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if has_selected_item_data.call():
+				create_body.call(get_selected_item_data.call())
 
-
-# GRID_WIDGET is element of body list in UI
-func _on_grid_widget_pressed(grid_widget: GUIGridWidget):
-	# Get data container for new body
-	var body_data: BodyResource = grid_widget.get_data().duplicate()
-	# Cursor create.
-	var cursor_widget = cursor_widget_scene.instantiate()
-	select.add_child(cursor_widget)
-	cursor_widget.construct(body_data)
-
-func _on_grid_widget_released(grid_widget: GUIGridWidget):
-	var cursor_widget = select.get_child(0)
-	var body_data: BodyResource = cursor_widget.get_data()
-	# Cursor delete.
-	select.remove_child(cursor_widget)
-	cursor_widget.queue_free()
-	# Body create.
-	create_body.call(body_data)
+func _on_item_list_item_clicked(index: int,
+		at_position: Vector2, mouse_button_index: int):
+	var body_data: BodyResource = item_list.get_item_metadata(index)
+	body_data.item_selected = not body_data.item_selected
+	if body_data.item_selected:
+		# Clear select
+		for i in range(0, item_list.get_item_count()):
+			if not index == i:
+				item_list.get_item_metadata(i).item_selected = false
+		for child in select.get_children():
+			select.remove_child(child)
+			child.queue_free()
+		# Create new cursor
+		var cursor_widget = cursor_widget_scene.instantiate()
+		select.add_child(cursor_widget)
+		cursor_widget.construct(body_data)
+		# Set new selected data
+		set_selected_item_data.call(body_data)
+	else:
+		# Delete cursor
+		for child in select.get_children():
+			select.remove_child(child)
+			child.queue_free()
+		# Remove selected data
+		set_selected_item_data.call(null)
 
 # Deselect body when 
 func _on_workspace_area_gui_input(event):
@@ -94,19 +104,22 @@ func _on_reload_pressed():
 
 # Grid widget is element of body list in UI
 # Every mode show own grid widgets
-func _create_grid_widgets():
-	for widget_name in get_mode_data.call().body_names:
-		var grid_widget = grid_widget_scene.instantiate()
-		grid_control.add_child(grid_widget)
-		grid_widget.widget_pressed.connect(_on_grid_widget_pressed)
-		grid_widget.widget_released.connect(_on_grid_widget_released)
-		grid_widget.construct(get_mode_data.call().body_resources[widget_name])
+func _create_items():
+	for body_name in get_mode_data.call().body_names:
+		var body_data = get_mode_data.call().body_resources[body_name]
+		var item_name = body_data.item_name
+		var body_icon = body_data.body_icon
+		var item_tooltip = body_data.item_tooltip
+		var index = item_list.add_item(item_name, body_icon, true)
+		item_list.set_item_metadata(index, body_data)
+		item_list.set_item_icon_modulate(index, Color(0.278, 0.6, 1))
+		item_list.set_item_tooltip(index, item_tooltip)
 
-func _update_grid():
-	if grid_control.size.x >= 180 and grid_control.size.x < 280:
-		grid_control.columns = 2
-	elif grid_control.size.x >= 280:
-		grid_control.columns = 3
+func _update_item_list():
+	if item_list.size.x >= 180 and item_list.size.x < 280:
+		item_list.max_columns = 2
+	elif item_list.size.x >= 280:
+		item_list.max_columns = 3
 
 func _update_realtime_properties():
 	if has_selected_body.call():

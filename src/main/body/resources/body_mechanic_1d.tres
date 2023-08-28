@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_4msn0")
 body_name = "body_mechanic_1d"
-widget_name = "Импульсное тело"
 body_icon = ExtResource("1_yjmhb")
+item_name = "Импульсное тело"
+item_tooltip = "Тело для совершения импульсных взаимодействий."

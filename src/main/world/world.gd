@@ -1,3 +1,4 @@
+class_name World
 extends Node2D
 # Class for world
 
@@ -8,6 +9,8 @@ const WORLD_PATH := "res://data/"
 var _state: int = STATES.STATIC
 var _bodies_count: int = 0
 var _speed: float = 1
+var _selected_item_data: BodyResource
+var _has_selected_item_data := false
 var _has_selected_body := false
 # GUI.
 var create_properties: Callable
@@ -46,7 +49,8 @@ func save_world(file_path: String):
 func load_world(file_path: String):
 	return LampFileManager.load_file(WORLD_PATH + file_path)
 
-func create_body(body_data: BodyResource):
+func create_body(body_data_arg: BodyResource):
+	var body_data = body_data_arg.duplicate()
 	_bodies_count += 1
 	body_data.id = _bodies_count
 	
@@ -80,6 +84,13 @@ func deselect_bodies():
 		body.deselect_body()
 
 
+# Setters
+func set_selected_item_data(body_data):
+	if body_data == null:
+		_has_selected_item_data = false
+	else:
+		_selected_item_data = body_data
+		_has_selected_item_data = true
 # Getters
 func get_body(body_id: int) -> BodyBase:
 	for body in get_children():
@@ -93,11 +104,17 @@ func get_selected_body() -> BodyBase:
 			return body
 	return null
 
+func get_selected_item_data() -> BodyResource:
+	return _selected_item_data
+
 func get_bodies_count() -> int:
 	return _bodies_count
 
 func has_selected_body() -> bool:
 	return _has_selected_body
+
+func has_selected_item_data() -> bool:
+	return _has_selected_item_data
 
 func get_bodies() -> Array:
 	return get_children()

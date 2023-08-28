@@ -63,7 +63,7 @@ func _reload_realtime_properties():
 
 func _set_values():
 	_data.properties["id"] = _data.id
-	_data.properties["type"] = str(_data.widget_name)
+	_data.properties["type"] = str(_data.item_name)
 	_data.properties["position"] = position.x
 
 
@@ -90,13 +90,13 @@ func get_realtime_property(property_name: String) -> Variant:
 	if _data.realtime_properties.has(property_name):
 		return _data.realtime_properties[property_name]
 	else:
-		return "?"
+		return 0
 
 func get_property(property_name: String) -> Variant:
 	if _data.properties.has(property_name):
 		return _data.properties[property_name]
 	else:
-		return "?"
+		return 0
 
 func get_properties() -> Dictionary:
 	return _data.properties
