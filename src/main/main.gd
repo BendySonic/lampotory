@@ -11,6 +11,8 @@ var _mode_data: ModeResource
 # Children
 var gui: GUI
 var world: World
+# Window
+var change_scene: Callable
 
 
 func _enter_tree():

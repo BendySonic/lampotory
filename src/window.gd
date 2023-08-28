@@ -23,7 +23,8 @@ func _ready():
 
 
 func _change_scene(packed_scene: PackedScene):
-	if LampLib.has_child(sub_viewport):
-		for child in sub_viewport.get_children():
-			child.queue_free()
-	sub_viewport.add_child(packed_scene.instantiate())
+	for child in sub_viewport.get_children():
+		child.queue_free()
+	var scene_instance = packed_scene.instantiate()
+	scene_instance.change_scene = _change_scene
+	sub_viewport.add_child(scene_instance)

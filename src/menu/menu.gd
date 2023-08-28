@@ -4,6 +4,9 @@ extends Control
 const MENU = "Panel/Panel/Menu/Menu/Menu/"
 const WORKSPACE = "Panel/Panel/Workspace/"
 
+# Window
+var change_scene: Callable
+
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 @onready var main_scene := preload("res://src/main/main.tscn")
 
@@ -20,7 +23,7 @@ func _ready():
 
 # TODO - Develop create project window
 func _on_create_project_pressed():
-	get_tree().change_scene_to_packed(main_scene)
+	change_scene.call(main_scene)
 
 
 func _on_start_toggled(button_pressed: bool):

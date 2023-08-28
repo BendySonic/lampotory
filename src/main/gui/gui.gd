@@ -121,6 +121,8 @@ func _update_item_list():
 	elif item_list.size.x >= 280:
 		item_list.max_columns = 3
 
+
+# TODO - Make monitoring system
 func _update_realtime_properties():
 	if has_selected_body.call():
 		var body = get_selected_body.call()
