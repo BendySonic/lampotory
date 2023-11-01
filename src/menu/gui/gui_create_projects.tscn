@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://diawtsi40o63a"]
 
-[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="1_df5iy"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/styles/themes/white.tres" id="1_df5iy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pohht"]
 bg_color = Color(0, 0.505882, 0.901961, 1)

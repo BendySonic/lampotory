@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn1licnpsxo0g"
-path="res://.godot/imported/blue_paper.png-19ab64710eb4e3da799a4a6379319593.ctex"
+path="res://.godot/imported/blue_paper.png-520404dd74857641e71fc72cefef1cd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D/background/blue_paper.png"
-dest_files=["res://.godot/imported/blue_paper.png-19ab64710eb4e3da799a4a6379319593.ctex"]
+source_file="res://assets/2d/background/blue_paper.png"
+dest_files=["res://.godot/imported/blue_paper.png-520404dd74857641e71fc72cefef1cd2.ctex"]
 
 [params]
 

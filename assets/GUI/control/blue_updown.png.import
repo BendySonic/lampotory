@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://seaouf727mh8"
-path="res://.godot/imported/blue_updown.png-96b685ff04c837938629020f2c64728d.ctex"
+path="res://.godot/imported/blue_updown.png-cae52bbefb2330b651317041a8edeaed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GUI/control/blue_updown.png"
-dest_files=["res://.godot/imported/blue_updown.png-96b685ff04c837938629020f2c64728d.ctex"]
+source_file="res://assets/gui/control/blue_updown.png"
+dest_files=["res://.godot/imported/blue_updown.png-cae52bbefb2330b651317041a8edeaed.ctex"]
 
 [params]
 

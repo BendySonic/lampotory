@@ -1,48 +1,44 @@
 extends Control
 # Class for menu
 
-const MENU = "Panel/Panel/Menu/Menu/Menu/"
+
+const BUTTONS = "Panel/Panel/Menu/Menu/Menu/Buttons/"
 const WORKSPACE = "Panel/Panel/Workspace/"
 
-# Window
-var change_scene: Callable
+var _change_scene_to:Callable
 
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
-@onready var main_scene := preload("res://src/main/main.tscn")
 
-@onready var start := get_node(MENU + "Start")
-@onready var projects := get_node(MENU + "Projects")
-@onready var sandbox := get_node(MENU + "Sanbox")
+@onready var buttons_container := get_node(BUTTONS)
+@onready var start_button := get_node(BUTTONS + "Start")
+@onready var projects_button := get_node(BUTTONS + "Projects")
+@onready var sandbox_button := get_node(BUTTONS + "Sanbox")
 
+@onready var workspace_container := get_node(WORKSPACE)
 @onready var start_container := get_node(WORKSPACE + "Start")
 @onready var projects_container := get_node(WORKSPACE + "Projects")
 
 
-func _ready():
-	pass
-
 # TODO - Develop create project window
-func _on_create_project_pressed():
-	change_scene.call(main_scene)
+func init(call_arg: Callable, arg: Variant):
+	self._change_scene_to = call_arg
 
+func _on_create_project_button_down():
+	_change_scene_to.call(
+			preload("res://src/main/main.tscn"),
+			preload("res://src/main/modes/mechanic.tres")
+	)
 
 func _on_start_toggled(button_pressed: bool):
 	if button_pressed:
+		_set_invisible_containers()
 		start_container.set_visible(true)
-		_set_pressed_buttons(false, [projects, sandbox])
-		_set_visible_containers(false, [projects_container])
 
 func _on_projects_toggled(button_pressed: bool):
 	if button_pressed:
+		_set_invisible_containers()
 		projects_container.set_visible(true)
-		_set_pressed_buttons(false, [start, sandbox])
-		_set_visible_containers(false, [start_container])
 
-
-func _set_pressed_buttons(pressed: bool, buttons: Array[BaseButton]):
-	for button in buttons:
-		button.set_pressed(pressed)
-
-func _set_visible_containers(visible: bool, containers: Array[Container]):
-	for container in containers:
-		container.set_visible(visible)
+func _set_invisible_containers():
+	for container in workspace_container.get_children():
+		container.set_visible(false)

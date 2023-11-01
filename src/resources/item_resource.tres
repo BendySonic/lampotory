@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BodyResource" load_steps=2 format=3 uid="uid://776mom2eymsw"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_gr0na"]
+
+[resource]
+script = ExtResource("1_gr0na")
+body_name = ""
+widget_name = ""

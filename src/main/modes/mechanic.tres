@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ModeResource" load_steps=3 format=3 uid="uid://74vrgjttgvik"]
+
+[ext_resource type="Resource" uid="uid://d4gyqud7xbsin" path="res://src/main/items/normal_body.tres" id="1_7r45o"]
+[ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_gf0fl"]
+
+[resource]
+script = ExtResource("1_gf0fl")
+mode_name = "mechanic"
+item_resources = Array[Resource("res://src/resources/item_resource.gd")]([ExtResource("1_7r45o")])

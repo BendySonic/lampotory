@@ -1,71 +1,93 @@
+class_name Main
 extends Node
-# Class of main workspace
+# Class of Main
+# Description: Contains laboratory main editor
+# Note: Main has Node2D and GUI components
+
+# Mode of laboratory
+var mode_data: ModeResource:
+	get: return mode_data
+
+# Child nodes
+var gui: Node
+var node2d: Node
+
+var change_scene_to: Callable
 
 
-const MODE_RESOURCE_PATH := "res://src/main/mode/resources/"
-const MODES := ["mechanic_1d"]
-# Project mode (type of project to app editor)
-var _project_data
-var _mode: int = 0
-var _mode_data: ModeResource
-# Children
-var gui: GUI
-var world: World
-# Window
-var change_scene: Callable
 
-
-func _enter_tree():
-	gui = get_node("GUI")
-	world = get_node("World")
-	_load_mode_data()
-	_set_gui_api()
-	_set_world_api()
-
-func _load_mode_data():
-	_mode_data = load(MODE_RESOURCE_PATH + MODES[_mode] + ".tres")
-	for body_name in _mode_data.body_names:
-		_mode_data.body_scenes[body_name] = (
-				load(_mode_data.body_scene_path + body_name + ".tscn"))
-	for body_name in _mode_data.body_names:
-		_mode_data.body_resources[body_name] = (
-				load(_mode_data.body_resource_path + body_name + ".tres"))
-
-# Children API
-func _set_gui_api():
-	# World
-	gui.play_world = world.play_world
-	gui.reload_world = world.reload_world
-	gui.save_world = world.save_world
-	gui.load_world = world.load_world
+# Private functions
+func init(call_arg: Callable, mode_arg: ModeResource):
+	self.change_scene_to = call_arg
+	self.mode_data = mode_arg
 	
-	gui.create_body = world.create_body
-	gui.deselect_bodies = world.deselect_bodies
-	gui.set_selected_item_data = world.set_selected_item_data
-	gui.get_selected_item_data = world.get_selected_item_data
-	gui.has_selected_item_data = world.has_selected_item_data
-	gui.get_body = world.get_body
-	gui.get_bodies = world.get_bodies
-	gui.get_bodies_count = world.get_bodies_count
-	gui.get_selected_body = world.get_selected_body
-	gui.has_selected_body = world.has_selected_body
-	# Main
-	gui.get_mode_data = get_mode_data
+func _enter_tree():
+	_load_children()
+	
+# Note: items are controls of bodies in editor,
+#		you select items to spawn bodies
+# Note: play/reload are signals to manipulate simulation
+func _ready():
+	gui.connect("item_pressed", _on_item_pressed)
+	gui.connect("item_released", _on_item_released)
+	gui.connect("items_window_mouse_exited", _on_items_window_mouse_exited)
+	gui.connect("play_toggled", _on_play_toggled)
+	gui.connect("reload_pressed", _on_reload_pressed)
+	
+	gui.create_items(mode_data.item_resources)
+	
+	node2d.connect("void_pressed", _on_void_pressed)
+	node2d.connect("body_held", _on_body_held)
+	node2d.connect("body_unheld", _on_body_unheld)
+	node2d.connect("body_selected", _on_body_selected)
+	node2d.connect("body_deselected", _on_body_deselected)
 
-func _set_world_api():
-	# GUI
-	world.create_properties = gui.create_properties
-	world.delete_properties = gui.delete_properties
-	# Main
-	world.get_mode_data = get_mode_data
-	world.is_mode = is_mode
+func _on_item_pressed(item_data: ItemResource):
+	clear_select()
+	node2d.set("selected_item_data", item_data)
+
+func _on_item_released():
+	clear_select()
+	node2d.unhold_held_body()
+	node2d.set("selected_item_data", null)
+
+func _on_items_window_mouse_exited():
+	var selected_item_data = node2d.get("selected_item_data")
+	if not selected_item_data == null:
+		node2d.create_body(selected_item_data).hold_body()
+		node2d.set("selected_item_data", null)
+
+func _on_play_toggled(button_pressed: bool):
+	node2d.play(button_pressed)
+
+func _on_reload_pressed():
+	node2d.reload()
+
+func _on_void_pressed():
+	clear_select()
+
+func _on_body_held(body: BodyBase):
+	clear_select()
+
+func _on_body_unheld(body: BodyBase):
+	clear_select()
+
+func _on_body_selected(body: BodyBase):
+	gui.create_properties(body)
+
+func _on_body_deselected(body: BodyBase):
+	gui.delete_properties()
+
+func _load_children():
+	gui = get_node("GUI")
+	node2d = get_node("Node2D")
 
 
-# Getters
-func get_mode_data() -> ModeResource:
-	return _mode_data
-# Conditions
+# Public functions
 func is_mode(mode_name: String) -> bool:
-	return MODES[_mode] == mode_name
+	return mode_data.mode_name == mode_name
 
+func clear_select():
+	node2d.deselect_selected_body()
+	gui.delete_properties()
 

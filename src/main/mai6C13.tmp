@@ -1,0 +1,332 @@
+[gd_scene load_steps=18 format=3 uid="uid://d1ftc2bsnc28r"]
+
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
+[ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
+[ext_resource type="Texture2D" uid="uid://cavpp7elaes7l" path="res://assets/gui/player/play.png" id="3_gerr7"]
+[ext_resource type="Texture2D" uid="uid://upk45rvboo31" path="res://assets/gui/icons/main_file.png" id="3_j412t"]
+[ext_resource type="Texture2D" uid="uid://careumpiracnw" path="res://assets/gui/player/pause.png" id="4_4a6pg"]
+[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/gui/icons/main_save.png" id="4_f12to"]
+[ext_resource type="Texture2D" uid="uid://wtnqwogi2ar6" path="res://assets/gui/player/rewind.png" id="5_m47vj"]
+[ext_resource type="Texture2D" uid="uid://do02k6map2qys" path="res://assets/gui/player/reload.png" id="6_40jtk"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/styles/themes/blue.tres" id="9_dpy8v"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/styles/themes/white.tres" id="10_lsr62"]
+[ext_resource type="Script" path="res://src/main/node2d/node2d.gd" id="11_5af0q"]
+[ext_resource type="Texture2D" uid="uid://cn1licnpsxo0g" path="res://assets/2d/background/blue_paper.png" id="13_e4318"]
+[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/foreground/mechanic.tscn" id="13_sps1s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pligj"]
+bg_color = Color(0.294118, 0.623529, 0.992157, 1)
+corner_radius_bottom_right = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c1c"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 5
+border_width_right = 10
+border_color = Color(0.388235, 0.666667, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.184314)
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80iel"]
+content_margin_left = 15.0
+bg_color = Color(0, 0.480469, 0.914063, 1)
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lv67e"]
+content_margin_left = 15.0
+bg_color = Color(0, 0.480469, 0.914063, 1)
+border_width_left = 5
+border_color = Color(0, 0.480469, 0.910156, 1)
+corner_radius_bottom_right = 40
+expand_margin_top = 10.0
+
+[node name="Main" type="Node"]
+script = ExtResource("1_58k2u")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_i5t1w")
+
+[node name="HUD" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBar" type="PanelContainer" parent="GUI/HUD"]
+custom_minimum_size = Vector2(700, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_pligj")
+
+[node name="Menu" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
+layout_mode = 2
+
+[node name="File" type="MarginContainer" parent="GUI/HUD/MenuBar/Menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File"]
+layout_mode = 2
+texture_normal = ExtResource("3_j412t")
+
+[node name="File2" type="MarginContainer" parent="GUI/HUD/MenuBar/Menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File2"]
+layout_mode = 2
+texture_normal = ExtResource("4_f12to")
+
+[node name="Player" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
+layout_mode = 2
+alignment = 2
+
+[node name="Play" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Play"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_gerr7")
+texture_pressed = ExtResource("4_4a6pg")
+
+[node name="Rewind" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Rewind"]
+layout_mode = 2
+texture_normal = ExtResource("5_m47vj")
+texture_pressed = ExtResource("5_m47vj")
+
+[node name="Reload" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="ReloadButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Reload"]
+layout_mode = 2
+texture_normal = ExtResource("6_40jtk")
+texture_pressed = ExtResource("6_40jtk")
+
+[node name="Speed" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="SpinBox" type="SpinBox" parent="GUI/HUD/MenuBar/Player/Speed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("9_dpy8v")
+
+[node name="Other" type="HBoxContainer" parent="GUI/HUD"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WorkspaceArea" type="MarginContainer" parent="GUI/HUD/Other"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+mouse_force_pass_scroll_events = false
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HUD/Other/WorkspaceArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+alignment = 2
+
+[node name="InfoLabel" type="Label" parent="GUI/HUD/Other/WorkspaceArea/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_lsr62")
+theme_override_font_sizes/font_size = 25
+text = "Скорость: 0
+Ускорение: 0
+Пройденный путь: 0"
+horizontal_alignment = 2
+
+[node name="ItemsWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(200, 400)
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.097
+anchor_right = 0.26
+anchor_bottom = 0.444
+offset_left = 0.499996
+offset_top = 0.159996
+offset_right = -3.05176e-05
+offset_bottom = 0.319977
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("10_lsr62")
+theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/ItemsWindow"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="GUI/ItemsWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("9_dpy8v")
+theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
+
+[node name="Label" type="Label" parent="GUI/ItemsWindow/VBoxContainer/Head"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Объекты
+"
+
+[node name="Body" type="MarginContainer" parent="GUI/ItemsWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="GUI/ItemsWindow/VBoxContainer/Body"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox"]
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox/HBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_lsr62")
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.388235, 1)
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Поиск"
+
+[node name="Margin" type="MarginContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="ItemsContainer" type="GridContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox/Margin"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+
+[node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(300, 250)
+anchors_preset = -1
+anchor_top = 1.111
+anchor_right = 0.273
+anchor_bottom = 1.458
+offset_top = 0.0799561
+offset_right = -0.299988
+offset_bottom = 0.23999
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("10_lsr62")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("9_dpy8v")
+
+[node name="Label" type="Label" parent="GUI/PropertiesWindow/VBoxContainer/Head"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = " Свойства"
+
+[node name="Body" type="MarginContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lv67e")
+
+[node name="PropertiesContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("9_dpy8v")
+
+[node name="CursorLayer" type="CanvasLayer" parent="GUI"]
+layer = 2
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("11_5af0q")
+
+[node name="Bodies" type="Node2D" parent="Node2D"]
+
+[node name="Enviroment" type="Node2D" parent="Node2D"]
+
+[node name="Foreground" type="Node2D" parent="Node2D/Enviroment"]
+
+[node name="Mechanic" parent="Node2D/Enviroment/Foreground" instance=ExtResource("13_sps1s")]
+position = Vector2(550, 400)
+
+[node name="Background" type="Node2D" parent="Node2D/Enviroment"]
+
+[node name="Background" type="CanvasLayer" parent="Node2D/Enviroment/Background"]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="Node2D/Enviroment/Background/Background"]
+offset_right = 1100.0
+offset_bottom = 721.0
+texture = ExtResource("13_e4318")
+metadata/_edit_lock_ = true
+
+[node name="Camera" type="Node2D" parent="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
+anchor_mode = 0
+
+[connection signal="toggled" from="GUI/HUD/MenuBar/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="pressed" from="GUI/HUD/MenuBar/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
+[connection signal="mouse_exited" from="GUI/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]

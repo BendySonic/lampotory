@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://x0war6otf7m2"
-path="res://.godot/imported/menu_tab.png-bd2ca49fb199e359130fc0b5d8cca6bc.ctex"
+path="res://.godot/imported/menu_tab.png-ea2666d6a54ae62486aac44bb186c116.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GUI/icons/menu_tab.png"
-dest_files=["res://.godot/imported/menu_tab.png-bd2ca49fb199e359130fc0b5d8cca6bc.ctex"]
+source_file="res://assets/gui/icons/menu_tab.png"
+dest_files=["res://.godot/imported/menu_tab.png-ea2666d6a54ae62486aac44bb186c116.ctex"]
 
 [params]
 
