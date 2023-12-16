@@ -9,15 +9,11 @@ script = ExtResource("1_5j6ac")
 item_name = "Деревянный брусок"
 item_tooltip = "Обычный прямоугольный деревянный брусок."
 item_icon = ExtResource("1_wa1ed")
-item_modulate = Color(0.28, 0.6, 1, 1)
+item_modulate = Color(0.278431, 0.6, 1, 1)
 item_scene = ExtResource("2_6vfa5")
-base_properties = {
-"constant_force": Vector2(0, 0),
+properties = {
 "gravity_scale": 1.0,
-"group": "",
-"id": "",
-"mass": 1.0,
-"type": ""
+"mass": 1.0
 }
 edit_properties = {
 "gravity_scale": 1.0,

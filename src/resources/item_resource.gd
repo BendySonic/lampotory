@@ -8,5 +8,5 @@ extends Resource
 
 @export var item_scene: PackedScene
 
-@export var base_properties: Dictionary
+@export var properties: Dictionary
 @export var edit_properties: Dictionary

@@ -243,8 +243,6 @@ theme_override_constants/margin_bottom = 10
 [node name="ItemsContainer" type="GridContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox/Margin"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 100
 
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(450, 300)

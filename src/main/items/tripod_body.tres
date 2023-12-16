@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://5m71t70oi0me"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_fh3pc"]
+[ext_resource type="Texture2D" uid="uid://dh3yc3gyjps1j" path="res://assets/gui/icons/items/body_point.png" id="1_pgqrf"]
+[ext_resource type="PackedScene" uid="uid://s0n5c84jnhiv" path="res://src/main/bodies/tripod_body.tscn" id="2_krw1r"]
+
+[resource]
+script = ExtResource("1_fh3pc")
+item_name = "Штатив"
+item_tooltip = "Прибор для крепления предметов на определенноё высоте от поверхности."
+item_icon = ExtResource("1_pgqrf")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_krw1r")
+properties = {
+"gravity_scale": 1
+}
+edit_properties = {
+"gravity_scale": 1.0
+}

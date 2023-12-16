@@ -2,19 +2,18 @@ extends CanvasLayer
 # Class for window app
 
 
-@onready var menu_scene := preload("res://src/menu/menu.tscn")
-@onready var main_scene :=  preload("res://src/main/main.tscn")
+# Children nodes
+@onready var sub_viewport: SubViewport = get_node(
+		"Border/SubViewportContainer/SubViewport"
+)
 
-@onready var sub_viewport := get_node("Border/SubViewportContainer/SubViewport")
+# Scene connects
+@onready var menu_scene := preload("res://src/menu/menu.tscn")
+
 
 # Private functions
-func _init():
-	var screen_size = DisplayServer.screen_get_size()
-	DisplayServer.window_set_size(Vector2i(1100, 720))
-	DisplayServer.window_set_position((screen_size / 2) - Vector2i(550, 360))
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, true)
-
 func _ready():
+	sub_viewport.handle_input_locally = true
 	change_scene_to(menu_scene, null)
 
 func free_scenes():

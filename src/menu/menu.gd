@@ -5,7 +5,7 @@ extends Control
 const BUTTONS = "Panel/Panel/Menu/Menu/Menu/Buttons/"
 const WORKSPACE = "Panel/Panel/Workspace/"
 
-var _change_scene_to:Callable
+var change_scene_to: Callable
 
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 
@@ -21,10 +21,10 @@ var _change_scene_to:Callable
 
 # TODO - Develop create project window
 func init(call_arg: Callable, arg: Variant):
-	self._change_scene_to = call_arg
+	self.change_scene_to = call_arg
 
 func _on_create_project_button_down():
-	_change_scene_to.call(
+	change_scene_to.call(
 			preload("res://src/main/main.tscn"),
 			preload("res://src/main/modes/mechanic.tres")
 	)

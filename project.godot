@@ -13,13 +13,9 @@ config_version=5
 config/name="Lampotory"
 config/tags=PackedStringArray("активный_проект", "программа")
 run/main_scene="res://src/global_window.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
 config/icon="res://assets/icons/icon.svg"
-
-[autoload]
-
-Events="*res://src/singletones/events.gd"
 
 [debug]
 
@@ -41,7 +37,14 @@ movie_writer/fps=24
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+enabled=PackedStringArray()
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://src/": "yellow"
+}
 
 [filesystem]
 
@@ -75,11 +78,15 @@ load={
 
 locale/translations=PackedStringArray("res://assets/localization/local.en.translation", "res://assets/localization/local.ru.translation")
 
+[layer_names]
+
+2d_physics/layer_1="bodies"
+2d_physics/layer_9="joints_bodies"
+2d_physics/layer_10="joints"
+
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=120
-2d/physics_engine="GodotPhysics2D"
 2d/time_before_sleep=0.1
 
 [rendering]

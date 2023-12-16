@@ -1,15 +1,13 @@
 extends Node2D
 # Class for foreground (enviroment) of laboratory
 
-var mouse_inside: bool:
-	get = is_mouse_inside
+var is_mouse_inside: bool
+
+
 
 
 func _on_static_body_2d_mouse_entered():
-	mouse_inside = true
+	is_mouse_inside = true
 
 func _on_static_body_2d_mouse_exited():
-	mouse_inside = false
-
-func is_mouse_inside():
-	return mouse_inside
+	is_mouse_inside = false

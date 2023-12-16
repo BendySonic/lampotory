@@ -3,6 +3,7 @@ extends Object
 
 
 # String methods
+# Has letters and etc.
 static func has_abc(text: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("\\D$")
@@ -13,7 +14,7 @@ static func has_abc(text: String) -> bool:
 	else:
 		return false
 
-
+# Has numbers and etc.
 static func has_123(text: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("\\d")
@@ -24,8 +25,8 @@ static func has_123(text: String) -> bool:
 
 
 # trim_fraction
-# trfr("1.245", 1) = 1.2
-# trfr("1.245", 2) = 1.24
+# trfr("1.245", 1) -> 1.2
+# trfr("1.245", 2) -> 1.24
 static func trfr(text: String, count: int) -> String:
 	var regex_dot = RegEx.new()
 	if not text.find(".") == -1:

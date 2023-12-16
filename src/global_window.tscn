@@ -18,7 +18,6 @@ bg_color = Color(0.292969, 0.625, 0.992188, 1)
 corner_radius_bottom_left = 25
 
 [node name="GlobalWindow" type="CanvasLayer"]
-layer = 0
 script = ExtResource("1_xsqgr")
 
 [node name="Border" type="PanelContainer" parent="."]
@@ -28,6 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme = SubResource("Theme_t73ui")
 theme_override_styles/panel = SubResource("StyleBoxFlat_0jusv")
 
@@ -37,7 +37,8 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="Border/SubViewportContainer"]
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1080, 700)
+physics_object_picking_sort = true
+size = Vector2i(1085, 705)
 render_target_update_mode = 4
 
 [node name="Panel" type="PanelContainer" parent="."]
@@ -50,5 +51,6 @@ offset_bottom = 45.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 0
+mouse_filter = 1
 theme = ExtResource("2_qtv8h")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ehgss")
