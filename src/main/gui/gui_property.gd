@@ -11,7 +11,7 @@ var body: NormalBody
 var _property_name: String
 var _property_value: Variant
 
-@onready var theme_resource = preload("res://assets/styles/themes/blue.tres")
+@onready var theme_resource = preload("res://assets/godot/themes/blue.tres")
 
 @onready var name_label := get_node(NAME) as Label
 @onready var value_container := get_node(VALUE) as HBoxContainer

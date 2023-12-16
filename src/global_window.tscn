@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ccmdeixcr40il"]
 
 [ext_resource type="Script" path="res://src/global_window.gd" id="1_xsqgr"]
-[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/styles/themes/blue.tres" id="2_qtv8h"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="2_qtv8h"]
 
 [sub_resource type="Theme" id="Theme_t73ui"]
 

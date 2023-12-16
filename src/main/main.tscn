@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
-[ext_resource type="Texture2D" uid="uid://cavpp7elaes7l" path="res://assets/gui/player/play.png" id="3_gerr7"]
-[ext_resource type="Texture2D" uid="uid://upk45rvboo31" path="res://assets/gui/icons/main_file.png" id="3_j412t"]
-[ext_resource type="Texture2D" uid="uid://careumpiracnw" path="res://assets/gui/player/pause.png" id="4_4a6pg"]
-[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/gui/icons/main_save.png" id="4_f12to"]
-[ext_resource type="Texture2D" uid="uid://wtnqwogi2ar6" path="res://assets/gui/player/rewind.png" id="5_m47vj"]
-[ext_resource type="Texture2D" uid="uid://do02k6map2qys" path="res://assets/gui/player/reload.png" id="6_40jtk"]
-[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/styles/themes/blue.tres" id="9_dpy8v"]
-[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/styles/themes/white.tres" id="10_lsr62"]
+[ext_resource type="Texture2D" uid="uid://upk45rvboo31" path="res://assets/graphic/gui/icons/main_file.png" id="3_hytgr"]
+[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/graphic/gui/icons/main_save.png" id="4_fk662"]
+[ext_resource type="Texture2D" uid="uid://cavpp7elaes7l" path="res://assets/graphic/gui/player/play.png" id="5_ovxhx"]
+[ext_resource type="Texture2D" uid="uid://careumpiracnw" path="res://assets/graphic/gui/player/pause.png" id="6_cbnpw"]
+[ext_resource type="Texture2D" uid="uid://wtnqwogi2ar6" path="res://assets/graphic/gui/player/rewind.png" id="7_iid86"]
+[ext_resource type="Texture2D" uid="uid://do02k6map2qys" path="res://assets/graphic/gui/player/reload.png" id="8_npou3"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="9_7dfw7"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="10_r6tdi"]
 [ext_resource type="Script" path="res://src/main/node2d/node2d.gd" id="11_5af0q"]
-[ext_resource type="Texture2D" uid="uid://cn1licnpsxo0g" path="res://assets/2d/background/blue_paper.png" id="13_e4318"]
+[ext_resource type="Texture2D" uid="uid://cn1licnpsxo0g" path="res://assets/graphic/2d/background/blue_paper.png" id="13_70htn"]
 [ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/foreground/mechanic.tscn" id="13_sps1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pligj"]
@@ -79,7 +79,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File"]
 layout_mode = 2
-texture_normal = ExtResource("3_j412t")
+texture_normal = ExtResource("3_hytgr")
 
 [node name="File2" type="MarginContainer" parent="GUI/HUD/MenuBar/Menu"]
 layout_mode = 2
@@ -90,7 +90,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File2"]
 layout_mode = 2
-texture_normal = ExtResource("4_f12to")
+texture_normal = ExtResource("4_fk662")
 
 [node name="Player" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
 layout_mode = 2
@@ -106,8 +106,8 @@ theme_override_constants/margin_bottom = 10
 [node name="PlayButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Play"]
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("3_gerr7")
-texture_pressed = ExtResource("4_4a6pg")
+texture_normal = ExtResource("5_ovxhx")
+texture_pressed = ExtResource("6_cbnpw")
 
 [node name="Rewind" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
 layout_mode = 2
@@ -118,8 +118,8 @@ theme_override_constants/margin_bottom = 10
 
 [node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Rewind"]
 layout_mode = 2
-texture_normal = ExtResource("5_m47vj")
-texture_pressed = ExtResource("5_m47vj")
+texture_normal = ExtResource("7_iid86")
+texture_pressed = ExtResource("7_iid86")
 
 [node name="Reload" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
 layout_mode = 2
@@ -130,8 +130,8 @@ theme_override_constants/margin_bottom = 10
 
 [node name="ReloadButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Reload"]
 layout_mode = 2
-texture_normal = ExtResource("6_40jtk")
-texture_pressed = ExtResource("6_40jtk")
+texture_normal = ExtResource("8_npou3")
+texture_pressed = ExtResource("8_npou3")
 
 [node name="Speed" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
 layout_mode = 2
@@ -143,7 +143,7 @@ theme_override_constants/margin_bottom = 10
 [node name="SpinBox" type="SpinBox" parent="GUI/HUD/MenuBar/Player/Speed"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme = ExtResource("9_dpy8v")
+theme = ExtResource("9_7dfw7")
 
 [node name="Other" type="HBoxContainer" parent="GUI/HUD"]
 layout_mode = 2
@@ -167,7 +167,7 @@ alignment = 2
 
 [node name="InfoLabel" type="Label" parent="GUI/HUD/Other/WorkspaceArea/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("10_lsr62")
+theme = ExtResource("10_r6tdi")
 theme_override_font_sizes/font_size = 25
 text = "Скорость: 0
 Ускорение: 0
@@ -189,7 +189,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.75
 mouse_filter = 1
-theme = ExtResource("10_lsr62")
+theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/ItemsWindow"]
@@ -200,7 +200,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.04
-theme = ExtResource("9_dpy8v")
+theme = ExtResource("9_7dfw7")
 theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
 
 [node name="Label" type="Label" parent="GUI/ItemsWindow/VBoxContainer/Head"]
@@ -227,7 +227,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("10_lsr62")
+theme = ExtResource("10_r6tdi")
 theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
 theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.388235, 1)
 theme_override_font_sizes/font_size = 16
@@ -258,7 +258,7 @@ offset_bottom = 0.23999
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-theme = ExtResource("10_lsr62")
+theme = ExtResource("10_r6tdi")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow"]
 layout_mode = 2
@@ -268,7 +268,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.04
-theme = ExtResource("9_dpy8v")
+theme = ExtResource("9_7dfw7")
 
 [node name="Label" type="Label" parent="GUI/PropertiesWindow/VBoxContainer/Head"]
 layout_mode = 2
@@ -298,7 +298,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lv67e")
 [node name="PropertiesContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("9_dpy8v")
+theme = ExtResource("9_7dfw7")
 
 [node name="CursorLayer" type="CanvasLayer" parent="GUI"]
 
@@ -322,7 +322,7 @@ layer = -1
 [node name="Background" type="TextureRect" parent="Node2D/Enviroment/Background/Background"]
 offset_right = 1100.0
 offset_bottom = 721.0
-texture = ExtResource("13_e4318")
+texture = ExtResource("13_70htn")
 
 [node name="Camera" type="Node2D" parent="Node2D"]
 

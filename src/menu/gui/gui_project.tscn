@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c326smqmm383s"]
 
-[ext_resource type="Texture2D" uid="uid://fpopwnibvkl0" path="res://assets/gui/icons/project_edit.png" id="1_aul5i"]
-[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/gui/icons/project_more.png" id="2_afxl6"]
+[ext_resource type="Texture2D" uid="uid://fpopwnibvkl0" path="res://assets/graphic/gui/icons/project_edit.png" id="1_aul5i"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="2_afxl6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yi5wb"]
 content_margin_left = 20.0

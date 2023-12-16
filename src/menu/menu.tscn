@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=3 uid="uid://d3pb6t8fbo0uc"]
 
 [ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
-[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/styles/themes/white.tres" id="2_1qb8u"]
-[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/styles/themes/blue.tres" id="3_ndbfm"]
-[ext_resource type="Texture2D" uid="uid://x0war6otf7m2" path="res://assets/gui/icons/menu_tab.png" id="4_1illt"]
-[ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/gui/icons/menu_home.png" id="5_vxo1e"]
-[ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/gui/icons/menu_lab.png" id="6_nqc37"]
-[ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/gui/icons/menu_sand.png" id="7_o12ka"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="3_aswnl"]
+[ext_resource type="Texture2D" uid="uid://x0war6otf7m2" path="res://assets/graphic/gui/icons/menu_tab.png" id="4_urbyx"]
+[ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="5_t4c6l"]
+[ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/graphic/gui/icons/menu_lab.png" id="6_iimh4"]
+[ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/graphic/gui/icons/menu_sand.png" id="7_gmbub"]
+[ext_resource type="Texture2D" uid="uid://brmasmf30mgvg" path="res://assets/graphic/gui/logo/logo_white.png" id="8_keydx"]
 [ext_resource type="PackedScene" uid="uid://c326smqmm383s" path="res://src/menu/gui/gui_project.tscn" id="8_ow4m1"]
-[ext_resource type="Texture2D" uid="uid://brmasmf30mgvg" path="res://assets/gui/logo/logo_white.png" id="8_r73kb"]
-[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/gui/icons/project_more.png" id="9_kpxeo"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
 
 [sub_resource type="Theme" id="Theme_mk0pc"]
 
@@ -90,7 +90,7 @@ theme_override_constants/margin_bottom = 35
 [node name="Menu" type="PanelContainer" parent="Panel/Panel/Menu"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-theme = ExtResource("2_1qb8u")
+theme = ExtResource("2_0numr")
 theme_override_styles/panel = SubResource("StyleBoxFlat_7pwii")
 
 [node name="Menu" type="VBoxContainer" parent="Panel/Panel/Menu/Menu"]
@@ -98,7 +98,7 @@ layout_mode = 2
 
 [node name="Head" type="PanelContainer" parent="Panel/Panel/Menu/Menu/Menu"]
 layout_mode = 2
-theme = ExtResource("3_ndbfm")
+theme = ExtResource("3_aswnl")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40ddf")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/Menu/Menu/Menu/Head"]
@@ -111,7 +111,7 @@ theme_override_constants/margin_bottom = 15
 [node name="TextureRect" type="TextureRect" parent="Panel/Panel/Menu/Menu/Menu/Head/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("4_1illt")
+texture = ExtResource("4_urbyx")
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Panel/Menu/Menu/Menu"]
 layout_mode = 2
@@ -119,32 +119,32 @@ layout_mode = 2
 [node name="Start" type="Button" parent="Panel/Panel/Menu/Menu/Menu/Buttons"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme = ExtResource("2_1qb8u")
+theme = ExtResource("2_0numr")
 theme_override_font_sizes/font_size = 22
 toggle_mode = true
 button_pressed = true
 text = "Начало"
-icon = ExtResource("5_vxo1e")
+icon = ExtResource("5_t4c6l")
 alignment = 2
 
 [node name="Projects" type="Button" parent="Panel/Panel/Menu/Menu/Menu/Buttons"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme = ExtResource("2_1qb8u")
+theme = ExtResource("2_0numr")
 theme_override_font_sizes/font_size = 22
 toggle_mode = true
 text = "Проекты"
-icon = ExtResource("6_nqc37")
+icon = ExtResource("6_iimh4")
 alignment = 2
 
 [node name="Sanbox" type="Button" parent="Panel/Panel/Menu/Menu/Menu/Buttons"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme = ExtResource("2_1qb8u")
+theme = ExtResource("2_0numr")
 theme_override_font_sizes/font_size = 22
 toggle_mode = true
 text = "Песочница"
-icon = ExtResource("7_o12ka")
+icon = ExtResource("7_gmbub")
 alignment = 2
 
 [node name="Workspace" type="MarginContainer" parent="Panel/Panel"]
@@ -167,7 +167,7 @@ custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture = ExtResource("8_r73kb")
+texture = ExtResource("8_keydx")
 expand_mode = 1
 
 [node name="Start" type="HBoxContainer" parent="Panel/Panel/Workspace/Start"]
@@ -221,9 +221,9 @@ text = "Проекты"
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("3_ndbfm")
+theme = ExtResource("3_aswnl")
 text = "Создать новый"
-icon = ExtResource("9_kpxeo")
+icon = ExtResource("9_kqmdu")
 alignment = 2
 
 [node name="GUIProject" parent="Panel/Panel/Workspace/Projects" instance=ExtResource("8_ow4m1")]

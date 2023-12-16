@@ -15,7 +15,7 @@ config/tags=PackedStringArray("активный_проект", "программ
 run/main_scene="res://src/global_window.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
-config/icon="res://assets/icons/icon.svg"
+config/icon="res://assets/logo/icon.svg"
 
 [debug]
 
