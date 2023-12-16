@@ -16,10 +16,10 @@ size = Vector2(40, 40)
 size = Vector2(15, 15)
 
 [node name="NormalBody" type="RigidBody2D"]
-collision_layer = 8
-collision_mask = 8
 input_pickable = true
 mass = 0.01
+can_sleep = false
+continuous_cd = 2
 script = ExtResource("1_w5vn2")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]

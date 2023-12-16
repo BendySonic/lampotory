@@ -9,7 +9,7 @@ signal body_deselected(body: NormalBody)
 
 enum States {PLAY, PAUSE}
 
-const PROJECT_PATH := "res://data/"
+const PROJECT_PATH := "res://saves/"
 
 var state: States = States.PLAY:
 	get: return state
@@ -23,8 +23,9 @@ var selected_item_data: Variant:
 	get: return selected_item_data
 
 @onready var bodies_node := get_node("Bodies") as Node
-@onready var foreground := get_node("Enviroment/Foreground/Mechanic") as Node
+@onready var foreground := get_node("Enviroment/Lab/Mechanic") as Node
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
+@onready var cursor := get_node("CanvasLayer/GUICursor") as GUICursor
 
 
 #region Input
@@ -102,9 +103,8 @@ func create_body():
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init(item_data, get_global_mouse_position())
+		body.init(item_data, get_global_mouse_position(), cursor)
 		bodies_node.add_child(body)
-		body.hold_body()
 		
 		selected_item_data = null
 
@@ -129,7 +129,7 @@ func get_bodies() -> Array[Node]:
 
 func is_any_body_mouse_inside() -> bool:
 	for body in get_bodies():
-		if body.is_mouse_inside() and not body.is_body_held():
+		if body.is_mouse_inside() and not body.is_held():
 			return true
 	return false
 #endregion

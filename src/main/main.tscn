@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1ftc2bsnc28r"]
+[gd_scene load_steps=19 format=3 uid="uid://d1ftc2bsnc28r"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
@@ -12,7 +12,8 @@
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="10_r6tdi"]
 [ext_resource type="Script" path="res://src/main/node2d/node2d.gd" id="11_5af0q"]
 [ext_resource type="Texture2D" uid="uid://cn1licnpsxo0g" path="res://assets/graphic/2d/background/blue_paper.png" id="13_70htn"]
-[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/foreground/mechanic.tscn" id="13_sps1s"]
+[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/labs/mechanic.tscn" id="13_fy0sy"]
+[ext_resource type="PackedScene" uid="uid://def2bkc3wpx2e" path="res://src/main/gui/gui_cursor.tscn" id="14_u1iqx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pligj"]
 bg_color = Color(0.294118, 0.623529, 0.992157, 1)
@@ -60,96 +61,96 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuBar" type="PanelContainer" parent="GUI/HUD"]
+[node name="Menu" type="PanelContainer" parent="GUI/HUD"]
 custom_minimum_size = Vector2(700, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_force_pass_scroll_events = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_pligj")
 
-[node name="Menu" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
+[node name="Panel" type="HBoxContainer" parent="GUI/HUD/Menu"]
 layout_mode = 2
 
-[node name="File" type="MarginContainer" parent="GUI/HUD/MenuBar/Menu"]
+[node name="Edit" type="MarginContainer" parent="GUI/HUD/Menu/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File"]
+[node name="EditButton" type="TextureButton" parent="GUI/HUD/Menu/Panel/Edit"]
 layout_mode = 2
 texture_normal = ExtResource("3_hytgr")
 
-[node name="File2" type="MarginContainer" parent="GUI/HUD/MenuBar/Menu"]
+[node name="Save" type="MarginContainer" parent="GUI/HUD/Menu/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Menu/File2"]
+[node name="SaveButton" type="TextureButton" parent="GUI/HUD/Menu/Panel/Save"]
 layout_mode = 2
 texture_normal = ExtResource("4_fk662")
 
-[node name="Player" type="HBoxContainer" parent="GUI/HUD/MenuBar"]
+[node name="Player" type="HBoxContainer" parent="GUI/HUD/Menu"]
 layout_mode = 2
 alignment = 2
 
-[node name="Play" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+[node name="Play" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="PlayButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Play"]
+[node name="PlayButton" type="TextureButton" parent="GUI/HUD/Menu/Player/Play"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_ovxhx")
 texture_pressed = ExtResource("6_cbnpw")
 
-[node name="Rewind" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+[node name="Rewind" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="TextureButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Rewind"]
+[node name="Rewindbutton" type="TextureButton" parent="GUI/HUD/Menu/Player/Rewind"]
 layout_mode = 2
 texture_normal = ExtResource("7_iid86")
 texture_pressed = ExtResource("7_iid86")
 
-[node name="Reload" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+[node name="Reload" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="ReloadButton" type="TextureButton" parent="GUI/HUD/MenuBar/Player/Reload"]
+[node name="ReloadButton" type="TextureButton" parent="GUI/HUD/Menu/Player/Reload"]
 layout_mode = 2
 texture_normal = ExtResource("8_npou3")
 texture_pressed = ExtResource("8_npou3")
 
-[node name="Speed" type="MarginContainer" parent="GUI/HUD/MenuBar/Player"]
+[node name="Speed" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="SpinBox" type="SpinBox" parent="GUI/HUD/MenuBar/Player/Speed"]
+[node name="SpinBox" type="SpinBox" parent="GUI/HUD/Menu/Player/Speed"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("9_7dfw7")
 
-[node name="Other" type="HBoxContainer" parent="GUI/HUD"]
+[node name="Workspace" type="HBoxContainer" parent="GUI/HUD"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WorkspaceArea" type="MarginContainer" parent="GUI/HUD/Other"]
+[node name="WorkspaceBox" type="MarginContainer" parent="GUI/HUD/Workspace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -159,13 +160,13 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/HUD/Other/WorkspaceArea"]
+[node name="WorkspaceBox" type="VBoxContainer" parent="GUI/HUD/Workspace/WorkspaceBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 alignment = 2
 
-[node name="InfoLabel" type="Label" parent="GUI/HUD/Other/WorkspaceArea/VBoxContainer"]
+[node name="InfoLabel" type="Label" parent="GUI/HUD/Workspace/WorkspaceBox/WorkspaceBox"]
 layout_mode = 2
 theme = ExtResource("10_r6tdi")
 theme_override_font_sizes/font_size = 25
@@ -192,10 +193,10 @@ mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/ItemsWindow"]
+[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/ItemsWindow"]
 layout_mode = 2
 
-[node name="Head" type="PanelContainer" parent="GUI/ItemsWindow/VBoxContainer"]
+[node name="Head" type="PanelContainer" parent="GUI/ItemsWindow/ItemsWindowBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
@@ -203,13 +204,13 @@ size_flags_stretch_ratio = 0.04
 theme = ExtResource("9_7dfw7")
 theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
 
-[node name="Label" type="Label" parent="GUI/ItemsWindow/VBoxContainer/Head"]
+[node name="HeadLabel" type="Label" parent="GUI/ItemsWindow/ItemsWindowBox/Head"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Объекты
 "
 
-[node name="Body" type="MarginContainer" parent="GUI/ItemsWindow/VBoxContainer"]
+[node name="Body" type="MarginContainer" parent="GUI/ItemsWindow/ItemsWindowBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
@@ -217,13 +218,13 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="GUI/ItemsWindow/VBoxContainer/Body"]
+[node name="BodyBox" type="VBoxContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body"]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox"]
+[node name="Search" type="HBoxContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 
-[node name="Search" type="LineEdit" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox/HBox"]
+[node name="SearchLine" type="LineEdit" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -233,18 +234,17 @@ theme_override_colors/font_placeholder_color = Color(0.388235, 0.388235, 0.38823
 theme_override_font_sizes/font_size = 16
 placeholder_text = "Поиск"
 
-[node name="Margin" type="MarginContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox"]
+[node name="Items" type="MarginContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 10
 
-[node name="ItemsContainer" type="GridContainer" parent="GUI/ItemsWindow/VBoxContainer/Body/VBox/Margin"]
+[node name="ItemsBox" type="GridContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 100
+columns = 3
 
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(450, 300)
@@ -260,22 +260,22 @@ size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow"]
+[node name="PropertiesWindowBox" type="VBoxContainer" parent="GUI/PropertiesWindow"]
 layout_mode = 2
 
-[node name="Head" type="PanelContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+[node name="Head" type="PanelContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.04
 theme = ExtResource("9_7dfw7")
 
-[node name="Label" type="Label" parent="GUI/PropertiesWindow/VBoxContainer/Head"]
+[node name="HeadLabel" type="Label" parent="GUI/PropertiesWindow/PropertiesWindowBox/Head"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = " Свойства"
 
-[node name="Body" type="MarginContainer" parent="GUI/PropertiesWindow/VBoxContainer"]
+[node name="Body" type="MarginContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 0
@@ -283,19 +283,19 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body"]
+[node name="BodyBox" type="HBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer"]
+[node name="Model" type="VBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer"]
+[node name="Properties" type="PanelContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_lv67e")
 
-[node name="PropertiesContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/VBoxContainer/Body/HBoxContainer/PanelContainer"]
+[node name="PropertiesBox" type="VBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox/Properties"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_7dfw7")
@@ -309,11 +309,6 @@ script = ExtResource("11_5af0q")
 
 [node name="Enviroment" type="Node2D" parent="Node2D"]
 
-[node name="Foreground" type="Node2D" parent="Node2D/Enviroment"]
-
-[node name="Mechanic" parent="Node2D/Enviroment/Foreground" instance=ExtResource("13_sps1s")]
-position = Vector2(550, 400)
-
 [node name="Background" type="Node2D" parent="Node2D/Enviroment"]
 
 [node name="Background" type="CanvasLayer" parent="Node2D/Enviroment/Background"]
@@ -324,11 +319,20 @@ offset_right = 1100.0
 offset_bottom = 721.0
 texture = ExtResource("13_70htn")
 
+[node name="Lab" type="Node2D" parent="Node2D/Enviroment"]
+
+[node name="Mechanic" parent="Node2D/Enviroment/Lab" instance=ExtResource("13_fy0sy")]
+position = Vector2(550, 400)
+
 [node name="Camera" type="Node2D" parent="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
 anchor_mode = 0
 
-[connection signal="toggled" from="GUI/HUD/MenuBar/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
-[connection signal="pressed" from="GUI/HUD/MenuBar/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+
+[node name="GUICursor" parent="Node2D/CanvasLayer" instance=ExtResource("14_u1iqx")]
+
+[connection signal="toggled" from="GUI/HUD/Menu/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="pressed" from="GUI/HUD/Menu/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
 [connection signal="mouse_exited" from="GUI/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]

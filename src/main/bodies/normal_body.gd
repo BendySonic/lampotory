@@ -22,16 +22,21 @@ var _state: States = States.NORMAL
 var _player: Player = Player.PLAY
 var _body_data: BodyResource = BodyResource.new()
 
+@onready var cursor: GUICursor
+
 @onready var select := get_node("Select") as Node2D
 @onready var area := get_node("Area2D") as Area2D
+
+@onready var pin_points := get_node("PinPoints").get_children()
 
 
 
 #region Initialization
-func init(item_data_arg: ItemResource, position_arg: Vector2):
+func init(item_data_arg: ItemResource, position_arg: Vector2, cursor_arg: GUICursor):
 	self._body_data.properties = item_data_arg.properties.duplicate()
 	self._body_data.edit_properties = item_data_arg.edit_properties.duplicate()
 	self.global_position = position_arg
+	self.cursor = cursor_arg
 
 func _notification(what):
 	if what == NOTIFICATION_POSTINITIALIZE:
@@ -40,15 +45,15 @@ func _notification(what):
 		count -= 1
 
 func _ready():
+	for pin_point in pin_points:
+		pin_point.body = self
+	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _is_state(States.HOLD) and body_defined:
-		# Hold body
-		var direction = (get_global_mouse_position() - global_position) * 25
-		physics_state.set_linear_velocity(direction)
 		# Can unhold
 		can_unhold = not area.has_overlapping_bodies()
 
@@ -93,7 +98,9 @@ func _on_data_edited(property_name: String, value: Variant):
 	emit_signal("data_changed")
 
 func _on_body_defined():
+	global_position = cursor.global_position
 	set_property("id", "name" + str(count))
+	hold_body()
 #endregion
 
 
@@ -114,14 +121,9 @@ func _is_player(player_arg: Player) -> bool:
 
 #region Hold
 func hold_body():
-	deselect_body()
 	_set_state(States.HOLD)
-	# Physics effect
-	collision_layer = 0
-	collision_mask = 0
-	if body_defined:
-		physics_state.linear_velocity = Vector2(0, 0)
-	gravity_scale = 0
+	deselect_body()
+	cursor.hold_body(self)
 	# Visual effect
 	modulate = Color(0.663, 0.804, 1)
 	z_index = 5
@@ -131,19 +133,16 @@ func hold_body():
 func unhold_body():
 	if _is_state(States.HOLD):
 		_set_state(States.NORMAL)
-		# Physics effect
-		collision_layer = 1
-		collision_mask = 1
-		if body_defined:
-			physics_state.linear_velocity = Vector2(0, 0)
-		load_data()
+		cursor.unhold_body()
+		for pin_point in pin_points:
+			pin_point.connect_connectable_bodies()
 		# Visual effect
 		modulate = Color(1, 1, 1)
 		z_index = 1
 		
 		emit_signal("body_unheld", self)
 
-func is_body_held() -> bool:
+func is_held() -> bool:
 	return _state == States.HOLD
 
 func set_can_unhold(value: bool):
@@ -181,7 +180,7 @@ func is_selected() -> bool:
 
 #region Data
 func load_data():
-	print("load")
+	print("Body data loaded")
 	for property_name in get_properties():
 		if property_name in self:
 			self.set(property_name, get_property(property_name))

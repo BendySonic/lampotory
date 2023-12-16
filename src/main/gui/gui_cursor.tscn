@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://def2bkc3wpx2e"]
+[gd_scene load_steps=3 format=3 uid="uid://def2bkc3wpx2e"]
 
 [ext_resource type="Script" path="res://src/main/gui/gui_cursor.gd" id="1_fiihl"]
 
-[node name="GUICursor" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ntef"]
+radius = 5.0
+
+[node name="GUICursor" type="CharacterBody2D"]
+collision_layer = 1024
+collision_mask = 0
 script = ExtResource("1_fiihl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0.717647, 0.933333, 0.592157)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6ntef")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+softness = 4.0

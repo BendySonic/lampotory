@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ll40qltxjh1o"]
+[gd_scene load_steps=5 format=3 uid="uid://ll40qltxjh1o"]
 
-[ext_resource type="Script" path="res://src/main/node2d/foreground/mechanic.gd" id="1_tg22m"]
+[ext_resource type="Script" path="res://src/main/node2d/labs/mechanic.gd" id="1_tg22m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qe42q"]
+rough = true
+absorbent = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ovjyk"]
 size = Vector2(500, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrse"]
+custom_solver_bias = 1.0
 size = Vector2(500, 100)
 
 [node name="Mechanic" type="Node2D"]
@@ -15,6 +20,7 @@ script = ExtResource("1_tg22m")
 position = Vector2(0, 100)
 collision_layer = 3
 collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_qe42q")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
 mesh = SubResource("QuadMesh_ovjyk")

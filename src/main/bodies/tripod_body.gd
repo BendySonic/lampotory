@@ -5,11 +5,11 @@ extends NormalBody
 @onready var cargo_body: RigidBody2D = get_node("CargoBody")
 
 
-func init(item_data_arg: ItemResource, position_arg: Vector2):
-	super(item_data_arg, position_arg)
+func init(item_data_arg: ItemResource, position_arg: Vector2, cursor_arg: GUICursor):
+	super(item_data_arg, position_arg, cursor_arg)
 	self.global_position = Vector2(position_arg.x, 440)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Hold
 	if _is_state(States.HOLD) and body_defined:
 		var direction = Vector2(
@@ -35,10 +35,10 @@ func _draw():
 
 func hold_body():
 	super()
-	freeze = false
-	cargo_body.freeze = true
+	set_deferred("freeze", false)
+	cargo_body.set_deferred("freeze", true)
 
 func unhold_body():
 	super()
-	freeze = true
-	cargo_body.freeze = false
+	set_deferred("freeze", true)
+	cargo_body.set_deferred("freeze", false)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_5j6ac"]
 [ext_resource type="Texture2D" uid="uid://bgthnm313rqvy" path="res://assets/graphic/gui/icons/items/body_square.png" id="1_wa1ed"]
-[ext_resource type="PackedScene" uid="uid://bm0f5yab2fysc" path="res://src/main/bodies/normal_body.tscn" id="2_6vfa5"]
+[ext_resource type="PackedScene" uid="uid://dinm4ywrs41ww" path="res://src/main/bodies/block_body.tscn" id="2_hhvwp"]
 
 [resource]
 script = ExtResource("1_5j6ac")
@@ -10,7 +10,7 @@ item_name = "Деревянный брусок"
 item_tooltip = "Обычный прямоугольный деревянный брусок."
 item_icon = ExtResource("1_wa1ed")
 item_modulate = Color(0.278431, 0.6, 1, 1)
-item_scene = ExtResource("2_6vfa5")
+item_scene = ExtResource("2_hhvwp")
 properties = {
 "gravity_scale": 1.0,
 "mass": 1.0

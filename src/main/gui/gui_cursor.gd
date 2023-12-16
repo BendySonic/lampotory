@@ -1,18 +1,21 @@
 class_name GUICursor
-extends Node2D
+extends CharacterBody2D
 
 
-var item_data: ItemResource:
-	get: return item_data
-
-@onready var icon := get_node("Sprite2D") as Sprite2D
+@onready var icon: Sprite2D = get_node("Sprite2D")
+@onready var pin_joint: PinJoint2D = get_node("PinJoint2D")
 
 
-func init(item_data_arg: ItemResource):
-	self.item_data = item_data_arg
-
-func _ready():
-	self.icon.texture = item_data.item_icon
 
 func _physics_process(_delta):
-	position = get_global_mouse_position()
+	velocity = (get_global_mouse_position() - global_position) * 25
+	move_and_slide()
+
+func hold_body(body: NormalBody):
+	if body.is_in_group("free_move"):
+		pin_joint.node_a = pin_joint.get_path_to(self)
+		pin_joint.node_b = pin_joint.get_path_to(body)
+
+func unhold_body():
+	pin_joint.node_a = ""
+	pin_joint.node_b = ""

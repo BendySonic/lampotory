@@ -20,7 +20,7 @@ var change_scene_to: Callable
 
 
 # TODO - Develop create project window
-func init(call_arg: Callable, arg: Variant):
+func init(call_arg: Callable, _arg: Variant):
 	self.change_scene_to = call_arg
 
 func _on_create_project_button_down():

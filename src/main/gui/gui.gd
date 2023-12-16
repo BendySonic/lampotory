@@ -11,27 +11,26 @@ signal reload_pressed()
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "ItemsWindow/"
-const ITEMS = ITEMS_WINDOW + "VBoxContainer/Body/VBox/Margin/ItemsContainer"
+const ITEMS_BOX = (ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox")
 const PROPERTIES_WINDOW = "PropertiesWindow/"
-const PROPERTIES_VIEW = PROPERTIES_WINDOW + "VBoxContainer/Body/HBoxContainer/"
-const PROPERTIES = (PROPERTIES_VIEW + "PanelContainer/PropertiesContainer")
-const WORKSPACE_AREA = "HUD/Other/WorkspaceArea/"
-const INFO = WORKSPACE_AREA + "VBoxContainer/InfoLabel"
-const PLAYER = "HUD/MenuBar/Player/"
-const PLAY = PLAYER + "Play/PlayButton"
-const RELOAD = PLAYER + "Reload/ReloadButton"
+const PROPERTIES_BOX = (PROPERTIES_WINDOW + "PropertiesWindowBox/Body/BodyBox/Properties/PropertiesBox")
+const WORKSPACE = "HUD/Workspace/"
+const INFO_LABEL = WORKSPACE + "WorkspaceBox/WorkspaceBox/InfoLabel"
+const PLAYER = "HUD/Menu/Player/"
+const PLAY_BUTTON = PLAYER + "Play/PlayButton"
+const RELOAD_BUTTON = PLAYER + "Reload/ReloadButton"
 
 # Children
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
-@onready var items_container := get_node(ITEMS) as GridContainer
+@onready var items_box := get_node(ITEMS_BOX) as GridContainer
 
 @onready var properties_window := get_node(PROPERTIES_WINDOW) as Control
-@onready var properties_container := get_node(PROPERTIES) as VBoxContainer
+@onready var properties_box := get_node(PROPERTIES_BOX) as VBoxContainer
 
-@onready var play_button := get_node(PLAY) as Button
-@onready var reload_button := get_node(RELOAD) as Button
+@onready var play_button := get_node(PLAY_BUTTON) as Button
+@onready var reload_button := get_node(RELOAD_BUTTON) as Button
 
-@onready var info_label := get_node(INFO)
+@onready var info_label := get_node(INFO_LABEL)
 
 @onready var cursor_layer := get_node("CursorLayer")
 
@@ -69,7 +68,7 @@ func create_items(item_resources: Array[ItemResource]):
 		new_item.init(item_data)
 		new_item.connect("item_pressed", _on_item_pressed)
 		new_item.connect("item_released", _on_item_released)
-		items_container.add_child(new_item)
+		items_box.add_child(new_item)
 #endregion
 
 
@@ -88,11 +87,11 @@ func create_properties(body: NormalBody):
 		
 		var new_property = property_scene.instantiate()
 		new_property.init(body, body_property, value)
-		properties_container.add_child(new_property)
+		properties_box.add_child(new_property)
 
 func delete_properties():
 	hide_properties_window()
-	for child in properties_container.get_children():
+	for child in properties_box.get_children():
 		child.queue_free()
 
 func hide_properties_window():

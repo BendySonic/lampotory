@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://s0n5c84jnhiv"]
 
 [ext_resource type="Script" path="res://src/main/bodies/tripod_body.gd" id="1_hsstv"]
-[ext_resource type="Script" path="res://src/main/bodies/PillarBody.gd" id="2_4fa0y"]
+[ext_resource type="Script" path="res://src/main/bodies/add_input_body.gd" id="2_m2w0s"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xh43s"]
 size = Vector2(110, 20)
@@ -41,7 +41,7 @@ size = Vector2(120, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p166e"]
 size = Vector2(100, 10)
 
-[node name="Tripod" type="RigidBody2D"]
+[node name="Tripod" type="RigidBody2D" groups=["axis_move"]]
 input_pickable = true
 lock_rotation = true
 script = ExtResource("1_hsstv")
@@ -59,7 +59,7 @@ position = Vector2(0, -220)
 collision_layer = 1024
 collision_mask = 0
 input_pickable = true
-script = ExtResource("2_4fa0y")
+script = ExtResource("2_m2w0s")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="PillarBody"]
 position = Vector2(5, 0)
@@ -125,3 +125,5 @@ mesh = SubResource("QuadMesh_gg3f0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_p166e")
+
+[node name="PinPoints" type="Node2D" parent="."]

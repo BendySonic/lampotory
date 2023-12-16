@@ -63,17 +63,17 @@ func _on_play_toggled(button_pressed: bool):
 func _on_reload_pressed():
 	node2d.reload()
 
-func _on_body_held(body: NormalBody):
+func _on_body_held(_body: NormalBody):
 	_clear_select()
 
-func _on_body_unheld(body: NormalBody):
+func _on_body_unheld(_body: NormalBody):
 	_clear_select()
 
 func _on_body_selected(body: NormalBody):
 	gui.create_properties(body)
 	#pass
 
-func _on_body_deselected(body: NormalBody):
+func _on_body_deselected(_body: NormalBody):
 	gui.delete_properties()
 
 func _on_void_pressed():
