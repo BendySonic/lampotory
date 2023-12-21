@@ -98,7 +98,7 @@ func _on_data_edited(property_name: String, value: Variant):
 	emit_signal("data_changed")
 
 func _on_body_defined():
-	global_position = cursor.global_position
+	print("W")
 	set_property("id", "name" + str(count))
 	hold_body()
 #endregion

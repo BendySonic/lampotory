@@ -13,10 +13,8 @@ radius = 7.5
 script = ExtResource("1_lnycl")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-bias = 0.9
+bias = 0.1
 disable_collision = false
-motor_enabled = true
-motor_target_velocity = 0.0331613
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("SphereMesh_yim6d")

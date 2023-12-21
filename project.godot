@@ -82,9 +82,10 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 
 [physics]
 
-2d/run_on_separate_thread=true
-common/physics_jitter_fix=0.0
-2d/physics_engine="Box2D"
+common/physics_jitter_fix=10.0
+2d/physics_engine="GodotPhysics2D"
+box_2d/solver/velocity_iterations=1000
+box_2d/solver/position_iterations=1000
 
 [rendering]
 

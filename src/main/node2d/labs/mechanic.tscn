@@ -4,7 +4,6 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qe42q"]
 rough = true
-absorbent = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ovjyk"]
 size = Vector2(500, 100)
