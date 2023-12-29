@@ -25,8 +25,10 @@ var selected_item_data: Variant:
 @onready var bodies_node := get_node("Bodies") as Node
 @onready var foreground := get_node("Enviroment/Lab/Mechanic") as Node
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
-@onready var cursor := get_node("CanvasLayer/GUICursor") as GUICursor
+@onready var cursor := get_node("GUICursor") as GUICursor
 
+func _input(event):
+	print("Mouse: ", get_global_mouse_position())
 
 #region Input
 func _unhandled_input(event):

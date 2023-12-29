@@ -17,4 +17,3 @@ modulate = Color(0, 0.717647, 0.933333, 0.592157)
 shape = SubResource("CircleShape2D_6ntef")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-softness = 4.0

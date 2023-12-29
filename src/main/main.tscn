@@ -327,11 +327,11 @@ position = Vector2(550, 400)
 [node name="Camera" type="Node2D" parent="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
+offset = Vector2(200, 200)
 anchor_mode = 0
+zoom = Vector2(1.5, 1.5)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
-
-[node name="GUICursor" parent="Node2D/CanvasLayer" instance=ExtResource("14_u1iqx")]
+[node name="GUICursor" parent="Node2D" instance=ExtResource("14_u1iqx")]
 
 [connection signal="toggled" from="GUI/HUD/Menu/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
 [connection signal="pressed" from="GUI/HUD/Menu/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]

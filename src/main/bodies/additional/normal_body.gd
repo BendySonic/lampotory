@@ -27,8 +27,6 @@ var _body_data: BodyResource = BodyResource.new()
 @onready var select := get_node("Select") as Node2D
 @onready var area := get_node("Area2D") as Area2D
 
-@onready var pin_points := get_node("PinPoints").get_children()
-
 
 
 #region Initialization
@@ -45,8 +43,8 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	for pin_point in pin_points:
-		pin_point.body = self
+	self.global_position = cursor.global_position
+	hold_body()
 	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
@@ -98,9 +96,7 @@ func _on_data_edited(property_name: String, value: Variant):
 	emit_signal("data_changed")
 
 func _on_body_defined():
-	print("W")
 	set_property("id", "name" + str(count))
-	hold_body()
 #endregion
 
 
@@ -126,7 +122,6 @@ func hold_body():
 	cursor.hold_body(self)
 	# Visual effect
 	modulate = Color(0.663, 0.804, 1)
-	z_index = 5
 	
 	emit_signal("body_held", self)
 
@@ -134,11 +129,8 @@ func unhold_body():
 	if _is_state(States.HOLD):
 		_set_state(States.NORMAL)
 		cursor.unhold_body()
-		for pin_point in pin_points:
-			pin_point.connect_connectable_bodies()
 		# Visual effect
 		modulate = Color(1, 1, 1)
-		z_index = 1
 		
 		emit_signal("body_unheld", self)
 

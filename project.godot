@@ -84,6 +84,7 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 
 common/physics_jitter_fix=10.0
 2d/physics_engine="GodotPhysics2D"
+2d/default_angular_damp=2.0
 box_2d/solver/velocity_iterations=1000
 box_2d/solver/position_iterations=1000
 
