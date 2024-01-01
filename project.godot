@@ -23,6 +23,7 @@ window/size/viewport_width=1100
 window/size/viewport_height=720
 window/size/resizable=false
 window/size/borderless=true
+window/stretch/mode="canvas_items"
 
 [editor]
 
@@ -82,11 +83,12 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 
 [physics]
 
-common/physics_jitter_fix=10.0
+2d/run_on_separate_thread=true
 2d/physics_engine="GodotPhysics2D"
-2d/default_angular_damp=2.0
-box_2d/solver/velocity_iterations=1000
-box_2d/solver/position_iterations=1000
+3d/default_angular_damp=2.0
+2d/solver/default_contact_bias=1.0
+2d/solver/default_constraint_bias=1.0
+2d/max_physics_steps_per_frame=8
 
 [rendering]
 

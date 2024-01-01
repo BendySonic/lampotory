@@ -11,3 +11,7 @@ func _on_static_body_2d_mouse_entered():
 
 func _on_static_body_2d_mouse_exited():
 	is_mouse_inside = false
+
+
+func _on_rigid_body_2d_mouse_entered():
+	print("Mouse ball")

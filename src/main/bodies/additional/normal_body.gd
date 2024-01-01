@@ -4,6 +4,7 @@ extends RigidBodyPlus
 # Note: class uses RigidBodyPlus instead of RigidBody2D
 
 signal body_held(body: NormalBody)
+signal body_held_with_pin(body: NormalBody)
 signal body_unheld(body: NormalBody)
 signal body_selected(body: NormalBody)
 signal body_deselected(body: NormalBody)
@@ -15,8 +16,8 @@ enum Player {PLAY, PAUSE}
 
 static var count: int = 0
 
-var can_unhold := false:
-	set = set_can_unhold
+#var can_unhold := false
+	#set = set_can_unhold
 
 var _state: States = States.NORMAL
 var _player: Player = Player.PLAY
@@ -43,17 +44,18 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	self.global_position = cursor.global_position
+	if not is_in_group("axis_move"):
+		self.global_position = cursor.global_position
 	hold_body()
 	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
 
-func _physics_process(_delta):
-	if _is_state(States.HOLD) and body_defined:
+#func _physics_process(_delta):
+	#if _is_state(States.HOLD) and body_defined:
 		# Can unhold
-		can_unhold = not area.has_overlapping_bodies()
+		#can_unhold = not area.has_overlapping_areas()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -74,8 +76,7 @@ func _input(event):
 				if _is_state(States.HOLD):
 					unhold_body()
 
-func _on_input_event(_viewport: Node, event: Variant, _shape_idx: int):
-	print("Body input")
+func _on_input_event(viewport: Node, event: Variant, _shape_idx: int):
 	if event is InputEventMouseButton:
 		# Hold
 		if event.button_index == 1:
@@ -89,6 +90,7 @@ func _on_input_event(_viewport: Node, event: Variant, _shape_idx: int):
 					deselect_body()
 				else:
 					select_body()
+	viewport.set_input_as_handled()
 
 func _on_data_edited(property_name: String, value: Variant):
 	set_property(property_name, value)
@@ -120,15 +122,26 @@ func hold_body():
 	_set_state(States.HOLD)
 	deselect_body()
 	cursor.hold_body(self)
+	lock_rotation = true
 	# Visual effect
 	modulate = Color(0.663, 0.804, 1)
 	
 	emit_signal("body_held", self)
 
+func hold_body_with_pin():
+	_set_state(States.HOLD)
+	deselect_body()
+	cursor.hold_body(self)
+	# Visual effect
+	modulate = Color(0.663, 0.804, 1)
+	
+	emit_signal("body_held_with_pin", self)
+
 func unhold_body():
 	if _is_state(States.HOLD):
 		_set_state(States.NORMAL)
 		cursor.unhold_body()
+		lock_rotation = false
 		# Visual effect
 		modulate = Color(1, 1, 1)
 		
@@ -137,12 +150,12 @@ func unhold_body():
 func is_held() -> bool:
 	return _state == States.HOLD
 
-func set_can_unhold(value: bool):
-	if value:
-		modulate = Color(0.663, 0.804, 1)
-	else:
-		modulate = Color(1, 0.169, 0.18)
-	can_unhold = value
+#func set_can_unhold(value: bool):
+	#if value:
+		#modulate = Color(0.663, 0.804, 1)
+	#else:
+		#modulate = Color(1, 0.169, 0.18)
+	#can_unhold = value
 #endregion
 
 
@@ -172,7 +185,6 @@ func is_selected() -> bool:
 
 #region Data
 func load_data():
-	print("Body data loaded")
 	for property_name in get_properties():
 		if property_name in self:
 			self.set(property_name, get_property(property_name))
@@ -198,3 +210,10 @@ func get_edit_properties() -> Dictionary:
 func get_id() -> String:
 	return _body_data.properties["id"]
 #endregion
+
+func set_velocity(direction: Vector2):
+	if body_defined:
+		physics_state.set_linear_velocity(direction)
+
+func get_cursor():
+	return cursor

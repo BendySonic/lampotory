@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://src/main/node2d/labs/mechanic.gd" id="1_tg22m"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qe42q"]
-rough = true
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y44od"]
+friction = 0.4
 
 [sub_resource type="QuadMesh" id="QuadMesh_ovjyk"]
 size = Vector2(500, 100)
@@ -17,10 +17,11 @@ z_index = 5
 script = ExtResource("1_tg22m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+modulate = Color(0.870588, 0.878431, 0.886275, 1)
 position = Vector2(0, 100)
 collision_layer = 3
 collision_mask = 3
-physics_material_override = SubResource("PhysicsMaterial_qe42q")
+physics_material_override = SubResource("PhysicsMaterial_y44od")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
 mesh = SubResource("QuadMesh_ovjyk")

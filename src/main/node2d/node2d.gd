@@ -27,9 +27,6 @@ var selected_item_data: Variant:
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
 @onready var cursor := get_node("GUICursor") as GUICursor
 
-func _input(event):
-	print("Mouse: ", get_global_mouse_position())
-
 #region Input
 func _unhandled_input(event):
 	if event is InputEventMouseButton:

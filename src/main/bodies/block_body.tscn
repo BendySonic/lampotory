@@ -1,50 +1,51 @@
 [gd_scene load_steps=9 format=3 uid="uid://dinm4ywrs41ww"]
 
-[ext_resource type="Script" path="res://src/main/bodies/block_body.gd" id="1_816vs"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="1_iq0i2"]
 [ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/PinPoint.tscn" id="2_62phn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
-friction = 0.5
+friction = 0.4
 
 [sub_resource type="QuadMesh" id="QuadMesh_i6ehh"]
-size = Vector2(56, 30)
+size = Vector2(56, 40)
 
 [sub_resource type="QuadMesh" id="QuadMesh_0e7jl"]
 size = Vector2(12, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4elv"]
 custom_solver_bias = 1.0
-size = Vector2(56, 30)
+size = Vector2(56, 40)
 
 [sub_resource type="QuadMesh" id="QuadMesh_kstnr"]
-size = Vector2(70, 40)
+size = Vector2(65, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mryxb"]
-size = Vector2(45, 15)
+size = Vector2(45, 30)
 
-[node name="BlockBody" type="RigidBody2D" groups=["free_move"]]
+[node name="BlockBody" type="RigidBody2D"]
 z_index = 1
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_a1fao")
-inertia = 1000.0
 can_sleep = false
-script = ExtResource("1_816vs")
+continuous_cd = 2
+script = ExtResource("1_iq0i2")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-z_index = 1
+modulate = Color(0.219608, 0.592157, 0.992157, 1)
 mesh = SubResource("QuadMesh_i6ehh")
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
-modulate = Color(0.815686, 0.815686, 0.815686, 1)
+modulate = Color(0.619608, 0.796078, 0.996078, 1)
 position = Vector2(34, 0)
 mesh = SubResource("QuadMesh_0e7jl")
 
 [node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
-modulate = Color(0.815686, 0.815686, 0.815686, 1)
+modulate = Color(0.619608, 0.796078, 0.996078, 1)
 position = Vector2(-34, 0)
 mesh = SubResource("QuadMesh_0e7jl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_j4elv")
 
 [node name="Select" type="MeshInstance2D" parent="."]
@@ -54,16 +55,24 @@ show_behind_parent = true
 mesh = SubResource("QuadMesh_kstnr")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_priority = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_mryxb")
 
-[node name="PinPoint" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_62phn")]
-position = Vector2(-45, 0)
-body = NodePath("..")
+[node name="PinPoint" parent="." node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_62phn")]
+modulate = Color(0, 0.803922, 0.447059, 1)
+position = Vector2(-43, 0)
+parent_body = NodePath("..")
+main_body = NodePath("..")
 
-[node name="PinPoint2" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_62phn")]
-position = Vector2(45, 0)
-body = NodePath("..")
+[node name="PinPoint2" parent="." node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_62phn")]
+modulate = Color(0, 0.803922, 0.447059, 1)
+position = Vector2(43, 0)
+parent_body = NodePath("..")
+main_body = NodePath("..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

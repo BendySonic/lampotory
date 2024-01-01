@@ -44,9 +44,9 @@ shadow_offset = Vector2(4, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtxmm"]
 content_margin_left = 8.0
-bg_color = Color(0.478431, 0.670588, 1, 1)
+bg_color = Color(0.137255, 0.635294, 0.984314, 1)
 border_width_bottom = 3
-border_color = Color(0, 0.423529, 0.756863, 1)
+border_color = Color(0, 0.478431, 0.85098, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10

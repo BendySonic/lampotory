@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://src/main/bodies/additional/pin_point.gd" id="1_lnycl"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_yim6d"]
-radius = 7.5
-height = 15.0
+radius = 10.0
+height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fisi8"]
-radius = 7.5
 
 [node name="PinPoint" type="Node2D"]
 script = ExtResource("1_lnycl")
@@ -15,7 +14,6 @@ script = ExtResource("1_lnycl")
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 bias = 0.9
 disable_collision = false
-softness = 1.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("SphereMesh_yim6d")

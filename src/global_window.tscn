@@ -7,10 +7,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jusv"]
 bg_color = Color(0.196078, 0.462745, 0.992157, 0)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 border_color = Color(0.294118, 0.627451, 0.996078, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehgss"]
@@ -38,7 +38,7 @@ layout_mode = 2
 handle_input_locally = false
 physics_object_picking = true
 physics_object_picking_sort = true
-size = Vector2i(1085, 705)
+size = Vector2i(1090, 710)
 render_target_update_mode = 4
 
 [node name="Panel" type="PanelContainer" parent="."]
