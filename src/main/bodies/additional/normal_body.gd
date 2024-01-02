@@ -123,7 +123,7 @@ func hold_body():
 	_set_state(States.HOLD)
 	deselect_body()
 	cursor.hold_body(self)
-	lock_rotation = true
+	set_deferred("lock_rotation", true)
 	# Visual effect
 	modulate = Color(0.663, 0.804, 1)
 	
@@ -142,7 +142,7 @@ func unhold_body():
 	if _is_state(States.HOLD):
 		_set_state(States.NORMAL)
 		cursor.unhold_body()
-		lock_rotation = false
+		set_deferred("lock_rotation", false)
 		# Visual effect
 		modulate = Color(1, 1, 1)
 		

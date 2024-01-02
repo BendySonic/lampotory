@@ -1,6 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccmdeixcr40il"]
+[gd_scene load_steps=4 format=3 uid="uid://7va1xuvm6bqp"]
 
-[ext_resource type="Script" path="res://src/global_window.gd" id="1_xsqgr"]
+[sub_resource type="GDScript" id="GDScript_d4ygj"]
+script/source = "extends CanvasLayer
+# Class for window app
+
+
+# Children nodes
+@onready var sub_viewport: SubViewport = get_node(
+		\"Border/SubViewportContainer/SubViewport\"
+)
+
+# Scene connects
+@onready var menu_scene := preload(\"res://src/menu/menu.tscn\")
+
+
+# Private functions
+func _ready():
+	sub_viewport.handle_input_locally = true
+	change_scene_to(menu_scene, null)
+
+func add_scene(scene: PackedScene, arg: Variant):
+	var new_scene = scene.instantiate()
+	new_scene.init(change_scene_to, arg)
+	sub_viewport.add_child(new_scene)
+
+func free_scenes():
+	for scene in sub_viewport.get_children():
+		scene.queue_free()
+
+# Public functions
+func change_scene_to(scene: PackedScene, arg: Variant):
+	free_scenes()
+	add_scene(scene, arg)
+"
 
 [sub_resource type="Theme" id="Theme_t73ui"]
 
@@ -8,7 +40,7 @@
 bg_color = Color(0.196078, 0.462745, 0.992157, 0)
 
 [node name="GlobalWindow" type="CanvasLayer"]
-script = ExtResource("1_xsqgr")
+script = SubResource("GDScript_d4ygj")
 
 [node name="Border" type="PanelContainer" parent="."]
 anchors_preset = 15

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1ftc2bsnc28r"]
+[gd_scene load_steps=17 format=3 uid="uid://d1ftc2bsnc28r"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
@@ -43,14 +43,6 @@ border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.2)
 corner_radius_top_left = 40
 corner_radius_top_right = 40
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lv67e"]
-content_margin_left = 15.0
-bg_color = Color(0, 0.480469, 0.914063, 1)
-border_width_left = 5
-border_color = Color(0, 0.480469, 0.910156, 1)
-corner_radius_bottom_right = 40
-expand_margin_top = 10.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_58k2u")
@@ -255,11 +247,6 @@ theme = ExtResource("9_7dfw7")
 [node name="HBoxContainer2" type="HBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Head"]
 layout_mode = 2
 
-[node name="HeadLabel" type="Label" parent="GUI/PropertiesWindow/PropertiesWindowBox/Head/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 19
-text = " Свойства"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Head/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -273,25 +260,8 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="BodyBox" type="HBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body"]
 layout_mode = 2
-
-[node name="Model" type="VBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox/Model"]
-layout_mode = 2
-
-[node name="Properties" type="PanelContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lv67e")
-
-[node name="PropertiesBox" type="VBoxContainer" parent="GUI/PropertiesWindow/PropertiesWindowBox/Body/BodyBox/Properties"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("9_7dfw7")
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("11_5af0q")

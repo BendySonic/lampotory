@@ -29,8 +29,6 @@ const RELOAD_BUTTON = PLAYER_WINDOW + "Player/Reload/ReloadButton"
 @onready var reload_button := get_node(RELOAD_BUTTON) as Button
 
 
-@onready var cursor_layer := get_node("CursorLayer")
-
 # Resources
 @onready var item_scene := preload(GUI_PATH + "gui_item.tscn")
 @onready var property_scene := preload(GUI_PATH + "gui_property.tscn")
@@ -100,14 +98,14 @@ func show_properties_window():
 
 
 #region Cursor
-func create_cursor(item_data: ItemResource):
-	delete_cursor()
-	var cursor: GUICursor = cursor_scene.instantiate()
-	cursor.init(item_data)
-	cursor_layer.add_child(cursor)
+#func create_cursor(item_data: ItemResource):
+	#delete_cursor()
+	#var cursor: GUICursor = cursor_scene.instantiate()
+	#cursor.init(item_data)
+	#cursor_layer.add_child(cursor)
 
-func delete_cursor():
-	for child in cursor_layer.get_children():
-		cursor_layer.remove_child(child)
-		child.queue_free()
+#func delete_cursor():
+	#for child in cursor_layer.get_children():
+		#cursor_layer.remove_child(child)
+		#child.queue_free()
 #endregion

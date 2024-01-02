@@ -1,19 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://blmbopi1jfuot"]
+[gd_scene load_steps=4 format=3 uid="uid://blmbopi1jfuot"]
+
+[ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_b1ltk"]
+[ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/graphic/gui/icons/menu_sand.png" id="1_hete6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu6op"]
 bg_color = Color(0.996078, 0.996078, 0.996078, 1)
 border_width_left = 4
 border_width_bottom = 4
 border_color = Color(0.0705882, 0.47451, 0.952941, 1)
-corner_radius_top_left = 48
-corner_radius_top_right = 48
-corner_radius_bottom_right = 48
-corner_radius_bottom_left = 45
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
 corner_detail = 16
 shadow_color = Color(0, 0.803922, 0.447059, 1)
 shadow_size = 1
-shadow_offset = Vector2(1, -1)
+shadow_offset = Vector2(3, -3)
 
-[node name="GUILab" type="PanelContainer"]
-custom_minimum_size = Vector2(100, 100)
+[node name="GUILab" type="MarginContainer"]
+custom_minimum_size = Vector2(165, 165)
+anchors_preset = -1
+anchor_right = 0.15
+anchor_bottom = 0.229
+offset_right = -165.0
+offset_bottom = -164.88
+pivot_offset = Vector2(82.5, 82.5)
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_b1ltk")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xu6op")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 55)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_hete6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.117647, 0.117647, 1)
+theme_override_font_sizes/font_size = 14
+text = "Механика"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="PanelContainer" to="." method="_on_gui_lab_gui_input"]
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_gui_lab_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_gui_lab_mouse_exited"]

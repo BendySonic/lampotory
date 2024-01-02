@@ -5,22 +5,15 @@ extends Node
 
 
 # Project mode
-var mode_data: ModeResource:
+var mode_data: ModeResource = preload("res://src/main/modes/mechanic.tres"):
 	get: return mode_data
 
 # Children
 var gui: Node
 var node2d: Node
 
-# Scene connects
-var change_scene_to: Callable
-
 
 #region Initialization
-func init(call_arg: Callable, mode_arg: ModeResource):
-	self.change_scene_to = call_arg
-	self.mode_data = mode_arg
-
 func _enter_tree():
 	gui = get_node("GUI")
 	node2d = get_node("Node2D")

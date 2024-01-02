@@ -1,10 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs8vgaxhy1b5e"]
+[gd_scene load_steps=7 format=3 uid="uid://cs8vgaxhy1b5e"]
 
 [ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="1_3xxm5"]
 [ext_resource type="Script" path="res://src/menu/gui/gui_left_button.gd" id="2_febvy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1w8d"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7sudi"]
+bg_color = Color(0.933333, 0.941176, 0.933333, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc8we"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vc2hu"]
+bg_color = Color(0.913725, 0.913725, 0.913725, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -23,8 +40,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 1
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_r1w8d")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_r1w8d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7sudi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fc8we")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vc2hu")
 script = ExtResource("2_febvy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
