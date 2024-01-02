@@ -44,7 +44,7 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	if not is_in_group("axis_move"):
+	if not is_in_group("tripod"):
 		self.global_position = cursor.global_position
 	hold_body()
 	
@@ -77,6 +77,7 @@ func _input(event):
 					unhold_body()
 
 func _on_input_event(viewport: Node, event: Variant, _shape_idx: int):
+	print("Event")
 	if event is InputEventMouseButton:
 		# Hold
 		if event.button_index == 1:

@@ -1,21 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccmdeixcr40il"]
+[gd_scene load_steps=4 format=3 uid="uid://ccmdeixcr40il"]
 
 [ext_resource type="Script" path="res://src/global_window.gd" id="1_xsqgr"]
-[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="2_qtv8h"]
 
 [sub_resource type="Theme" id="Theme_t73ui"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jusv"]
 bg_color = Color(0.196078, 0.462745, 0.992157, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.294118, 0.627451, 0.996078, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehgss"]
-bg_color = Color(0.292969, 0.625, 0.992188, 1)
-corner_radius_bottom_left = 25
 
 [node name="GlobalWindow" type="CanvasLayer"]
 script = ExtResource("1_xsqgr")
@@ -38,19 +28,5 @@ layout_mode = 2
 handle_input_locally = false
 physics_object_picking = true
 physics_object_picking_sort = true
-size = Vector2i(1090, 710)
+size = Vector2i(1100, 720)
 render_target_update_mode = 4
-
-[node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(200, 45)
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 45.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-mouse_filter = 1
-theme = ExtResource("2_qtv8h")
-theme_override_styles/panel = SubResource("StyleBoxFlat_ehgss")

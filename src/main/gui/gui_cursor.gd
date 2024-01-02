@@ -11,7 +11,7 @@ var held_body: Variant = null
 func _physics_process(_delta):
 	# Axis move for special bodies
 	if not held_body == null:
-		if held_body.is_in_group("axis_move"):
+		if held_body.is_in_group("tripod"):
 			held_body.set_velocity(Vector2(
 					(global_position.x - held_body.global_position.x) * 2,
 					0
@@ -22,7 +22,7 @@ func _physics_process(_delta):
 
 func hold_body(body: NormalBody):
 	# Cursor hold free movable bodies
-	if not body.is_in_group("axis_move"):
+	if not body.is_in_group("tripod"):
 		pin_joint.node_a = pin_joint.get_path_to(self)
 		pin_joint.node_b = pin_joint.get_path_to(body)
 	held_body = body

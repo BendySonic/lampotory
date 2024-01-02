@@ -14,22 +14,25 @@
 [ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/labs/mechanic.tscn" id="13_fy0sy"]
 [ext_resource type="PackedScene" uid="uid://def2bkc3wpx2e" path="res://src/main/gui/gui_cursor.tscn" id="14_u1iqx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pligj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb8je"]
 bg_color = Color(1, 1, 1, 1)
-border_width_right = 4
+border_width_left = 1
+border_width_right = 1
 border_width_bottom = 4
-border_color = Color(0.294118, 0.623529, 0.992157, 1)
-corner_radius_bottom_right = 25
-shadow_color = Color(0, 0.803922, 0.447059, 0.301961)
-shadow_offset = Vector2(8, 8)
-anti_aliasing_size = 0.01
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c1c"]
 bg_color = Color(1, 1, 1, 1)
-border_width_right = 4
-border_color = Color(0.294118, 0.623529, 0.992157, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 5
+corner_radius_top_left = 40
 corner_radius_top_right = 40
-shadow_color = Color(0, 0.803922, 0.447059, 0.392157)
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 shadow_offset = Vector2(8, 0)
 anti_aliasing_size = 0.01
 
@@ -38,6 +41,7 @@ content_margin_left = 15.0
 bg_color = Color(0.294118, 0.623529, 0.992157, 1)
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 40
 corner_radius_top_right = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lv67e"]
@@ -50,143 +54,117 @@ expand_margin_top = 10.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_58k2u")
+metadata/_edit_vertical_guides_ = [-132.0]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource("2_i5t1w")
 
-[node name="HUD" type="VBoxContainer" parent="GUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PlayerWindow" type="PanelContainer" parent="GUI"]
+offset_left = 728.0
+offset_top = 19.0
+offset_right = 1091.0
+offset_bottom = 69.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
 
-[node name="Menu" type="PanelContainer" parent="GUI/HUD"]
-custom_minimum_size = Vector2(700, 45)
+[node name="Player" type="HBoxContainer" parent="GUI/PlayerWindow"]
 layout_mode = 2
-size_flags_horizontal = 0
-mouse_force_pass_scroll_events = false
-theme_override_styles/panel = SubResource("StyleBoxFlat_pligj")
+alignment = 1
 
-[node name="Panel" type="HBoxContainer" parent="GUI/HUD/Menu"]
-layout_mode = 2
-
-[node name="Edit" type="MarginContainer" parent="GUI/HUD/Menu/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="EditButton" type="TextureButton" parent="GUI/HUD/Menu/Panel/Edit"]
-modulate = Color(0.137255, 0.635294, 0.984314, 1)
-layout_mode = 2
-texture_normal = ExtResource("3_hytgr")
-
-[node name="Save" type="MarginContainer" parent="GUI/HUD/Menu/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="SaveButton" type="TextureButton" parent="GUI/HUD/Menu/Panel/Save"]
-modulate = Color(0.137255, 0.635294, 0.984314, 1)
-layout_mode = 2
-texture_normal = ExtResource("4_fk662")
-
-[node name="Player" type="HBoxContainer" parent="GUI/HUD/Menu"]
-layout_mode = 2
-alignment = 2
-
-[node name="Play" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
+[node name="Play" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="PlayButton" type="TextureButton" parent="GUI/HUD/Menu/Player/Play"]
+[node name="PlayButton" type="TextureButton" parent="GUI/PlayerWindow/Player/Play"]
 modulate = Color(0, 0.803922, 0.447059, 1)
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_ovxhx")
 texture_pressed = ExtResource("6_cbnpw")
 
-[node name="Rewind" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
+[node name="Rewind" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="Rewindbutton" type="TextureButton" parent="GUI/HUD/Menu/Player/Rewind"]
+[node name="Rewindbutton" type="TextureButton" parent="GUI/PlayerWindow/Player/Rewind"]
 modulate = Color(0, 0.803922, 0.447059, 1)
 layout_mode = 2
 texture_normal = ExtResource("7_iid86")
 texture_pressed = ExtResource("7_iid86")
 
-[node name="Reload" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
+[node name="Reload" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="ReloadButton" type="TextureButton" parent="GUI/HUD/Menu/Player/Reload"]
+[node name="ReloadButton" type="TextureButton" parent="GUI/PlayerWindow/Player/Reload"]
 modulate = Color(0, 0.803922, 0.447059, 1)
 layout_mode = 2
 texture_normal = ExtResource("8_npou3")
 texture_pressed = ExtResource("8_npou3")
 
-[node name="Speed" type="MarginContainer" parent="GUI/HUD/Menu/Player"]
+[node name="Speed" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="SpinBox" type="SpinBox" parent="GUI/HUD/Menu/Player/Speed"]
+[node name="SpinBox" type="SpinBox" parent="GUI/PlayerWindow/Player/Speed"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("9_7dfw7")
 
-[node name="Workspace" type="HBoxContainer" parent="GUI/HUD"]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="MenuWindow" type="PanelContainer" parent="GUI"]
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 148.0
+offset_bottom = 75.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
 
-[node name="WorkspaceBox" type="MarginContainer" parent="GUI/HUD/Workspace"]
+[node name="Panel" type="HBoxContainer" parent="GUI/MenuWindow"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-mouse_force_pass_scroll_events = false
+
+[node name="Edit" type="MarginContainer" parent="GUI/MenuWindow/Panel"]
+layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
 
-[node name="WorkspaceBox" type="VBoxContainer" parent="GUI/HUD/Workspace/WorkspaceBox"]
+[node name="EditButton" type="TextureButton" parent="GUI/MenuWindow/Panel/Edit"]
+modulate = Color(0.137255, 0.635294, 0.984314, 1)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-alignment = 2
+texture_normal = ExtResource("3_hytgr")
 
-[node name="InfoLabel" type="Label" parent="GUI/HUD/Workspace/WorkspaceBox/WorkspaceBox"]
+[node name="Save" type="MarginContainer" parent="GUI/MenuWindow/Panel"]
 layout_mode = 2
-theme = ExtResource("10_r6tdi")
-theme_override_font_sizes/font_size = 25
-text = "Скорость: 0
-Ускорение: 0
-Пройденный путь: 0"
-horizontal_alignment = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="SaveButton" type="TextureButton" parent="GUI/MenuWindow/Panel/Save"]
+modulate = Color(0.137255, 0.635294, 0.984314, 1)
+layout_mode = 2
+texture_normal = ExtResource("4_fk662")
 
 [node name="ItemsWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(220, 550)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -400.0
-offset_right = 200.0
+offset_left = 24.0
+offset_top = -567.0
+offset_right = 244.0
+offset_bottom = -17.0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -247,7 +225,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ItemsBox" type="GridContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
-theme_override_constants/v_separation = 50
+theme_override_constants/v_separation = 70
 columns = 2
 
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
@@ -315,8 +293,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_7dfw7")
 
-[node name="CursorLayer" type="CanvasLayer" parent="GUI"]
-
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("11_5af0q")
 
@@ -327,7 +303,7 @@ script = ExtResource("11_5af0q")
 [node name="Background" type="Node2D" parent="Node2D/Enviroment"]
 
 [node name="Background" type="CanvasLayer" parent="Node2D/Enviroment/Background"]
-layer = -1
+layer = -2
 
 [node name="Panel" type="Panel" parent="Node2D/Enviroment/Background/Background"]
 anchors_preset = 15
@@ -337,6 +313,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 
 [node name="Lab" type="Node2D" parent="Node2D/Enviroment"]
@@ -347,12 +324,12 @@ position = Vector2(550, 400)
 [node name="Camera" type="Node2D" parent="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
-offset = Vector2(200, 150)
+offset = Vector2(200, 50)
 anchor_mode = 0
 zoom = Vector2(1.5, 1.5)
 
 [node name="GUICursor" parent="Node2D" instance=ExtResource("14_u1iqx")]
 
-[connection signal="toggled" from="GUI/HUD/Menu/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
-[connection signal="pressed" from="GUI/HUD/Menu/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
+[connection signal="toggled" from="GUI/PlayerWindow/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="pressed" from="GUI/PlayerWindow/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
 [connection signal="mouse_exited" from="GUI/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]

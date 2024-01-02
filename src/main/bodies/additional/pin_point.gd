@@ -24,13 +24,13 @@ func _on_body_unheld(_body):
 	connect_connectable_bodies()
 
 func _on_body_held(_body):
-	disconnect_bodies()
+	if not main_body.is_in_group("tripod"):
+		disconnect_bodies()
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if event.is_pressed():
-				disconnect_bodies()
 				main_body.hold_body_with_pin()
 
 func _input(event):

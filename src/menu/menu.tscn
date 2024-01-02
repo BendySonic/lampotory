@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3pb6t8fbo0uc"]
+[gd_scene load_steps=18 format=3 uid="uid://d3pb6t8fbo0uc"]
 
 [ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="5_t4c6l"]
 [ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/graphic/gui/icons/menu_lab.png" id="6_iimh4"]
 [ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/graphic/gui/icons/menu_sand.png" id="7_gmbub"]
-[ext_resource type="Texture2D" uid="uid://brmasmf30mgvg" path="res://assets/graphic/gui/logo/logo_white.png" id="8_keydx"]
+[ext_resource type="Texture2D" uid="uid://dmc7ryofl017l" path="res://assets/logo/logo.png" id="8_nama8"]
 [ext_resource type="PackedScene" uid="uid://c326smqmm383s" path="res://src/menu/gui/gui_project.tscn" id="8_ow4m1"]
 [ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
 
@@ -15,45 +15,59 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeoci"]
 content_margin_right = 0.0
-bg_color = Color(0.195313, 0.460938, 0.992188, 1)
+bg_color = Color(0.894118, 0.933333, 1, 1)
 border_color = Color(0.294118, 0.627451, 0.996078, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pwii"]
 bg_color = Color(1, 1, 1, 1)
-border_width_top = 5
-border_width_right = 10
-border_color = Color(0.282353, 0.580392, 0.992157, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 10
+border_color = Color(0.0705882, 0.47451, 0.952941, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 shadow_color = Color(0, 0, 0, 0.145098)
-shadow_size = 30
-shadow_offset = Vector2(20, 20)
+shadow_size = 1
+shadow_offset = Vector2(5, 15)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40ddf"]
 bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
 border_width_bottom = 5
 corner_radius_top_left = 50
-corner_radius_top_right = 40
+corner_radius_top_right = 50
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k47h"]
 bg_color = Color(0.243137, 0.552941, 1, 1)
-border_width_top = 5
-border_width_right = 10
-border_color = Color(0.403922, 0.643137, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 10
+border_color = Color(0.0705882, 0.47451, 0.952941, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 shadow_color = Color(0, 0, 0, 0.160784)
-shadow_size = 12
-shadow_offset = Vector2(5, 5)
+shadow_size = 1
+shadow_offset = Vector2(3, 10)
 
 [sub_resource type="FontVariation" id="FontVariation_6kn07"]
 spacing_bottom = -5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
+content_margin_right = 11.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 7
+border_color = Color(0.0705882, 0.47451, 0.952941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -155,6 +169,7 @@ theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 80
 
 [node name="Start" type="VBoxContainer" parent="Panel/Panel/Workspace"]
+visible = false
 layout_mode = 2
 
 [node name="Logo" type="MarginContainer" parent="Panel/Panel/Workspace/Start"]
@@ -167,7 +182,7 @@ custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture = ExtResource("8_keydx")
+texture = ExtResource("8_nama8")
 expand_mode = 1
 
 [node name="Start" type="HBoxContainer" parent="Panel/Panel/Workspace/Start"]
@@ -195,7 +210,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("FontVariation_6kn07")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Начни физические опыты
 с консультацией
 виртуального помощника!"
@@ -204,7 +219,6 @@ text = "Начни физические опыты
 layout_mode = 2
 
 [node name="Projects" type="VBoxContainer" parent="Panel/Panel/Workspace"]
-visible = false
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -214,17 +228,20 @@ layout_mode = 2
 
 [node name="ProjectLabel" type="Label" parent="Panel/Panel/Workspace/Projects/ProjectBar"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
 theme_override_font_sizes/font_size = 22
 text = "Проекты"
 
 [node name="CreateProject" type="Button" parent="Panel/Panel/Workspace/Projects/ProjectBar"]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("3_aswnl")
+theme_override_colors/font_color = Color(0.113725, 0.12549, 0.117647, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_821nr")
 text = "Создать новый"
 icon = ExtResource("9_kqmdu")
 alignment = 2
+expand_icon = true
 
 [node name="GUIProject" parent="Panel/Panel/Workspace/Projects" instance=ExtResource("8_ow4m1")]
 layout_mode = 2

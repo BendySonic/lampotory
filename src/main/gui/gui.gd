@@ -11,14 +11,12 @@ signal reload_pressed()
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "ItemsWindow/"
-const ITEMS_BOX = (ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox")
+const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
 const PROPERTIES_WINDOW = "PropertiesWindow/"
-const PROPERTIES_BOX = (PROPERTIES_WINDOW + "PropertiesWindowBox/Body/BodyBox/Properties/PropertiesBox")
-const WORKSPACE = "HUD/Workspace/"
-const INFO_LABEL = WORKSPACE + "WorkspaceBox/WorkspaceBox/InfoLabel"
-const PLAYER = "HUD/Menu/Player/"
-const PLAY_BUTTON = PLAYER + "Play/PlayButton"
-const RELOAD_BUTTON = PLAYER + "Reload/ReloadButton"
+const PROPERTIES_BOX = PROPERTIES_WINDOW + "PropertiesWindowBox/Body/BodyBox/Properties/PropertiesBox"
+const PLAYER_WINDOW = "PlayerWindow/"
+const PLAY_BUTTON = PLAYER_WINDOW + "Player/Play/PlayButton"
+const RELOAD_BUTTON = PLAYER_WINDOW + "Player/Reload/ReloadButton"
 
 # Children
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
@@ -30,7 +28,6 @@ const RELOAD_BUTTON = PLAYER + "Reload/ReloadButton"
 @onready var play_button := get_node(PLAY_BUTTON) as Button
 @onready var reload_button := get_node(RELOAD_BUTTON) as Button
 
-@onready var info_label := get_node(INFO_LABEL)
 
 @onready var cursor_layer := get_node("CursorLayer")
 

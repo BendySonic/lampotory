@@ -87,7 +87,6 @@ shape = SubResource("RectangleShape2D_y3mv0")
 position = Vector2(0, 115)
 node_a = NodePath("..")
 node_b = NodePath("../PlaceHolder")
-bias = 0.5
 length = 65.0
 initial_offset = 1.0
 

@@ -15,10 +15,19 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 content_margin_left = 30.0
 content_margin_right = 15.0
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
 border_width_bottom = 5
-border_color = Color(0.278431, 0.615686, 1, 1)
+border_color = Color(0.0705882, 0.47451, 0.952941, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 expand_margin_left = 10.0
 expand_margin_right = 10.0
+shadow_color = Color(0, 0, 0, 0.176471)
+shadow_size = 1
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk6he"]
 content_margin_left = 8.0

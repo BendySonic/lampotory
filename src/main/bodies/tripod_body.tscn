@@ -52,8 +52,7 @@ size = Vector2(120, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p166e"]
 size = Vector2(110, 5)
 
-[node name="Tripod" type="RigidBody2D" groups=["axis_move"]]
-self_modulate = Color(0.733333, 0.862745, 0.956863, 1)
+[node name="Tripod" type="RigidBody2D" groups=["tripod"]]
 collision_layer = 5
 input_pickable = true
 mass = 20.0
@@ -62,17 +61,20 @@ lock_rotation = true
 freeze = true
 script = ExtResource("1_hsstv")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color(0.372549, 0.709804, 1, 1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Node2D"]
 modulate = Color(0.756863, 0.756863, 0.756863, 1)
 position = Vector2(20, 0)
 mesh = SubResource("QuadMesh_xh43s")
 
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Node2D"]
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 position = Vector2(-35, 10)
 mesh = SubResource("QuadMesh_asm5d")
 
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Node2D"]
 modulate = Color(0.776471, 0.776471, 0.776471, 1)
 position = Vector2(75, 10)
 mesh = SubResource("QuadMesh_asm5d")
@@ -90,7 +92,7 @@ script = ExtResource("2_2natp")
 main_body = NodePath("..")
 
 [node name="Node2D" type="Node2D" parent="PillarBody"]
-modulate = Color(0.819608, 0.827451, 0.827451, 1)
+modulate = Color(0.72549, 0.854902, 1, 1)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="PillarBody/Node2D"]
 show_behind_parent = true
@@ -107,7 +109,7 @@ shape = SubResource("RectangleShape2D_ie6si")
 
 [node name="TripodLevel" type="CharacterBody2D" parent="PillarBody"]
 z_index = 1
-position = Vector2(40, -400)
+position = Vector2(40, -350)
 collision_layer = 8
 collision_mask = 8
 collision_priority = 2.0
@@ -120,7 +122,7 @@ position = Vector2(-20, 0)
 shape = SubResource("RectangleShape2D_tw0ar")
 
 [node name="Node2D" type="Node2D" parent="PillarBody/TripodLevel"]
-modulate = Color(0.670588, 0.694118, 0.713726, 1)
+modulate = Color(0.203922, 0.658824, 1, 1)
 position = Vector2(-20, 0)
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="PillarBody/TripodLevel/Node2D"]
@@ -132,7 +134,7 @@ position = Vector2(20, 0)
 mesh = SubResource("SphereMesh_ulsc8")
 
 [node name="PinPoint" parent="PillarBody/TripodLevel" node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_eerml")]
-modulate = Color(0.596078, 0.596078, 0.596078, 1)
+modulate = Color(0, 0.705882, 0.466667, 1)
 position = Vector2(-70, 0)
 scale = Vector2(1.5, 1.5)
 parent_body = NodePath("..")
