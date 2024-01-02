@@ -38,7 +38,7 @@ anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80iel"]
 content_margin_left = 15.0
-bg_color = Color(0.294118, 0.623529, 0.992157, 1)
+bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.2)
 corner_radius_top_left = 40
