@@ -40,6 +40,7 @@ mass = 0.3
 physics_material_override = SubResource("PhysicsMaterial_effc7")
 center_of_mass_mode = 1
 center_of_mass = Vector2(0, 25)
+freeze_mode = 1
 script = ExtResource("1_a1t7g")
 length_coeff = 6.0
 width_coeff = 17.0

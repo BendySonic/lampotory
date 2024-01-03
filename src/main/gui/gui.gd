@@ -5,6 +5,7 @@ extends CanvasLayer
 signal item_pressed(item_data: ItemResource)
 signal item_released()
 signal items_window_mouse_exited()
+
 signal play_toggled(button_pressed: bool)
 signal reload_pressed()
 
@@ -13,21 +14,35 @@ signal cut_pressed()
 signal paste_pressed()
 signal delete_pressed()
 
+signal save_project_pressed(name: String, theme: String)
+
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
+
 const PROPERTIES_WINDOW = "PropertiesWindow/"
 const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/VBoxContainer"
-const ACTIONS_WINDOW = "ActionsWindow/"
-const ACTIONS_BOX = ACTIONS_WINDOW + "HBoxContainer/"
+
 const PLAYER_WINDOW = "PlayerWindow/"
 const PLAY_BUTTON = PLAYER_WINDOW + "Player/Play/PlayButton"
 const RELOAD_BUTTON = PLAYER_WINDOW + "Player/Reload/ReloadButton"
+
+const ACTIONS_WINDOW = "ActionsWindow/"
+const ACTIONS_BOX = ACTIONS_WINDOW + "HBoxContainer/"
 const COPY_BUTTON = ACTIONS_BOX + "MarginContainer/CopyButton"
 const CUT_BUTTON = ACTIONS_BOX + "MarginContainer2/CutButton"
 const PASTE_BUTTON = ACTIONS_BOX + "MarginContainer3/PasteButton"
 const DELETE_BUTTON = ACTIONS_BOX + "MarginContainer4/DeleteButton"
+
+const MENU_WINDOW = "MenuWindow/"
+const MENU_BOX = MENU_WINDOW + "Panel/"
+const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
+
+const SAVE_WINDOW = "SaveWindow/"
+const SAVE_BOX = SAVE_WINDOW + "MarginContainer/VBoxContainer/"
+const PROJECT_NAME_EDIT = SAVE_WINDOW + "ProjectNameEdit"
+const PROJECT_THEME_EDIT = SAVE_WINDOW + "ProjectThemeEdit"
 
 # Children
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
@@ -39,19 +54,28 @@ const DELETE_BUTTON = ACTIONS_BOX + "MarginContainer4/DeleteButton"
 @onready var actions_window := get_node(ACTIONS_WINDOW) as Control
 @onready var actions_box := get_node(ACTIONS_BOX) as VBoxContainer
 
-@onready var play_button := get_node(PLAY_BUTTON) as Button
-@onready var reload_button := get_node(RELOAD_BUTTON) as Button
-
 @onready var copy_button := get_node(COPY_BUTTON) as TextureButton
 @onready var cut_button := get_node(CUT_BUTTON) as TextureButton
 @onready var paste_button := get_node(PASTE_BUTTON) as TextureButton
 @onready var delete_button := get_node(DELETE_BUTTON) as TextureButton
 
+@onready var play_button := get_node(PLAY_BUTTON) as Button
+@onready var reload_button := get_node(RELOAD_BUTTON) as Button
+
+@onready var save_button := get_node(SAVE_BUTTON) as MenuButton
+
+@onready var save_window = get_node(SAVE_WINDOW) as PanelContainer
+
+@onready var project_name_edit = get_node(PROJECT_NAME_EDIT) as LineEdit
+@onready var project_theme_edit = get_node(PROJECT_THEME_EDIT) as LineEdit
+
 # Resources
 @onready var item_scene := preload(GUI_PATH + "gui_item.tscn")
 @onready var property_scene := preload(GUI_PATH + "gui_property.tscn")
-@onready var cursor_scene := preload(GUI_PATH + "gui_cursor.tscn")
 
+
+func _ready():
+	save_button.get_popup().connect("id_pressed", _on_id_pressed)
 
 #region Input
 func _on_item_pressed(item_data: ItemResource):
@@ -71,6 +95,10 @@ func _on_play_toggled(button_pressed: bool):
 func _on_reload_pressed():
 	play_button.button_pressed = false
 	emit_signal("reload_pressed")
+
+func _on_id_pressed(id: int):
+	if id == 0:
+		show_save_window()
 #endregion
 
 #region ItemsWindow
@@ -173,6 +201,32 @@ func _on_delete_button_up():
 	emit_signal("delete_pressed")
 #endregion
 
+
+#region SaveWindow
+func show_save_window():
+	save_window.set_visible(true)
+	save_window.set_global_position(Vector2(DisplayServer.window_get_size() / 2)
+			- Vector2(save_window.size / 2))
+
+func hide_save_window():
+	save_window.set_visible(false)
+
+func _on_exit_button_pressed():
+	hide_save_window()
+
+func _on_save_project_button_pressed():
+	emit_signal(
+			"save_project_pressed", 
+			project_name_edit.get_text(),
+			project_theme_edit.get_text()
+	)
+#endregion
+
+
+
+
+# NOTE:
+# Don't use: legacy code --->>>
 
 #region Cursor
 #func create_cursor(item_data: ItemResource):

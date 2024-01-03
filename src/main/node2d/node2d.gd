@@ -59,13 +59,13 @@ func _on_body_deselected(body: NormalBody):
 
 #region Saver
 # TODO - Develop save/load system by window
-func save_world(file_path: String):
+func save_project(file_path: String):
 	var bodies_properties: Array[Dictionary]
 	for body in get_children():
 		bodies_properties.push_back(body.get_properties())
 	LampFileManager.save_file(PROJECT_PATH + file_path, bodies_properties)
 
-func load_world(file_path: String):
+func load_project(file_path: String):
 	return LampFileManager.load_file(PROJECT_PATH + file_path)
 #endregion
 
@@ -73,11 +73,10 @@ func load_world(file_path: String):
 #region Player
 func play(button_pressed: bool):
 	state = States.PLAY if button_pressed else States.PAUSE
-	for body in get_bodies():
-		if button_pressed:
-			body.play()
-		else:
-			body.pause()
+	if button_pressed:
+		get_tree().paused = true
+	else:
+		get_tree().paused = false
 
 func reload():
 	state = States.PLAY
@@ -98,7 +97,7 @@ func item_released():
 #region Bodies
 # TODO - Fix body spawn (Check for another bodies)
 func create_body():
-	if not selected_item_data == null:
+	if not selected_item_data == null and not get_tree().paused:
 		var item_data = selected_item_data
 		var body = item_data.item_scene.instantiate()
 		body.connect("body_held", _on_body_held)

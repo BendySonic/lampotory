@@ -1,11 +1,9 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://dvkde7fnq2ulu"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://dvkde7fnq2ulu"]
 
 [ext_resource type="Texture2D" uid="uid://d1oarr68d1iay" path="res://assets/graphic/gui/control/green_down.png" id="1_sbosp"]
 [ext_resource type="Texture2D" uid="uid://blrj2s28rlk8u" path="res://assets/graphic/gui/control/green_updown.png" id="2_p0gxa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8cmx"]
-content_margin_left = 30.0
-content_margin_right = 15.0
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xn0d"]
@@ -13,8 +11,6 @@ bg_color = Color(1, 1, 1, 0)
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwlfe"]
-content_margin_left = 30.0
-content_margin_right = 15.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
 border_width_right = 1
@@ -75,18 +71,23 @@ shadow_offset = Vector2(3, 4)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5s10"]
 bg_color = Color(0.964706, 0.964706, 0.964706, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c1c"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3o07f"]
 bg_color = Color(1, 1, 1, 1)
-border_width_top = 5
-border_width_right = 10
-border_color = Color(0.388235, 0.666667, 1, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-shadow_color = Color(0, 0, 0, 0.184314)
-shadow_size = 5
-shadow_offset = Vector2(5, 5)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 7
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.101961)
+shadow_size = 1
+shadow_offset = Vector2(3, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ib4rj"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 5
+border_color = Color(0.780392, 0.780392, 0.780392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rffq"]
 bg_color = Color(1, 1, 1, 1)
@@ -134,7 +135,7 @@ Button/styles/focus = SubResource("StyleBoxFlat_1xn0d")
 Button/styles/hover = SubResource("StyleBoxFlat_c8cmx")
 Button/styles/normal = SubResource("StyleBoxFlat_c8cmx")
 Button/styles/pressed = SubResource("StyleBoxFlat_gwlfe")
-Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_color = Color(0.180392, 0.180392, 0.180392, 1)
 LineEdit/colors/caret_color = Color(0.619608, 0.619608, 0.619608, 1)
 LineEdit/colors/font_color = Color(0.211765, 0.717647, 0.498039, 1)
 LineEdit/colors/font_placeholder_color = Color(0.294118, 0.768627, 0.54902, 1)
@@ -145,7 +146,11 @@ OptionButton/constants/h_separation = 15
 OptionButton/icons/arrow = ExtResource("1_sbosp")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_wmhch")
 Panel/styles/panel = SubResource("StyleBoxFlat_v5s10")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_v5c1c")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_3o07f")
+PopupMenu/colors/font_color = Color(0.223529, 0.223529, 0.223529, 1)
+PopupMenu/colors/font_disabled_color = Color(0.4, 0.4, 0.4, 0.466667)
+PopupMenu/colors/font_separator_color = Color(0.415686, 0.415686, 0.415686, 1)
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_ib4rj")
 SpinBox/icons/updown = ExtResource("2_p0gxa")
 TabContainer/colors/font_unselected_color = Color(1, 1, 1, 1)
 TabContainer/constants/side_margin = 0

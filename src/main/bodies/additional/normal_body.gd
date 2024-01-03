@@ -86,6 +86,7 @@ func _on_input_event(viewport: Node, event: Variant, _shape_idx: int):
 			if event.is_pressed():
 				if not _is_state(States.HOLD):
 					hold_body()
+					viewport.set_input_as_handled()
 		# Select
 		elif event.button_index == 2:
 			if event.is_pressed():
@@ -93,7 +94,6 @@ func _on_input_event(viewport: Node, event: Variant, _shape_idx: int):
 					deselect_body()
 				else:
 					select_body()
-	viewport.set_input_as_handled()
 
 func _on_data_edited(property_name: String, value: Variant):
 	set_property(property_name, value)
@@ -169,7 +169,7 @@ func select_body():
 		_set_state(States.SELECTED)
 		# Visual select
 		select.visible = true
-		z_index = 5
+		#z_index = 5
 		
 		emit_signal("body_selected", self)
 
@@ -178,7 +178,7 @@ func deselect_body():
 		_set_state(States.NORMAL)
 		# Visual deselect
 		select.visible = false
-		z_index = 0
+		#z_index = 0
 		
 		emit_signal("body_deselected", self)
 
@@ -224,3 +224,7 @@ func get_cursor():
 
 func get_body_scene():
 	return body_scene
+
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	viewport.set_input_as_handled()

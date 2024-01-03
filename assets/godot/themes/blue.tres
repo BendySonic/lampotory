@@ -8,21 +8,27 @@ content_margin_top = 5.0
 content_margin_right = 10.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0.392157, 0.929412, 1)
+border_width_bottom = 5
+border_color = Color(0, 0.333333, 0.8, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68tph"]
 content_margin_left = 10.0
 content_margin_top = 5.0
 content_margin_right = 10.0
 content_margin_bottom = 5.0
-bg_color = Color(0, 0.32549, 0.788235, 1)
+bg_color = Color(0, 0.352941, 0.847059, 1)
+border_width_bottom = 3
+border_color = Color(0, 0.278431, 0.67451, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7p7vy"]
 
@@ -65,6 +71,10 @@ corner_radius_top_right = 40
 
 [resource]
 Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 Button/styles/focus = SubResource("StyleBoxFlat_q7hvm")
 Button/styles/hover = SubResource("StyleBoxFlat_68tph")
 Button/styles/normal = SubResource("StyleBoxFlat_q7hvm")

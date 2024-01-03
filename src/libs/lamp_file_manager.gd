@@ -22,7 +22,7 @@ static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 
 static func save_file(file_path: String, bodies_properties: Array[Dictionary]):
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
-	pack_data(bodies_properties, file)
+	#pack_data(bodies_properties, file)
 	file.close()
 
 static func load_file(file_path:String) -> Array[Dictionary]:

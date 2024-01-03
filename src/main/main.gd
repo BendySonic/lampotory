@@ -31,6 +31,8 @@ func _ready():
 	gui.connect("paste_pressed", _on_paste_pressed)
 	gui.connect("delete_pressed", _on_delete_pressed)
 	
+	gui.connect("save_project_pressed", _on_save_project_pressed)
+	
 	gui.create_items(mode_data.item_resources)
 	
 	node2d.connect("void_pressed", _on_void_pressed)
@@ -77,6 +79,9 @@ func _on_delete_pressed():
 	node2d.delete_selected_body()
 	_clear_select()
 
+func _on_save_project_pressed(name: String, theme: String):
+	node2d.save_project(name, theme)
+
 func _on_body_held(_body: NormalBody):
 	_clear_select()
 
@@ -103,7 +108,3 @@ func _on_void_pressed(event):
 func is_mode(mode_name: String) -> bool:
 	return mode_data.mode_name == mode_name
 #endregion
-
-
-
-

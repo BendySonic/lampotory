@@ -32,6 +32,7 @@ func _on_input_event(viewport, event, shape_idx):
 		if event.button_index == 1:
 			if event.is_pressed():
 				main_body.hold_body_with_pin()
+	viewport.set_input_as_handled()
 
 func _input(event):
 	if event is InputEventMouseButton:

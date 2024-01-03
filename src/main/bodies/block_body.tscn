@@ -23,10 +23,18 @@ size = Vector2(65, 48)
 size = Vector2(45, 30)
 
 [node name="BlockBody" type="RigidBody2D"]
-z_index = 4
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_a1fao")
 can_sleep = false
+freeze_mode = 1
 continuous_cd = 2
 script = ExtResource("1_iq0i2")
 
@@ -76,3 +84,4 @@ main_body = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
