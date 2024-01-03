@@ -23,7 +23,7 @@ size = Vector2(65, 48)
 size = Vector2(45, 30)
 
 [node name="BlockBody" type="RigidBody2D"]
-z_index = 1
+z_index = 4
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_a1fao")
 can_sleep = false

@@ -18,12 +18,14 @@ static var count: int = 0
 
 #var can_unhold := false
 	#set = set_can_unhold
+var body_scene: PackedScene:
+	get = get_body_scene
+var cursor: GUICursor:
+	get = get_cursor
 
 var _state: States = States.NORMAL
 var _player: Player = Player.PLAY
 var _body_data: BodyResource = BodyResource.new()
-
-@onready var cursor: GUICursor
 
 @onready var select := get_node("Select") as Node2D
 @onready var area := get_node("Area2D") as Area2D
@@ -31,10 +33,11 @@ var _body_data: BodyResource = BodyResource.new()
 
 
 #region Initialization
-func init(item_data_arg: ItemResource, position_arg: Vector2, cursor_arg: GUICursor):
-	self._body_data.properties = item_data_arg.properties.duplicate()
-	self._body_data.edit_properties = item_data_arg.edit_properties.duplicate()
-	self.global_position = position_arg
+func init(properties_arg: Dictionary, edit_properties_arg: Dictionary,
+		body_scene_arg: PackedScene, cursor_arg: GUICursor):
+	self._body_data.properties = properties_arg.duplicate()
+	self._body_data.edit_properties = edit_properties_arg.duplicate()
+	self.body_scene = body_scene_arg
 	self.cursor = cursor_arg
 
 func _notification(what):
@@ -46,7 +49,6 @@ func _notification(what):
 func _ready():
 	if not is_in_group("tripod"):
 		self.global_position = cursor.global_position
-	hold_body()
 	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
@@ -100,6 +102,7 @@ func _on_data_edited(property_name: String, value: Variant):
 
 func _on_body_defined():
 	set_property("id", "name" + str(count))
+	load_data()
 #endregion
 
 
@@ -218,3 +221,6 @@ func set_velocity(direction: Vector2):
 
 func get_cursor():
 	return cursor
+
+func get_body_scene():
+	return body_scene

@@ -2,9 +2,10 @@ class_name TripodBody
 extends NormalBody
 
 
-func init(item_data_arg: ItemResource, position_arg: Vector2, cursor_arg: GUICursor):
-	super(item_data_arg, position_arg, cursor_arg)
-	self.global_position = Vector2(position_arg.x, 440)
+func init(properties_arg: Dictionary, edit_properties_arg: Dictionary,
+		body_scene_arg: PackedScene, cursor_arg: GUICursor):
+	super(properties_arg, edit_properties_arg, body_scene_arg, cursor_arg)
+	self.global_position = Vector2(cursor_arg.global_position.x, 440)
 
 func hold_body():
 	super()

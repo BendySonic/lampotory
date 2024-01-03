@@ -65,6 +65,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_c7mw3")
+theme_override_colors/font_color = Color(0.113725, 0.113725, 0.113725, 1)
 theme_override_font_sizes/font_size = 13
 text = "Имя"
 autowrap_mode = 3

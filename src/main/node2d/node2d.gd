@@ -1,7 +1,7 @@
 extends Node2D
 # Class for Main/Node2D
 
-signal void_pressed()
+signal void_pressed(event)
 signal body_held(body: NormalBody)
 signal body_unheld(body: NormalBody)
 signal body_selected(body: NormalBody)
@@ -18,6 +18,8 @@ var speed: float = 1:
 # Data container for selected body
 var selected_body: Variant:
 	get: return selected_body
+var buffer_body: Variant:
+	get: return buffer_body
 # Data containers durning body spawn
 var selected_item_data: Variant:
 	get: return selected_item_data
@@ -25,14 +27,15 @@ var selected_item_data: Variant:
 @onready var bodies_node := get_node("Bodies") as Node
 @onready var foreground := get_node("Enviroment/Lab/Mechanic") as Node
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
-@onready var cursor := get_node("GUICursor") as GUICursor
+@onready var cursor := get_node("GUICursor") as GUICursor:
+	get = get_cursor
 
 #region Input
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.is_pressed(): 
+		if event.is_pressed(): 
 			if not is_any_body_mouse_inside():
-				emit_signal("void_pressed")
+				emit_signal("void_pressed", event)
 #endregion
 
 
@@ -102,15 +105,43 @@ func create_body():
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init(item_data, get_global_mouse_position(), cursor)
+		body.init(item_data.properties, item_data.edit_properties,
+				item_data.item_scene, cursor)
 		bodies_node.add_child(body)
+		body.hold_body()
 		
 		selected_item_data = null
+
+func create_copy_body():
+	if not buffer_body == null:
+		var body = buffer_body.body_scene.instantiate()
+		body.connect("body_held", _on_body_held)
+		body.connect("body_unheld", _on_body_unheld)
+		body.connect("body_selected", _on_body_selected)
+		body.connect("body_deselected", _on_body_deselected)
+		body.init(buffer_body.get_properties(), buffer_body.get_edit_properties(),
+				buffer_body.get_body_scene(), cursor)
+		bodies_node.add_child(body)
 
 func delete_body(body_id: String):
 	for body in get_bodies():
 		if body.get_id() == body_id:
 			body.queue_free()
+
+func delete_selected_body():
+	if not selected_body == null:
+		if buffer_body == selected_body:
+			bodies_node.remove_child(selected_body)
+		else:
+			selected_body.queue_free()
+
+func copy_body():
+	if not buffer_body == null:
+		buffer_body.queue_free()
+	buffer_body = selected_body
+
+func paste_body():
+	create_copy_body()
 
 func clear_select():
 	if not selected_body == null:
@@ -132,6 +163,9 @@ func is_any_body_mouse_inside() -> bool:
 			return true
 	return false
 #endregion
+
+func get_cursor():
+	return cursor
 
 
 #region Foreground

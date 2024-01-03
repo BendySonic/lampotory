@@ -28,7 +28,7 @@ size = Vector2(20, 200)
 size = Vector2(15, 500)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw0ar"]
-size = Vector2(120, 25)
+size = Vector2(120, 40)
 
 [sub_resource type="QuadMesh" id="QuadMesh_woe4q"]
 size = Vector2(100, 15)
@@ -109,6 +109,7 @@ shape = SubResource("RectangleShape2D_ie6si")
 
 [node name="TripodLevel" type="CharacterBody2D" parent="PillarBody"]
 z_index = 1
+z_as_relative = false
 position = Vector2(40, -350)
 collision_layer = 8
 collision_mask = 8

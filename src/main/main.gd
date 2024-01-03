@@ -22,8 +22,14 @@ func _ready():
 	gui.connect("item_pressed", _on_item_pressed)
 	gui.connect("item_released", _on_item_released)
 	gui.connect("items_window_mouse_exited", _on_items_window_mouse_exited)
+	
 	gui.connect("play_toggled", _on_play_toggled)
 	gui.connect("reload_pressed", _on_reload_pressed)
+	
+	gui.connect("copy_pressed", _on_copy_pressed)
+	gui.connect("cut_pressed", _on_cut_pressed)
+	gui.connect("paste_pressed", _on_paste_pressed)
+	gui.connect("delete_pressed", _on_delete_pressed)
 	
 	gui.create_items(mode_data.item_resources)
 	
@@ -56,6 +62,21 @@ func _on_play_toggled(button_pressed: bool):
 func _on_reload_pressed():
 	node2d.reload()
 
+func _on_copy_pressed():
+	node2d.copy_body()
+
+func _on_cut_pressed():
+	node2d.copy_body()
+	node2d.delete_selected_body()
+	_clear_select()
+
+func _on_paste_pressed():
+	node2d.paste_body()
+
+func _on_delete_pressed():
+	node2d.delete_selected_body()
+	_clear_select()
+
 func _on_body_held(_body: NormalBody):
 	_clear_select()
 
@@ -63,14 +84,18 @@ func _on_body_unheld(_body: NormalBody):
 	_clear_select()
 
 func _on_body_selected(body: NormalBody):
+	gui.create_actions_with_body(body)
 	gui.create_properties(body)
 	#pass
 
 func _on_body_deselected(_body: NormalBody):
+	gui.delete_actions()
 	gui.delete_properties()
 
-func _on_void_pressed():
+func _on_void_pressed(event):
 	_clear_select()
+	if event.button_index == 2:
+		gui.create_actions(node2d.get_cursor())
 #endregion
 
 
@@ -78,4 +103,7 @@ func _on_void_pressed():
 func is_mode(mode_name: String) -> bool:
 	return mode_data.mode_name == mode_name
 #endregion
+
+
+
 
