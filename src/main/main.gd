@@ -32,6 +32,7 @@ func _ready():
 	gui.connect("delete_pressed", _on_delete_pressed)
 	
 	gui.connect("save_project_pressed", _on_save_project_pressed)
+	gui.connect("open_project_pressed", _on_open_project_pressed)
 	
 	gui.create_items(mode_data.item_resources)
 	
@@ -81,6 +82,9 @@ func _on_delete_pressed():
 
 func _on_save_project_pressed(name: String, theme: String):
 	node2d.save_project(name, theme)
+
+func _on_open_project_pressed():
+	node2d.load_project()
 
 func _on_body_held(_body: NormalBody):
 	_clear_select()

@@ -134,12 +134,12 @@ self_modulate = Color(0.92549, 0.92549, 0.92549, 1)
 position = Vector2(20, 0)
 mesh = SubResource("SphereMesh_ulsc8")
 
-[node name="PinPoint" parent="PillarBody/TripodLevel" node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_eerml")]
+[node name="PinPoint" parent="PillarBody/TripodLevel" instance=ExtResource("2_eerml")]
 modulate = Color(0, 0.705882, 0.466667, 1)
 position = Vector2(-70, 0)
 scale = Vector2(1.5, 1.5)
-parent_body = NodePath("..")
-main_body = NodePath("../../..")
+main_body_path = NodePath("../../..")
+parent_body_path = NodePath("..")
 
 [node name="Stop" type="CharacterBody2D" parent="PillarBody"]
 position = Vector2(40, -250)

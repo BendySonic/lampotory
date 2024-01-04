@@ -10,6 +10,8 @@ signal body_deselected(body: NormalBody)
 enum States {PLAY, PAUSE}
 
 const PROJECT_PATH := "res://saves/"
+const LOADED := true
+const NOT_LOADED := false
 
 var state: States = States.PLAY:
 	get: return state
@@ -59,14 +61,21 @@ func _on_body_deselected(body: NormalBody):
 
 #region Saver
 # TODO - Develop save/load system by window
-func save_project(file_path: String):
-	var bodies_properties: Array[Dictionary]
-	for body in get_children():
-		bodies_properties.push_back(body.get_properties())
-	LampFileManager.save_file(PROJECT_PATH + file_path, bodies_properties)
+func save_project(name: String, theme: String):
+	LampFileManager.save_file(bodies_node)
 
-func load_project(file_path: String):
-	return LampFileManager.load_file(PROJECT_PATH + file_path)
+func load_project():#file_path: String):
+	for body in bodies_node.get_children():
+		body.queue_free()
+	var bodies = LampFileManager.load_file()
+	for body in bodies.get_children():
+		bodies.remove_child(body)
+		body.connect("body_held", _on_body_held)
+		body.connect("body_unheld", _on_body_unheld)
+		body.connect("body_selected", _on_body_selected)
+		body.connect("body_deselected", _on_body_deselected)
+		body.init_as_loaded()
+		bodies_node.add_child(body)
 #endregion
 
 
@@ -104,22 +113,22 @@ func create_body():
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init(item_data.properties, item_data.edit_properties,
-				item_data.item_scene, cursor)
+		body.init(cursor, item_data.item_scene)
 		bodies_node.add_child(body)
 		body.hold_body()
 		
 		selected_item_data = null
 
 func create_copy_body():
+	print(buffer_body)
 	if not buffer_body == null:
 		var body = buffer_body.body_scene.instantiate()
 		body.connect("body_held", _on_body_held)
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init(buffer_body.get_properties(), buffer_body.get_edit_properties(),
-				buffer_body.get_body_scene(), cursor)
+		body.init_as_copy(cursor, buffer_body.body_scene, buffer_body.get_properties(),
+				buffer_body.get_edit_properties())
 		bodies_node.add_child(body)
 
 func delete_body(body_id: String):
@@ -136,7 +145,13 @@ func delete_selected_body():
 
 func copy_body():
 	if not buffer_body == null:
-		buffer_body.queue_free()
+		var has_buffer_body: bool
+		for body in bodies_node.get_children():
+			if buffer_body == body:
+				has_buffer_body = true
+		if not has_buffer_body:
+			buffer_body.queue_free
+	# Pack body to buffer
 	buffer_body = selected_body
 
 func paste_body():

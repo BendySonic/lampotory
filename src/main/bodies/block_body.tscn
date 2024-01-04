@@ -1,10 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://dinm4ywrs41ww"]
+[gd_scene load_steps=11 format=3 uid="uid://dinm4ywrs41ww"]
 
 [ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="1_iq0i2"]
 [ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/PinPoint.tscn" id="2_62phn"]
+[ext_resource type="Script" path="res://src/resources/body_resource.gd" id="2_sgle7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
 friction = 0.4
+
+[sub_resource type="Resource" id="Resource_m8ont"]
+script = ExtResource("2_sgle7")
+properties = {
+"mass": 2.0
+}
+edit_properties = {
+"mass": 2.0
+}
 
 [sub_resource type="QuadMesh" id="QuadMesh_i6ehh"]
 size = Vector2(56, 40)
@@ -37,6 +47,7 @@ can_sleep = false
 freeze_mode = 1
 continuous_cd = 2
 script = ExtResource("1_iq0i2")
+body_data = SubResource("Resource_m8ont")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.219608, 0.592157, 0.992157, 1)
@@ -70,18 +81,16 @@ collision_priority = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_mryxb")
 
-[node name="PinPoint" parent="." node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_62phn")]
+[node name="PinPoint" parent="." instance=ExtResource("2_62phn")]
 modulate = Color(0, 0.803922, 0.447059, 1)
 position = Vector2(-43, 0)
-parent_body = NodePath("..")
-main_body = NodePath("..")
+main_body_path = NodePath("..")
+parent_body_path = NodePath("..")
 
-[node name="PinPoint2" parent="." node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("2_62phn")]
+[node name="PinPoint2" parent="." instance=ExtResource("2_62phn")]
 modulate = Color(0, 0.803922, 0.447059, 1)
 position = Vector2(43, 0)
-parent_body = NodePath("..")
-main_body = NodePath("..")
+main_body_path = NodePath("..")
+parent_body_path = NodePath("..")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

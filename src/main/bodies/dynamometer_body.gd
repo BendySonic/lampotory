@@ -8,17 +8,25 @@ extends NormalBody
 
 var arrow_value: float = 0
 
+@export var level_position: Vector2
+
 @onready var place_holder = get_node("PlaceHolder")
 
+func _ready():
+	super()
+	if is_loaded:
+		place_holder.position = level_position
+
 func _physics_process(delta):
+	level_position = place_holder.position
 	queue_redraw()
 
-func _input(event):
-	super(event)
-	if event is InputEventMouseButton:
-		if event.button_index == 2:
-			if event.is_pressed():
-				print(arrow_value)
+#func _input(event):
+#	super(event)
+#	if event is InputEventMouseButton:
+#		if event.button_index == 2:
+#			if event.is_pressed():
+#				print(arrow_value)
 
 func _draw():
 	# Spring

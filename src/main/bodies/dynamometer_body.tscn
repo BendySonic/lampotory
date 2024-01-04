@@ -107,16 +107,16 @@ gravity_scale = 0.0
 shape = SubResource("CircleShape2D_04blo")
 disabled = true
 
-[node name="PinPoint" parent="PlaceHolder" node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("1_3u68w")]
+[node name="PinPoint" parent="PlaceHolder" instance=ExtResource("1_3u68w")]
 modulate = Color(0, 0.803922, 0.447059, 1)
-parent_body = NodePath("..")
-main_body = NodePath("../..")
+main_body_path = NodePath("../..")
+parent_body_path = NodePath("..")
 
-[node name="PinPoint" parent="." node_paths=PackedStringArray("parent_body", "main_body") instance=ExtResource("1_3u68w")]
+[node name="PinPoint" parent="." instance=ExtResource("1_3u68w")]
 modulate = Color(0, 0.803922, 0.447059, 1)
 position = Vector2(0, -20)
-parent_body = NodePath("..")
-main_body = NodePath("..")
+main_body_path = NodePath("..")
+parent_body_path = NodePath("..")
 
 [node name="Label" type="Label" parent="."]
 show_behind_parent = true

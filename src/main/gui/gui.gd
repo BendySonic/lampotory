@@ -15,6 +15,7 @@ signal paste_pressed()
 signal delete_pressed()
 
 signal save_project_pressed(name: String, theme: String)
+signal open_project_pressed()
 
 const GUI_PATH = "res://src/main/gui/"
 
@@ -37,12 +38,13 @@ const DELETE_BUTTON = ACTIONS_BOX + "MarginContainer4/DeleteButton"
 
 const MENU_WINDOW = "MenuWindow/"
 const MENU_BOX = MENU_WINDOW + "Panel/"
+const EDIT_BUTTON = MENU_BOX + "Edit/EditButton"
 const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
 
 const SAVE_WINDOW = "SaveWindow/"
 const SAVE_BOX = SAVE_WINDOW + "MarginContainer/VBoxContainer/"
-const PROJECT_NAME_EDIT = SAVE_WINDOW + "ProjectNameEdit"
-const PROJECT_THEME_EDIT = SAVE_WINDOW + "ProjectThemeEdit"
+const PROJECT_NAME_EDIT = SAVE_BOX + "ProjectNameEdit"
+const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
 
 # Children
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
@@ -63,6 +65,7 @@ const PROJECT_THEME_EDIT = SAVE_WINDOW + "ProjectThemeEdit"
 @onready var reload_button := get_node(RELOAD_BUTTON) as Button
 
 @onready var save_button := get_node(SAVE_BUTTON) as MenuButton
+@onready var edit_button := get_node(EDIT_BUTTON) as MenuButton
 
 @onready var save_window = get_node(SAVE_WINDOW) as PanelContainer
 
@@ -75,7 +78,8 @@ const PROJECT_THEME_EDIT = SAVE_WINDOW + "ProjectThemeEdit"
 
 
 func _ready():
-	save_button.get_popup().connect("id_pressed", _on_id_pressed)
+	save_button.get_popup().connect("id_pressed", _on_save_button_id_pressed)
+	edit_button.get_popup().connect("id_pressed", _on_edit_button_id_pressed)
 
 #region Input
 func _on_item_pressed(item_data: ItemResource):
@@ -96,9 +100,14 @@ func _on_reload_pressed():
 	play_button.button_pressed = false
 	emit_signal("reload_pressed")
 
-func _on_id_pressed(id: int):
+func _on_save_button_id_pressed(id: int):
 	if id == 0:
 		show_save_window()
+
+func _on_edit_button_id_pressed(id: int):
+	print("HELLO")
+	if id == 1:
+		emit_signal("open_project_pressed")
 #endregion
 
 #region ItemsWindow
@@ -240,3 +249,4 @@ func _on_save_project_button_pressed():
 		#cursor_layer.remove_child(child)
 		#child.queue_free()
 #endregion
+

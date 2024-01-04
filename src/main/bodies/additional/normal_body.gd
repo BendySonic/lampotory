@@ -18,27 +18,44 @@ static var count: int = 0
 
 #var can_unhold := false
 	#set = set_can_unhold
-var body_scene: PackedScene:
-	get = get_body_scene
+	
+@export var state: States = States.NORMAL
+@export var player: Player = Player.PLAY
+@export var body_data: BodyResource = BodyResource.new()
+
+@export var cursor_path: NodePath
+@export var body_scene_path: String
+
 var cursor: GUICursor:
 	get = get_cursor
+var body_scene: PackedScene
 
-var _state: States = States.NORMAL
-var _player: Player = Player.PLAY
-var _body_data: BodyResource = BodyResource.new()
+var is_loaded: bool
 
 @onready var select := get_node("Select") as Node2D
 @onready var area := get_node("Area2D") as Area2D
 
 
+# There is many HACK's, sorry for this... I had no time... So dumb code...
+# Mainly it caused by bug with saving references to nodes in PackedScene
 
 #region Initialization
-func init(properties_arg: Dictionary, edit_properties_arg: Dictionary,
-		body_scene_arg: PackedScene, cursor_arg: GUICursor):
-	self._body_data.properties = properties_arg.duplicate()
-	self._body_data.edit_properties = edit_properties_arg.duplicate()
-	self.body_scene = body_scene_arg
-	self.cursor = cursor_arg
+func init(cursor_arg: GUICursor, body_scene: PackedScene):
+	self.cursor_path = cursor_arg.get_path()
+	self.body_scene_path = body_scene.resource_path
+	self.is_loaded = false
+	self.body_data = body_data.duplicate()
+
+func init_as_copy(cursor_arg: GUICursor, body_scene: PackedScene,
+		properties: Dictionary, edit_properties: Dictionary):
+	self.cursor_path = cursor_arg.get_path()
+	self.body_scene_path = body_scene.resource_path
+	self.is_loaded = false
+	self.body_data.properties = properties
+	self.body_data.edit_properties = edit_properties
+
+func init_as_loaded():
+	self.is_loaded = true
 
 func _notification(what):
 	if what == NOTIFICATION_POSTINITIALIZE:
@@ -47,8 +64,14 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	if not is_in_group("tripod"):
+	cursor = get_node(cursor_path)
+	body_scene = ResourceLoader.load(body_scene_path)
+	# Position to cursor
+	if not is_loaded and not is_in_group("tripod"):
 		self.global_position = cursor.global_position
+	# Fix freeze trouble after load project
+	if freeze:
+		linear_velocity = Vector2(0, 0)
 	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
@@ -103,21 +126,22 @@ func _on_data_edited(property_name: String, value: Variant):
 func _on_body_defined():
 	set_property("id", "name" + str(count))
 	load_data()
+	print("Body defined")
 #endregion
 
 
 #region States
 func _set_state(value: States):
-	_state = value
+	state = value
 
 func _is_state(state_arg: States) -> bool:
-	return _state == state_arg
+	return state == state_arg
 
 func _set_player(value: Player):
-	_player = value
+	player = value
 
 func _is_player(player_arg: Player) -> bool:
-	return _player == player_arg
+	return player == player_arg
 #endregion
 
 
@@ -152,7 +176,7 @@ func unhold_body():
 		emit_signal("body_unheld", self)
 
 func is_held() -> bool:
-	return _state == States.HOLD
+	return state == States.HOLD
 
 #func set_can_unhold(value: bool):
 	#if value:
@@ -197,22 +221,22 @@ func load_data():
 	sleeping = false
 
 func set_property(property_name: String, value: Variant):
-	_body_data.properties[property_name] = value
+	body_data.properties[property_name] = value
 	# Sync data properties and editable properties
 	if get_edit_properties().has(property_name):
-		_body_data.edit_properties[property_name] = value
+		body_data.edit_properties[property_name] = value
 
 func get_property(property_name: String) -> Variant:
-	return _body_data.properties[property_name]
+	return body_data.properties[property_name]
 
 func get_properties() -> Dictionary:
-	return _body_data.properties
+	return body_data.properties
 
 func get_edit_properties() -> Dictionary:
-	return _body_data.edit_properties
+	return body_data.edit_properties
 
 func get_id() -> String:
-	return _body_data.properties["id"]
+	return body_data.properties["id"]
 #endregion
 
 func set_velocity(direction: Vector2):
@@ -222,8 +246,6 @@ func set_velocity(direction: Vector2):
 func get_cursor():
 	return cursor
 
-func get_body_scene():
-	return body_scene
 
 
 func _on_area_2d_input_event(viewport, event, shape_idx):

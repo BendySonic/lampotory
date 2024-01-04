@@ -20,14 +20,31 @@ static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 		bodies_properties.push_back(json.get_data())
 	return bodies_properties
 
-static func save_file(file_path: String, bodies_properties: Array[Dictionary]):
-	var file = FileAccess.open(file_path, FileAccess.WRITE)
+static func save_file(bodies_node: Node2D):
+	#var file = FileAccess.open(file_path, FileAccess.WRITE)
+	#for body in bodies_node.get_children():
+	#	file.store_var(body.duplicate(), true)
 	#pack_data(bodies_properties, file)
-	file.close()
+	#file.close()
+	var scene = PackedScene.new()
+	
+	for body in bodies_node.get_children():
+		body.owner = bodies_node
+	
+	var result = scene.pack(bodies_node)
+	if result == OK:
+		var error = ResourceSaver.save(scene, "res://saves/scenetest.tscn")  # Or "user://..."
+		if error != OK:
+			push_error("An error occurred while saving the scene to disk.")
 
-static func load_file(file_path:String) -> Array[Dictionary]:
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	var bodies_properties = unpack_data(file)
-	file.close()
-	return bodies_properties
+
+static func load_file():
+	#var file = FileAccess.open(file_path, FileAccess.READ)
+	#var bodies: Array[RigidBody2D]
+	#while file.get_position() < file.get_length():
+	#	var body = file.get_var(true)
+	#	bodies.push_back(body)
+	#file.close()
+	var result = ResourceLoader.load("res://saves/scenetest.tscn").instantiate()
+	return result
 

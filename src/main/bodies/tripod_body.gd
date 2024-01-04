@@ -1,11 +1,19 @@
 class_name TripodBody
 extends NormalBody
 
+@export var level_position: Vector2
 
-func init(properties_arg: Dictionary, edit_properties_arg: Dictionary,
-		body_scene_arg: PackedScene, cursor_arg: GUICursor):
-	super(properties_arg, edit_properties_arg, body_scene_arg, cursor_arg)
-	self.global_position = Vector2(cursor_arg.global_position.x, 440)
+@onready var tripod_level := get_node("PillarBody/TripodLevel")
+
+func _ready():
+	super()
+	if not is_loaded:
+		global_position = Vector2(cursor.global_position.x, 440)
+	else:
+		tripod_level.global_position = level_position
+
+func _physics_process(delta):
+	level_position = tripod_level.global_position
 
 func hold_body():
 	super()
