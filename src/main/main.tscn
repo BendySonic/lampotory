@@ -429,6 +429,17 @@ size_flags_horizontal = 8
 theme = ExtResource("9_7dfw7")
 text = "Сохранить"
 
+[node name="SaveAsWindow" type="FileDialog" parent="GUI"]
+title = "Сохранить проект как..."
+initial_position = 2
+size = Vector2i(600, 400)
+theme = ExtResource("10_r6tdi")
+theme_override_colors/folder_icon_color = Color(0.341176, 1, 0.878431, 1)
+ok_button_text = "Сохранить"
+cancel_button_text = "Отмена"
+access = 2
+use_native_dialog = true
+
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("11_5af0q")
 
