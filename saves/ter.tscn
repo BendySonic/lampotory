@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://src/main/node2d/bodies.gd" id="1_ulpu0"]
+[ext_resource type="Resource" path="res://src/main/modes/mechanic.tres" id="2_w8ycd"]
+[ext_resource type="Script" path="res://src/resources/project_resource.gd" id="3_pssxw"]
+[ext_resource type="PackedScene" path="res://src/main/bodies/block_body.tscn" id="4_h1n2u"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="5_cu5k2"]
+[ext_resource type="Script" path="res://src/resources/body_resource.gd" id="6_scgo8"]
+
+[sub_resource type="Resource" id="Resource_ric84"]
+script = ExtResource("3_pssxw")
+project_name = "ter"
+project_theme = "ter"
+project_mode = ExtResource("2_w8ycd")
+is_saved = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
+friction = 0.4
+
+[sub_resource type="Resource" id="Resource_rhna0"]
+script = ExtResource("6_scgo8")
+properties = {
+"id": "name0",
+"mass": 2.0
+}
+edit_properties = {
+"mass": 2.0
+}
+
+[sub_resource type="Resource" id="Resource_hix7s"]
+script = ExtResource("6_scgo8")
+properties = {
+"id": "name0",
+"mass": 2.0
+}
+edit_properties = {
+"mass": 2.0
+}
+
+[node name="Bodies" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_ulpu0")
+project_data = SubResource("Resource_ric84")
+
+[node name="BlockBody" type="RigidBody2D" parent="." instance=ExtResource("4_h1n2u")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(523.479, 430.286)
+rotation = -1.76565e-05
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(0.000915611, 3.3185e-07)
+script = ExtResource("5_cu5k2")
+state = 0
+player = 0
+body_data = SubResource("Resource_rhna0")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@118" type="RigidBody2D" parent="." instance=ExtResource("4_h1n2u")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(610.977, 430.296)
+rotation = -0.000137744
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(8.35957e-08, -3.36884e-08)
+script = ExtResource("5_cu5k2")
+state = 0
+player = 0
+body_data = SubResource("Resource_hix7s")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"

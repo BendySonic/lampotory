@@ -5,7 +5,7 @@ extends Node
 
 
 # Project mode
-var mode_data: ModeResource = preload("res://src/main/modes/mechanic.tres"):
+var mode_data: ModeResource:
 	get: return mode_data
 
 # Children
@@ -19,6 +19,12 @@ func _enter_tree():
 	node2d = get_node("Node2D")
 
 func _ready():
+	set_mode(Global.project_data.project_mode)
+	if Global.project_data.is_saved:
+		node2d.load_project(Global.project_data.project_name)
+	else:
+		node2d.first_project_load()
+	
 	gui.connect("item_pressed", _on_item_pressed)
 	gui.connect("item_released", _on_item_released)
 	gui.connect("items_window_mouse_exited", _on_items_window_mouse_exited)
@@ -84,7 +90,7 @@ func _on_save_project_pressed(name: String, theme: String):
 	node2d.save_project(name, theme)
 
 func _on_open_project_pressed():
-	node2d.load_project()
+	node2d.load_project("Привет")
 
 func _on_body_held(_body: NormalBody):
 	_clear_select()
@@ -109,6 +115,9 @@ func _on_void_pressed(event):
 
 
 #region Mode
+func set_mode(mode: ModeResource):
+	mode_data = mode
+	
 func is_mode(mode_name: String) -> bool:
 	return mode_data.mode_name == mode_name
 #endregion

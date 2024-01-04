@@ -20,11 +20,13 @@ var speed: float = 1:
 # Data container for selected body
 var selected_body: Variant:
 	get: return selected_body
-var buffer_body: Variant:
-	get: return buffer_body
 # Data containers durning body spawn
 var selected_item_data: Variant:
 	get: return selected_item_data
+
+var buffer_body: Variant:
+	get: return buffer_body
+var buffer_project: Variant
 
 @onready var bodies_node := get_node("Bodies") as Node
 @onready var foreground := get_node("Enviroment/Lab/Mechanic") as Node
@@ -61,13 +63,35 @@ func _on_body_deselected(body: NormalBody):
 
 #region Saver
 # TODO - Develop save/load system by window
-func save_project(name: String, theme: String):
-	LampFileManager.save_file(bodies_node)
 
-func load_project():#file_path: String):
-	for body in bodies_node.get_children():
+func first_project_load():
+	bodies_node.project_data = Global.project_data
+
+func save_project(name: String, theme: String):
+	Global.project_data.project_name = name
+	Global.project_data.project_theme = theme
+	Global.project_data.is_saved = true
+	bodies_node.project_data = Global.project_data.duplicate()
+	LampFileManager.save_file(bodies_node, name)
+	var project = LampFileManager.load_file(name)
+	print("Ok")
+	buffer_project = project
+
+func load_project(name: String):#file_path: String):
+	# Clear workspace
+	print("Load")
+	for body in get_bodies():
 		body.queue_free()
-	var bodies = LampFileManager.load_file()
+	
+	# Load project
+	var project = LampFileManager.load_file(Global.project_data.project_name)
+	unpack_project(project)
+	
+	# Put project into buffer for reload
+	buffer_project = project
+
+func unpack_project(project: Variant):
+	var bodies = project.instantiate()
 	for body in bodies.get_children():
 		bodies.remove_child(body)
 		body.connect("body_held", _on_body_held)
@@ -76,6 +100,8 @@ func load_project():#file_path: String):
 		body.connect("body_deselected", _on_body_deselected)
 		body.init_as_loaded()
 		bodies_node.add_child(body)
+	# Save configure data
+	Global.project_data = bodies.project_data
 #endregion
 
 
@@ -89,8 +115,11 @@ func play(button_pressed: bool):
 
 func reload():
 	state = States.PLAY
+	print("Reload")
 	for body in get_bodies():
-		body.reload()
+		bodies_node.remove_child(body)
+		body.queue_free()
+	unpack_project(buffer_project)
 #endregion
 
 
@@ -146,7 +175,7 @@ func delete_selected_body():
 func copy_body():
 	if not buffer_body == null:
 		var has_buffer_body: bool
-		for body in bodies_node.get_children():
+		for body in get_bodies():
 			if buffer_body == body:
 				has_buffer_body = true
 		if not has_buffer_body:
@@ -168,8 +197,11 @@ func get_body(body_id: String) -> NormalBody:
 			return body
 	return null
 
-func get_bodies() -> Array[Node]:
-	return get_node("Bodies").get_children()
+func get_bodies() -> Array[NormalBody]:
+	var bodies: Array[NormalBody]
+	for body in bodies_node.get_children():
+		bodies.push_back(body)
+	return bodies
 
 func is_any_body_mouse_inside() -> bool:
 	for body in get_bodies():

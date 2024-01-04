@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://src/main/node2d/bodies.gd" id="1_1irh8"]
+[ext_resource type="Resource" path="res://src/main/modes/mechanic.tres" id="2_b387b"]
+[ext_resource type="Script" path="res://src/resources/project_resource.gd" id="3_ccqak"]
+[ext_resource type="PackedScene" path="res://src/main/bodies/block_body.tscn" id="4_futy2"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="5_kb8i8"]
+[ext_resource type="Script" path="res://src/resources/body_resource.gd" id="6_jllrc"]
+
+[sub_resource type="Resource" id="Resource_nrn4c"]
+script = ExtResource("3_ccqak")
+project_name = "deer"
+project_theme = "erer"
+project_mode = ExtResource("2_b387b")
+is_saved = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
+friction = 0.4
+
+[sub_resource type="Resource" id="Resource_q3lh3"]
+script = ExtResource("6_jllrc")
+properties = {
+"id": "name0",
+"mass": 2.0
+}
+edit_properties = {
+"mass": 2.0
+}
+
+[sub_resource type="Resource" id="Resource_u8ctk"]
+script = ExtResource("6_jllrc")
+properties = {
+"id": "name0",
+"mass": 2.0
+}
+edit_properties = {
+"mass": 2.0
+}
+
+[node name="Bodies" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_1irh8")
+project_data = SubResource("Resource_nrn4c")
+
+[node name="BlockBody" type="RigidBody2D" parent="." instance=ExtResource("4_futy2")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(575.439, 430.264)
+rotation = 0.00111513
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-9.67414e-08, -2.76726e-08)
+script = ExtResource("5_kb8i8")
+state = 0
+player = 0
+body_data = SubResource("Resource_q3lh3")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@118" type="RigidBody2D" parent="." instance=ExtResource("4_futy2")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(486.285, 430.102)
+rotation = 0.0025727
+scale = Vector2(1, 1)
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-9.87399e-08, 1.42102e-07)
+script = ExtResource("5_kb8i8")
+state = 0
+player = 0
+body_data = SubResource("Resource_u8ctk")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"

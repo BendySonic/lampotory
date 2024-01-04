@@ -19,7 +19,7 @@ func hold_body():
 	super()
 	collision_layer = 2
 	collision_mask = 2
-	lock_rotation = true
+	set_deferred("lock_rotation", true)
 	set_deferred("freeze", false)
 
 func unhold_body():

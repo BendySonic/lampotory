@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3pb6t8fbo0uc"]
+[gd_scene load_steps=17 format=3 uid="uid://d3pb6t8fbo0uc"]
 
 [ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="5_t4c6l"]
 [ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/graphic/gui/icons/menu_lab.png" id="6_iimh4"]
 [ext_resource type="PackedScene" uid="uid://blmbopi1jfuot" path="res://src/menu/gui/gui_lab.tscn" id="8_3pvbh"]
-[ext_resource type="PackedScene" uid="uid://c326smqmm383s" path="res://src/menu/gui/gui_project.tscn" id="8_ow4m1"]
 [ext_resource type="Texture2D" uid="uid://daacw4vi75686" path="res://assets/graphic/gui/icons/search_icon.png" id="9_d6sed"]
 [ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
 
@@ -39,9 +38,9 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_lmigs"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_t5fog"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_xtody"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_wvlsp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
 content_margin_right = 11.0
@@ -118,7 +117,7 @@ layout_mode = 2
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_lmigs")
+button_group = SubResource("ButtonGroup_t5fog")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
 
@@ -126,7 +125,7 @@ up_icon = ExtResource("5_t4c6l")
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_xtody")
+button_group = SubResource("ButtonGroup_wvlsp")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
 
@@ -232,18 +231,6 @@ popup/item_0/id = 0
 [node name="GridContainer" type="GridContainer" parent="Panel/Panel/Workspace/MyProjects"]
 layout_mode = 2
 columns = 3
-
-[node name="GUIProject" parent="Panel/Panel/Workspace/MyProjects/GridContainer" instance=ExtResource("8_ow4m1")]
-layout_mode = 2
-
-[node name="GUIProject2" parent="Panel/Panel/Workspace/MyProjects/GridContainer" instance=ExtResource("8_ow4m1")]
-layout_mode = 2
-
-[node name="GUIProject3" parent="Panel/Panel/Workspace/MyProjects/GridContainer" instance=ExtResource("8_ow4m1")]
-layout_mode = 2
-
-[node name="GUIProject4" parent="Panel/Panel/Workspace/MyProjects/GridContainer" instance=ExtResource("8_ow4m1")]
-layout_mode = 2
 
 [connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Buttons/NewButton" to="." method="_on_new_button_toggled"]
 [connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Buttons/MyProjectsButton" to="." method="_on_my_projects_button_toggled"]

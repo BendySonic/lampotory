@@ -11,7 +11,7 @@ signal body_deselected(body: NormalBody)
 signal data_edited(property_name: String, value: Variant)
 signal data_changed()
 
-enum States {NORMAL, HOLD, SELECTED}
+enum States {NORMAL, HOLD, HOLD_WITH_PIN, SELECTED}
 enum Player {PLAY, PAUSE}
 
 static var count: int = 0
@@ -87,27 +87,26 @@ func _input(event):
 		# Rotation
 		if event.button_index == 4:
 			if event.is_pressed():
-				if _is_state(States.HOLD):
+				if _is_state(States.HOLD) and not is_in_group("tripod"):
 					var rotated_tf = physics_state.transform.rotated_local(0.393)
 					physics_state.transform = rotated_tf
 		elif event.button_index == 5:
 			if event.is_pressed():
-				if  _is_state(States.HOLD):
+				if  _is_state(States.HOLD) and not is_in_group("tripod"):
 					var rotated_tf = physics_state.transform.rotated_local(-0.393)
 					physics_state.transform = rotated_tf
 		# Hold
 		if event.button_index == 1:
 			if not event.is_pressed():
-				if _is_state(States.HOLD):
+				if _is_state(States.HOLD) or _is_state(States.HOLD):
 					unhold_body()
 
 func _on_input_event(viewport: Node, event: Variant, _shape_idx: int):
-	print("Event")
 	if event is InputEventMouseButton:
 		# Hold
 		if event.button_index == 1:
 			if event.is_pressed():
-				if not _is_state(States.HOLD):
+				if not _is_state(States.HOLD) and not _is_state(States.HOLD_WITH_PIN):
 					hold_body()
 					viewport.set_input_as_handled()
 		# Select
@@ -126,7 +125,6 @@ func _on_data_edited(property_name: String, value: Variant):
 func _on_body_defined():
 	set_property("id", "name" + str(count))
 	load_data()
-	print("Body defined")
 #endregion
 
 
@@ -157,7 +155,7 @@ func hold_body():
 	emit_signal("body_held", self)
 
 func hold_body_with_pin():
-	_set_state(States.HOLD)
+	_set_state(States.HOLD_WITH_PIN)
 	deselect_body()
 	cursor.hold_body(self)
 	# Visual effect
@@ -166,7 +164,7 @@ func hold_body_with_pin():
 	emit_signal("body_held_with_pin", self)
 
 func unhold_body():
-	if _is_state(States.HOLD):
+	if _is_state(States.HOLD) or _is_state(States.HOLD_WITH_PIN):
 		_set_state(States.NORMAL)
 		cursor.unhold_body()
 		set_deferred("lock_rotation", false)

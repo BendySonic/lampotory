@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
 config/icon="res://assets/logo/icon.svg"
 
+[autoload]
+
+Global="*res://src/global.gd"
+
 [display]
 
 window/size/viewport_width=1100
@@ -30,6 +34,7 @@ movie_writer/speaker_mode=1
 movie_writer/mjpeg_quality=0.65
 movie_writer/movie_file="C:/Users/nurba/Videos/godot/video2.avi"
 movie_writer/fps=24
+export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 

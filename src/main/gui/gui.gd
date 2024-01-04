@@ -61,8 +61,8 @@ const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
 @onready var paste_button := get_node(PASTE_BUTTON) as TextureButton
 @onready var delete_button := get_node(DELETE_BUTTON) as TextureButton
 
-@onready var play_button := get_node(PLAY_BUTTON) as Button
-@onready var reload_button := get_node(RELOAD_BUTTON) as Button
+@onready var play_button := get_node(PLAY_BUTTON) as TextureButton
+@onready var reload_button := get_node(RELOAD_BUTTON) as TextureButton
 
 @onready var save_button := get_node(SAVE_BUTTON) as MenuButton
 @onready var edit_button := get_node(EDIT_BUTTON) as MenuButton
@@ -102,10 +102,16 @@ func _on_reload_pressed():
 
 func _on_save_button_id_pressed(id: int):
 	if id == 0:
-		show_save_window()
+		if Global.project_data.is_saved:
+			emit_signal(
+					"save_project_pressed", 
+					Global.project_data.project_name,
+					Global.project_data.project_theme
+			)
+		else:
+			show_save_window()
 
 func _on_edit_button_id_pressed(id: int):
-	print("HELLO")
 	if id == 1:
 		emit_signal("open_project_pressed")
 #endregion

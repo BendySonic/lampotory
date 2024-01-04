@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs410o4h85bjo"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/pin_point.gd" id="1_lnycl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yim6d"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fisi8"]
+
+[node name="PinPoint" type="Node2D"]
+script = ExtResource("1_lnycl")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+bias = 0.25
+disable_collision = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_yim6d")
+
+[node name="Area2D" type="Area2D" parent="." groups=["pin_point"]]
+priority = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fisi8")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_input_event"]

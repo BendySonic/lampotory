@@ -1,0 +1,290 @@
+[gd_scene load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://src/main/node2d/bodies.gd" id="1_smd85"]
+[ext_resource type="Resource" path="res://src/main/modes/mechanic.tres" id="2_k21hy"]
+[ext_resource type="Script" path="res://src/resources/project_resource.gd" id="3_mlcjn"]
+[ext_resource type="PackedScene" path="res://src/main/bodies/block_body.tscn" id="4_x2o3j"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="5_gmc5d"]
+[ext_resource type="Script" path="res://src/resources/body_resource.gd" id="6_gi68c"]
+[ext_resource type="PackedScene" path="res://src/main/bodies/tripod_body.tscn" id="7_tpb7l"]
+[ext_resource type="Script" path="res://src/main/bodies/tripod_body.gd" id="8_26hl2"]
+[ext_resource type="PackedScene" path="res://src/main/bodies/dynamometer_body.tscn" id="9_w0erj"]
+[ext_resource type="Script" path="res://src/main/bodies/dynamometer_body.gd" id="10_f62kf"]
+
+[sub_resource type="Resource" id="Resource_0iwhh"]
+script = ExtResource("3_mlcjn")
+project_name = "Штатив"
+project_theme = "Лабораторные приборы"
+project_mode = ExtResource("2_k21hy")
+is_saved = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
+friction = 0.4
+
+[sub_resource type="Resource" id="Resource_grjr5"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name-88",
+"mass": 0.1
+}
+edit_properties = {
+"mass": 0.1
+}
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m0ibl"]
+friction = 0.4
+rough = true
+
+[sub_resource type="Resource" id="Resource_xem85"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name0"
+}
+edit_properties = {}
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_effc7"]
+friction = 0.3
+rough = true
+
+[sub_resource type="Resource" id="Resource_aljsb"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name-88"
+}
+edit_properties = {}
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vepev"]
+friction = 0.4
+
+[sub_resource type="Resource" id="Resource_lnj2k"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name-88",
+"mass": 0.05
+}
+edit_properties = {
+"mass": 0.05
+}
+
+[sub_resource type="Resource" id="Resource_m8ont"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name-88",
+"mass": 0.05
+}
+edit_properties = {
+"mass": 0.05
+}
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_apitx"]
+friction = 0.4
+
+[sub_resource type="Resource" id="Resource_12w8s"]
+script = ExtResource("6_gi68c")
+properties = {
+"id": "name-88",
+"mass": 0.05
+}
+edit_properties = {
+"mass": 0.05
+}
+
+[node name="Bodies" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_smd85")
+project_data = SubResource("Resource_0iwhh")
+
+[node name="BlockBody" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(510.277, 289.497)
+rotation = -1.57247
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-0.254968, 0.295348)
+angular_velocity = 0.000911939
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_grjr5")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="Tripod" type="RigidBody2D" parent="." groups=["tripod"] instance=ExtResource("7_tpb7l")]
+position = Vector2(538.797, 437.8)
+collision_layer = 5
+input_pickable = true
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_m0ibl")
+lock_rotation = true
+freeze = true
+script = ExtResource("8_26hl2")
+level_position = Vector2(578.797, 41.2363)
+state = 0
+player = 0
+body_data = SubResource("Resource_xem85")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/tripod_body.tscn"
+
+[node name="DynamometerBody" type="RigidBody2D" parent="." instance=ExtResource("9_w0erj")]
+z_index = -3
+position = Vector2(512.112, 83.9413)
+rotation = -0.00135899
+collision_layer = 2
+collision_mask = 6
+input_pickable = true
+mass = 0.3
+physics_material_override = SubResource("PhysicsMaterial_effc7")
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, 25)
+freeze_mode = 1
+linear_velocity = Vector2(-0.0595335, 8.38599e-05)
+angular_velocity = 0.00129926
+script = ExtResource("10_f62kf")
+length_coeff = 6.0
+width_coeff = 17.0
+skew_coeff = 2.5
+ring_count = 5.0
+level_position = Vector2(-0.0027771, 146.385)
+state = 0
+player = 0
+body_data = SubResource("Resource_aljsb")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/dynamometer_body.tscn"
+
+[node name="@RigidBody2D@118" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(510.427, 373.446)
+rotation = 1.60925
+scale = Vector2(1, 1)
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_vepev")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-0.239153, 0.293633)
+angular_velocity = -0.0012996
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_lnj2k")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@130" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(675.915, 430.3)
+rotation = -3.14159
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_vepev")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-2.38419e-07, 0)
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_m8ont")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@123" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(321.119, 390.446)
+rotation = -0.000141049
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_apitx")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-7.15256e-07, 0)
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_12w8s")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@124" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(880.111, 929979)
+rotation = -1.84308
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_apitx")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(0.000102255, 9799.52)
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_12w8s")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
+
+[node name="@RigidBody2D@125" type="RigidBody2D" parent="." instance=ExtResource("4_x2o3j")]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+position = Vector2(329.918, 430.221)
+rotation = -0.000364493
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_apitx")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+linear_velocity = Vector2(-4.76837e-07, 0)
+script = ExtResource("5_gmc5d")
+state = 0
+player = 0
+body_data = SubResource("Resource_12w8s")
+cursor_path = NodePath("/root/Main/Node2D/GUICursor")
+body_scene_path = "res://src/main/bodies/block_body.tscn"
