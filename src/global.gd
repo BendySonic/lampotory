@@ -1,3 +1,3 @@
 extends Node
 
-var project_data: ProjectResource
+var project_data: Dictionary

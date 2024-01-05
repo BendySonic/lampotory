@@ -21,32 +21,39 @@ static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 	return bodies_properties
 
 static func save_file(bodies_node: Node2D, name: String):
-	#var file = FileAccess.open(file_path, FileAccess.WRITE)
-	#for body in bodies_node.get_children():
-	#	file.store_var(body.duplicate(), true)
-	#pack_data(bodies_properties, file)
-	#file.close()
-	var scene = PackedScene.new()
+	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.WRITE)
 	
+	var save: Dictionary = {}
 	for body in bodies_node.get_children():
-		body.owner = bodies_node
-		for node in body.get_children():
-			node.owner = body
+		save[body.name] = body.get_all_properties()
+	save["project_data"] = bodies_node.project_data
+	file.store_var(save)
 	
-	var result = scene.pack(bodies_node)
-	if result == OK:
-		var error = ResourceSaver.save(scene, "res://saves/" + name + ".tscn", 64)  # Or "user://..."
-		if error != OK:
-			push_error("An error occurred while saving the scene to disk.")
+	file.close()
 
 
 static func load_file(name: String):
-	#var file = FileAccess.open(file_path, FileAccess.READ)
-	#var bodies: Array[RigidBody2D]
-	#while file.get_position() < file.get_length():
-	#	var body = file.get_var(true)
-	#	bodies.push_back(body)
-	#file.close()
-	var result = ResourceLoader.load("res://saves/" + name + ".tscn", "", 0)
-	return result
+	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.READ)
+	var save: Dictionary = file.get_var()
+	var bodies_node = Bodies.new()
+	
+	for body_name in save:
+		var body_properties = save[body_name]
+		
+		if body_name == "project_data":
+			bodies_node.project_data = body_properties
+			continue
+		
+		var body = ResourceLoader.load(body_properties["body_scene_path"]).instantiate()
+		for property_name in body_properties:
+			body.set(property_name, body_properties[property_name])
+			for child in body.get_children():
+				if child.name == property_name:
+					for child_property_name in body_properties[property_name]:
+						child.set(child_property_name, body_properties[property_name][child_property_name])
+		body.loaded_properties = body_properties
+		bodies_node.add_child(body)
+	
+	file.close()
+	return bodies_node
 

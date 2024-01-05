@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-var hold := false
+signal unhold(level_position: Vector2)
 
+var hold := false
 
 func _physics_process(_delta):
 	# Trupod level go to mouse in set axis
@@ -19,3 +20,4 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_released() and hold:
 			hold = false
+			emit_signal("unhold", position)

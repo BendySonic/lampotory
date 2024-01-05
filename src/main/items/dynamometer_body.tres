@@ -11,5 +11,3 @@ item_tooltip = "Прибор для измерения силы или моме�
 item_icon = ExtResource("1_ws50i")
 item_modulate = Color(1, 1, 1, 1)
 item_scene = ExtResource("2_jhkn5")
-properties = {}
-edit_properties = {}

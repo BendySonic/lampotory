@@ -112,8 +112,8 @@ func _on_save_button_id_pressed(id: int):
 			show_save_window()
 
 func _on_edit_button_id_pressed(id: int):
-	if id == 1:
-		emit_signal("open_project_pressed")
+	if id == 0:
+		get_tree().change_scene_to_file("res://src/menu/menu.tscn")
 #endregion
 
 #region ItemsWindow

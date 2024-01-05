@@ -6,11 +6,11 @@
 friction = 0.4
 
 [sub_resource type="QuadMesh" id="QuadMesh_ovjyk"]
-size = Vector2(500, 100)
+size = Vector2(2000, 1000)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrse"]
 custom_solver_bias = 1.0
-size = Vector2(500, 100)
+size = Vector2(2000, 1000)
 
 [node name="Mechanic" type="Node2D"]
 z_index = 5
@@ -18,7 +18,6 @@ script = ExtResource("1_tg22m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 modulate = Color(0.870588, 0.878431, 0.886275, 1)
-position = Vector2(0, 100)
 collision_layer = 3
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_y44od")

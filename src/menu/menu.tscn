@@ -38,9 +38,9 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_t5fog"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fpe1c"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_wvlsp"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_ida0p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
 content_margin_right = 11.0
@@ -114,20 +114,26 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 
 [node name="NewButton" parent="Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_t5fog")
+button_group = SubResource("ButtonGroup_fpe1c")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
+icon_size = Vector2(50, 50)
+text_size = 18
 
 [node name="MyProjectsButton" parent="Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_wvlsp")
+button_group = SubResource("ButtonGroup_ida0p")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
+icon_size = Vector2(50, 50)
+text_size = 16
 
 [node name="Workspace" type="MarginContainer" parent="Panel/Panel"]
 layout_mode = 2
@@ -228,7 +234,13 @@ allow_reselect = true
 popup/item_0/text = "Самые новые"
 popup/item_0/id = 0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/Panel/Workspace/MyProjects"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Panel/Workspace/MyProjects"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_0numr")
+follow_focus = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Panel/Workspace/MyProjects/ScrollContainer"]
 layout_mode = 2
 columns = 3
 

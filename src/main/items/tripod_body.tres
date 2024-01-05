@@ -11,9 +11,3 @@ item_tooltip = "Прибор для крепления предметов на �
 item_icon = ExtResource("1_cqwl8")
 item_modulate = Color(1, 1, 1, 1)
 item_scene = ExtResource("2_krw1r")
-properties = {
-"gravity_scale": 1
-}
-edit_properties = {
-"gravity_scale": 1.0
-}

@@ -9,10 +9,6 @@ signal body_deselected(body: NormalBody)
 
 enum States {PLAY, PAUSE}
 
-const PROJECT_PATH := "res://saves/"
-const LOADED := true
-const NOT_LOADED := false
-
 var state: States = States.PLAY:
 	get: return state
 var speed: float = 1:
@@ -26,10 +22,12 @@ var selected_item_data: Variant:
 
 var buffer_body: Variant:
 	get: return buffer_body
-var buffer_project: Variant
+
+var is_camera_drag: bool
+var releative_drag_position: Vector2
 
 @onready var bodies_node := get_node("Bodies") as Node
-@onready var foreground := get_node("Enviroment/Lab/Mechanic") as Node
+@onready var lab := get_node("Enviroment/Lab/Mechanic") as Node
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
 @onready var cursor := get_node("GUICursor") as GUICursor:
 	get = get_cursor
@@ -42,6 +40,21 @@ func _unhandled_input(event):
 				emit_signal("void_pressed", event)
 #endregion
 
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == 3:
+			if event.is_pressed():
+				is_camera_drag = true
+				releative_drag_position = camera.to_local(cursor.global_position)
+			elif event.is_released():
+				is_camera_drag = false
+
+func _process(delta):
+	if is_camera_drag:
+		camera.global_position += (- camera.to_local(cursor.global_position) +
+				releative_drag_position)
+		releative_drag_position += (camera.to_local(cursor.global_position) - 
+				releative_drag_position)
 
 #region Body input
 func _on_body_held(body: NormalBody):
@@ -61,37 +74,35 @@ func _on_body_deselected(body: NormalBody):
 #endregion
 
 
-#region Saver
-# TODO - Develop save/load system by window
+#region ItemsWindow
+func item_pressed(item_data: ItemResource):
+	selected_item_data = item_data
 
+func item_released():
+	selected_item_data = null
+#endregion
+
+
+#region Saver
 func first_project_load():
 	bodies_node.project_data = Global.project_data
 
 func save_project(name: String, theme: String):
-	Global.project_data.project_name = name
-	Global.project_data.project_theme = theme
-	Global.project_data.is_saved = true
+	Global.project_data["project_name"] = name
+	Global.project_data["project_theme"] = theme
+	Global.project_data["is_saved"] = true
 	bodies_node.project_data = Global.project_data.duplicate()
 	LampFileManager.save_file(bodies_node, name)
 	var project = LampFileManager.load_file(name)
-	print("Ok")
-	buffer_project = project
 
 func load_project(name: String):#file_path: String):
 	# Clear workspace
-	print("Load")
 	for body in get_bodies():
+		bodies_node.remove_child(body)
 		body.queue_free()
-	
 	# Load project
-	var project = LampFileManager.load_file(Global.project_data.project_name)
-	unpack_project(project)
-	
-	# Put project into buffer for reload
-	buffer_project = project
-
-func unpack_project(project: Variant):
-	var bodies = project.instantiate()
+	var bodies = LampFileManager.load_file(Global.project_data["project_name"])
+	await(get_tree().create_timer(0.3).timeout)
 	for body in bodies.get_children():
 		bodies.remove_child(body)
 		body.connect("body_held", _on_body_held)
@@ -99,7 +110,8 @@ func unpack_project(project: Variant):
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
 		body.init_as_loaded()
-		bodies_node.add_child(body)
+		bodies_node.add_child(body, true)
+		bodies.queue_free()
 	# Save configure data
 	Global.project_data = bodies.project_data
 #endregion
@@ -115,20 +127,7 @@ func play(button_pressed: bool):
 
 func reload():
 	state = States.PLAY
-	print("Reload")
-	for body in get_bodies():
-		bodies_node.remove_child(body)
-		body.queue_free()
-	unpack_project(buffer_project)
-#endregion
-
-
-#region ItemsWindow
-func item_pressed(item_data: ItemResource):
-	selected_item_data = item_data
-
-func item_released():
-	selected_item_data = null
+	await load_project(Global.project_data["project_name"])
 #endregion
 
 
@@ -143,13 +142,12 @@ func create_body():
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
 		body.init(cursor, item_data.item_scene)
-		bodies_node.add_child(body)
+		bodies_node.add_child(body, true)
 		body.hold_body()
 		
 		selected_item_data = null
 
 func create_copy_body():
-	print(buffer_body)
 	if not buffer_body == null:
 		var body = buffer_body.body_scene.instantiate()
 		body.connect("body_held", _on_body_held)
@@ -179,7 +177,7 @@ func copy_body():
 			if buffer_body == body:
 				has_buffer_body = true
 		if not has_buffer_body:
-			buffer_body.queue_free
+			buffer_body.queue_free()
 	# Pack body to buffer
 	buffer_body = selected_body
 
@@ -215,6 +213,6 @@ func get_cursor():
 
 
 #region Foreground
-func is_foreground_mouse_inside() -> bool:
-	return foreground.is_mouse_inside()
+func is_lab_mouse_inside() -> bool:
+	return lab.is_mouse_inside()
 #endregion

@@ -11,12 +11,4 @@ item_tooltip = "Обычный прямоугольный деревянный �
 item_icon = ExtResource("1_scogn")
 item_modulate = Color(1, 1, 1, 1)
 item_scene = ExtResource("2_hhvwp")
-properties = {
-"gravity_scale": 1.0,
-"mass": 1.0
-}
-edit_properties = {
-"gravity_scale": 1.0,
-"mass": 1.0
-}
 metadata/total_gravity = false

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="66.034821mm"
+   height="67.448593mm"
+   viewBox="0 0 66.034821 67.448593"
+   version="1.1"
+   id="svg5"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-42.42907,-46.215445)">
+    <rect
+       style="fill:#1279f3;fill-opacity:1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:148.649;paint-order:fill markers stroke"
+       id="rect2770"
+       width="53.676392"
+       height="53.708103"
+       x="15.603838"
+       y="73.928764"
+       rx="10.840611"
+       ry="10.594598"
+       transform="rotate(-21.749184)"
+       inkscape:export-filename="book.svg"
+       inkscape:export-xdpi="11.539366"
+       inkscape:export-ydpi="11.539366" />
+    <rect
+       style="fill:#3c90f5;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:148.649;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect234"
+       width="49.592892"
+       height="53.894314"
+       x="24.767918"
+       y="70.729065"
+       rx="10.840611"
+       ry="10.594598"
+       transform="rotate(-14.435294)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.9874px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.36146;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:148.649;stroke-opacity:1;paint-order:fill markers stroke"
+       x="51.702183"
+       y="110.56493"
+       id="text4718"
+       transform="rotate(-13.87527)"><tspan
+         sodipodi:role="line"
+         id="tspan4716"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.9874px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.36146"
+         x="51.702183"
+         y="110.56493">A</tspan></text>
+  </g>
+</svg>

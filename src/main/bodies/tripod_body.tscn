@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://s0n5c84jnhiv"]
+[gd_scene load_steps=23 format=3 uid="uid://s0n5c84jnhiv"]
 
 [ext_resource type="Script" path="res://src/main/bodies/tripod_body.gd" id="1_hsstv"]
 [ext_resource type="Script" path="res://src/main/bodies/additional/pillar_body.gd" id="2_2natp"]
@@ -22,7 +22,11 @@ size = Vector2(140, 20)
 size = Vector2(15, 500)
 
 [sub_resource type="QuadMesh" id="QuadMesh_63xm3"]
-size = Vector2(20, 200)
+size = Vector2(20, 225)
+
+[sub_resource type="SphereMesh" id="SphereMesh_631ge"]
+radius = 25.0
+height = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ie6si"]
 size = Vector2(15, 500)
@@ -30,12 +34,18 @@ size = Vector2(15, 500)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw0ar"]
 size = Vector2(120, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0eutm"]
+size = Vector2(40, 50)
+
 [sub_resource type="QuadMesh" id="QuadMesh_woe4q"]
 size = Vector2(100, 15)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ulsc8"]
 radius = 15.0
 height = 30.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_i8mou"]
+size = Vector2(30, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2cdw"]
 size = Vector2(46, 20)
@@ -52,7 +62,7 @@ size = Vector2(120, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p166e"]
 size = Vector2(110, 5)
 
-[node name="Tripod" type="RigidBody2D" groups=["tripod"]]
+[node name="TripodBody" type="RigidBody2D" node_paths=PackedStringArray("children") groups=["tripod"]]
 collision_layer = 5
 input_pickable = true
 mass = 20.0
@@ -60,6 +70,8 @@ physics_material_override = SubResource("PhysicsMaterial_m0ibl")
 lock_rotation = true
 freeze = true
 script = ExtResource("1_hsstv")
+start_height = 540.0
+children = [NodePath("PillarBody/TripodLevel/PinPoint")]
 
 [node name="Node2D" type="Node2D" parent="."]
 modulate = Color(0.372549, 0.709804, 1, 1)
@@ -103,6 +115,11 @@ mesh = SubResource("QuadMesh_o4b74")
 position = Vector2(40, -105)
 mesh = SubResource("QuadMesh_63xm3")
 
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="PillarBody/Node2D"]
+modulate = Color(0.898039, 0.898039, 0.898039, 1)
+position = Vector2(40, -485)
+mesh = SubResource("SphereMesh_631ge")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody"]
 position = Vector2(40, -250)
 shape = SubResource("RectangleShape2D_ie6si")
@@ -122,6 +139,10 @@ script = ExtResource("3_qr2oy")
 position = Vector2(-20, 0)
 shape = SubResource("RectangleShape2D_tw0ar")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PillarBody/TripodLevel"]
+position = Vector2(40, 0)
+shape = SubResource("RectangleShape2D_0eutm")
+
 [node name="Node2D" type="Node2D" parent="PillarBody/TripodLevel"]
 modulate = Color(0.203922, 0.658824, 1, 1)
 position = Vector2(-20, 0)
@@ -133,6 +154,10 @@ mesh = SubResource("QuadMesh_woe4q")
 self_modulate = Color(0.92549, 0.92549, 0.92549, 1)
 position = Vector2(20, 0)
 mesh = SubResource("SphereMesh_ulsc8")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="PillarBody/TripodLevel/Node2D"]
+position = Vector2(60, 0)
+mesh = SubResource("QuadMesh_i8mou")
 
 [node name="PinPoint" parent="PillarBody/TripodLevel" instance=ExtResource("2_eerml")]
 modulate = Color(0, 0.705882, 0.466667, 1)
@@ -179,3 +204,4 @@ shape = SubResource("RectangleShape2D_p166e")
 
 [connection signal="input_event" from="PillarBody" to="PillarBody" method="_on_input_event"]
 [connection signal="input_event" from="PillarBody/TripodLevel" to="PillarBody/TripodLevel" method="_on_input_event"]
+[connection signal="unhold" from="PillarBody/TripodLevel" to="." method="_on_tripod_level_unhold"]

@@ -6,8 +6,10 @@ extends RigidBodyPlus
 signal body_held(body: NormalBody)
 signal body_held_with_pin(body: NormalBody)
 signal body_unheld(body: NormalBody)
+
 signal body_selected(body: NormalBody)
 signal body_deselected(body: NormalBody)
+
 signal data_edited(property_name: String, value: Variant)
 signal data_changed()
 
@@ -16,18 +18,32 @@ enum Player {PLAY, PAUSE}
 
 static var count: int = 0
 
-#var can_unhold := false
-	#set = set_can_unhold
-	
-@export var state: States = States.NORMAL
-@export var player: Player = Player.PLAY
-@export var body_data: BodyResource = BodyResource.new()
+#region Save/load data
+var all_properties: Array[Dictionary]
+var loaded_properties: Dictionary
+var allowed_properties: PackedStringArray = [
+		"name",
+		
+		"global_position", "rotation", "linear_velocity", "angular_velocity",
+		
+		"state", "player", "properties", "edit_properties",
+		"cursor_path", "body_scene_path",
+		
+		"level_position"
+]
+#endregion
 
-@export var cursor_path: NodePath
-@export var body_scene_path: String
+@export var properties: Dictionary
+@export var edit_properties: Dictionary
+@export var children: Array[Node2D]
 
-var cursor: GUICursor:
-	get = get_cursor
+var state: States = States.NORMAL
+var player: Player = Player.PLAY
+
+var cursor_path: NodePath
+var body_scene_path: String
+
+var cursor: GUICursor
 var body_scene: PackedScene
 
 var is_loaded: bool
@@ -36,23 +52,22 @@ var is_loaded: bool
 @onready var area := get_node("Area2D") as Area2D
 
 
-# There is many HACK's, sorry for this... I had no time... So dumb code...
-# Mainly it caused by bug with saving references to nodes in PackedScene
 
 #region Initialization
-func init(cursor_arg: GUICursor, body_scene: PackedScene):
+func init(cursor_arg: GUICursor, body_scene_arg):
 	self.cursor_path = cursor_arg.get_path()
-	self.body_scene_path = body_scene.resource_path
+	self.body_scene_path = body_scene_arg.resource_path
+	self.properties = properties.duplicate()
+	self.edit_properties = edit_properties.duplicate()
 	self.is_loaded = false
-	self.body_data = body_data.duplicate()
 
-func init_as_copy(cursor_arg: GUICursor, body_scene: PackedScene,
-		properties: Dictionary, edit_properties: Dictionary):
+func init_as_copy(cursor_arg: GUICursor, body_scene_arg: PackedScene,
+		properties_arg: Dictionary, edit_properties_arg: Dictionary):
 	self.cursor_path = cursor_arg.get_path()
-	self.body_scene_path = body_scene.resource_path
+	self.body_scene_path = body_scene_arg.resource_path
+	self.properties = properties_arg.duplicate()
+	self.edit_properties = edit_properties_arg.duplicate()
 	self.is_loaded = false
-	self.body_data.properties = properties
-	self.body_data.edit_properties = edit_properties
 
 func init_as_loaded():
 	self.is_loaded = true
@@ -64,23 +79,14 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	cursor = get_node(cursor_path)
-	body_scene = ResourceLoader.load(body_scene_path)
-	# Position to cursor
-	if not is_loaded and not is_in_group("tripod"):
-		self.global_position = cursor.global_position
-	# Fix freeze trouble after load project
-	if freeze:
-		linear_velocity = Vector2(0, 0)
+	all_properties = get_property_list()
+	_load_by_paths()
+	_set_start_position()
+	_fix_freeze()
 	
 	connect("input_event", _on_input_event)
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
-
-#func _physics_process(_delta):
-	#if _is_state(States.HOLD) and body_defined:
-		# Can unhold
-		#can_unhold = not area.has_overlapping_areas()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -127,6 +133,20 @@ func _on_body_defined():
 	load_data()
 #endregion
 
+
+#region Ready methods
+func _load_by_paths():
+	cursor = get_node(cursor_path)
+	body_scene = ResourceLoader.load(body_scene_path)
+
+func _set_start_position():
+	if not is_loaded and not is_in_group("tripod"):
+		self.global_position = cursor.global_position
+
+func _fix_freeze():
+	if freeze:
+		linear_velocity = Vector2(0, 0)
+#endregion
 
 #region States
 func _set_state(value: States):
@@ -219,22 +239,22 @@ func load_data():
 	sleeping = false
 
 func set_property(property_name: String, value: Variant):
-	body_data.properties[property_name] = value
+	properties[property_name] = value
 	# Sync data properties and editable properties
 	if get_edit_properties().has(property_name):
-		body_data.edit_properties[property_name] = value
+		edit_properties[property_name] = value
 
 func get_property(property_name: String) -> Variant:
-	return body_data.properties[property_name]
+	return properties[property_name]
 
 func get_properties() -> Dictionary:
-	return body_data.properties
+	return properties
 
 func get_edit_properties() -> Dictionary:
-	return body_data.edit_properties
+	return edit_properties
 
 func get_id() -> String:
-	return body_data.properties["id"]
+	return properties["id"]
 #endregion
 
 func set_velocity(direction: Vector2):
@@ -244,7 +264,23 @@ func set_velocity(direction: Vector2):
 func get_cursor():
 	return cursor
 
+func get_all_properties():
+	var result: Dictionary
+	
+	for property in all_properties:
+		if allowed_properties.has(property["name"]):
+			var value = get(property["name"])
+			if value is Dictionary:
+				result[property["name"]] = value.duplicate()
+			else:
+				result[property["name"]] = value
+	
+	for child in children:
+		if child.has_method("get_all_properties"):
+			result[child.name] = child.get_all_properties().duplicate()
+	
+	return result
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
-	viewport.set_input_as_handled()
+
+

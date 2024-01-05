@@ -8,9 +8,6 @@ const SAVE_DIR = "res://saves/"
 const BUTTONS = "Panel/Panel/Menu/Menu/Menu/Buttons/"
 const WORKSPACE = "Panel/Panel/Workspace/"
 
-var project_modes: Dictionary = {
-	"mechanic": preload("res://src/main/modes/mechanic.tres")
-}
 
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 
@@ -21,7 +18,7 @@ var project_modes: Dictionary = {
 @onready var workspace_container := get_node(WORKSPACE)
 @onready var new_container := get_node(WORKSPACE + "New")
 @onready var my_projects_container := get_node(WORKSPACE + "MyProjects")
-@onready var my_projects_grid_container := get_node(WORKSPACE + "MyProjects/GridContainer")
+@onready var my_projects_grid_container := get_node(WORKSPACE + "MyProjects/ScrollContainer/GridContainer")
 
 
 # TODO - Develop create project window
@@ -46,16 +43,21 @@ func _on_my_projects_button_toggled(button_pressed: bool):
 func _on_mechanic_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			Global.project_data = ProjectResource.new()
-			Global.project_data.project_mode = project_modes["mechanic"]
+			Global.project_data = {
+					"project_name": "",
+					"project_theme": "",
+					"project_mode": "",
+					"is_saved": false
+			}
+			Global.project_data["project_mode"] = "mechanic"
 			get_tree().change_scene_to_file("res://src/main/main.tscn")
 
 func load_projects():
 	var file_names = DirAccess.get_files_at(SAVE_DIR)
 	for file_name in file_names:
-		var project_path = SAVE_DIR + file_name
-		var scene = ResourceLoader.load(project_path).instantiate()
-		var project_data = scene.project_data
+		var file = FileAccess.open(SAVE_DIR + file_name, FileAccess.READ)
+		var save: Dictionary = file.get_var()
+		var project_data = save["project_data"]
 		
 		var gui_project: GUIProject = gui_project_scene.instantiate()
 		gui_project.project_data = project_data

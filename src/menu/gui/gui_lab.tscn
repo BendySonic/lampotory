@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://blmbopi1jfuot"]
 
 [ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_b1ltk"]
-[ext_resource type="Texture2D" uid="uid://b0xmx8omi2ij0" path="res://assets/graphic/gui/icons/menu_sand.png" id="1_hete6"]
+[ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand_icon.png" id="2_g554w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu6op"]
 bg_color = Color(0.996078, 0.996078, 0.996078, 1)
@@ -41,12 +41,12 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(70, 55)
+custom_minimum_size = Vector2(75, 67)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_hete6")
-stretch_mode = 5
+texture = ExtResource("2_g554w")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

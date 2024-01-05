@@ -8,6 +8,10 @@ extends Node
 var mode_data: ModeResource:
 	get: return mode_data
 
+var project_modes: Dictionary = {
+	"mechanic": preload("res://src/main/modes/mechanic.tres")
+}
+
 # Children
 var gui: Node
 var node2d: Node
@@ -19,9 +23,9 @@ func _enter_tree():
 	node2d = get_node("Node2D")
 
 func _ready():
-	set_mode(Global.project_data.project_mode)
-	if Global.project_data.is_saved:
-		node2d.load_project(Global.project_data.project_name)
+	set_mode(project_modes[Global.project_data["project_mode"]])
+	if Global.project_data["is_saved"]:
+		await node2d.load_project(Global.project_data["project_name"])
 	else:
 		node2d.first_project_load()
 	
@@ -90,7 +94,7 @@ func _on_save_project_pressed(name: String, theme: String):
 	node2d.save_project(name, theme)
 
 func _on_open_project_pressed():
-	node2d.load_project("Привет")
+	await node2d.load_project("Привет")
 
 func _on_body_held(_body: NormalBody):
 	_clear_select()

@@ -5,10 +5,9 @@ extends NormalBody
 @export var width_coeff: float = 15
 @export var skew_coeff: float = 3.5
 @export var ring_count: float = 4
-
 var arrow_value: float = 0
 
-@export var level_position: Vector2
+var level_position: Vector2
 
 @onready var place_holder = get_node("PlaceHolder")
 

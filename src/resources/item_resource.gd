@@ -7,6 +7,3 @@ extends Resource
 @export var item_modulate: Color
 
 @export var item_scene: PackedScene
-
-@export var properties: Dictionary
-@export var edit_properties: Dictionary
