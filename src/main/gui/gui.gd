@@ -159,7 +159,7 @@ func create_properties(body: NormalBody):
 	delete_properties()
 	properties_window.set_position(actions_window.get_position() + Vector2(0, 50))
 	show_properties_window()
-	var body_properties = body.get_edit_properties()
+	var body_properties = body.get_properties()
 	
 	for body_property in body_properties:
 		var value = body.get_property(body_property)

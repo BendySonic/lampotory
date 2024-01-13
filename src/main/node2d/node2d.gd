@@ -32,6 +32,10 @@ var releative_drag_position: Vector2
 @onready var cursor := get_node("GUICursor") as GUICursor:
 	get = get_cursor
 
+
+func _ready():
+	Global.cursor = cursor
+
 #region Input
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -93,7 +97,6 @@ func save_project(name: String, theme: String):
 	Global.project_data["is_saved"] = true
 	bodies_node.project_data = Global.project_data.duplicate()
 	LampFileManager.save_file(bodies_node, name)
-	var project = LampFileManager.load_file(name)
 
 func load_project(name: String):#file_path: String):
 	# Clear workspace
@@ -105,12 +108,12 @@ func load_project(name: String):#file_path: String):
 	await(get_tree().create_timer(0.3).timeout)
 	for body in bodies.get_children():
 		bodies.remove_child(body)
-		body.connect("body_held", _on_body_held)
+		body.connect("body_static_held", _on_body_held)
+		body.connect("body_pin_held", _on_body_held)
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init_as_loaded()
-		bodies_node.add_child(body, true)
+		bodies_node.add_child(body, false)
 		bodies.queue_free()
 	# Save configure data
 	Global.project_data = bodies.project_data
@@ -137,11 +140,12 @@ func create_body():
 	if not selected_item_data == null and not get_tree().paused:
 		var item_data = selected_item_data
 		var body = item_data.item_scene.instantiate()
-		body.connect("body_held", _on_body_held)
+		body.connect("body_static_held", _on_body_held)
+		body.connect("body_pin_held", _on_body_held)
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init(cursor, item_data.item_scene)
+		body.create_body(item_data.item_scene)
 		bodies_node.add_child(body, true)
 		body.hold_body()
 		
@@ -149,13 +153,17 @@ func create_body():
 
 func create_copy_body():
 	if not buffer_body == null:
-		var body = buffer_body.body_scene.instantiate()
-		body.connect("body_held", _on_body_held)
+		var body_scene = ResourceLoader.load(buffer_body.body_scene_path)
+		var body = body_scene.instantiate()
+		body.connect("body_static_held", _on_body_held)
+		body.connect("body_pin_held", _on_body_held)
 		body.connect("body_unheld", _on_body_unheld)
 		body.connect("body_selected", _on_body_selected)
 		body.connect("body_deselected", _on_body_deselected)
-		body.init_as_copy(cursor, buffer_body.body_scene, buffer_body.get_properties(),
-				buffer_body.get_edit_properties())
+		body.create_copy_body(
+				buffer_body.body_scene, 
+				buffer_body.get_properties()
+		)
 		bodies_node.add_child(body)
 
 func delete_body(body_id: String):
@@ -210,7 +218,6 @@ func is_any_body_mouse_inside() -> bool:
 
 func get_cursor():
 	return cursor
-
 
 #region Foreground
 func is_lab_mouse_inside() -> bool:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_jppdy"]
 [ext_resource type="Texture2D" uid="uid://bf8i7m0hsin6i" path="res://assets/graphic/gui/icons/items/dynamometer.png" id="1_ws50i"]
-[ext_resource type="PackedScene" uid="uid://o10ef5dyaajd" path="res://src/main/bodies/dynamometer_body.tscn" id="2_jhkn5"]
+[ext_resource type="PackedScene" uid="uid://o10ef5dyaajd" path="res://src/main/bodies/dynamometer_body/dynamometer_body.tscn" id="2_jhkn5"]
 
 [resource]
 script = ExtResource("1_jppdy")

@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://dinm4ywrs41ww"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/normal_body.gd" id="1_iq0i2"]
+[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/PinPoint.tscn" id="2_62phn"]
+[ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/Components/save_component.tscn" id="2_obehf"]
+[ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/Components/input_component.tscn" id="3_k2baw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1fao"]
+friction = 0.4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1vbc"]
+size = Vector2(58, 42)
+
+[sub_resource type="QuadMesh" id="QuadMesh_i6ehh"]
+size = Vector2(56, 40)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0e7jl"]
+size = Vector2(12, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kstnr"]
+size = Vector2(65, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mryxb"]
+size = Vector2(45, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4elv"]
+custom_solver_bias = 1.0
+size = Vector2(56, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18553"]
+
+[node name="BlockBody" type="RigidBody2D"]
+process_priority = 2
+process_physics_priority = 2
+top_level = true
+z_index = 10
+z_as_relative = false
+disable_mode = 2
+collision_layer = 2049
+collision_priority = 5.0
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_a1fao")
+can_sleep = false
+freeze_mode = 1
+continuous_cd = 2
+script = ExtResource("1_iq0i2")
+properties = {
+"mass": 1.0
+}
+
+[node name="SaveComponent" parent="." instance=ExtResource("2_obehf")]
+save_properties_list = ["position", "rotation", "linear_velocity", "angular_velocity", "cursor_path", "body_scene_path", "main_body_path", "parent_body_path", "connected_pin_point_path", "has_connectable_bodies", "is_connected"]
+save_nodes_paths = [NodePath(".."), NodePath("../PinPoint"), NodePath("../PinPoint2")]
+
+[node name="HoldComponent" parent="." node_paths=PackedStringArray("parent_body") instance=ExtResource("3_k2baw")]
+parent_body = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoldComponent"]
+shape = SubResource("RectangleShape2D_c1vbc")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.219608, 0.592157, 0.992157, 1)
+mesh = SubResource("QuadMesh_i6ehh")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.619608, 0.796078, 0.996078, 1)
+position = Vector2(34, 0)
+mesh = SubResource("QuadMesh_0e7jl")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.619608, 0.796078, 0.996078, 1)
+position = Vector2(-34, 0)
+mesh = SubResource("QuadMesh_0e7jl")
+
+[node name="Select" type="MeshInstance2D" parent="Visuals"]
+visible = false
+modulate = Color(0.752941, 0.764706, 0.768627, 1)
+show_behind_parent = true
+mesh = SubResource("QuadMesh_kstnr")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mryxb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_j4elv")
+
+[node name="PinPoint" parent="." instance=ExtResource("2_62phn")]
+modulate = Color(0, 0.803922, 0.447059, 1)
+position = Vector2(-43, 0)
+main_body_path = NodePath("..")
+parent_body_path = NodePath("..")
+
+[node name="HoldComponent" parent="PinPoint" node_paths=PackedStringArray("parent_body") instance=ExtResource("3_k2baw")]
+parent_body = NodePath("../..")
+hold_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PinPoint/HoldComponent"]
+shape = SubResource("RectangleShape2D_18553")
+
+[node name="PinPoint2" parent="." instance=ExtResource("2_62phn")]
+modulate = Color(0, 0.803922, 0.447059, 1)
+position = Vector2(43, 0)
+main_body_path = NodePath("..")
+parent_body_path = NodePath("..")
+
+[node name="HoldComponent" parent="PinPoint2" node_paths=PackedStringArray("parent_body") instance=ExtResource("3_k2baw")]
+parent_body = NodePath("../..")
+hold_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PinPoint2/HoldComponent"]
+shape = SubResource("RectangleShape2D_18553")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="renamed" from="PinPoint2" to="." method="_on_renamed"]

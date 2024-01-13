@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnge3mi3iwtub"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/components/spring_component.gd" id="1_roy58"]
+
+[node name="SpringComponent" type="DampedSpringJoint2D"]
+script = ExtResource("1_roy58")

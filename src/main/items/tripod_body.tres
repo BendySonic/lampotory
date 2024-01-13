@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bry6ogfqd66ad" path="res://assets/graphic/gui/icons/items/tripod.png" id="1_cqwl8"]
 [ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_fh3pc"]
-[ext_resource type="PackedScene" uid="uid://s0n5c84jnhiv" path="res://src/main/bodies/tripod_body.tscn" id="2_krw1r"]
+[ext_resource type="PackedScene" uid="uid://s0n5c84jnhiv" path="res://src/main/bodies/tripod_body/tripod_body.tscn" id="2_krw1r"]
 
 [resource]
 script = ExtResource("1_fh3pc")

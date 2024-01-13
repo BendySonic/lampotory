@@ -23,35 +23,33 @@ static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 static func save_file(bodies_node: Node2D, name: String):
 	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.WRITE)
 	
-	var save: Dictionary = {}
+	var save_data: Dictionary = {}
 	for body in bodies_node.get_children():
-		save[body.name] = body.get_all_properties()
-	save["project_data"] = bodies_node.project_data
-	file.store_var(save)
+		save_data[body.name] = body.save_body()
+	save_data["project_data"] = bodies_node.project_data
+	file.store_var(save_data)
 	
 	file.close()
 
 
 static func load_file(name: String):
 	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.READ)
-	var save: Dictionary = file.get_var()
+	var save_data: Dictionary = file.get_var()
 	var bodies_node = Bodies.new()
 	
-	for body_name in save:
-		var body_properties = save[body_name]
+	for body_name in save_data:
+		var body_data = save_data[body_name]
 		
 		if body_name == "project_data":
-			bodies_node.project_data = body_properties
+			bodies_node.project_data = body_data
 			continue
 		
-		var body = ResourceLoader.load(body_properties["body_scene_path"]).instantiate()
-		for property_name in body_properties:
-			body.set(property_name, body_properties[property_name])
-			for child in body.get_children():
-				if child.name == property_name:
-					for child_property_name in body_properties[property_name]:
-						child.set(child_property_name, body_properties[property_name][child_property_name])
-		body.loaded_properties = body_properties
+		var body: NormalBody
+		for node_name in body_data:
+			var node_data = body_data[node_name]
+			if node_data.has("body_scene_path"):
+				body = ResourceLoader.load(node_data["body_scene_path"]).instantiate()
+		body.load_body(body_data)
 		bodies_node.add_child(body)
 	
 	file.close()
