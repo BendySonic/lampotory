@@ -5,14 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_up6em"]
 [ext_resource type="Script" path="res://src/main/bodies/tripod_body/pillar_body.gd" id="4_l3fy0"]
 [ext_resource type="Script" path="res://src/main/bodies/tripod_body/tripod_level.gd" id="5_8ytb8"]
-[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/PinPoint.tscn" id="6_210j8"]
+[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/pin_point.tscn" id="6_bnl7i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m0ibl"]
 friction = 0.4
 rough = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p166e"]
-size = Vector2(110, 5)
 
 [sub_resource type="QuadMesh" id="QuadMesh_xh43s"]
 size = Vector2(140, 15)
@@ -28,6 +25,9 @@ size = Vector2(30, 270)
 
 [sub_resource type="QuadMesh" id="QuadMesh_gg3f0"]
 size = Vector2(120, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p166e"]
+size = Vector2(110, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4n4j"]
 size = Vector2(140, 20)
@@ -65,30 +65,25 @@ size = Vector2(40, 50)
 size = Vector2(46, 20)
 
 [node name="TripodBody" type="RigidBody2D" groups=["tripod"]]
+collision_layer = 36995
+collision_mask = 36995
 input_pickable = true
 mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_m0ibl")
 lock_rotation = true
-freeze = true
 script = ExtResource("1_ny3xa")
-start_height = 540.0
-body_scene_path = "res://src/main/bodies/tripod_body.tscn"
+floor_height = 540.0
+body_scene_path = "res://src/main/bodies/tripod_body/tripod_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_tsl72")]
 save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "tripod_level_start_position"),
+NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "tripod_height"),
 NodePath("../PillarBody/TripodLevel/PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
 }
 save_nodes = [NodePath(".."), NodePath("../PillarBody/TripodLevel/PinPoint")]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("3_up6em")]
 main_body = NodePath("..")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(20, 0)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_p166e")
 
 [node name="Visuals" type="Node2D" parent="."]
 modulate = Color(0.372549, 0.709804, 1, 1)
@@ -124,6 +119,12 @@ mesh = SubResource("QuadMesh_rcxbg")
 
 [node name="MeshInstance2D3" type="MeshInstance2D" parent="Visuals/Select"]
 mesh = SubResource("QuadMesh_gg3f0")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(20, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_p166e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(20, 2.5)
@@ -193,7 +194,7 @@ shape = SubResource("RectangleShape2D_tw0ar")
 position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_0eutm")
 
-[node name="PinPoint" parent="PillarBody/TripodLevel" node_paths=PackedStringArray("main_body") instance=ExtResource("6_210j8")]
+[node name="PinPoint" parent="PillarBody/TripodLevel" node_paths=PackedStringArray("main_body") instance=ExtResource("6_bnl7i")]
 modulate = Color(0, 0.705882, 0.466667, 1)
 position = Vector2(-70, 0)
 scale = Vector2(1.5, 1.5)
@@ -201,7 +202,7 @@ main_body = NodePath("../../..")
 
 [node name="InputComponent" parent="PillarBody/TripodLevel/PinPoint" node_paths=PackedStringArray("main_body") instance=ExtResource("3_up6em")]
 main_body = NodePath("../../../..")
-hold_type = 1
+disabled = true
 
 [node name="Stop" type="CharacterBody2D" parent="PillarBody"]
 position = Vector2(40, -250)

@@ -38,9 +38,9 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_fpe1c"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_khfpa"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ida0p"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fceot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
 content_margin_right = 11.0
@@ -118,7 +118,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_fpe1c")
+button_group = SubResource("ButtonGroup_khfpa")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
 icon_size = Vector2(50, 50)
@@ -129,7 +129,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_ida0p")
+button_group = SubResource("ButtonGroup_fceot")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
 icon_size = Vector2(50, 50)

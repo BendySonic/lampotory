@@ -23,7 +23,7 @@ const ITEMS_WINDOW = "ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
-const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/VBoxContainer"
+const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/VBoxContainer/"
 
 const PLAYER_WINDOW = "PlayerWindow/"
 const PLAY_BUTTON = PLAYER_WINDOW + "Player/Play/PlayButton"
@@ -52,6 +52,7 @@ const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
 
 @onready var properties_window := get_node(PROPERTIES_WINDOW) as Control
 @onready var properties_box := get_node(PROPERTIES_BOX) as VBoxContainer
+@onready var no_properties_label := get_node(PROPERTIES_BOX + "NoPropertiesLabel") as Label
 
 @onready var actions_window := get_node(ACTIONS_WINDOW) as Control
 @onready var actions_box := get_node(ACTIONS_BOX) as VBoxContainer
@@ -116,6 +117,7 @@ func _on_edit_button_id_pressed(id: int):
 		get_tree().change_scene_to_file("res://src/menu/menu.tscn")
 #endregion
 
+
 #region ItemsWindow
 func create_items(item_resources: Array[ItemResource]):
 	for item_data in item_resources:
@@ -140,7 +142,7 @@ func create_actions(cursor: GUICursor):
 	cut_button.modulate = Color(0.812, 0.812, 0.812)
 	delete_button.set_disabled(true)
 	delete_button.modulate = Color(0.812, 0.812, 0.812)
-	show_actions_window()
+	actions_window.set_visible(true)
 
 func create_actions_with_body(body: NormalBody):
 	actions_window.set_global_position(body.get_screen_transform().origin)
@@ -150,40 +152,31 @@ func create_actions_with_body(body: NormalBody):
 	cut_button.modulate = Color(1, 1, 1)
 	delete_button.set_disabled(false)
 	delete_button.modulate = Color(1, 1, 1)
-	show_actions_window()
+	actions_window.set_visible(true)
 
 func delete_actions():
-	hide_actions_window()
+	actions_window.set_visible(false)
+
 
 func create_properties(body: NormalBody):
 	delete_properties()
 	properties_window.set_position(actions_window.get_position() + Vector2(0, 50))
-	show_properties_window()
+	properties_window.set_visible(true)
 	var body_properties = body.get_properties()
 	
+	no_properties_label.set_visible(body_properties.is_empty())
 	for body_property in body_properties:
 		var value = body.get_property(body_property)
 		
 		var new_property = property_scene.instantiate()
-		new_property.init(body, body_property, value)
+		new_property.create_property(body, body_property, value)
 		properties_box.add_child(new_property)
 
 func delete_properties():
-	hide_properties_window()
-	for child in properties_box.get_children():
-		child.queue_free()
-
-func hide_actions_window():
-	actions_window.set_visible(false)
-
-func show_actions_window():
-	actions_window.set_visible(true)
-
-func hide_properties_window():
 	properties_window.set_visible(false)
-
-func show_properties_window():
-	properties_window.set_visible(true)
+	for child in properties_box.get_children():
+		if not child == no_properties_label:
+			child.queue_free()
 
 
 func _on_copy_button_down():

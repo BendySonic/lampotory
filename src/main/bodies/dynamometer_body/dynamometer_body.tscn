@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/main/bodies/additional/components/save_component.gd" id="2_vvbyk"]
 [ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_bsohi"]
 [ext_resource type="PackedScene" uid="uid://bnge3mi3iwtub" path="res://src/main/bodies/additional/components/spring_component.tscn" id="4_a0a2n"]
-[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/PinPoint.tscn" id="5_do3q0"]
+[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/pin_point.tscn" id="5_fqyc1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_effc7"]
 friction = 0.3
@@ -39,16 +39,12 @@ center_of_mass_mode = 1
 center_of_mass = Vector2(0, 25)
 freeze_mode = 1
 script = ExtResource("1_2783h")
-length_coeff = 6.0
-width_coeff = 17.0
-skew_coeff = 2.5
-ring_count = 5.0
 body_scene_path = "res://src/main/bodies/dynamometer_body/dynamometer_body.tscn"
 
 [node name="SaveComponent" type="Node" parent="." node_paths=PackedStringArray("save_nodes")]
 script = ExtResource("2_vvbyk")
 save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "tripod_level_start_position"),
+NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "place_holder_start_position"),
 NodePath("../PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect"),
 NodePath("../PlaceHolder/PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
 }
@@ -91,6 +87,7 @@ mesh = SubResource("QuadMesh_n63it")
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0.243137, 0.584314, 0.988235, 1)
+z_index = 10
 mesh = SubResource("QuadMesh_c1e5m")
 
 [node name="MeshInstance2D3" type="MeshInstance2D" parent="Visuals"]
@@ -157,6 +154,7 @@ position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_bjogw")
 
 [node name="PlaceHolder" type="RigidBody2D" parent="."]
+z_index = 10
 position = Vector2(0, 117)
 mass = 0.01
 gravity_scale = 0.0
@@ -165,12 +163,15 @@ gravity_scale = 0.0
 shape = SubResource("CircleShape2D_04blo")
 disabled = true
 
-[node name="PinPoint" parent="PlaceHolder" node_paths=PackedStringArray("main_body") instance=ExtResource("5_do3q0")]
+[node name="PinPoint" parent="PlaceHolder" node_paths=PackedStringArray("main_body") instance=ExtResource("5_fqyc1")]
 modulate = Color(0, 0.803922, 0.447059, 1)
 main_body = NodePath("../..")
 disconnect_on_hold = true
 
-[node name="PinPoint" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("5_do3q0")]
+[node name="InputComponent" parent="PlaceHolder/PinPoint" instance=ExtResource("3_bsohi")]
+disabled = true
+
+[node name="PinPoint" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("5_fqyc1")]
 modulate = Color(0, 0.803922, 0.447059, 1)
 position = Vector2(0, -20)
 main_body = NodePath("..")

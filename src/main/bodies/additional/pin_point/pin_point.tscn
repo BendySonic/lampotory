@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs410o4h85bjo"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/pin_point/pin_point.gd" id="1_os6ct"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/pin_point/detect_area.gd" id="2_nsklt"]
+[ext_resource type="Script" path="res://src/main/bodies/additional/pin_point/connect_area.gd" id="3_f7ikp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yim6d"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb6wa"]
+size = Vector2(25, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljcg6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1wgu"]
+size = Vector2(5, 5)
+
+[node name="PinPoint" type="StaticBody2D"]
+collision_layer = 32768
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_os6ct")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_yim6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gb6wa")
+
+[node name="DetectArea" type="Area2D" parent="." groups=["pin_point"]]
+script = ExtResource("2_nsklt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("RectangleShape2D_ljcg6")
+
+[node name="ConnectArea" type="Area2D" parent="."]
+script = ExtResource("3_f7ikp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectArea"]
+shape = SubResource("RectangleShape2D_a1wgu")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+bias = 0.25
+disable_collision = false
+
+[connection signal="area_entered" from="ConnectArea" to="ConnectArea" method="_on_area_entered"]

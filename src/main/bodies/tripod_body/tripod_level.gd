@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal unhold(level_position: Vector2)
+signal unhold(tripod_height: Vector2)
 
 var hold := false
 

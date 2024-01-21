@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://d4gyqud7xbsin"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_5j6ac"]
+[ext_resource type="Texture2D" uid="uid://4y87n5ijlogi" path="res://assets/graphic/gui/icons/items/block.png" id="1_scogn"]
+[ext_resource type="PackedScene" uid="uid://dinm4ywrs41ww" path="res://src/main/bodies/block_body/block_body.tscn" id="2_hhvwp"]
+
+[resource]
+script = ExtResource("1_5j6ac")
+item_name = "Деревянный брусок"
+item_tooltip = "Обычный прямоугольный деревянный брусок."
+item_icon = ExtResource("1_scogn")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_hhvwp")
+metadata/total_gravity = false

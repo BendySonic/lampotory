@@ -16,12 +16,13 @@ enum Player {PLAY, PAUSE}
 
 static var count: int = 0
 
-@export var body_scene_path: String
 # Data
 @export var properties: Dictionary
 var state: States = States.NORMAL
 var player: Player = Player.PLAY
-# Save data
+# Loadable
+@export var body_scene_path: String
+# Save system
 var save_data: Dictionary
 var is_loaded := false
 # Nodes
@@ -33,12 +34,10 @@ var is_loaded := false
 
 
 #region Initialization
-func create_body(body_scene_arg):
-	self.body_scene_path = body_scene_arg.resource_path
+func create_body():
 	self.properties = properties.duplicate()
 
-func create_copy_body(body_scene_arg: PackedScene, properties_arg: Dictionary):
-	self.body_scene_path = body_scene_arg.resource_path
+func create_copy_body(properties_arg: Dictionary):
 	self.properties = properties_arg.duplicate()
 
 func load_body(save_data_arg: Dictionary):
@@ -53,8 +52,7 @@ func _notification(what):
 
 func _ready():
 	save_component.load_data(save_data, self)
-	_set_start_position()
-	_fix_freeze()
+	prepare_body()
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
 
@@ -74,22 +72,21 @@ func _input(event):
 
 func _on_data_edited(property_name: String, value: Variant):
 	set_property(property_name, value)
-	load_data()
+	reload_data()
 	emit_signal("data_changed")
 
 func _on_body_defined():
-	load_data()
+	reload_data()
 #endregion
 
 
 #region Ready methods
-func _set_start_position():
-	if not is_loaded and not is_in_group("tripod"):
-		self.global_position = Global.cursor.global_position
+func prepare_body():
+	set_start_position()
 
-func _fix_freeze():
-	if freeze:
-		linear_velocity = Vector2(0, 0)
+func set_start_position():
+	if not is_loaded:
+		self.global_position = Global.cursor.global_position
 #endregion
 
 
@@ -129,7 +126,7 @@ func set_unhold():
 
 func is_held() -> bool:
 	return (is_state(States.STATIC_HOLD) or is_state(States.PIN_HOLD))
-
+#endregion
 
 #region Select
 func select_body():
@@ -138,11 +135,13 @@ func select_body():
 func deselect_body():
 	input_component.deselect_body()
 
-func set_selected():
+func set_select():
 	set_state(States.SELECTED)
+	emit_signal("body_selected", self)
 
-func set_deselected():
+func set_deselect():
 	set_state(States.NORMAL)
+	emit_signal("body_deselected", self)
 
 func is_selected() -> bool:
 	return is_state(States.SELECTED)
@@ -150,7 +149,7 @@ func is_selected() -> bool:
 
 
 #region Data
-func load_data():
+func reload_data():
 	for property_name in get_properties():
 		if property_name in self:
 			self.set(property_name, get_property(property_name))
@@ -175,10 +174,12 @@ func set_velocity(direction: Vector2):
 	if body_defined:
 		physics_state.set_linear_velocity(direction)
 
-
 #region Save/Load body
 func save_body():
 	return save_component.save_data()
+
+func prepare_save():
+	pass
 #endregion
 
 

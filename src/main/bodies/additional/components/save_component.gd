@@ -8,7 +8,9 @@ func save_data():
 	var save_data: Dictionary
 	
 	for node in save_nodes:
+		node.prepare_save()
 		var node_path = get_path_to(node)
+		
 		save_data[node_path] = Dictionary()
 		var node_data = save_data[node_path]
 		
@@ -21,6 +23,7 @@ func save_data():
 				node_data[property_name] = (
 						value.duplicate() if value is Dictionary else value
 				)
+	print(save_data)
 	return save_data
 
 func load_data(save_data: Dictionary, body: NormalBody):

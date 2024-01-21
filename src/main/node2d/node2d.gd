@@ -107,14 +107,10 @@ func load_project(name: String):#file_path: String):
 	var bodies = LampFileManager.load_file(Global.project_data["project_name"])
 	await(get_tree().create_timer(0.3).timeout)
 	for body in bodies.get_children():
+		connect_body_signals(body)
 		bodies.remove_child(body)
-		body.connect("body_static_held", _on_body_held)
-		body.connect("body_pin_held", _on_body_held)
-		body.connect("body_unheld", _on_body_unheld)
-		body.connect("body_selected", _on_body_selected)
-		body.connect("body_deselected", _on_body_deselected)
-		bodies_node.add_child(body, false)
-		bodies.queue_free()
+		bodies_node.add_child(body, true)
+	bodies.queue_free()
 	# Save configure data
 	Global.project_data = bodies.project_data
 #endregion
@@ -134,18 +130,26 @@ func reload():
 #endregion
 
 
+#region New body
+func new_body(body_scene: PackedScene):
+	var body = body_scene.instantiate()
+	connect_body_signals(body)
+	return body
+
+func connect_body_signals(body: NormalBody):
+	body.connect("body_static_held", _on_body_held)
+	body.connect("body_pin_held", _on_body_held)
+	body.connect("body_unheld", _on_body_unheld)
+	body.connect("body_selected", _on_body_selected)
+	body.connect("body_deselected", _on_body_deselected)
+#endregion
+
 #region Bodies
-# TODO - Fix body spawn (Check for another bodies)
 func create_body():
 	if not selected_item_data == null and not get_tree().paused:
 		var item_data = selected_item_data
-		var body = item_data.item_scene.instantiate()
-		body.connect("body_static_held", _on_body_held)
-		body.connect("body_pin_held", _on_body_held)
-		body.connect("body_unheld", _on_body_unheld)
-		body.connect("body_selected", _on_body_selected)
-		body.connect("body_deselected", _on_body_deselected)
-		body.create_body(item_data.item_scene)
+		var body = new_body(item_data.item_scene)
+		body.create_body()
 		bodies_node.add_child(body, true)
 		body.hold_body()
 		
@@ -154,16 +158,8 @@ func create_body():
 func create_copy_body():
 	if not buffer_body == null:
 		var body_scene = ResourceLoader.load(buffer_body.body_scene_path)
-		var body = body_scene.instantiate()
-		body.connect("body_static_held", _on_body_held)
-		body.connect("body_pin_held", _on_body_held)
-		body.connect("body_unheld", _on_body_unheld)
-		body.connect("body_selected", _on_body_selected)
-		body.connect("body_deselected", _on_body_deselected)
-		body.create_copy_body(
-				buffer_body.body_scene, 
-				buffer_body.get_properties()
-		)
+		var body = new_body(body_scene)
+		body.create_copy_body(buffer_body.get_properties())
 		bodies_node.add_child(body)
 
 func delete_body(body_id: String):

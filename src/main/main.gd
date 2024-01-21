@@ -23,11 +23,11 @@ func _enter_tree():
 	node2d = get_node("Node2D")
 
 func _ready():
-	set_mode(project_modes[Global.project_data["project_mode"]])
 	if Global.project_data["is_saved"]:
 		await node2d.load_project(Global.project_data["project_name"])
 	else:
 		node2d.first_project_load()
+		set_mode(project_modes[Global.project_data["project_mode"]])
 	
 	gui.connect("item_pressed", _on_item_pressed)
 	gui.connect("item_released", _on_item_released)

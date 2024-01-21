@@ -21,13 +21,15 @@ var is_move_to_connect := false
 @onready var input_component: InputComponent = get_node("InputComponent")
 
 func _ready():
-	main_body.connect("rigid_body_defined", _on_main_body_defined)
-	main_body.connect("body_unheld", _on_body_unheld)
-	main_body.connect("body_static_held", _on_static_body_held)
+	if not main_body == null:
+		main_body.connect("rigid_body_defined", _on_main_body_defined, CONNECT_ONE_SHOT)
+		main_body.connect("body_unheld", _on_body_unheld)
+		main_body.connect("body_static_held", _on_static_body_held)
 
 func _on_main_body_defined():
 	if is_connected:
-		connected_pin_point = get_node(connected_pin_point_path)
+		while connected_pin_point == null:
+			connected_pin_point = get_node(connected_pin_point_path)
 		connect_pin_point(connected_pin_point)
 
 func _physics_process(delta):
@@ -68,13 +70,15 @@ func connect_pin_point(pin_point: PinPoint):
 			or (is_connected and main_body.is_loaded)
 	):
 		move_to_connect()
+		var layer_arg = main_body.collision_layer
+		var mask_arg = main_body.collision_mask
 		main_body.collision_layer = 0
 		main_body.collision_mask = 0
 		await moved_to_connect
 		pin_joint.node_a = pin_joint.get_path_to(get_parent())
 		pin_joint.node_b = pin_joint.get_path_to(pin_point.get_parent())
-		main_body.collision_layer = 1
-		main_body.collision_mask = 1
+		main_body.collision_layer = layer_arg
+		main_body.collision_mask = mask_arg
 
 func disconnect_pin_points():
 	for area in detect_area.get_overlapping_areas():
@@ -103,3 +107,6 @@ func move_to_connect():
 
 func get_main_body():
 	return main_body
+	
+func prepare_save():
+	pass
