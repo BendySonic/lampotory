@@ -3,7 +3,7 @@ extends Control
 # Class for menu
 
 
-const SAVE_DIR = "res://saves/"
+const SAVE_DIR = "saves/"
 
 const BUTTONS = "Panel/Panel/Menu/Menu/Menu/Buttons/"
 const WORKSPACE = "Panel/Panel/Workspace/"
@@ -57,6 +57,7 @@ func _on_mechanic_gui_input(event):
 func load_projects():
 	var file_names = DirAccess.get_files_at(SAVE_DIR)
 	for file_name in file_names:
+		print(file_names)
 		var file = FileAccess.open(SAVE_DIR + file_name, FileAccess.READ)
 		var save: Dictionary = file.get_var()
 		var project_data = save["project_data"]

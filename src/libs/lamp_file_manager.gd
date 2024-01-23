@@ -21,7 +21,7 @@ static func unpack_data(file: FileAccess) -> Array[Dictionary]:
 	return bodies_properties
 
 static func save_file(bodies_node: Node2D, name: String):
-	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.WRITE)
+	var file = FileAccess.open("saves/" + name + ".dlmp", FileAccess.WRITE)
 	
 	var save_data: Dictionary = {}
 	for body in bodies_node.get_children():
@@ -33,7 +33,7 @@ static func save_file(bodies_node: Node2D, name: String):
 
 
 static func load_file(name: String):
-	var file = FileAccess.open("res://saves/" + name + ".dlmp", FileAccess.READ)
+	var file = FileAccess.open("saves/" + name + ".dlmp", FileAccess.READ)
 	var save_data: Dictionary = file.get_var()
 	var bodies_node = Bodies.new()
 	

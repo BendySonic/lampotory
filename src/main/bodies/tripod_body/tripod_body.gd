@@ -10,6 +10,7 @@ extends NormalBody
 func prepare_body():
 	set_start_position()
 	tripod_level.position.y = tripod_height.y
+	set_deferred("freeze", true)
 
 # Save tripod level
 func _on_tripod_level_unhold(tripod_height_arg: Vector2):
