@@ -8,12 +8,13 @@ signal pin_point_disconnected()
 @export var main_body: NormalBody
 @export var disconnect_on_hold: bool
 
+# Loadable
 var connected_pin_point_path: NodePath
+# State
 var connected_pin_point: PinPoint
 var is_connected := false
 var has_connect := false
-
-var is_move_to_connect := false
+var is_move_to_contact := false
 	
 @onready var pin_joint: PinJoint2D = get_node("PinJoint2D")
 @onready var detect_area: DetectArea = get_node("DetectArea")
@@ -34,9 +35,9 @@ func _on_main_body_defined():
 
 func _physics_process(delta):
 	if connect_area.has_contact:
-		is_move_to_connect = false
+		is_move_to_contact = false
 		emit_signal("moved_to_connect")
-	if is_move_to_connect:
+	if is_move_to_contact:
 		main_body.set_velocity(
 				(connected_pin_point.global_position - self.global_position) * 20
 		)
@@ -56,9 +57,8 @@ func connect_pin_points():
 			if pin_point.connected_pin_point == self:
 				continue
 			
-			connect_pin_point(pin_point)
-			
 			connected_pin_point = pin_point
+			await connect_pin_point(pin_point)
 			connected_pin_point_path = get_path_to(pin_point)
 			is_connected = true
 			pin_point.has_connect = true
@@ -81,17 +81,17 @@ func connect_pin_point(pin_point: PinPoint):
 		main_body.collision_mask = mask_arg
 
 func disconnect_pin_points():
+	is_move_to_contact = false
+	
 	for area in detect_area.get_overlapping_areas():
 		if area is DetectArea:
 			var pin_point = area.get_parent()
 			
-			if pin_point.connected_pin_point == self:
+			if pin_point.is_connected or pin_point.has_connect:
 				pin_point.clear()
 			
-			is_move_to_connect = false
-			pin_point.emit_signal("pin_point_disconnected")
-			emit_signal("pin_point_disconnected")
-			break
+				pin_point.emit_signal("pin_point_disconnected")
+				emit_signal("pin_point_disconnected")
 	clear()
 
 func clear():
@@ -102,8 +102,12 @@ func clear():
 	is_connected = false
 	has_connect = false
 
+func disconnect_cursor():
+	if Global.cursor.is_hold(get_parent()):
+		Global.cursor.unhold_body()
+
 func move_to_connect():
-	is_move_to_connect = true
+	is_move_to_contact = true
 
 func get_main_body():
 	return main_body

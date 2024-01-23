@@ -1,16 +1,18 @@
 class_name DynamometerBody
 extends NormalBody
 
-var place_holder_start_position: Vector2
+var place_holder_height: Vector2
 @onready var place_holder = get_node("PlaceHolder")
+
 
 func prepare_body():
 	super()
 	if is_loaded:
-		place_holder.position = place_holder_start_position
+		place_holder.position = place_holder_height
 
+# Save PlaceHolder level
 func _physics_process(delta):
-	place_holder_start_position = place_holder.position
+	place_holder_height = place_holder.position
 
 
 #func _input(event):

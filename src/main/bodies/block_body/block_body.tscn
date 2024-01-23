@@ -51,8 +51,8 @@ NodePath("../PinPoint2"): PackedStringArray("connected_pin_point_path", "is_conn
 }
 save_nodes = [NodePath(".."), NodePath("../PinPoint"), NodePath("../PinPoint2")]
 
-[node name="InputComponent" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("3_0ei2d")]
-main_body = NodePath("..")
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_0ei2d")]
+input_body = NodePath("..")
 hold_type = 1
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -93,8 +93,8 @@ position = Vector2(-43, 0)
 main_body = NodePath("..")
 disconnect_on_hold = true
 
-[node name="InputComponent" parent="PinPoint" node_paths=PackedStringArray("main_body") instance=ExtResource("3_0ei2d")]
-main_body = NodePath("../..")
+[node name="InputComponent" parent="PinPoint" node_paths=PackedStringArray("input_body") instance=ExtResource("3_0ei2d")]
+input_body = NodePath("../..")
 hold_type = 2
 
 [node name="PinPoint2" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("4_brbf5")]
@@ -103,8 +103,8 @@ position = Vector2(43, 0)
 main_body = NodePath("..")
 disconnect_on_hold = true
 
-[node name="InputComponent" parent="PinPoint2" node_paths=PackedStringArray("main_body") instance=ExtResource("3_0ei2d")]
-main_body = NodePath("../..")
+[node name="InputComponent" parent="PinPoint2" node_paths=PackedStringArray("input_body") instance=ExtResource("3_0ei2d")]
+input_body = NodePath("../..")
 hold_type = 2
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

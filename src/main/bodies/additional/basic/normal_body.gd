@@ -15,6 +15,9 @@ enum States {NORMAL, STATIC_HOLD, PIN_HOLD, SELECTED}
 enum Player {PLAY, PAUSE}
 
 static var count: int = 0
+# Save system
+var save_data: Dictionary
+var is_loaded := false
 
 # Data
 @export var properties: Dictionary
@@ -22,9 +25,8 @@ var state: States = States.NORMAL
 var player: Player = Player.PLAY
 # Loadable
 @export var body_scene_path: String
-# Save system
-var save_data: Dictionary
-var is_loaded := false
+# Special
+var scroll_timer: Timer = Timer.new()
 # Nodes
 @onready var select := get_node("Visuals/Select") as Node2D
 # Components
@@ -53,6 +55,7 @@ func _notification(what):
 func _ready():
 	save_component.load_data(save_data, self)
 	prepare_body()
+	prepare_scroll_timer()
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
 
@@ -62,13 +65,19 @@ func _input(event):
 		if event.button_index == 4:
 			if event.is_pressed():
 				if is_state(States.STATIC_HOLD) and not is_in_group("tripod"):
-					var rotated_tf = physics_state.transform.rotated_local(0.393)
-					physics_state.transform = rotated_tf
+					scroll_timer.stop()
+					angular_velocity = PI / 6 * 10.5
+					scroll_timer.start()
 		elif event.button_index == 5:
 			if event.is_pressed():
-				if  is_state(States.STATIC_HOLD) and not is_in_group("tripod"):
-					var rotated_tf = physics_state.transform.rotated_local(-0.393)
-					physics_state.transform = rotated_tf
+				if is_state(States.STATIC_HOLD) and not is_in_group("tripod"):
+					scroll_timer.stop()
+					angular_velocity = -PI / 6 * 10.5
+					scroll_timer.start()
+
+func _on_scroll_timer_timeout():
+	angular_velocity = 0
+	scroll_timer.stop()
 
 func _on_data_edited(property_name: String, value: Variant):
 	set_property(property_name, value)
@@ -81,6 +90,11 @@ func _on_body_defined():
 
 
 #region Ready methods
+func prepare_scroll_timer():
+	scroll_timer.connect("timeout", _on_scroll_timer_timeout)
+	scroll_timer.wait_time = 0.05
+	add_child(scroll_timer)
+
 func prepare_body():
 	set_start_position()
 
@@ -153,8 +167,8 @@ func reload_data():
 	for property_name in get_properties():
 		if property_name in self:
 			self.set(property_name, get_property(property_name))
-		elif property_name in physics_state:
-			physics_state.set(property_name, get_property(property_name))
+		#lif property_name in physics_state:
+		#	physics_state.set(property_name, get_property(property_name))
 	sleeping = false
 
 func set_property(property_name: String, value: Variant):
@@ -172,7 +186,7 @@ func get_id() -> String:
 
 func set_velocity(direction: Vector2):
 	if body_defined:
-		physics_state.set_linear_velocity(direction)
+		linear_velocity = direction
 
 #region Save/Load body
 func save_body():

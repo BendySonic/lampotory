@@ -20,6 +20,8 @@ const WORKSPACE = "Panel/Panel/Workspace/"
 @onready var my_projects_container := get_node(WORKSPACE + "MyProjects")
 @onready var my_projects_grid_container := get_node(WORKSPACE + "MyProjects/ScrollContainer/GridContainer")
 
+func _init():
+	print("EOROR")
 
 # TODO - Develop create project window
 func _set_invisible_containers():

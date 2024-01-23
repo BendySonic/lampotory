@@ -82,8 +82,8 @@ NodePath("../PillarBody/TripodLevel/PinPoint"): PackedStringArray("connected_pin
 }
 save_nodes = [NodePath(".."), NodePath("../PillarBody/TripodLevel/PinPoint")]
 
-[node name="InputComponent" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("3_up6em")]
-main_body = NodePath("..")
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_up6em")]
+input_body = NodePath("..")
 
 [node name="Visuals" type="Node2D" parent="."]
 modulate = Color(0.372549, 0.709804, 1, 1)
@@ -200,8 +200,7 @@ position = Vector2(-70, 0)
 scale = Vector2(1.5, 1.5)
 main_body = NodePath("../../..")
 
-[node name="InputComponent" parent="PillarBody/TripodLevel/PinPoint" node_paths=PackedStringArray("main_body") instance=ExtResource("3_up6em")]
-main_body = NodePath("../../../..")
+[node name="InputComponent" parent="PillarBody/TripodLevel/PinPoint" instance=ExtResource("3_up6em")]
 disabled = true
 
 [node name="Stop" type="CharacterBody2D" parent="PillarBody"]

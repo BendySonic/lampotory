@@ -44,14 +44,14 @@ body_scene_path = "res://src/main/bodies/dynamometer_body/dynamometer_body.tscn"
 [node name="SaveComponent" type="Node" parent="." node_paths=PackedStringArray("save_nodes")]
 script = ExtResource("2_vvbyk")
 save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "place_holder_start_position"),
+NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "place_holder_height"),
 NodePath("../PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect"),
 NodePath("../PlaceHolder/PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
 }
 save_nodes = [NodePath(".."), NodePath("../PlaceHolder/PinPoint"), NodePath("../PinPoint")]
 
-[node name="InputComponent" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("3_bsohi")]
-main_body = NodePath("..")
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_bsohi")]
+input_body = NodePath("..")
 hold_type = 1
 
 [node name="SpringComponent" parent="." instance=ExtResource("4_a0a2n")]
@@ -168,7 +168,8 @@ modulate = Color(0, 0.803922, 0.447059, 1)
 main_body = NodePath("../..")
 disconnect_on_hold = true
 
-[node name="InputComponent" parent="PlaceHolder/PinPoint" instance=ExtResource("3_bsohi")]
+[node name="InputComponent" parent="PlaceHolder/PinPoint" node_paths=PackedStringArray("input_body") instance=ExtResource("3_bsohi")]
+input_body = NodePath("../..")
 disabled = true
 
 [node name="PinPoint" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("5_fqyc1")]
@@ -177,6 +178,6 @@ position = Vector2(0, -20)
 main_body = NodePath("..")
 disconnect_on_hold = true
 
-[node name="InputComponent" parent="PinPoint" node_paths=PackedStringArray("main_body") instance=ExtResource("3_bsohi")]
-main_body = NodePath("../..")
+[node name="InputComponent" parent="PinPoint" node_paths=PackedStringArray("input_body") instance=ExtResource("3_bsohi")]
+input_body = NodePath("../..")
 hold_type = 2

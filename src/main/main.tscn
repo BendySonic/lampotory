@@ -264,6 +264,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ItemsBox" type="GridContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
+theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 70
 columns = 2
 

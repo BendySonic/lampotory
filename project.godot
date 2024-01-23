@@ -34,7 +34,6 @@ movie_writer/speaker_mode=1
 movie_writer/mjpeg_quality=0.65
 movie_writer/movie_file="C:/Users/nurba/video2.avi"
 movie_writer/fps=24
-export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
@@ -88,17 +87,21 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_jitter_fix=2.0
+common/max_physics_steps_per_frame=12
+common/physics_jitter_fix=4.0
 2d/physics_engine="GodotPhysics2D"
 3d/default_angular_damp=2.0
 2d/default_angular_damp=1.25
+2d/sleep_threshold_linear=0.0
+2d/sleep_threshold_angular=0.0
+2d/time_before_sleep=6000.0
 2d/solver/default_contact_bias=1.0
 2d/solver/default_constraint_bias=1.0
 
 [rendering]
 
+gl_compatibility/driver.windows="opengl3_angle"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-viewport/size/borderless=false
 viewport/defaults/default_clear_color=Color(1, 1, 1, 1)

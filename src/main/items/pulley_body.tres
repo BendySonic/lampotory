@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_edkhl")
-item_name = "Блок"
+item_name = "Механич. блок"
 item_tooltip = "Изменяет направление силы"
 item_icon = ExtResource("1_uk8ek")
 item_modulate = Color(0.52549, 0.698039, 0.996078, 1)

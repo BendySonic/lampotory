@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://src/main/bodies/rope_body/rope_part.gd" id="1_qdg4w"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e1h0y"]
-friction = 0.0
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gqgql"]
+friction = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pp42t"]
 radius = 8.0
@@ -13,7 +13,8 @@ collision_layer = 32768
 collision_mask = 128
 input_pickable = true
 mass = 0.01
-physics_material_override = SubResource("PhysicsMaterial_e1h0y")
+physics_material_override = SubResource("PhysicsMaterial_gqgql")
+can_sleep = false
 continuous_cd = 1
 script = ExtResource("1_qdg4w")
 
@@ -22,5 +23,5 @@ shape = SubResource("CircleShape2D_pp42t")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
-bias = 0.5
-softness = 3.0
+bias = 0.2
+softness = 2.0
