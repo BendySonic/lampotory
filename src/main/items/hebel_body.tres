@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dcnfqla7lttq7"]
+
+[ext_resource type="Texture2D" uid="uid://cjprv1o8n78rt" path="res://assets/graphic/gui/icons/items/hebel.png" id="1_aqnix"]
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_mv22b"]
+[ext_resource type="PackedScene" uid="uid://djgwwfw1otq17" path="res://src/main/bodies/hebel_body/hebel_body.tscn" id="2_ckbx4"]
+
+[resource]
+script = ExtResource("1_mv22b")
+item_name = "Рычаг"
+item_tooltip = "Рычаг, вращающийся по правилу моментов"
+item_icon = ExtResource("1_aqnix")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_ckbx4")

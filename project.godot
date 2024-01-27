@@ -51,6 +51,13 @@ folder_colors={
 import/blender/enabled.android=true
 import/fbx/enabled.android=true
 
+[importer_defaults]
+
+bitmap={
+"create_from": 0,
+"threshold": 0.5
+}
+
 [input]
 
 create={
@@ -87,8 +94,8 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 [physics]
 
 2d/run_on_separate_thread=true
-common/max_physics_steps_per_frame=12
-common/physics_jitter_fix=4.0
+common/max_physics_steps_per_frame=6
+common/physics_jitter_fix=2.0
 2d/physics_engine="GodotPhysics2D"
 3d/default_angular_damp=2.0
 2d/default_angular_damp=1.25

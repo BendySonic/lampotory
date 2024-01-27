@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5s3e7s5hhejp"]
+[gd_scene load_steps=19 format=3 uid="uid://b5s3e7s5hhejp"]
 
 [ext_resource type="Texture2D" uid="uid://ctd024ouydovk" path="res://assets/graphic/gui/lua/lua_normal.svg" id="1_akp1j"]
+[ext_resource type="Script" path="res://src/main/lua/lua.gd" id="1_q8r22"]
 [ext_resource type="Texture2D" uid="uid://datdv4cptkgbi" path="res://assets/graphic/gui/lua/message.svg" id="2_vd6uu"]
 [ext_resource type="PackedScene" uid="uid://cs8vgaxhy1b5e" path="res://src/menu/gui/gui_left_button.tscn" id="3_4d8m8"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="3_5y306"]
 [ext_resource type="Texture2D" uid="uid://7j7w4axicwxk" path="res://assets/graphic/gui/lua/book.png" id="4_nklj4"]
 [ext_resource type="Texture2D" uid="uid://otmfeintjn32" path="res://assets/graphic/gui/lua/question.png" id="5_he7cl"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="7_32y31"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tutep"]
 
@@ -14,41 +16,265 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58hme"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5yor3"]
+font_size = 40
+font_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[sub_resource type="Animation" id="Animation_a0enb"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Message:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(130, 140), Vector2(-80, -80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Message:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [-0.698132, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Message:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qhve7"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(-80, -80), Vector2(130, 140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Message:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(5, 1),
+"update": 0,
+"values": [0.0, -0.698132]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Message:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Message:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hfqx"]
+_data = {
+"hide": SubResource("Animation_qhve7"),
+"show": SubResource("Animation_a0enb")
+}
+
+[sub_resource type="Animation" id="Animation_hony8"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7),
+"transitions": PackedFloat32Array(0.277392, 2.63902, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Warning:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7),
+"transitions": PackedFloat32Array(0.320001, 3.03143, 1),
+"update": 0,
+"values": [Vector2(100, 70), Vector2(0, 60), Vector2(140, 130)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Warning:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7),
+"transitions": PackedFloat32Array(0.435275, 1, 1),
+"update": 0,
+"values": [0.125831, -0.349066, -0.698132]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Warning:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_740pn"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1.03526),
+"update": 0,
+"values": [-0.698132, 0.125664]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Warning:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 0.535887),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Warning:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.378929, 0.420448),
+"update": 0,
+"values": [Vector2(140, 130), Vector2(100, 70)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Warning:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m7fcq"]
+_data = {
+"hide": SubResource("Animation_hony8"),
+"show": SubResource("Animation_740pn")
+}
+
 [node name="Lua" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_q8r22")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_left = 110.0
-offset_top = 100.0
-offset_right = 190.0
-offset_bottom = 170.0
+offset_left = 119.0
+offset_top = 103.0
+offset_right = 184.0
+offset_bottom = 173.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="Lua" type="TextureButton" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-texture = ExtResource("1_akp1j")
-expand_mode = 3
+toggle_mode = true
+texture_normal = ExtResource("1_akp1j")
+ignore_texture_size = true
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Message" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 offset_left = -80.0
 offset_top = -80.0
-offset_right = 131.639
-offset_bottom = 131.0
+offset_right = 130.0
+offset_bottom = 128.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tutep")
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="Message"]
 layout_mode = 2
 texture = ExtResource("2_vd6uu")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="Label" type="Label" parent="Message"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -60,17 +286,17 @@ text = "Привет, я Луа, виртуальный помощник тво�
 autowrap_mode = 3
 text_overrun_behavior = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Message"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Message/MarginContainer"]
 layout_mode = 2
 
-[node name="Book" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_4d8m8")]
+[node name="BookButton" parent="Message/MarginContainer/VBoxContainer" instance=ExtResource("3_4d8m8")]
 custom_minimum_size = Vector2(85, 75)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -79,7 +305,7 @@ up_icon = ExtResource("4_nklj4")
 icon_size = Vector2(40, 40)
 text_size = 12
 
-[node name="Book2" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_4d8m8")]
+[node name="HelpButton" parent="Message/MarginContainer/VBoxContainer" instance=ExtResource("3_4d8m8")]
 custom_minimum_size = Vector2(85, 75)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -88,7 +314,36 @@ up_icon = ExtResource("5_he7cl")
 icon_size = Vector2(20, 30)
 text_size = 12
 
+[node name="ReturnButton" type="Button" parent="Message/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("7_32y31")
+text = "Назад"
+
+[node name="Warning" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 70.0
+offset_right = 141.0
+offset_bottom = 125.0
+rotation = 0.125664
+theme_override_styles/panel = SubResource("StyleBoxEmpty_58hme")
+
+[node name="TextureRect" type="TextureRect" parent="Warning"]
+layout_mode = 2
+texture = ExtResource("2_vd6uu")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Warning"]
+layout_mode = 2
+text = "!"
+label_settings = SubResource("LabelSettings_5yor3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LineEdit" type="LineEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -104.0
 offset_top = 137.0
@@ -97,3 +352,18 @@ offset_bottom = 161.0
 theme = ExtResource("3_5y306")
 theme_override_font_sizes/font_size = 14
 text = "Напиши мне!"
+
+[node name="MessageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7hfqx")
+}
+speed_scale = 1.4
+
+[node name="WarningAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m7fcq")
+}
+speed_scale = 1.4
+
+[connection signal="toggled" from="MarginContainer/Lua" to="." method="_on_lua_toggled"]
+[connection signal="pressed" from="Message/MarginContainer/VBoxContainer/BookButton" to="." method="_on_book_pressed"]

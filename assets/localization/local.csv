@@ -1,3 +1,9 @@
 ,en,ru
-mass,Body’s mass,Масса тела
-gravity_scale,Gravity scale,Коэффициент графитации
+mass,Body’s mass (kg),Масса тела (кг)
+gravity_scale,Gravity scale,Коэффициент гравитации
+weightless,Weightless mode,Невесомый режим
+angle,Angle (degrees),Угол (градусы)
+width,Width,Длина
+height,Height,Высота
+precise_mode,Precies mode,Высокоточный режим
+friction,Friction,Трение

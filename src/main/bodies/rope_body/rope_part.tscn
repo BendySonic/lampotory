@@ -5,7 +5,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gqgql"]
 friction = 0.5
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pp42t"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhfat"]
 radius = 8.0
 
 [node name="RopePart" type="RigidBody2D"]
@@ -19,9 +19,9 @@ continuous_cd = 1
 script = ExtResource("1_qdg4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_pp42t")
+shape = SubResource("CircleShape2D_nhfat")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
 bias = 0.2
-softness = 2.0
+softness = 1.0

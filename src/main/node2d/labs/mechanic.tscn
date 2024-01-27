@@ -13,6 +13,8 @@ custom_solver_bias = 1.0
 size = Vector2(2000, 1000)
 
 [node name="Mechanic" type="Node2D"]
+show_behind_parent = true
+top_level = true
 z_index = 5
 script = ExtResource("1_tg22m")
 
@@ -23,6 +25,7 @@ collision_mask = 32899
 physics_material_override = SubResource("PhysicsMaterial_y44od")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+z_index = -1
 mesh = SubResource("QuadMesh_ovjyk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

@@ -33,7 +33,7 @@ radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjvwu"]
 custom_solver_bias = 1.0
-size = Vector2(10, 20)
+size = Vector2(15, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_pjieg"]
 bake_interval = 20.0
@@ -43,10 +43,10 @@ _data = {
 point_count = 19
 
 [node name="PulleyBody" type="RigidBody2D"]
+z_as_relative = false
 collision_layer = 4225
 collision_mask = 4225
 input_pickable = true
-mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_oh8me")
 can_sleep = false
 lock_rotation = true
@@ -57,11 +57,6 @@ properties = {
 body_scene_path = "res://src/main/bodies/pulley_body/pulley_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_afsoj")]
-save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path"),
-NodePath("../PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect"),
-NodePath("../RopeBody"): PackedStringArray("curve_points_positions")
-}
 save_nodes = [NodePath(".."), NodePath("../PinPoint"), NodePath("../RopeBody")]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_jd0dn")]
@@ -79,7 +74,7 @@ mesh = SubResource("QuadMesh_tcegb")
 [node name="MeshInstance2D6" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0, 0.737255, 0.486275, 1)
 z_index = 25
-position = Vector2(-36, 2)
+position = Vector2(-38, 2)
 mesh = SubResource("QuadMesh_v1r8n")
 
 [node name="MeshInstance2D5" type="MeshInstance2D" parent="Visuals"]
@@ -91,7 +86,7 @@ mesh = SubResource("QuadMesh_tcegb")
 [node name="MeshInstance2D7" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0, 0.737255, 0.486275, 1)
 z_index = 25
-position = Vector2(36, 2)
+position = Vector2(38, 2)
 mesh = SubResource("QuadMesh_v1r8n")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
@@ -111,11 +106,11 @@ mesh = SubResource("QuadMesh_evqjh")
 shape = SubResource("CircleShape2D_2y02p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(36, 0)
+position = Vector2(38, 0)
 shape = SubResource("RectangleShape2D_xjvwu")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(-36, 0)
+position = Vector2(-38, 0)
 shape = SubResource("RectangleShape2D_xjvwu")
 
 [node name="PinPoint" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("4_6jvb3")]
@@ -134,3 +129,5 @@ length_limit = 175.0
 
 [node name="Path2D" type="Path2D" parent="RopeBody"]
 curve = SubResource("Curve2D_pjieg")
+
+[connection signal="body_unheld" from="." to="." method="_on_body_unheld"]

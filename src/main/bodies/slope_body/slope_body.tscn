@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvtobwoncjpli"]
+
+[ext_resource type="Script" path="res://src/main/bodies/slope_body/slope_body.gd" id="1_2yrwp"]
+[ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/additional/components/save_component.tscn" id="2_tha5i"]
+[ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_0yw26"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fpa0k"]
+rough = true
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_xbt0l"]
+points = PackedVector2Array(0, 0, 0, -100, 200, 0)
+
+[node name="SlopeBody" type="RigidBody2D"]
+z_as_relative = false
+collision_layer = 32769
+collision_mask = 4225
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_fpa0k")
+center_of_mass_mode = 1
+script = ExtResource("1_2yrwp")
+floor_height = 555.0
+properties = {
+"friction": 0.4,
+"height": 100.0,
+"width": 100.0
+}
+body_scene_path = "res://src/main/bodies/slope_body/slope_body.tscn"
+
+[node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_tha5i")]
+save_nodes = [NodePath("..")]
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_0yw26")]
+input_body = NodePath("..")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="Polygon2D" parent="Visuals"]
+color = Color(0, 0.564706, 0.882353, 1)
+polygon = PackedVector2Array(0, 0, 0, -100, 200, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("ConvexPolygonShape2D_xbt0l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_xbt0l")

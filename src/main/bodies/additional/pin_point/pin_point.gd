@@ -6,14 +6,20 @@ signal moved_to_connect()
 signal pin_point_disconnected()
 
 @export var main_body: NormalBody
+@export var data_to_save: PackedStringArray = [
+		"connected_pin_point_path",
+		"is_connected",
+		"has_connect"
+]
 @export var disconnect_on_hold: bool
 
-# Loadable
 var connected_pin_point_path: NodePath
-# State
 var connected_pin_point: PinPoint
+# Connect another body
 var is_connected := false
+# Connected by another body
 var has_connect := false
+
 var is_move_to_contact := false
 	
 @onready var pin_joint: PinJoint2D = get_node("PinJoint2D")
@@ -39,7 +45,7 @@ func _physics_process(delta):
 		emit_signal("moved_to_connect")
 	if is_move_to_contact:
 		main_body.set_velocity(
-				(connected_pin_point.global_position - self.global_position) * 20
+				(connected_pin_point.global_position - self.global_position) * 15
 		)
 
 func _on_static_body_held(_body):
@@ -72,8 +78,7 @@ func connect_pin_point(pin_point: PinPoint):
 		move_to_connect()
 		var layer_arg = main_body.collision_layer
 		var mask_arg = main_body.collision_mask
-		main_body.collision_layer = 0
-		main_body.collision_mask = 0
+		main_body.set_collision_to_pin_point_connect()
 		await moved_to_connect
 		pin_joint.node_a = pin_joint.get_path_to(get_parent())
 		pin_joint.node_b = pin_joint.get_path_to(pin_point.get_parent())

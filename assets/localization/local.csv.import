@@ -13,5 +13,5 @@ dest_files=["res://assets/localization/local.en.translation", "res://assets/loca
 
 [params]
 
-compress=true
+compress=false
 delimiter=0

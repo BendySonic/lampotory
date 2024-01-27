@@ -17,13 +17,15 @@ signal delete_pressed()
 signal save_project_pressed(name: String, theme: String)
 signal open_project_pressed()
 
+signal display_vector_toggled(toggled_on: bool)
+
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
-const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/VBoxContainer/"
+const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/GridContainer/"
 
 const PLAYER_WINDOW = "PlayerWindow/"
 const PLAY_BUTTON = PLAYER_WINDOW + "Player/Play/PlayButton"
@@ -46,12 +48,14 @@ const SAVE_BOX = SAVE_WINDOW + "MarginContainer/VBoxContainer/"
 const PROJECT_NAME_EDIT = SAVE_BOX + "ProjectNameEdit"
 const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
 
+const EDIT_WINDOW = "EditWindow/"
+
 # Children
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
 @onready var items_box := get_node(ITEMS_BOX) as GridContainer
 
 @onready var properties_window := get_node(PROPERTIES_WINDOW) as Control
-@onready var properties_box := get_node(PROPERTIES_BOX) as VBoxContainer
+@onready var properties_box := get_node(PROPERTIES_BOX) as GridContainer
 @onready var no_properties_label := get_node(PROPERTIES_BOX + "NoPropertiesLabel") as Label
 
 @onready var actions_window := get_node(ACTIONS_WINDOW) as Control
@@ -69,10 +73,10 @@ const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
 @onready var edit_button := get_node(EDIT_BUTTON) as MenuButton
 
 @onready var save_window = get_node(SAVE_WINDOW) as PanelContainer
-
 @onready var project_name_edit = get_node(PROJECT_NAME_EDIT) as LineEdit
 @onready var project_theme_edit = get_node(PROJECT_THEME_EDIT) as LineEdit
 
+@onready var edit_window = get_node(EDIT_WINDOW) as PanelContainer
 # Resources
 @onready var item_scene := preload(GUI_PATH + "gui_item.tscn")
 @onready var property_scene := preload(GUI_PATH + "gui_property.tscn")
@@ -115,6 +119,11 @@ func _on_save_button_id_pressed(id: int):
 func _on_edit_button_id_pressed(id: int):
 	if id == 0:
 		get_tree().change_scene_to_file("res://src/menu/menu.tscn")
+	if id == 1:
+		show_edit_window()
+
+func _on_display_vector_button_toggled(toggled_on):
+	emit_signal("display_vector_toggled", toggled_on)
 #endregion
 
 
@@ -219,9 +228,6 @@ func show_save_window():
 func hide_save_window():
 	save_window.set_visible(false)
 
-func _on_exit_button_pressed():
-	hide_save_window()
-
 func _on_save_project_button_pressed():
 	emit_signal(
 			"save_project_pressed", 
@@ -230,7 +236,19 @@ func _on_save_project_button_pressed():
 	)
 #endregion
 
+#region EditWindow
+func show_edit_window():
+	edit_window.set_visible(true)
+	edit_window.set_global_position(Vector2(DisplayServer.window_get_size() / 2)
+			- Vector2(save_window.size / 2))
 
+func hide_edit_window():
+	edit_window.set_visible(false)
+#endregion
+
+func _on_exit_button_pressed():
+	hide_save_window()
+	hide_edit_window()
 
 
 # NOTE:
@@ -248,4 +266,3 @@ func _on_save_project_button_pressed():
 		#cursor_layer.remove_child(child)
 		#child.queue_free()
 #endregion
-

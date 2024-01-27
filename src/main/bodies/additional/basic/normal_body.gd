@@ -21,12 +21,19 @@ var is_loaded := false
 
 # Data
 @export var properties: Dictionary
+@export var data_to_save: PackedStringArray = [
+	"name",
+	"position",
+	"rotation",
+	"linear_velocity",
+	"angular_velocity",
+	"properties",
+	"body_scene_path"
+]
+@export var body_scene_path: String
 var state: States = States.NORMAL
 var player: Player = Player.PLAY
-# Loadable
-@export var body_scene_path: String
-# Special
-var scroll_timer: Timer = Timer.new()
+
 # Nodes
 @onready var select := get_node("Visuals/Select") as Node2D
 # Components
@@ -54,30 +61,10 @@ func _notification(what):
 
 func _ready():
 	save_component.load_data(save_data, self)
+	reload_data()
 	prepare_body()
-	prepare_scroll_timer()
 	connect("data_edited", _on_data_edited)
 	connect("rigid_body_defined", _on_body_defined, CONNECT_ONE_SHOT)
-
-func _input(event):
-	if event is InputEventMouseButton:
-		# Rotation
-		if event.button_index == 4:
-			if event.is_pressed():
-				if is_state(States.STATIC_HOLD) and not is_in_group("tripod"):
-					scroll_timer.stop()
-					angular_velocity = PI / 6 * 10.5
-					scroll_timer.start()
-		elif event.button_index == 5:
-			if event.is_pressed():
-				if is_state(States.STATIC_HOLD) and not is_in_group("tripod"):
-					scroll_timer.stop()
-					angular_velocity = -PI / 6 * 10.5
-					scroll_timer.start()
-
-func _on_scroll_timer_timeout():
-	angular_velocity = 0
-	scroll_timer.stop()
 
 func _on_data_edited(property_name: String, value: Variant):
 	set_property(property_name, value)
@@ -85,16 +72,11 @@ func _on_data_edited(property_name: String, value: Variant):
 	emit_signal("data_changed")
 
 func _on_body_defined():
-	reload_data()
+	pass
 #endregion
 
 
 #region Ready methods
-func prepare_scroll_timer():
-	scroll_timer.connect("timeout", _on_scroll_timer_timeout)
-	scroll_timer.wait_time = 0.05
-	add_child(scroll_timer)
-
 func prepare_body():
 	set_start_position()
 
@@ -195,6 +177,10 @@ func save_body():
 func prepare_save():
 	pass
 #endregion
+
+func set_collision_to_pin_point_connect():
+	collision_layer = 0
+	collision_mask = 0
 
 
 

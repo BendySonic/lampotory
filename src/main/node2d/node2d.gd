@@ -26,11 +26,14 @@ var buffer_body: Variant:
 var is_camera_drag: bool
 var releative_drag_position: Vector2
 
+var is_display_vector: bool = false
+
 @onready var bodies_node := get_node("Bodies") as Node
 @onready var lab := get_node("Enviroment/Lab/Mechanic") as Node
 @onready var camera := get_node("Camera/Camera2D") as Camera2D
 @onready var cursor := get_node("GUICursor") as GUICursor:
 	get = get_cursor
+
 
 
 func _ready():
@@ -54,11 +57,32 @@ func _input(event):
 				is_camera_drag = false
 
 func _process(delta):
+	# Camera
 	if is_camera_drag:
 		camera.global_position += (- camera.to_local(cursor.global_position) +
 				releative_drag_position)
 		releative_drag_position += (camera.to_local(cursor.global_position) - 
 				releative_drag_position)
+
+func _physics_process(delta):
+	# Forces
+	queue_redraw()
+
+func _draw():
+	for body in bodies_node.get_children():
+		var gravity_force = body.mass * Vector2(0, 980) / 20
+		if not gravity_force.length() <= 2 and is_display_vector:
+			var gravity_force_position = body.to_global(body.center_of_mass) + gravity_force
+			draw_line(body.to_global(body.center_of_mass), gravity_force_position, Color.DEEP_SKY_BLUE, 5, true)
+			draw_circle(body.to_global(body.center_of_mass), 5, Color.LIME_GREEN)
+			draw_line(
+					gravity_force_position + Vector2(-10, -10),
+					gravity_force_position, Color.LIME_GREEN, 5, true)
+			draw_line(
+					gravity_force_position + Vector2(10, -10),
+					gravity_force_position, Color.LIME_GREEN, 5, true)
+			draw_circle(gravity_force_position + Vector2(0, -1), 4, Color.LIME_GREEN)
+
 
 #region Body input
 func _on_body_held(body: NormalBody):
@@ -88,14 +112,10 @@ func item_released():
 
 
 #region Saver
-func first_project_load():
-	bodies_node.project_data = Global.project_data
-
 func save_project(name: String, theme: String):
 	Global.project_data["project_name"] = name
 	Global.project_data["project_theme"] = theme
 	Global.project_data["is_saved"] = true
-	bodies_node.project_data = Global.project_data.duplicate()
 	LampFileManager.save_file(bodies_node, name)
 
 func load_project(name: String):#file_path: String):
@@ -111,9 +131,7 @@ func load_project(name: String):#file_path: String):
 		bodies.remove_child(body)
 		bodies_node.add_child(body, true)
 	bodies.queue_free()
-	# Save configure data
-	Global.project_data = bodies.project_data
-#endregion
+	#endregion
 
 
 #region Player
@@ -129,20 +147,6 @@ func reload():
 	await load_project(Global.project_data["project_name"])
 #endregion
 
-
-#region New body
-func new_body(body_scene: PackedScene):
-	var body = body_scene.instantiate()
-	connect_body_signals(body)
-	return body
-
-func connect_body_signals(body: NormalBody):
-	body.connect("body_static_held", _on_body_held)
-	body.connect("body_pin_held", _on_body_held)
-	body.connect("body_unheld", _on_body_unheld)
-	body.connect("body_selected", _on_body_selected)
-	body.connect("body_deselected", _on_body_deselected)
-#endregion
 
 #region Bodies
 func create_body():
@@ -211,6 +215,24 @@ func is_any_body_mouse_inside() -> bool:
 			return true
 	return false
 #endregion
+
+
+#region New body
+func new_body(body_scene: PackedScene):
+	var body = body_scene.instantiate()
+	connect_body_signals(body)
+	return body
+
+func connect_body_signals(body: NormalBody):
+	body.connect("body_static_held", _on_body_held)
+	body.connect("body_pin_held", _on_body_held)
+	body.connect("body_unheld", _on_body_unheld)
+	body.connect("body_selected", _on_body_selected)
+	body.connect("body_deselected", _on_body_deselected)
+#endregion
+
+func display_vector(toggled_on: bool):
+	is_display_vector = toggled_on
 
 func get_cursor():
 	return cursor

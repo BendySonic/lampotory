@@ -18,3 +18,10 @@ func get_pin_point():
 
 func set_shape(shape_arg: Shape2D):
 	shape.shape = shape_arg
+
+func set_weightless(value):
+	if value:
+		gravity_scale = 0.01
+		linear_velocity = Vector2(0, 0)
+	else:
+		gravity_scale = 1

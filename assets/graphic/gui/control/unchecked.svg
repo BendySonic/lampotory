@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="79.275101mm"
+   height="37.648239mm"
+   viewBox="0 0 79.275101 37.648239"
+   version="1.1"
+   id="svg5"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-35.356629,-95.472287)">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#1279f3;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:148.649;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect4904"
+       width="76.275101"
+       height="34.648243"
+       x="-113.13173"
+       y="96.97229"
+       rx="18.7129"
+       ry="16.565046"
+       transform="scale(-1,1)"
+       inkscape:export-filename="unchecked.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <ellipse
+       style="fill:#1279f3;fill-opacity:1;stroke-width:2.82734;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:148.649;paint-order:fill markers stroke"
+       id="ellipse4906"
+       cx="-51.853115"
+       cy="114.40626"
+       rx="11.718975"
+       ry="11.887594"
+       transform="scale(-1,1)" />
+  </g>
+</svg>

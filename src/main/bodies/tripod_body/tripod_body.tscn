@@ -65,22 +65,21 @@ size = Vector2(40, 50)
 size = Vector2(46, 20)
 
 [node name="TripodBody" type="RigidBody2D" groups=["tripod"]]
+z_as_relative = false
 collision_layer = 36995
 collision_mask = 36995
 input_pickable = true
-mass = 20.0
+mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_m0ibl")
+center_of_mass_mode = 1
+center_of_mass = Vector2(40, -250)
 lock_rotation = true
 script = ExtResource("1_ny3xa")
 floor_height = 540.0
 body_scene_path = "res://src/main/bodies/tripod_body/tripod_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_tsl72")]
-save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "tripod_height"),
-NodePath("../PillarBody/TripodLevel/PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
-}
-save_nodes = [NodePath(".."), NodePath("../PillarBody/TripodLevel/PinPoint")]
+save_nodes = [NodePath(".."), NodePath("../PillarBody/TripodLevel/PinPoint"), NodePath("../PillarBody/TripodLevel")]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_up6em")]
 input_body = NodePath("..")
@@ -130,13 +129,12 @@ shape = SubResource("RectangleShape2D_p166e")
 position = Vector2(20, 2.5)
 shape = SubResource("RectangleShape2D_o4n4j")
 
-[node name="PillarBody" type="CharacterBody2D" parent="." node_paths=PackedStringArray("main_body")]
+[node name="PillarBody" type="CharacterBody2D" parent="."]
 show_behind_parent = true
 collision_layer = 1024
 collision_mask = 0
 input_pickable = true
 script = ExtResource("4_l3fy0")
-main_body = NodePath("..")
 
 [node name="Visuals" type="Node2D" parent="PillarBody"]
 modulate = Color(0.72549, 0.854902, 1, 1)
@@ -194,11 +192,10 @@ shape = SubResource("RectangleShape2D_tw0ar")
 position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_0eutm")
 
-[node name="PinPoint" parent="PillarBody/TripodLevel" node_paths=PackedStringArray("main_body") instance=ExtResource("6_bnl7i")]
+[node name="PinPoint" parent="PillarBody/TripodLevel" instance=ExtResource("6_bnl7i")]
 modulate = Color(0, 0.705882, 0.466667, 1)
 position = Vector2(-70, 0)
 scale = Vector2(1.5, 1.5)
-main_body = NodePath("../../..")
 
 [node name="InputComponent" parent="PillarBody/TripodLevel/PinPoint" instance=ExtResource("3_up6em")]
 disabled = true

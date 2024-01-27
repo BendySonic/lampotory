@@ -33,6 +33,11 @@ func _ready():
 		elif property_value is float:
 			value_edit.set_step(0.01)
 		value_edit.connect("value_changed", _on_value_changed)
+		if property_name == "friction":
+			value_edit.max_value = 1
+			value_edit.min_value = 0
+		else:
+			value_edit.max_value = 300
 		value_edit.set_value(property_value)
 	elif property_value is bool:
 		value_edit = CheckButton.new()

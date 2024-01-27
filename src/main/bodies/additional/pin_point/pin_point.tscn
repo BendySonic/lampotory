@@ -9,12 +9,12 @@ radius = 10.0
 height = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb6wa"]
-size = Vector2(25, 25)
+size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljcg6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1wgu"]
-size = Vector2(5, 5)
+size = Vector2(3, 3)
 
 [node name="PinPoint" type="StaticBody2D"]
 collision_layer = 32768

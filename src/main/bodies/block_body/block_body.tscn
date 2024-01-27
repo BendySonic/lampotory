@@ -44,16 +44,12 @@ properties = {
 body_scene_path = "res://src/main/bodies/block_body/block_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_exxfr")]
-save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "properties"),
-NodePath("../PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect"),
-NodePath("../PinPoint2"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
-}
 save_nodes = [NodePath(".."), NodePath("../PinPoint"), NodePath("../PinPoint2")]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_0ei2d")]
 input_body = NodePath("..")
 hold_type = 1
+is_rotatable = true
 
 [node name="Visuals" type="Node2D" parent="."]
 

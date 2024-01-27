@@ -36,14 +36,11 @@ func _on_body_defined():
 		var new_rope_part = rope_part_scene.instantiate()
 		new_rope_part.position = curve_point_position
 		new_rope_part.last_rope_part = last_rope_part
-		if last_rope_part:
-			new_rope_part.get_node("PinJoint2D").node_b = last_rope_part.get_path()
-		
-		add_child(new_rope_part, true)
+		call_deferred("set_child", new_rope_part, last_rope_part)
+		await new_rope_part.ready
 		rope_parts.push_back(new_rope_part)
 		
 		last_rope_part = new_rope_part
-	
 	set_pin_points()
 
 func set_pin_points():
@@ -53,6 +50,7 @@ func set_pin_points():
 	end_rope_parts  = [first_rope_part, last_rope_part]
 	for rope_part in end_rope_parts:
 		rope_part.set_deferred("lock_rotation", true)
+		print("LOCK")
 		# Set bigger forms
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(25, 25)
@@ -77,10 +75,19 @@ func _physics_process(delta):
 		var pin_point = end_rope_part.get_pin_point()
 		if end_rope_part.position.length() > length_limit:
 			end_rope_part.get_pin_point().disconnect_pin_points()
-			print("Ok")
 			pin_point.disconnect_cursor()
 
 func prepare_save():
 	curve_points_positions = PackedVector2Array()
 	for rope_part in rope_parts:
 		curve_points_positions.push_back(rope_part.position)
+
+func set_child(new_rope_part, last_rope_part):
+	if last_rope_part:
+		new_rope_part.get_node("PinJoint2D").node_b = last_rope_part.get_path()
+		
+	add_child(new_rope_part, true)
+
+func set_weightless(value):
+	for rope_part in rope_parts:
+		rope_part.set_weightless(value)

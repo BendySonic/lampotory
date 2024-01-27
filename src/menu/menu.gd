@@ -42,18 +42,14 @@ func _on_my_projects_button_toggled(button_pressed: bool):
 		load_projects()
 
 
+# New project
 func _on_mechanic_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			Global.project_data = {
-					"project_name": "",
-					"project_theme": "",
-					"project_mode": "",
-					"is_saved": false
-			}
 			Global.project_data["project_mode"] = "mechanic"
 			get_tree().change_scene_to_file("res://src/main/main.tscn")
 
+# Load projects
 func load_projects():
 	var file_names = DirAccess.get_files_at(SAVE_DIR)
 	for file_name in file_names:

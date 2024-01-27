@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://58rhv5606xle"]
+
+[ext_resource type="Texture2D" uid="uid://c1m7ymoq1d0ri" path="res://assets/graphic/gui/icons/items/ruler.png" id="1_6eqbq"]
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_7rk22"]
+[ext_resource type="PackedScene" uid="uid://c7q3ocl7umgkh" path="res://src/main/bodies/ruler_body/ruler_body.tscn" id="2_ole5s"]
+
+[resource]
+script = ExtResource("1_7rk22")
+item_name = "Линейка"
+item_tooltip = "Измеряет расстояние в метрах"
+item_icon = ExtResource("1_6eqbq")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_ole5s")
