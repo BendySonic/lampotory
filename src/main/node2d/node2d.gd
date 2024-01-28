@@ -13,13 +13,13 @@ var state: States = States.PLAY:
 	get: return state
 var speed: float = 1:
 	get: return speed
+
 # Data container for selected body
 var selected_body: Variant:
 	get: return selected_body
 # Data containers durning body spawn
 var selected_item_data: Variant:
 	get: return selected_item_data
-
 var buffer_body: Variant:
 	get: return buffer_body
 
