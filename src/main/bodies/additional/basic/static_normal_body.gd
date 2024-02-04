@@ -1,7 +1,7 @@
 class_name StaticNormalBody
 extends NormalBody
 
-@export var floor_height: float
+@export var floor_height: float = 200
 
 
 func prepare_body():

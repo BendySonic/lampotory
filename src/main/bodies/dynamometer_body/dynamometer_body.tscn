@@ -29,8 +29,7 @@ size = Vector2(40, 104)
 radius = 4.0
 
 [node name="DynamometerBody" type="RigidBody2D"]
-z_index = -3
-z_as_relative = false
+z_index = 20
 collision_layer = 2
 collision_mask = 6
 input_pickable = true
@@ -44,11 +43,6 @@ body_scene_path = "res://src/main/bodies/dynamometer_body/dynamometer_body.tscn"
 
 [node name="SaveComponent" type="Node" parent="." node_paths=PackedStringArray("save_nodes")]
 script = ExtResource("2_vvbyk")
-save_properties_list = {
-NodePath(".."): PackedStringArray("position", "rotation", "linear_velocity", "angular_velocity", "name", "body_scene_path", "place_holder_height"),
-NodePath("../PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect"),
-NodePath("../PlaceHolder/PinPoint"): PackedStringArray("connected_pin_point_path", "is_connected", "has_connect")
-}
 save_nodes = [NodePath(".."), NodePath("../PlaceHolder/PinPoint"), NodePath("../PinPoint")]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_bsohi")]

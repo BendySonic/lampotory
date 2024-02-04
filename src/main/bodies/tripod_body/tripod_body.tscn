@@ -11,6 +11,16 @@
 friction = 0.4
 rough = true
 
+[sub_resource type="QuadMesh" id="QuadMesh_o4b74"]
+size = Vector2(15, 600)
+
+[sub_resource type="QuadMesh" id="QuadMesh_63xm3"]
+size = Vector2(22, 225)
+
+[sub_resource type="SphereMesh" id="SphereMesh_631ge"]
+radius = 25.0
+height = 50.0
+
 [sub_resource type="QuadMesh" id="QuadMesh_xh43s"]
 size = Vector2(140, 15)
 
@@ -32,18 +42,8 @@ size = Vector2(110, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4n4j"]
 size = Vector2(140, 20)
 
-[sub_resource type="QuadMesh" id="QuadMesh_o4b74"]
-size = Vector2(15, 500)
-
-[sub_resource type="QuadMesh" id="QuadMesh_63xm3"]
-size = Vector2(20, 225)
-
-[sub_resource type="SphereMesh" id="SphereMesh_631ge"]
-radius = 25.0
-height = 50.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ie6si"]
-size = Vector2(15, 500)
+size = Vector2(22, 600)
 
 [sub_resource type="QuadMesh" id="QuadMesh_woe4q"]
 size = Vector2(100, 15)
@@ -65,6 +65,7 @@ size = Vector2(40, 50)
 size = Vector2(46, 20)
 
 [node name="TripodBody" type="RigidBody2D" groups=["tripod"]]
+z_index = 15
 z_as_relative = false
 collision_layer = 36995
 collision_mask = 36995
@@ -75,7 +76,6 @@ center_of_mass_mode = 1
 center_of_mass = Vector2(40, -250)
 lock_rotation = true
 script = ExtResource("1_ny3xa")
-floor_height = 540.0
 body_scene_path = "res://src/main/bodies/tripod_body/tripod_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_tsl72")]
@@ -86,6 +86,19 @@ input_body = NodePath("..")
 
 [node name="Visuals" type="Node2D" parent="."]
 modulate = Color(0.372549, 0.709804, 1, 1)
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Visuals"]
+position = Vector2(40, -300)
+mesh = SubResource("QuadMesh_o4b74")
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="Visuals"]
+position = Vector2(40, -105)
+mesh = SubResource("QuadMesh_63xm3")
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.898039, 0.898039, 0.898039, 1)
+position = Vector2(40, -600)
+mesh = SubResource("SphereMesh_631ge")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0.756863, 0.756863, 0.756863, 1)
@@ -130,36 +143,16 @@ position = Vector2(20, 2.5)
 shape = SubResource("RectangleShape2D_o4n4j")
 
 [node name="PillarBody" type="CharacterBody2D" parent="."]
-show_behind_parent = true
-collision_layer = 1024
-collision_mask = 0
+collision_layer = 16
+collision_mask = 16
 input_pickable = true
 script = ExtResource("4_l3fy0")
 
-[node name="Visuals" type="Node2D" parent="PillarBody"]
-modulate = Color(0.72549, 0.854902, 1, 1)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="PillarBody/Visuals"]
-show_behind_parent = true
-position = Vector2(40, -250)
-mesh = SubResource("QuadMesh_o4b74")
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="PillarBody/Visuals"]
-position = Vector2(40, -105)
-mesh = SubResource("QuadMesh_63xm3")
-
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="PillarBody/Visuals"]
-modulate = Color(0.898039, 0.898039, 0.898039, 1)
-position = Vector2(40, -485)
-mesh = SubResource("SphereMesh_631ge")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody"]
-position = Vector2(40, -250)
+position = Vector2(40, -300)
 shape = SubResource("RectangleShape2D_ie6si")
 
 [node name="TripodLevel" type="CharacterBody2D" parent="PillarBody"]
-z_index = 1
-z_as_relative = false
 position = Vector2(40, -350)
 collision_layer = 8
 collision_mask = 8
@@ -200,17 +193,17 @@ scale = Vector2(1.5, 1.5)
 [node name="InputComponent" parent="PillarBody/TripodLevel/PinPoint" instance=ExtResource("3_up6em")]
 disabled = true
 
-[node name="Stop" type="CharacterBody2D" parent="PillarBody"]
+[node name="Stop" type="CharacterBody2D" parent="."]
 position = Vector2(40, -250)
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody/Stop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stop"]
 position = Vector2(0, 50)
 shape = SubResource("RectangleShape2D_d2cdw")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="PillarBody/Stop"]
-position = Vector2(0, -230)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Stop"]
+position = Vector2(0, -345)
 shape = SubResource("RectangleShape2D_d2cdw")
 
 [connection signal="body_pin_held" from="." to="." method="_on_body_held"]

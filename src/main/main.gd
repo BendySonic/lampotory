@@ -43,6 +43,7 @@ func _ready():
 	gui.connect("open_project_pressed", _on_open_project_pressed)
 	
 	gui.connect("display_vector_toggled", _on_display_vector_pressed)
+	gui.connect("clear_pressed", _on_clear_pressed)
 	
 	gui.create_items(mode_data.item_resources)
 	
@@ -98,6 +99,9 @@ func _on_open_project_pressed():
 
 func _on_display_vector_pressed(toggled_on: bool):
 	node2d.display_vector(toggled_on)
+
+func _on_clear_pressed():
+	node2d.clear_bodies()
 
 func _on_body_held(_body: NormalBody):
 	_clear_select()

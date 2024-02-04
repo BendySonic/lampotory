@@ -18,4 +18,4 @@ func _ready():
 func _on_edit_button_pressed():
 	Global.project_data = project_data
 	Global.project_data["project_mode"] = "mechanic"
-	get_tree().change_scene_to_file("res://src/main/main.tscn")
+	get_tree().change_scene_to_file("res://src/main/loading/loading.tscn")

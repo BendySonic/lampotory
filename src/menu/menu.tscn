@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3pb6t8fbo0uc"]
+[gd_scene load_steps=22 format=3 uid="uid://d3pb6t8fbo0uc"]
 
 [ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://blmbopi1jfuot" path="res://src/menu/gui/gui_lab.tscn" id="8_3pvbh"]
 [ext_resource type="Texture2D" uid="uid://daacw4vi75686" path="res://assets/graphic/gui/icons/search_icon.png" id="9_d6sed"]
 [ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
+[ext_resource type="Texture2D" uid="uid://80qqs2bvlln8" path="res://assets/graphic/2d/chess.png" id="10_b8www"]
+[ext_resource type="Texture2D" uid="uid://ccno24kak24l4" path="res://assets/graphic/2d/arrows.png" id="11_fc7du"]
+[ext_resource type="Texture2D" uid="uid://7q2iqo38ohlf" path="res://assets/graphic/2d/electro.png" id="12_es2f7"]
+[ext_resource type="Texture2D" uid="uid://bxp8lrm1vkdr6" path="res://assets/graphic/2d/ch.png" id="13_mpbxy"]
 
 [sub_resource type="Theme" id="Theme_mk0pc"]
 
@@ -38,9 +42,9 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_q7c5s"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_c2hs7"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rfixq"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_5di46"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
 content_margin_right = 11.0
@@ -56,12 +60,25 @@ shadow_color = Color(0, 0, 0, 0.0705882)
 shadow_size = 1
 shadow_offset = Vector2(2, 5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp5er"]
+content_margin_right = 11.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.0705882)
+shadow_size = 1
+shadow_offset = Vector2(2, 5)
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -69,9 +86,10 @@ size_flags_vertical = 3
 script = ExtResource("1_bg866")
 
 [node name="Panel" type="PanelContainer" parent="."]
-layout_mode = 2
-offset_right = 1100.0
-offset_bottom = 720.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -82,7 +100,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
 layout_mode = 2
 
 [node name="Menu" type="MarginContainer" parent="Panel/Panel"]
+z_index = 1
 layout_mode = 2
+size_flags_horizontal = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 15
@@ -112,16 +132,16 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Panel/Menu/Menu/Menu"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="NewButton" parent="Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_q7c5s")
+button_group = SubResource("ButtonGroup_c2hs7")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
-icon_size = Vector2(50, 50)
 text_size = 18
 
 [node name="MyProjectsButton" parent="Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
@@ -129,16 +149,17 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_rfixq")
+button_group = SubResource("ButtonGroup_5di46")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
-icon_size = Vector2(50, 50)
 text_size = 16
 
 [node name="Workspace" type="MarginContainer" parent="Panel/Panel"]
+z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 40
+size_flags_stretch_ratio = 8.0
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 60
@@ -160,7 +181,15 @@ custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_colors/font_color = Color(0.113725, 0.12549, 0.117647, 1)
+theme_override_colors/font_pressed_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_hover_color = Color(0.133333, 0.133333, 0.133333, 1)
+theme_override_colors/font_focus_color = Color(0.164706, 0.164706, 0.164706, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.137255, 0.137255, 0.137255, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_821nr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jp5er")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jp5er")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_821nr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jp5er")
 text = "Создать новый"
 icon = ExtResource("9_kqmdu")
 alignment = 2
@@ -173,10 +202,13 @@ theme_override_constants/margin_top = 25
 
 [node name="GridContainer" type="GridContainer" parent="Panel/Panel/Workspace/New/MarginContainer"]
 layout_mode = 2
-columns = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 4
 
 [node name="GUILab" parent="Panel/Panel/Workspace/New/MarginContainer/GridContainer" instance=ExtResource("8_3pvbh")]
 layout_mode = 2
+mode = "mechanic"
 
 [node name="MyProjects" type="VBoxContainer" parent="Panel/Panel/Workspace"]
 visible = false
@@ -244,8 +276,114 @@ follow_focus = true
 layout_mode = 2
 columns = 3
 
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0.862745, 0.568627, 0.384314)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -229.0
+offset_right = 164.0
+offset_bottom = 187.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("10_b8www")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(0, 0.862745, 0.568627, 0.505882)
+layout_mode = 1
+offset_left = 465.0
+offset_top = -169.0
+offset_right = 841.0
+offset_bottom = 232.0
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("11_fc7du")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+modulate = Color(0, 0.862745, 0.568627, 0.345098)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.0
+offset_top = -562.0
+offset_right = 113.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+modulate = Color(0, 0.862745, 0.568627, 0.552941)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -85.0
+offset_right = -169.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+modulate = Color(0, 0.862745, 0.568627, 0.337255)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -98.0
+offset_right = 122.0
+offset_bottom = 84.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+modulate = Color(0.584314, 0.92549, 0.835294, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -233.0
+offset_right = 111.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("12_es2f7")
+
 [connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Buttons/NewButton" to="." method="_on_new_button_toggled"]
 [connection signal="toggled" from="Panel/Panel/Menu/Menu/Menu/Buttons/MyProjectsButton" to="." method="_on_my_projects_button_toggled"]
-[connection signal="button_down" from="Panel/Panel/Workspace/New/NewMenu/CreateProject" to="." method="_on_create_project_button_down"]
+[connection signal="pressed" from="Panel/Panel/Workspace/New/NewMenu/CreateProject" to="." method="_on_create_project_pressed"]
 [connection signal="gui_input" from="Panel/Panel/Workspace/New/MarginContainer/GridContainer/GUILab" to="." method="_on_mechanic_gui_input"]
 [connection signal="button_down" from="Panel/Panel/Workspace/MyProjects/ProjectMenu/CreateProject" to="." method="_on_create_project_button_down"]

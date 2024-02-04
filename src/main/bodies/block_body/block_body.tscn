@@ -27,9 +27,7 @@ size = Vector2(56, 40)
 [node name="BlockBody" type="RigidBody2D"]
 process_priority = 2
 process_physics_priority = 2
-top_level = true
-z_index = 10
-z_as_relative = false
+z_index = 30
 disable_mode = 2
 collision_priority = 5.0
 input_pickable = true

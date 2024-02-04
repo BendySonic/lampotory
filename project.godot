@@ -12,9 +12,14 @@ config_version=5
 
 config/name="Lampotory"
 config/tags=PackedStringArray("активный_проект", "программа")
-run/main_scene="res://src/menu/menu.tscn"
+run/main_scene="res://src/start.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
+run/low_processor_mode=true
+boot_splash/bg_color=Color(0, 0, 0, 0)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://assets/logo/icon.svg"
 
 [autoload]
@@ -25,8 +30,11 @@ Global="*res://src/global.gd"
 
 window/size/viewport_width=1100
 window/size/viewport_height=720
+window/size/transparent=true
 window/size/extend_to_title=true
-window/stretch/mode="canvas_items"
+window/energy_saving/keep_screen_on=false
+window/stretch/aspect="ignore"
+window/per_pixel_transparency/allowed=true
 
 [editor]
 
@@ -94,8 +102,6 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 [physics]
 
 2d/run_on_separate_thread=true
-common/max_physics_steps_per_frame=6
-common/physics_jitter_fix=2.0
 2d/physics_engine="GodotPhysics2D"
 3d/default_angular_damp=2.0
 2d/default_angular_damp=1.25
@@ -111,4 +117,5 @@ gl_compatibility/driver.windows="opengl3_angle"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-viewport/defaults/default_clear_color=Color(1, 1, 1, 1)
+viewport/transparent_background=true
+viewport/defaults/default_clear_color=Color(1, 1, 1, 0)

@@ -21,9 +21,11 @@ var definitions: PackedStringArray
 @onready var message_animation_player: AnimationPlayer = get_node("MessageAnimationPlayer")
 @onready var warning_animation_player: AnimationPlayer = get_node("WarningAnimationPlayer")
 @onready var edit_animation_player: AnimationPlayer = get_node("EditAnimationPlayer")
+@onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 
 
 func _ready():
+	animation_player.play("show")
 	# Open dictionary
 	var file = FileAccess.open("res://assets/data/dictionary.txt", FileAccess.READ)
 	var dictionary: String = file.get_as_text()
@@ -44,6 +46,10 @@ func _ready():
 						is_start = false
 			definition += ch
 	file.close()
+	
+	while animation_player.is_playing() == true:
+		await get_tree().create_timer(1).timeout
+	animation_player.play("idle")
 
 func _on_lua_toggled(toggled_on):
 	if toggled_on:
@@ -77,6 +83,10 @@ func _on_return_button_pressed():
 	mode = Modes.NONE
 	edit_animation_player.play_backwards("show")
 
+func _on_line_edit_text_submitted(new_text):
+	if mode == Modes.DICTIONARY:
+		open_dictionary(new_text)
+
 func print_message(text: String):
 	if is_printing:
 		is_printing = false
@@ -90,10 +100,6 @@ func print_message(text: String):
 			emit_signal("stopped_printing")
 			return
 	is_printing = false
-
-func _on_line_edit_text_submitted(new_text):
-	if mode == Modes.DICTIONARY:
-		open_dictionary(new_text)
 
 func open_dictionary(new_text):
 	var file = FileAccess.open("res://assets/data/dictionary.txt", FileAccess.READ)

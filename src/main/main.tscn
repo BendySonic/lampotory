@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d1ftc2bsnc28r"]
+[gd_scene load_steps=29 format=3 uid="uid://d1ftc2bsnc28r"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
@@ -51,6 +51,8 @@ border_color = Color(0, 0, 0, 0.2)
 corner_radius_top_left = 40
 corner_radius_top_right = 40
 
+[sub_resource type="FontVariation" id="FontVariation_rgot6"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tm53v"]
 bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
 border_width_bottom = 7
@@ -88,87 +90,34 @@ metadata/_edit_vertical_guides_ = [-132.0]
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource("2_i5t1w")
 
-[node name="PlayerWindow" type="PanelContainer" parent="GUI"]
-offset_left = 728.0
-offset_top = 19.0
-offset_right = 1091.0
-offset_bottom = 69.0
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MenuWindow" type="PanelContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
 
-[node name="Player" type="HBoxContainer" parent="GUI/PlayerWindow"]
-layout_mode = 2
-alignment = 1
-
-[node name="Play" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="PlayButton" type="TextureButton" parent="GUI/PlayerWindow/Player/Play"]
-modulate = Color(0, 0.803922, 0.447059, 1)
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("6_cbnpw")
-texture_pressed = ExtResource("5_ovxhx")
-
-[node name="Freeze" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="FreezeButton" type="TextureButton" parent="GUI/PlayerWindow/Player/Freeze"]
-modulate = Color(0, 0.803922, 0.447059, 1)
-layout_mode = 2
-texture_normal = ExtResource("7_iid86")
-texture_pressed = ExtResource("7_iid86")
-
-[node name="Reload" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="ReloadButton" type="TextureButton" parent="GUI/PlayerWindow/Player/Reload"]
-modulate = Color(0, 0.803922, 0.447059, 1)
-layout_mode = 2
-texture_normal = ExtResource("8_npou3")
-texture_pressed = ExtResource("8_npou3")
-
-[node name="Speed" type="MarginContainer" parent="GUI/PlayerWindow/Player"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="SpinBox" type="SpinBox" parent="GUI/PlayerWindow/Player/Speed"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("9_7dfw7")
-
-[node name="MenuWindow" type="PanelContainer" parent="GUI"]
-offset_left = 18.0
-offset_top = 20.0
-offset_right = 129.0
-offset_bottom = 75.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
-
-[node name="Panel" type="HBoxContainer" parent="GUI/MenuWindow"]
+[node name="Panel" type="HBoxContainer" parent="GUI/MarginContainer/MenuWindow"]
 layout_mode = 2
 
-[node name="Edit" type="MarginContainer" parent="GUI/MenuWindow/Panel"]
+[node name="Edit" type="MarginContainer" parent="GUI/MarginContainer/MenuWindow/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="EditButton" type="MenuButton" parent="GUI/MenuWindow/Panel/Edit"]
+[node name="EditButton" type="MenuButton" parent="GUI/MarginContainer/MenuWindow/Panel/Edit"]
 modulate = Color(0.137255, 0.635294, 0.984314, 1)
 layout_mode = 2
 theme = ExtResource("10_r6tdi")
@@ -179,14 +128,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Настройки проекта"
 popup/item_1/id = 1
 
-[node name="Save" type="MarginContainer" parent="GUI/MenuWindow/Panel"]
+[node name="Save" type="MarginContainer" parent="GUI/MarginContainer/MenuWindow/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 5
 
-[node name="SaveButton" type="MenuButton" parent="GUI/MenuWindow/Panel/Save"]
+[node name="SaveButton" type="MenuButton" parent="GUI/MarginContainer/MenuWindow/Panel/Save"]
 modulate = Color(0.137255, 0.635294, 0.984314, 1)
 layout_mode = 2
 theme = ExtResource("10_r6tdi")
@@ -195,42 +144,48 @@ item_count = 1
 popup/item_0/text = "Сохранить"
 popup/item_0/id = 0
 
-[node name="ItemsWindow" type="PanelContainer" parent="GUI"]
+[node name="ItemsWindow" type="PanelContainer" parent="GUI/MarginContainer"]
 custom_minimum_size = Vector2(220, 550)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -567.0
-offset_right = 244.0
-offset_bottom = -17.0
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
 
-[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/ItemsWindow"]
+[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/MarginContainer/ItemsWindow"]
 layout_mode = 2
 
-[node name="Head" type="PanelContainer" parent="GUI/ItemsWindow/ItemsWindowBox"]
+[node name="Head" type="PanelContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 0.04
 theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
 
-[node name="HeadLabel" type="Label" parent="GUI/ItemsWindow/ItemsWindowBox/Head"]
+[node name="Control" type="Control" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Head"]
 layout_mode = 2
+
+[node name="HeadLabel" type="Label" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Head/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -27.5
+offset_right = 181.0
+offset_bottom = 27.5
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 27)
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
-theme_override_font_sizes/font_size = 19
+theme_override_fonts/font = SubResource("FontVariation_rgot6")
+theme_override_font_sizes/font_size = 40
 text = "Объекты
 "
 
-[node name="Body" type="MarginContainer" parent="GUI/ItemsWindow/ItemsWindowBox"]
+[node name="Body" type="MarginContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
@@ -238,13 +193,14 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="BodyBox" type="VBoxContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body"]
+[node name="BodyBox" type="VBoxContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body"]
 layout_mode = 2
 
-[node name="Search" type="HBoxContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+[node name="Search" type="HBoxContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 
-[node name="SearchLine" type="LineEdit" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
+[node name="SearchLine" type="LineEdit" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
+texture_filter = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -254,25 +210,145 @@ theme_override_colors/font_placeholder_color = Color(0, 0.592157, 0.372549, 1)
 theme_override_font_sizes/font_size = 16
 placeholder_text = "Поиск"
 
-[node name="Items" type="MarginContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+[node name="Items" type="MarginContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="ItemsBox" type="GridContainer" parent="GUI/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
+[node name="ItemsBox" type="GridContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 70
 columns = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="PlayerWindow" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
+
+[node name="Player" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Play"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_cbnpw")
+texture_pressed = ExtResource("5_ovxhx")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Freeze" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="FreezeButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Freeze"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("7_iid86")
+texture_pressed = ExtResource("7_iid86")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Reload" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="ReloadButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Reload"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture_normal = ExtResource("8_npou3")
+texture_pressed = ExtResource("8_npou3")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ToolsWindow" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 20
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/ToolsWindow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme = ExtResource("10_r6tdi")
+
+[node name="DisplayVectorButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource("16_20fa6")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme = ExtResource("10_r6tdi")
+
+[node name="ClearButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer2"]
+modulate = Color(0.0705882, 0.47451, 0.952941, 1)
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource("14_1duld")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 70
+
+[node name="Lua" parent="GUI/MarginContainer/MarginContainer" instance=ExtResource("16_wpmlv")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
 [node name="ActionsWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(0, 40)
-offset_top = 748.0
-offset_right = 300.0
-offset_bottom = 788.0
+offset_left = 4.0
+offset_top = 1311.0
+offset_right = 304.0
+offset_bottom = 1351.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.04
 theme = ExtResource("9_7dfw7")
@@ -346,13 +422,10 @@ stretch_mode = 0
 
 [node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
 custom_minimum_size = Vector2(300, 50)
-anchors_preset = -1
-anchor_top = 1.111
-anchor_right = 0.273
-anchor_bottom = 1.458
-offset_top = 0.0800171
-offset_right = -0.299988
-offset_bottom = -199.76
+offset_left = 4.0
+offset_top = 1363.0
+offset_right = 304.0
+offset_bottom = 1417.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
@@ -367,21 +440,21 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 12
 
+[node name="NoPropertiesLabel" type="Label" parent="GUI/PropertiesWindow/Body"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "У тела нет свойств"
+horizontal_alignment = 1
+
 [node name="GridContainer" type="GridContainer" parent="GUI/PropertiesWindow/Body"]
 layout_mode = 2
 columns = 2
 
-[node name="NoPropertiesLabel" type="Label" parent="GUI/PropertiesWindow/Body/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "У тела нет свойств"
-horizontal_alignment = 1
-
 [node name="SaveWindow" type="PanelContainer" parent="GUI"]
-offset_left = 331.0
-offset_top = 748.0
-offset_right = 781.0
-offset_bottom = 948.0
+offset_left = 335.0
+offset_top = 1311.0
+offset_right = 785.0
+offset_bottom = 1514.0
 theme = ExtResource("10_r6tdi")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/SaveWindow"]
@@ -439,10 +512,10 @@ text = "Сохранить"
 anchors_preset = -1
 anchor_right = 0.351
 anchor_bottom = 0.371
-offset_left = 807.0
-offset_top = 748.0
-offset_right = 820.9
-offset_bottom = 728.88
+offset_left = 811.0
+offset_top = 1311.0
+offset_right = 824.9
+offset_bottom = 1324.88
 theme = ExtResource("10_r6tdi")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI/EditWindow"]
@@ -497,30 +570,6 @@ size_flags_horizontal = 8
 theme = ExtResource("9_7dfw7")
 text = "Сохранить"
 
-[node name="ToolsWindow" type="Container" parent="GUI"]
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.128
-anchor_right = 0.22
-anchor_bottom = 0.196
-offset_left = -0.4
-offset_top = -0.160004
-offset_right = -1.52588e-05
-offset_bottom = -0.12001
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/ToolsWindow"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="DisplayVectorButton" type="TextureButton" parent="GUI/ToolsWindow/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("16_20fa6")
-ignore_texture_size = true
-stretch_mode = 0
-
 [node name="SaveAsWindow" type="FileDialog" parent="GUI"]
 title = "Сохранить проект как..."
 initial_position = 2
@@ -531,36 +580,6 @@ ok_button_text = "Сохранить"
 cancel_button_text = "Отмена"
 access = 2
 use_native_dialog = true
-
-[node name="Workspace" type="Control" parent="GUI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Workspace"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.827
-anchor_top = 0.64
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.299988
-offset_top = 0.199982
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_right = 190
-theme_override_constants/margin_bottom = 180
-
-[node name="Lua" parent="GUI/Workspace/MarginContainer" instance=ExtResource("16_wpmlv")]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
 
 [node name="Node2D" type="Node2D" parent="."]
 top_level = true
@@ -592,22 +611,28 @@ theme = ExtResource("10_r6tdi")
 [node name="Lab" type="Node2D" parent="Node2D/Enviroment"]
 
 [node name="Mechanic" parent="Node2D/Enviroment/Lab" instance=ExtResource("13_fy0sy")]
-position = Vector2(550, 1050)
+position = Vector2(0, 700)
 
 [node name="Camera" type="Node2D" parent="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
-anchor_mode = 0
+limit_left = -2500
+limit_top = -4000
+limit_right = 2500
+limit_bottom = 500
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="GUICursor" parent="Node2D" instance=ExtResource("14_u1iqx")]
 
-[connection signal="toggled" from="GUI/PlayerWindow/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
-[connection signal="pressed" from="GUI/PlayerWindow/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
-[connection signal="mouse_exited" from="GUI/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]
+[connection signal="mouse_exited" from="GUI/MarginContainer/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]
+[connection signal="toggled" from="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
+[connection signal="toggled" from="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer/DisplayVectorButton" to="GUI" method="_on_display_vector_button_toggled"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer2/ClearButton" to="GUI" method="_on_clear_button_pressed"]
 [connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer/CopyButton" to="GUI" method="_on_copy_button_down"]
 [connection signal="button_up" from="GUI/ActionsWindow/HBoxContainer/MarginContainer/CopyButton" to="GUI" method="_on_copy_button_up"]
 [connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer2/CutButton" to="GUI" method="_on_cut_button_down"]
@@ -619,4 +644,3 @@ drag_vertical_enabled = true
 [connection signal="pressed" from="GUI/SaveWindow/MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="GUI" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="GUI/SaveWindow/MarginContainer/VBoxContainer/SaveProjectButton" to="GUI" method="_on_save_project_button_pressed"]
 [connection signal="pressed" from="GUI/EditWindow/MarginContainer/VBoxContainer/PanelContainer/ExitButton" to="GUI" method="_on_exit_button_pressed"]
-[connection signal="toggled" from="GUI/ToolsWindow/HBoxContainer/DisplayVectorButton" to="GUI" method="_on_display_vector_button_toggled"]

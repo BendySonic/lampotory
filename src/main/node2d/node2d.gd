@@ -17,21 +17,26 @@ var speed: float = 1:
 # Data container for selected body
 var selected_body: Variant:
 	get: return selected_body
+var held_body: Variant
 # Data containers durning body spawn
 var selected_item_data: Variant:
 	get: return selected_item_data
+
 var buffer_body: Variant:
 	get: return buffer_body
 
+var camera_drag_start_position: Vector2
+var is_camera_ready_to_drag: bool
 var is_camera_drag: bool
+var is_camera_dragged: bool
 var releative_drag_position: Vector2
 
 var is_display_vector: bool = false
 
-@onready var bodies_node := get_node("Bodies") as Node
-@onready var lab := get_node("Enviroment/Lab/Mechanic") as Node
-@onready var camera := get_node("Camera/Camera2D") as Camera2D
-@onready var cursor := get_node("GUICursor") as GUICursor:
+@onready var bodies_node: Node = get_node("Bodies")
+@onready var lab: Node = get_node("Enviroment/Lab/Mechanic")
+@onready var camera: Camera2D = get_node("Camera/Camera2D")
+@onready var cursor: GUICursor = get_node("GUICursor"):
 	get = get_cursor
 
 
@@ -42,28 +47,51 @@ func _ready():
 #region Input
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed(): 
-			if not is_any_body_mouse_inside():
+		if event.is_released():
+			if not is_any_body_mouse_inside() and not is_camera_dragged:
 				emit_signal("void_pressed", event)
+			is_camera_dragged = false
 #endregion
 
+# Camera
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == 3:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
-				is_camera_drag = true
-				releative_drag_position = camera.to_local(cursor.global_position)
+				is_camera_ready_to_drag = true
+				camera_drag_start_position = event.global_position
 			elif event.is_released():
+				is_camera_ready_to_drag = false
 				is_camera_drag = false
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			if not camera.zoom > Vector2(2, 2) and held_body == null:
+				camera.zoom *= Vector2(1.05, 1.05)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and held_body == null:
+			if not camera.zoom < Vector2(0.5, 0.5):
+				camera.zoom /= Vector2(1.05, 1.05)
+	if event is InputEventMouseMotion:
+		if is_camera_ready_to_drag and (event.global_position - camera_drag_start_position).length() > 20:
+			is_camera_drag = true
+			releative_drag_position = camera.to_local(cursor.global_position)
+			is_camera_dragged = true
 
 func _process(delta):
 	# Camera
 	if is_camera_drag:
-		camera.global_position += (- camera.to_local(cursor.global_position) +
+		camera.global_position += (-camera.to_local(cursor.global_position) +
 				releative_drag_position)
+		if camera.global_position.x > 2000:
+			camera.global_position.x = 2000
+		if camera.global_position.x < -2000:
+			camera.global_position.x = -2000
+		if camera.global_position.y > 200:
+			camera.global_position.y = 200
+		if camera.global_position.y < -4000:
+			camera.global_position.y = -4000
 		releative_drag_position += (camera.to_local(cursor.global_position) - 
 				releative_drag_position)
 
+# Draw forces
 func _physics_process(delta):
 	# Forces
 	queue_redraw()
@@ -86,9 +114,11 @@ func _draw():
 
 #region Body input
 func _on_body_held(body: NormalBody):
+	held_body = body
 	emit_signal("body_held", body)
 
 func _on_body_unheld(body: NormalBody):
+	held_body = null
 	emit_signal("body_unheld", body)
 
 func _on_body_selected(body: NormalBody):
@@ -119,6 +149,8 @@ func save_project(name: String, theme: String):
 	LampFileManager.save_file(bodies_node, name)
 
 func load_project(name: String):#file_path: String):
+	if not Global.project_data["is_saved"]:
+		return
 	# Clear workspace
 	for body in get_bodies():
 		bodies_node.remove_child(body)
@@ -171,6 +203,10 @@ func delete_body(body_id: String):
 		if body.get_id() == body_id:
 			body.queue_free()
 
+func clear_bodies():
+	for body in get_bodies():
+		body.queue_free()
+
 func delete_selected_body():
 	if not selected_body == null:
 		if buffer_body == selected_body:
@@ -212,6 +248,12 @@ func get_bodies() -> Array[NormalBody]:
 func is_any_body_mouse_inside() -> bool:
 	for body in get_bodies():
 		if body.is_mouse_inside() and not body.is_held():
+			return true
+	return false
+
+func is_any_body_selected():
+	for body in get_bodies():
+		if body.is_selected() and not body.is_held():
 			return true
 	return false
 #endregion

@@ -12,8 +12,7 @@ custom_solver_bias = 1.0
 size = Vector2(440, 60)
 
 [node name="RulerBody" type="RigidBody2D"]
-z_index = 30
-z_as_relative = false
+z_index = 1000
 collision_layer = 1048576
 collision_mask = 0
 collision_priority = 2.0

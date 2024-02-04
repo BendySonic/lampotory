@@ -18,16 +18,17 @@ signal save_project_pressed(name: String, theme: String)
 signal open_project_pressed()
 
 signal display_vector_toggled(toggled_on: bool)
+signal clear_pressed()
 
 const GUI_PATH = "res://src/main/gui/"
 
-const ITEMS_WINDOW = "ItemsWindow/"
+const ITEMS_WINDOW = "MarginContainer/ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
 const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/GridContainer/"
 
-const PLAYER_WINDOW = "PlayerWindow/"
+const PLAYER_WINDOW = "MarginContainer/VBoxContainer/PlayerWindow/"
 const PLAY_BUTTON = PLAYER_WINDOW + "Player/Play/PlayButton"
 const RELOAD_BUTTON = PLAYER_WINDOW + "Player/Reload/ReloadButton"
 
@@ -38,7 +39,7 @@ const CUT_BUTTON = ACTIONS_BOX + "MarginContainer2/CutButton"
 const PASTE_BUTTON = ACTIONS_BOX + "MarginContainer3/PasteButton"
 const DELETE_BUTTON = ACTIONS_BOX + "MarginContainer4/DeleteButton"
 
-const MENU_WINDOW = "MenuWindow/"
+const MENU_WINDOW = "MarginContainer/MenuWindow/"
 const MENU_BOX = MENU_WINDOW + "Panel/"
 const EDIT_BUTTON = MENU_BOX + "Edit/EditButton"
 const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
@@ -46,7 +47,7 @@ const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
 const SAVE_WINDOW = "SaveWindow/"
 const SAVE_BOX = SAVE_WINDOW + "MarginContainer/VBoxContainer/"
 const PROJECT_NAME_EDIT = SAVE_BOX + "ProjectNameEdit"
-const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectThemeEdit"
+const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectDescriptionEdit"
 
 const EDIT_WINDOW = "EditWindow/"
 
@@ -56,7 +57,7 @@ const EDIT_WINDOW = "EditWindow/"
 
 @onready var properties_window := get_node(PROPERTIES_WINDOW) as Control
 @onready var properties_box := get_node(PROPERTIES_BOX) as GridContainer
-@onready var no_properties_label := get_node(PROPERTIES_BOX + "NoPropertiesLabel") as Label
+@onready var no_properties_label := get_node(PROPERTIES_WINDOW + "Body/NoPropertiesLabel") as Label
 
 @onready var actions_window := get_node(ACTIONS_WINDOW) as Control
 @onready var actions_box := get_node(ACTIONS_BOX) as VBoxContainer
@@ -118,12 +119,19 @@ func _on_save_button_id_pressed(id: int):
 
 func _on_edit_button_id_pressed(id: int):
 	if id == 0:
+		Global.project_data["project_name"] = ""
+		Global.project_data["project_theme"] = ""
+		Global.project_data["project_mode"] = ""
+		Global.project_data["is_saved"] = false
 		get_tree().change_scene_to_file("res://src/menu/menu.tscn")
 	if id == 1:
 		show_edit_window()
 
 func _on_display_vector_button_toggled(toggled_on):
 	emit_signal("display_vector_toggled", toggled_on)
+
+func _on_clear_button_pressed():
+	emit_signal("clear_pressed")
 #endregion
 
 
@@ -145,6 +153,7 @@ func clear_select():
 
 func create_actions(cursor: GUICursor):
 	actions_window.set_global_position(cursor.get_screen_transform().origin)
+	limit_actions()
 	copy_button.set_disabled(true)
 	copy_button.modulate = Color(0.812, 0.812, 0.812)
 	cut_button.set_disabled(true)
@@ -154,7 +163,8 @@ func create_actions(cursor: GUICursor):
 	actions_window.set_visible(true)
 
 func create_actions_with_body(body: NormalBody):
-	actions_window.set_global_position(body.get_screen_transform().origin)
+	actions_window.set_global_position(Global.cursor.get_screen_transform().origin)
+	limit_actions()
 	copy_button.set_disabled(false)
 	copy_button.modulate = Color(1, 1, 1)
 	cut_button.set_disabled(false)
@@ -165,6 +175,28 @@ func create_actions_with_body(body: NormalBody):
 
 func delete_actions():
 	actions_window.set_visible(false)
+
+func limit_actions():
+	if (
+		actions_window.get_global_position().x > 
+		(Vector2(get_window().size).x - 320)
+		or actions_window.get_global_position().y > 
+		(Vector2(get_window().size).y - 250)
+	):
+		actions_window.global_position = (
+			actions_window.global_position.clamp(
+				Vector2(0, 0), (Vector2(get_window().size) - Vector2(320, 250))
+			)
+		)
+	if (
+		actions_window.get_global_position().x < 260
+		or actions_window.get_global_position().y < 50
+	):
+		actions_window.global_position = (
+			actions_window.global_position.clamp(
+				Vector2(260, 50), (Vector2(get_window().size) - Vector2(300, 300))
+			)
+		)
 
 
 func create_properties(body: NormalBody):

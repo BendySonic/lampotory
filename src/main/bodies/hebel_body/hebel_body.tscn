@@ -8,6 +8,16 @@
 [ext_resource type="Script" path="res://src/main/bodies/hebel_body/rigid_body.gd" id="6_ll6ie"]
 [ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/pin_point.tscn" id="6_vlucd"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_0cls0"]
+size = Vector2(15, 600)
+
+[sub_resource type="QuadMesh" id="QuadMesh_jev8w"]
+size = Vector2(20, 225)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ccd1g"]
+radius = 25.0
+height = 50.0
+
 [sub_resource type="QuadMesh" id="QuadMesh_sq71a"]
 size = Vector2(140, 15)
 
@@ -29,41 +39,34 @@ size = Vector2(110, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7tkw"]
 size = Vector2(140, 20)
 
-[sub_resource type="QuadMesh" id="QuadMesh_0cls0"]
-size = Vector2(15, 500)
-
-[sub_resource type="QuadMesh" id="QuadMesh_jev8w"]
-size = Vector2(20, 225)
-
-[sub_resource type="SphereMesh" id="SphereMesh_ccd1g"]
-radius = 25.0
-height = 50.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2mbf"]
-size = Vector2(15, 500)
+size = Vector2(15, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdrpf"]
+size = Vector2(40, 40)
 
 [sub_resource type="QuadMesh" id="QuadMesh_utra5"]
 size = Vector2(300, 15)
 
 [sub_resource type="SphereMesh" id="SphereMesh_q54v1"]
-radius = 15.0
-height = 30.0
+radius = 20.0
+height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm0iw"]
-size = Vector2(300, 25)
+custom_solver_bias = 1.0
+size = Vector2(300, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45oy5"]
 size = Vector2(46, 20)
 
 [node name="HebelBody" type="RigidBody2D"]
+z_index = 11
+collision_layer = 16
 input_pickable = true
 center_of_mass_mode = 1
 center_of_mass = Vector2(0, -200)
 lock_rotation = true
 script = ExtResource("1_spv3p")
-floor_height = 550.0
 body_scene_path = "res://src/main/bodies/hebel_body/hebel_body.tscn"
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_3jitn")]
@@ -74,6 +77,22 @@ input_body = NodePath("..")
 
 [node name="Visuals" type="Node2D" parent="."]
 modulate = Color(0.372549, 0.709804, 1, 1)
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Visuals"]
+z_index = -3
+position = Vector2(0, -300)
+mesh = SubResource("QuadMesh_0cls0")
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="Visuals"]
+z_index = -5
+z_as_relative = false
+position = Vector2(0, -105)
+mesh = SubResource("QuadMesh_jev8w")
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.898039, 0.898039, 0.898039, 1)
+position = Vector2(0, -600)
+mesh = SubResource("SphereMesh_ccd1g")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0.756863, 0.756863, 0.756863, 1)
@@ -116,43 +135,16 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_k7tkw")
 
 [node name="PillarBody" type="CharacterBody2D" parent="."]
-show_behind_parent = true
-collision_layer = 1024
+collision_layer = 16
 collision_mask = 0
 input_pickable = true
 script = ExtResource("4_s0s35")
 
-[node name="Visuals" type="Node2D" parent="PillarBody"]
-modulate = Color(0.72549, 0.854902, 1, 1)
-show_behind_parent = true
-z_index = -1
-z_as_relative = false
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="PillarBody/Visuals"]
-show_behind_parent = true
-z_index = -5
-z_as_relative = false
-position = Vector2(0, -250)
-mesh = SubResource("QuadMesh_0cls0")
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="PillarBody/Visuals"]
-z_index = -5
-z_as_relative = false
-position = Vector2(0, -105)
-mesh = SubResource("QuadMesh_jev8w")
-
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="PillarBody/Visuals"]
-modulate = Color(0.898039, 0.898039, 0.898039, 1)
-position = Vector2(0, -485)
-mesh = SubResource("SphereMesh_ccd1g")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody"]
-position = Vector2(0, -250)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PillarBody"]
+position = Vector2(0, -300)
 shape = SubResource("RectangleShape2D_v2mbf")
 
 [node name="TripodLevel" type="CharacterBody2D" parent="PillarBody"]
-z_index = 1
-z_as_relative = false
 position = Vector2(0, -350)
 collision_layer = 8
 collision_mask = 8
@@ -187,6 +179,7 @@ position = Vector2(20, 0)
 mesh = SubResource("SphereMesh_q54v1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody/TripodLevel/RigidBody2D"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_rm0iw")
 
 [node name="PinPoint" parent="PillarBody/TripodLevel/RigidBody2D" instance=ExtResource("6_vlucd")]
@@ -245,12 +238,11 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarBody/Stop"]
-position = Vector2(0, 50)
+position = Vector2(0, 40)
 shape = SubResource("RectangleShape2D_45oy5")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PillarBody/Stop"]
-position = Vector2(0, -230)
+position = Vector2(0, -345)
 shape = SubResource("RectangleShape2D_45oy5")
 
-[connection signal="input_event" from="PillarBody" to="PillarBody" method="_on_input_event"]
 [connection signal="input_event" from="PillarBody/TripodLevel" to="PillarBody/TripodLevel" method="_on_input_event"]

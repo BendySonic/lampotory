@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b5s3e7s5hhejp"]
+[gd_scene load_steps=28 format=3 uid="uid://b5s3e7s5hhejp"]
 
 [ext_resource type="Texture2D" uid="uid://ctd024ouydovk" path="res://assets/graphic/gui/lua/lua_normal.svg" id="1_akp1j"]
 [ext_resource type="Script" path="res://src/main/lua/lua.gd" id="1_q8r22"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://7j7w4axicwxk" path="res://assets/graphic/gui/lua/book.png" id="4_nklj4"]
 [ext_resource type="Texture2D" uid="uid://otmfeintjn32" path="res://assets/graphic/gui/lua/question.png" id="5_he7cl"]
 [ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="7_32y31"]
+[ext_resource type="Texture2D" uid="uid://h4nouwidxnpl" path="res://assets/graphic/gui/lua/lua_funny.svg" id="9_i8ldh"]
+[ext_resource type="Texture2D" uid="uid://cy5ueejq8ke3x" path="res://assets/graphic/2d/ball.png" id="10_6an15"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tutep"]
 
@@ -101,7 +103,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [Vector2(130, 140), Vector2(-80, -80)]
+"values": [Vector2(10, 30), Vector2(-185, -190)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -222,7 +224,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(0.378929, 0.420448),
 "update": 0,
-"values": [Vector2(140, 130), Vector2(100, 70)]
+"values": [Vector2(0, 40), Vector2(-20, -40)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -276,18 +278,172 @@ _data = {
 "show": SubResource("Animation_csx2o")
 }
 
+[sub_resource type="Animation" id="Animation_a0o1b"]
+resource_name = "show"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.31864, 3.13834, 0.378929),
+"update": 0,
+"values": [Vector2(-500, 200), Vector2(-500, -400), Vector2(-20, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Lua:texture_normal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2.07053, 1),
+"update": 1,
+"values": [ExtResource("9_i8ldh"), ExtResource("1_akp1j")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.517632, 1, 1),
+"update": 0,
+"values": [0.0, 0.776672, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WarningAnimationPlayer:current_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"show"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Warning:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.366022, 3.13834, 1),
+"update": 0,
+"values": [Vector2(-500, 200), Vector2(-500, -400), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MarginContainer:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.517632, 1, 1),
+"update": 0,
+"values": [0.0, 0.776672, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7xktw"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(0.870551, 1.31951, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(0.87055, 1.86607, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6, 2.2, 2.4, 2.6, 2.8),
+"transitions": PackedFloat32Array(1, 2.21914, 0.406126, 2.21914, 0.34151, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.523599, -0.523599, 0.523599, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/Lua:texture_normal")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_akp1j"), ExtResource("9_i8ldh"), ExtResource("1_akp1j")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52qys"]
+_data = {
+"idle": SubResource("Animation_7xktw"),
+"show": SubResource("Animation_a0o1b")
+}
+
+[sub_resource type="Gradient" id="Gradient_yhuop"]
+offsets = PackedFloat32Array(0, 0.987179)
+colors = PackedColorArray(0.934553, 0.621844, 3.85046e-07, 1, 1, 0.862745, 0.294118, 1)
+
 [node name="Lua" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = -20.0
+offset_bottom = -40.0
 script = ExtResource("1_q8r22")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_left = 119.0
-offset_top = 103.0
-offset_right = 184.0
-offset_bottom = 173.0
+offset_right = 65.0
+offset_bottom = 70.0006
+pivot_offset = Vector2(32, 35)
 
 [node name="Lua" type="TextureButton" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 70)
@@ -301,10 +457,10 @@ stretch_mode = 5
 visible = false
 custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
-offset_left = 130.0
-offset_top = 140.0
-offset_right = 340.0
-offset_bottom = 348.0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 220.0
+offset_bottom = 238.0
 rotation = -0.698132
 scale = Vector2(1e-05, 1e-05)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tutep")
@@ -369,13 +525,13 @@ theme = ExtResource("7_32y31")
 text = "Назад"
 
 [node name="Warning" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 100.354
-offset_top = 70.5304
-offset_right = 141.354
-offset_bottom = 125.53
-rotation = -0.0116354
-scale = Vector2(0.972222, 0.972222)
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 21.0
+offset_bottom = 15.0
+rotation = 0.125664
 theme_override_styles/panel = SubResource("StyleBoxEmpty_58hme")
 
 [node name="TextureRect" type="TextureRect" parent="Warning"]
@@ -392,10 +548,10 @@ vertical_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = -120.0
-offset_top = 137.0
-offset_right = 93.0
-offset_bottom = 161.0
+offset_left = -239.0
+offset_top = 34.0
+offset_right = -26.0
+offset_bottom = 58.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(107, 12)
 theme = ExtResource("3_5y306")
@@ -418,6 +574,24 @@ speed_scale = 1.8
 libraries = {
 "": SubResource("AnimationLibrary_ww6ie")
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_52qys")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+show_behind_parent = true
+position = Vector2(150, 160)
+lifetime = 0.5
+local_coords = true
+texture = ExtResource("10_6an15")
+spread = 180.0
+initial_velocity_max = 453.9
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_yhuop")
 
 [connection signal="toggled" from="MarginContainer/Lua" to="." method="_on_lua_toggled"]
 [connection signal="pressed" from="Message/MarginContainer/VBoxContainer/BookButton" to="." method="_on_book_button_pressed"]

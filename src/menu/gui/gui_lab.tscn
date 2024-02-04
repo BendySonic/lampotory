@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://blmbopi1jfuot"]
+[gd_scene load_steps=9 format=3 uid="uid://blmbopi1jfuot"]
 
 [ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_b1ltk"]
 [ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand_icon.png" id="2_g554w"]
+[ext_resource type="Texture2D" uid="uid://j01uvvlscetm" path="res://assets/graphic/gui/icons/choose.png" id="3_xbk0r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu6op"]
 bg_color = Color(0.996078, 0.996078, 0.996078, 1)
@@ -17,6 +18,48 @@ shadow_color = Color(0, 0.803922, 0.447059, 1)
 shadow_size = 1
 shadow_offset = Vector2(3, -3)
 
+[sub_resource type="Animation" id="Animation_c6rco"]
+resource_name = "choose"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChooseTexture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.277392, 4.92458, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfy65"]
+_data = {
+"choose": SubResource("Animation_c6rco")
+}
+
+[sub_resource type="Animation" id="Animation_sgn2p"]
+resource_name = "hover"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1.6245, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.15, 1.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5fjj"]
+_data = {
+"hover": SubResource("Animation_sgn2p")
+}
+
 [node name="GUILab" type="MarginContainer"]
 custom_minimum_size = Vector2(165, 165)
 anchors_preset = -1
@@ -24,6 +67,7 @@ anchor_right = 0.15
 anchor_bottom = 0.229
 offset_right = -165.0
 offset_bottom = -164.88
+scale = Vector2(1.07763, 1.07763)
 pivot_offset = Vector2(82.5, 82.5)
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -55,6 +99,21 @@ theme_override_font_sizes/font_size = 14
 text = "Механика"
 horizontal_alignment = 1
 
-[connection signal="gui_input" from="PanelContainer" to="." method="_on_gui_lab_gui_input"]
+[node name="ChooseTexture" type="Sprite2D" parent="."]
+position = Vector2(140, 130)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_xbk0r")
+
+[node name="ChooseAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kfy65")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ChooseAnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_l5fjj")
+}
+
 [connection signal="mouse_entered" from="PanelContainer" to="." method="_on_gui_lab_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_gui_lab_mouse_exited"]

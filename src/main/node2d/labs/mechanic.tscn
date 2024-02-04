@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ll40qltxjh1o"]
+[gd_scene load_steps=9 format=3 uid="uid://ll40qltxjh1o"]
 
 [ext_resource type="Script" path="res://src/main/node2d/labs/mechanic.gd" id="1_tg22m"]
 
@@ -6,17 +6,30 @@
 friction = 0.4
 
 [sub_resource type="QuadMesh" id="QuadMesh_ovjyk"]
-size = Vector2(2000, 1000)
+size = Vector2(4000, 1000)
+
+[sub_resource type="QuadMesh" id="QuadMesh_q7yvk"]
+size = Vector2(2000, 6000)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dh84o"]
+size = Vector2(4000, 2000)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrse"]
 custom_solver_bias = 1.0
-size = Vector2(2000, 1000)
+size = Vector2(4000, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jqg2"]
+size = Vector2(2000, 6000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6v53"]
+size = Vector2(4000, 2000)
 
 [node name="Mechanic" type="Node2D"]
 show_behind_parent = true
 top_level = true
 z_index = 5
 script = ExtResource("1_tg22m")
+shape_meter_size = 20
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 modulate = Color(0.870588, 0.878431, 0.886275, 1)
@@ -28,8 +41,35 @@ physics_material_override = SubResource("PhysicsMaterial_y44od")
 z_index = -1
 mesh = SubResource("QuadMesh_ovjyk")
 
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="StaticBody2D"]
+z_index = -1
+position = Vector2(3000, -2500)
+mesh = SubResource("QuadMesh_q7yvk")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="StaticBody2D"]
+z_index = -1
+position = Vector2(-3000, -2500)
+mesh = SubResource("QuadMesh_q7yvk")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="StaticBody2D"]
+z_index = -1
+position = Vector2(0, -5500)
+mesh = SubResource("QuadMesh_dh84o")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_uwrse")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3000, -2500)
+shape = SubResource("RectangleShape2D_4jqg2")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-3000, -2500)
+shape = SubResource("RectangleShape2D_4jqg2")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -5500)
+shape = SubResource("RectangleShape2D_n6v53")
 
 [connection signal="mouse_entered" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_entered"]
 [connection signal="mouse_exited" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_exited"]

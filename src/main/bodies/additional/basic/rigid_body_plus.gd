@@ -10,6 +10,9 @@ var body_defined := false
 var mouse_inside: bool:
 	get = is_mouse_inside
 
+func _init():
+	connect("mouse_entered", _on_mouse_entered)
+	connect("mouse_exited", _on_mouse_exited)
 
 #region PhysicsState define
 func _integrate_forces(state):
@@ -20,10 +23,10 @@ func _integrate_forces(state):
 
 
 #region Mouse enter/exit
-func _mouse_enter():
+func _on_mouse_entered():
 	mouse_inside = true
 
-func _mouse_exit():
+func _on_mouse_exited():
 	mouse_inside = false
 
 func is_mouse_inside():

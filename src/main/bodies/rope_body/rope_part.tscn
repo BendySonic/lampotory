@@ -9,7 +9,7 @@ friction = 0.5
 radius = 8.0
 
 [node name="RopePart" type="RigidBody2D"]
-collision_layer = 32768
+collision_layer = 32896
 collision_mask = 128
 input_pickable = true
 mass = 0.01
