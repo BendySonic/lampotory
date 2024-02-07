@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="assets/logo/github_logo2.png" width="700" alt="Lampotory logo">
+	<img src="assets/logo/logo3.png" width="700" alt="Lampotory logo">
 </p>
 
 **Lamporoty is an open, accessible and completely free 2D virtual laboratory.**
