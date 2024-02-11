@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqgnoo2ywlaf5"]
+
+[ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_oqbwb"]
+[ext_resource type="Texture2D" uid="uid://cy5ueejq8ke3x" path="res://assets/graphic/2d/ball.png" id="2_r8p85"]
+[ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand_icon.png" id="3_ekelh"]
+[ext_resource type="Texture2D" uid="uid://j01uvvlscetm" path="res://assets/graphic/gui/icons/choose.png" id="4_xmnmj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y3wal"]
+font_size = 26
+font_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[sub_resource type="Animation" id="Animation_c6rco"]
+resource_name = "choose"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChooseTexture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.277392, 4.92458, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfy65"]
+_data = {
+"choose": SubResource("Animation_c6rco")
+}
+
+[sub_resource type="Animation" id="Animation_sgn2p"]
+resource_name = "hover"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1.6245, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.15, 1.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5fjj"]
+_data = {
+"hover": SubResource("Animation_sgn2p")
+}
+
+[node name="GUILab" type="MarginContainer"]
+custom_minimum_size = Vector2(250, 250)
+offset_right = 165.0
+offset_bottom = 171.0
+pivot_offset = Vector2(82.5, 82.5)
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_oqbwb")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_r8p85")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="VBox/TextureRect"]
+modulate = Color(0.815686, 0.815686, 0.815686, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r8p85")
+stretch_mode = 5
+
+[node name="Margin" type="MarginContainer" parent="VBox/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="TextureRect" type="TextureRect" parent="VBox/TextureRect/Margin"]
+custom_minimum_size = Vector2(75, 67)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_ekelh")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.117647, 0.117647, 1)
+text = "Механика"
+label_settings = SubResource("LabelSettings_y3wal")
+horizontal_alignment = 1
+
+[node name="ChooseTexture" type="Sprite2D" parent="."]
+position = Vector2(140, 130)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_xmnmj")
+
+[node name="ChooseAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kfy65")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ChooseAnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_l5fjj")
+}

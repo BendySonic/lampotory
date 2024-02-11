@@ -20,7 +20,7 @@ boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://assets/logo/icon.svg"
+config/icon="res://assets/logo/icon.png"
 
 [autoload]
 
@@ -35,6 +35,7 @@ window/size/extend_to_title=true
 window/energy_saving/keep_screen_on=false
 window/stretch/aspect="ignore"
 window/per_pixel_transparency/allowed=true
+window/handheld/orientation=1
 
 [editor]
 
@@ -89,6 +90,10 @@ load={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/localization/local.en.translation", "res://assets/localization/local.ru.translation")
@@ -102,12 +107,13 @@ locale/translations=PackedStringArray("res://assets/localization/local.en.transl
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_jitter_fix=2.0
 2d/physics_engine="GodotPhysics2D"
 3d/default_angular_damp=2.0
 2d/default_angular_damp=1.25
 2d/sleep_threshold_linear=0.0
 2d/sleep_threshold_angular=0.0
-2d/time_before_sleep=6000.0
+2d/time_before_sleep=600.0
 2d/solver/default_contact_bias=1.0
 2d/solver/default_constraint_bias=1.0
 

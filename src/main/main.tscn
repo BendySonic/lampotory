@@ -101,23 +101,28 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="MenuWindow" type="PanelContainer" parent="GUI/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 80
+
+[node name="MenuWindow" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
 
-[node name="Panel" type="HBoxContainer" parent="GUI/MarginContainer/MenuWindow"]
+[node name="Panel" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer2/MenuWindow"]
 layout_mode = 2
 
-[node name="Edit" type="MarginContainer" parent="GUI/MarginContainer/MenuWindow/Panel"]
+[node name="Edit" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer2/MenuWindow/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="EditButton" type="MenuButton" parent="GUI/MarginContainer/MenuWindow/Panel/Edit"]
+[node name="EditButton" type="MenuButton" parent="GUI/MarginContainer/VBoxContainer2/MenuWindow/Panel/Edit"]
 modulate = Color(0.137255, 0.635294, 0.984314, 1)
 layout_mode = 2
 theme = ExtResource("10_r6tdi")
@@ -128,14 +133,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Настройки проекта"
 popup/item_1/id = 1
 
-[node name="Save" type="MarginContainer" parent="GUI/MarginContainer/MenuWindow/Panel"]
+[node name="Save" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer2/MenuWindow/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 5
 
-[node name="SaveButton" type="MenuButton" parent="GUI/MarginContainer/MenuWindow/Panel/Save"]
+[node name="SaveButton" type="MenuButton" parent="GUI/MarginContainer/VBoxContainer2/MenuWindow/Panel/Save"]
 modulate = Color(0.137255, 0.635294, 0.984314, 1)
 layout_mode = 2
 theme = ExtResource("10_r6tdi")
@@ -144,30 +149,30 @@ item_count = 1
 popup/item_0/text = "Сохранить"
 popup/item_0/id = 0
 
-[node name="ItemsWindow" type="PanelContainer" parent="GUI/MarginContainer"]
+[node name="ItemsWindow" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(220, 550)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
 
-[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/MarginContainer/ItemsWindow"]
+[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow"]
 layout_mode = 2
 
-[node name="Head" type="PanelContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox"]
+[node name="Head" type="PanelContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_stretch_ratio = 0.04
 theme = ExtResource("10_r6tdi")
 theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
 
-[node name="Control" type="Control" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Head"]
+[node name="Control" type="Control" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Head"]
 layout_mode = 2
 
-[node name="HeadLabel" type="Label" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Head/Control"]
+[node name="HeadLabel" type="Label" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Head/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -185,7 +190,7 @@ theme_override_font_sizes/font_size = 40
 text = "Объекты
 "
 
-[node name="Body" type="MarginContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox"]
+[node name="Body" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
@@ -193,13 +198,13 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="BodyBox" type="VBoxContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body"]
+[node name="BodyBox" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body"]
 layout_mode = 2
 
-[node name="Search" type="HBoxContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+[node name="Search" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 
-[node name="SearchLine" type="LineEdit" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
+[node name="SearchLine" type="LineEdit" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -210,14 +215,14 @@ theme_override_colors/font_placeholder_color = Color(0, 0.592157, 0.372549, 1)
 theme_override_font_sizes/font_size = 16
 placeholder_text = "Поиск"
 
-[node name="Items" type="MarginContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+[node name="Items" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="ItemsBox" type="GridContainer" parent="GUI/MarginContainer/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
+[node name="ItemsBox" type="GridContainer" parent="GUI/MarginContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 theme_override_constants/h_separation = 40
@@ -257,17 +262,18 @@ texture_pressed = ExtResource("5_ovxhx")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Freeze" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player"]
+[node name="SpeedUp" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="FreezeButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Freeze"]
+[node name="SpeedUpButton" type="TextureButton" parent="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/SpeedUp"]
 modulate = Color(0, 0.803922, 0.447059, 1)
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
+toggle_mode = true
 texture_normal = ExtResource("7_iid86")
 texture_pressed = ExtResource("7_iid86")
 ignore_texture_size = true
@@ -628,8 +634,9 @@ editor_draw_drag_margin = true
 
 [node name="GUICursor" parent="Node2D" instance=ExtResource("14_u1iqx")]
 
-[connection signal="mouse_exited" from="GUI/MarginContainer/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]
+[connection signal="mouse_exited" from="GUI/MarginContainer/VBoxContainer2/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]
 [connection signal="toggled" from="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="toggled" from="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/SpeedUp/SpeedUpButton" to="GUI" method="_on_speed_up_button_toggled"]
 [connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/PlayerWindow/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
 [connection signal="toggled" from="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer/DisplayVectorButton" to="GUI" method="_on_display_vector_button_toggled"]
 [connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer2/ClearButton" to="GUI" method="_on_clear_button_pressed"]

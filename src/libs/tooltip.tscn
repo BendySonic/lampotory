@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3seuxw41qcta"]
+
+[ext_resource type="Texture2D" uid="uid://2ed4ednqbn8" path="res://assets/graphic/gui/icons/tooltip.png" id="1_w6da4"]
+[ext_resource type="Script" path="res://src/libs/tooltip.gd" id="2_0k4ib"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oroie"]
+content_margin_left = 10.0
+bg_color = Color(0, 0, 0, 0.811765)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_fm5l3"]
+line_spacing = -3.0
+font_size = 14
+
+[node name="Tooltip" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 0.015
+anchor_bottom = 0.024
+offset_right = 0.5
+offset_bottom = -0.280001
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_w6da4")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_0k4ib")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.765
+anchor_top = 0.706
+anchor_right = 6.118
+anchor_bottom = 1.647
+offset_left = -0.00500107
+offset_top = -0.00200081
+offset_right = 168.994
+offset_bottom = 35.001
+theme_override_styles/panel = SubResource("StyleBoxFlat_oroie")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+text = "Это просто плавающая подсказка!"
+label_settings = SubResource("LabelSettings_fm5l3")
+autowrap_mode = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

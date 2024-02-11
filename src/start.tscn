@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcufbmyqxd5k2"]
 
 [ext_resource type="Script" path="res://src/start.gd" id="1_2evct"]
-[ext_resource type="Texture2D" uid="uid://doonsthgcnna7" path="res://assets/logo/logo2.png" id="2_rad7t"]
+[ext_resource type="Texture2D" uid="uid://i2hmojo6yfho" path="res://assets/logo/logo.png" id="2_rad7t"]
 [ext_resource type="Texture2D" uid="uid://dc83ar7r20vdr" path="res://assets/graphic/gui/icons/rotate.png" id="3_bt5lc"]
 
 [sub_resource type="Animation" id="Animation_54twm"]

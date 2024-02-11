@@ -22,7 +22,7 @@ signal clear_pressed()
 
 const GUI_PATH = "res://src/main/gui/"
 
-const ITEMS_WINDOW = "MarginContainer/ItemsWindow/"
+const ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
@@ -39,7 +39,7 @@ const CUT_BUTTON = ACTIONS_BOX + "MarginContainer2/CutButton"
 const PASTE_BUTTON = ACTIONS_BOX + "MarginContainer3/PasteButton"
 const DELETE_BUTTON = ACTIONS_BOX + "MarginContainer4/DeleteButton"
 
-const MENU_WINDOW = "MarginContainer/MenuWindow/"
+const MENU_WINDOW = "MarginContainer/VBoxContainer2/MenuWindow/"
 const MENU_BOX = MENU_WINDOW + "Panel/"
 const EDIT_BUTTON = MENU_BOX + "Edit/EditButton"
 const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
@@ -106,6 +106,12 @@ func _on_reload_pressed():
 	play_button.button_pressed = false
 	emit_signal("reload_pressed")
 
+func _on_speed_up_button_toggled(button_pressed: bool):
+	if button_pressed:
+		Engine.time_scale = 1.5
+	else:
+		Engine.time_scale = 1.0
+
 func _on_save_button_id_pressed(id: int):
 	if id == 0:
 		if Global.project_data.is_saved:
@@ -133,6 +139,7 @@ func _on_display_vector_button_toggled(toggled_on):
 func _on_clear_button_pressed():
 	emit_signal("clear_pressed")
 #endregion
+
 
 
 #region ItemsWindow
@@ -298,3 +305,4 @@ func _on_exit_button_pressed():
 		#cursor_layer.remove_child(child)
 		#child.queue_free()
 #endregion
+

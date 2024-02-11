@@ -50,7 +50,6 @@ func set_pin_points():
 	end_rope_parts  = [first_rope_part, last_rope_part]
 	for rope_part in end_rope_parts:
 		rope_part.set_deferred("lock_rotation", true)
-		print("LOCK")
 		# Set bigger forms
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(25, 25)

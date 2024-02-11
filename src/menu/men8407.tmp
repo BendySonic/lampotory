@@ -1,0 +1,384 @@
+[gd_scene load_steps=22 format=3 uid="uid://d3pb6t8fbo0uc"]
+
+[ext_resource type="Script" path="res://src/menu/menu.gd" id="1_bg866"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="3_aswnl"]
+[ext_resource type="PackedScene" uid="uid://cs8vgaxhy1b5e" path="res://src/menu/gui/gui_left_button.tscn" id="4_ngdw2"]
+[ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="5_t4c6l"]
+[ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/graphic/gui/icons/menu_lab.png" id="6_iimh4"]
+[ext_resource type="PackedScene" uid="uid://blmbopi1jfuot" path="res://src/menu/gui/gui_lab.tscn" id="8_3pvbh"]
+[ext_resource type="Texture2D" uid="uid://daacw4vi75686" path="res://assets/graphic/gui/icons/search_icon.png" id="9_d6sed"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
+[ext_resource type="Texture2D" uid="uid://80qqs2bvlln8" path="res://assets/graphic/2d/chess.png" id="10_b8www"]
+[ext_resource type="Texture2D" uid="uid://ccno24kak24l4" path="res://assets/graphic/2d/arrows.png" id="11_fc7du"]
+[ext_resource type="Texture2D" uid="uid://7q2iqo38ohlf" path="res://assets/graphic/2d/electro.png" id="12_es2f7"]
+[ext_resource type="Texture2D" uid="uid://bxp8lrm1vkdr6" path="res://assets/graphic/2d/ch.png" id="13_mpbxy"]
+
+[sub_resource type="Theme" id="Theme_mk0pc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeoci"]
+content_margin_right = 0.0
+bg_color = Color(0.945098, 0.964706, 1, 1)
+border_color = Color(0.294118, 0.627451, 0.996078, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pwii"]
+bg_color = Color(1, 1, 1, 1)
+border_width_right = 5
+border_width_bottom = 15
+border_color = Color(0.807843, 0.823529, 0.854902, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.0666667)
+shadow_size = 1
+shadow_offset = Vector2(3, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40ddf"]
+bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
+border_width_bottom = 5
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+shadow_color = Color(0, 0, 0, 0.176471)
+shadow_offset = Vector2(10, 10)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dg0ly"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_vv4x2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
+content_margin_right = 11.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 7
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.0705882)
+shadow_size = 1
+shadow_offset = Vector2(2, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp5er"]
+content_margin_right = 11.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.0705882)
+shadow_size = 1
+shadow_offset = Vector2(2, 5)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_bg866")
+
+[node name="Windows" type="Node" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="Windows"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_mk0pc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
+
+[node name="Panel" type="HBoxContainer" parent="Windows/Panel"]
+layout_mode = 2
+
+[node name="Menu" type="MarginContainer" parent="Windows/Panel/Panel"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 35
+
+[node name="Menu" type="PanelContainer" parent="Windows/Panel/Panel/Menu"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme = ExtResource("2_0numr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pwii")
+
+[node name="Menu" type="VBoxContainer" parent="Windows/Panel/Panel/Menu/Menu"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="Windows/Panel/Panel/Menu/Menu/Menu"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_aswnl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40ddf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Windows/Panel/Panel/Menu/Menu/Menu/Head"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="Buttons" type="VBoxContainer" parent="Windows/Panel/Panel/Menu/Menu/Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NewButton" parent="Windows/Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_dg0ly")
+down_text = "Новый"
+up_icon = ExtResource("5_t4c6l")
+text_size = 18
+
+[node name="MyProjectsButton" parent="Windows/Panel/Panel/Menu/Menu/Menu/Buttons" instance=ExtResource("4_ngdw2")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_vv4x2")
+down_text = "Мои проекты"
+up_icon = ExtResource("6_iimh4")
+text_size = 16
+
+[node name="Workspace" type="MarginContainer" parent="Windows/Panel/Panel"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 60
+
+[node name="New" type="VBoxContainer" parent="Windows/Panel/Panel/Workspace"]
+layout_mode = 2
+
+[node name="NewMenu" type="HBoxContainer" parent="Windows/Panel/Panel/Workspace/New"]
+layout_mode = 2
+
+[node name="ProjectLabel" type="Label" parent="Windows/Panel/Panel/Workspace/New/NewMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
+theme_override_font_sizes/font_size = 22
+text = "Новый проект"
+
+[node name="CreateProject" type="Button" parent="Windows/Panel/Panel/Workspace/New/NewMenu"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.113725, 0.12549, 0.117647, 1)
+theme_override_colors/font_pressed_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_hover_color = Color(0.133333, 0.133333, 0.133333, 1)
+theme_override_colors/font_focus_color = Color(0.164706, 0.164706, 0.164706, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.137255, 0.137255, 0.137255, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_821nr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jp5er")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jp5er")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_821nr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jp5er")
+text = "Создать новый"
+icon = ExtResource("9_kqmdu")
+alignment = 2
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Windows/Panel/Panel/Workspace/New"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 25
+
+[node name="GridContainer" type="GridContainer" parent="Windows/Panel/Panel/Workspace/New/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 4
+
+[node name="GUILab" parent="Windows/Panel/Panel/Workspace/New/MarginContainer/GridContainer" instance=ExtResource("8_3pvbh")]
+layout_mode = 2
+mode = "mechanic"
+
+[node name="MyProjects" type="VBoxContainer" parent="Windows/Panel/Panel/Workspace"]
+visible = false
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="ProjectMenu" type="HBoxContainer" parent="Windows/Panel/Panel/Workspace/MyProjects"]
+layout_mode = 2
+
+[node name="ProjectLabel" type="Label" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
+theme_override_font_sizes/font_size = 22
+text = "Мои проекты"
+
+[node name="CreateProject" type="Button" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu"]
+visible = false
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.113725, 0.12549, 0.117647, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_821nr")
+text = "Создать новый"
+icon = ExtResource("9_kqmdu")
+alignment = 2
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("9_d6sed")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="SearchLine" type="LineEdit" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu/MarginContainer"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_0numr")
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Поиск"
+
+[node name="OptionButton" type="OptionButton" parent="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu"]
+layout_mode = 2
+theme = ExtResource("2_0numr")
+toggle_mode = false
+item_count = 1
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Самые новые"
+popup/item_0/id = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Windows/Panel/Panel/Workspace/MyProjects"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_0numr")
+follow_focus = true
+
+[node name="GridContainer" type="GridContainer" parent="Windows/Panel/Panel/Workspace/MyProjects/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Windows"]
+modulate = Color(0, 0.862745, 0.568627, 0.384314)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -229.0
+offset_right = 164.0
+offset_bottom = 187.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("10_b8www")
+
+[node name="TextureRect2" type="TextureRect" parent="Windows"]
+modulate = Color(0, 0.862745, 0.568627, 0.505882)
+offset_left = 465.0
+offset_top = -169.0
+offset_right = 841.0
+offset_bottom = 232.0
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("11_fc7du")
+
+[node name="TextureRect3" type="TextureRect" parent="Windows"]
+modulate = Color(0, 0.862745, 0.568627, 0.345098)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.0
+offset_top = -562.0
+offset_right = 113.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TextureRect4" type="TextureRect" parent="Windows"]
+modulate = Color(0, 0.862745, 0.568627, 0.552941)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -85.0
+offset_right = -169.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="Windows"]
+modulate = Color(0, 0.862745, 0.568627, 0.337255)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -98.0
+offset_right = 122.0
+offset_bottom = 84.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="Windows"]
+modulate = Color(0.584314, 0.92549, 0.835294, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -233.0
+offset_right = 111.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("12_es2f7")
+
+[connection signal="toggled" from="Windows/Panel/Panel/Menu/Menu/Menu/Buttons/NewButton" to="." method="_on_new_button_toggled"]
+[connection signal="toggled" from="Windows/Panel/Panel/Menu/Menu/Menu/Buttons/MyProjectsButton" to="." method="_on_my_projects_button_toggled"]
+[connection signal="pressed" from="Windows/Panel/Panel/Workspace/New/NewMenu/CreateProject" to="." method="_on_create_project_pressed"]
+[connection signal="gui_input" from="Windows/Panel/Panel/Workspace/New/MarginContainer/GridContainer/GUILab" to="." method="_on_mechanic_gui_input"]
+[connection signal="button_down" from="Windows/Panel/Panel/Workspace/MyProjects/ProjectMenu/CreateProject" to="." method="_on_create_project_button_down"]

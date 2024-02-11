@@ -1,119 +1,240 @@
-[gd_scene load_steps=9 format=3 uid="uid://blmbopi1jfuot"]
+[gd_scene load_steps=13 format=3 uid="uid://blmbopi1jfuot"]
 
 [ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_b1ltk"]
 [ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand_icon.png" id="2_g554w"]
-[ext_resource type="Texture2D" uid="uid://j01uvvlscetm" path="res://assets/graphic/gui/icons/choose.png" id="3_xbk0r"]
+[ext_resource type="Texture2D" uid="uid://cy5ueejq8ke3x" path="res://assets/graphic/2d/ball.png" id="2_j6bwj"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="4_nc2pl"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu6op"]
-bg_color = Color(0.996078, 0.996078, 0.996078, 1)
-border_width_left = 4
-border_width_bottom = 4
-border_color = Color(0.0705882, 0.47451, 0.952941, 1)
-corner_radius_top_left = 70
-corner_radius_top_right = 70
-corner_radius_bottom_right = 70
-corner_radius_bottom_left = 70
-corner_detail = 16
-shadow_color = Color(0, 0.803922, 0.447059, 1)
-shadow_size = 1
-shadow_offset = Vector2(3, -3)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m5gk"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0.576471, 0.964706, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
-[sub_resource type="Animation" id="Animation_c6rco"]
-resource_name = "choose"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ChooseTexture:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.277392, 4.92458, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.8, 0.8)]
-}
+[sub_resource type="PrismMesh" id="PrismMesh_v1a6d"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfy65"]
-_data = {
-"choose": SubResource("Animation_c6rco")
-}
+[sub_resource type="LabelSettings" id="LabelSettings_oouqc"]
+line_spacing = 0.0
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_cq6kt"]
+font_color = Color(0.192157, 0.192157, 0.192157, 1)
 
 [sub_resource type="Animation" id="Animation_sgn2p"]
 resource_name = "hover"
-length = 0.15
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:scale")
+tracks/0/path = NodePath("VBox/TextureRect/TextureRect:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1.6245, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.15, 1.15)]
+"values": [Vector2(0, -7), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBox/TextureRect/TextureRect/Margin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.5, -3), Vector2(-0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hd5m6"]
+resource_name = "rehover"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox/TextureRect/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBox/TextureRect/TextureRect/Margin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.5, 0), Vector2(-0.5, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_6to7h"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox/TextureRect/Control/PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBox/TextureRect/Control/PanelContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(0.353553, 1.27456, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1.2), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBox/TextureRect/Control/PanelContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l5fjj"]
 _data = {
-"hover": SubResource("Animation_sgn2p")
+"hover": SubResource("Animation_sgn2p"),
+"rehover": SubResource("Animation_hd5m6"),
+"show": SubResource("Animation_6to7h")
 }
 
 [node name="GUILab" type="MarginContainer"]
 custom_minimum_size = Vector2(165, 165)
-anchors_preset = -1
-anchor_right = 0.15
-anchor_bottom = 0.229
-offset_right = -165.0
-offset_bottom = -164.88
-scale = Vector2(1.07763, 1.07763)
+offset_right = 165.0
+offset_bottom = 171.0
 pivot_offset = Vector2(82.5, 82.5)
+size_flags_stretch_ratio = 0.5
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_b1ltk")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_xu6op")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBox"]
+self_modulate = Color(0.815686, 0.815686, 0.815686, 1)
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 3
+texture = ExtResource("2_j6bwj")
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBox/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j6bwj")
+stretch_mode = 5
+
+[node name="Margin" type="MarginContainer" parent="VBox/TextureRect/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 35
+
+[node name="TextureRect" type="TextureRect" parent="VBox/TextureRect/TextureRect/Margin"]
 custom_minimum_size = Vector2(75, 67)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 texture = ExtResource("2_g554w")
-expand_mode = 1
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="VBox/TextureRect"]
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBox/TextureRect/Control"]
+visible = false
+layout_mode = 0
+offset_left = -39.0
+offset_top = 129.0
+offset_right = 183.0
+offset_bottom = 256.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(111, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_2m5gk")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="VBox/TextureRect/Control/PanelContainer"]
+self_modulate = Color(0, 0.576471, 0.964706, 1)
+position = Vector2(111, -9)
+scale = Vector2(26.75, -26.625)
+mesh = SubResource("PrismMesh_v1a6d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/TextureRect/Control/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/TextureRect/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Лаборатория механики, симулирующая школьные лабораторные работы"
+label_settings = SubResource("LabelSettings_oouqc")
+autowrap_mode = 3
+
+[node name="Create" type="Button" parent="VBox/TextureRect/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_nc2pl")
+text = "Создать"
+
+[node name="Label" type="Label" parent="VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.117647, 0.117647, 0.117647, 1)
-theme_override_font_sizes/font_size = 14
 text = "Механика"
+label_settings = SubResource("LabelSettings_cq6kt")
 horizontal_alignment = 1
 
-[node name="ChooseTexture" type="Sprite2D" parent="."]
-position = Vector2(140, 130)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_xbk0r")
-
-[node name="ChooseAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kfy65")
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../ChooseAnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_l5fjj")
 }
 
-[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_gui_lab_mouse_entered"]
-[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_gui_lab_mouse_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="VBox/TextureRect/Control/PanelContainer/VBoxContainer/Create" to="." method="_on_create_pressed"]

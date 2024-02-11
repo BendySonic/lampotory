@@ -1,17 +1,15 @@
 class_name GUILab
 extends Container
 
-signal selected(object)
-signal deselected(object)
+signal create_pressed(object)
 
 @export var mode: String
 
-var toggled_on := false:
-	set = set_toggled_on
-@onready var choose_texture: Sprite2D = get_node("ChooseTexture")
-@onready var choose_animation: AnimationPlayer = get_node("ChooseAnimationPlayer")
+var pressed := false
+
 @onready var animation: AnimationPlayer = get_node("AnimationPlayer")
 
+@onready var label = get_node("VBox/Label")
 
 func _on_gui_lab_mouse_entered():
 	animation.play("hover")
@@ -22,19 +20,18 @@ func _on_gui_lab_mouse_exited():
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			toggled_on = not toggled_on
+			pressed = not pressed
+			if pressed:
+				animation.play("show")
+			else:
+				animation.play_backwards("show")
 
-func set_toggled_on(value):
-	toggled_on = value
-	if value:
-		choose_animation.play("choose")
-		emit_signal("selected", self)
-	else:
-		choose_animation.play_backwards("choose")
-		emit_signal("deselected", self)
 
-func select():
-	toggled_on = true
+func _on_create_pressed():
+	emit_signal("create_pressed", self)
 
-func deselect():
-	toggled_on = false
+func _on_mouse_entered():
+	animation.queue("hover")
+
+func _on_mouse_exited():
+	animation.queue("rehover")

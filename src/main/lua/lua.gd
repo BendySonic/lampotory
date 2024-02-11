@@ -27,29 +27,30 @@ var definitions: PackedStringArray
 func _ready():
 	animation_player.play("show")
 	# Open dictionary
-	var file = FileAccess.open("res://assets/data/dictionary.txt", FileAccess.READ)
-	var dictionary: String = file.get_as_text()
-	var definition: String = ""
-	
-	var is_start: bool = true
-	for ch in dictionary:
-		if ch == "&":
-			definitions.push_back(definition)
-			definition = ""
-			is_start = true
-		else:
-			if is_start:
-				match ch:
-					"\n", "\r", "\r\n":
-						continue
-					_:
-						is_start = false
-			definition += ch
-	file.close()
-	
-	while animation_player.is_playing() == true:
-		await get_tree().create_timer(1).timeout
-	animation_player.play("idle")
+	if OS.get_name() == "Windows":
+		var file = FileAccess.open("res://assets/data/dictionary.txt", FileAccess.READ)
+		var dictionary: String = file.get_as_text()
+		var definition: String = ""
+		
+		var is_start: bool = true
+		for ch in dictionary:
+			if ch == "&":
+				definitions.push_back(definition)
+				definition = ""
+				is_start = true
+			else:
+				if is_start:
+					match ch:
+						"\n", "\r", "\r\n":
+							continue
+						_:
+							is_start = false
+				definition += ch
+		file.close()
+		
+		while animation_player.is_playing() == true:
+			await get_tree().create_timer(1).timeout
+		animation_player.play("idle")
 
 func _on_lua_toggled(toggled_on):
 	if toggled_on:

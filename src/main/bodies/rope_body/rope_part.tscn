@@ -6,6 +6,7 @@
 friction = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhfat"]
+custom_solver_bias = 1.0
 radius = 8.0
 
 [node name="RopePart" type="RigidBody2D"]
