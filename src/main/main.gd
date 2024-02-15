@@ -9,7 +9,8 @@ var mode_data: ModeResource:
 	get: return mode_data
 
 var project_modes: Dictionary = {
-	"mechanic": preload("res://src/main/modes/mechanic.tres")
+	"mechanic": preload("res://src/main/modes/mechanic.tres"),
+	"electrodynamics": preload("res://src/main/modes/electrodynamics.tres")
 }
 
 # Children
@@ -23,9 +24,9 @@ func _enter_tree():
 	node2d = get_node("Node2D")
 
 func _ready():
-	if Global.project_data["is_saved"]:
-		await node2d.load_project(Global.project_data["project_name"])
-	set_mode(project_modes[Global.project_data["project_mode"]])
+	if Global.is_current_project_saved():
+		await node2d.load_project(Global.get_current_project_name())
+	set_mode(project_modes[Global.get_current_project_mode()])
 	
 	gui.connect("item_pressed", _on_item_pressed)
 	gui.connect("item_released", _on_item_released)
@@ -128,6 +129,7 @@ func _on_void_pressed(event):
 #region Mode
 func set_mode(mode: ModeResource):
 	mode_data = mode
+	node2d.set_mode(mode)
 	
 func is_mode(mode_name: String) -> bool:
 	return mode_data.mode_name == mode_name

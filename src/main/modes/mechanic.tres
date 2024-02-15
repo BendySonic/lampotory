@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ModeResource" load_steps=9 format=3 uid="uid://74vrgjttgvik"]
+[gd_resource type="Resource" script_class="ModeResource" load_steps=10 format=3 uid="uid://74vrgjttgvik"]
 
 [ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_gf0fl"]
 [ext_resource type="Resource" uid="uid://d4gyqud7xbsin" path="res://src/main/items/block_body.tres" id="1_mbdi1"]
@@ -8,8 +8,10 @@
 [ext_resource type="Resource" uid="uid://c3vlp6csmitmy" path="res://src/main/items/slope_body.tres" id="5_lma62"]
 [ext_resource type="Resource" uid="uid://58rhv5606xle" path="res://src/main/items/ruler_body.tres" id="6_rs8si"]
 [ext_resource type="Resource" uid="uid://dcnfqla7lttq7" path="res://src/main/items/hebel_body.tres" id="7_mo2nc"]
+[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/labs/mechanic.tscn" id="8_6xj8o"]
 
 [resource]
 script = ExtResource("1_gf0fl")
 mode_name = "mechanic"
+lab_scene = ExtResource("8_6xj8o")
 item_resources = Array[Resource("res://src/resources/item_resource.gd")]([ExtResource("1_mbdi1"), ExtResource("2_cmnvy"), ExtResource("3_jy4he"), ExtResource("4_75wuk"), ExtResource("5_lma62"), ExtResource("6_rs8si"), ExtResource("7_mo2nc")])

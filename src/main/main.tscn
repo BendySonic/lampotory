@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d1ftc2bsnc28r"]
+[gd_scene load_steps=28 format=3 uid="uid://d1ftc2bsnc28r"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_58k2u"]
 [ext_resource type="Script" path="res://src/main/gui/gui.gd" id="2_i5t1w"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://src/main/node2d/node2d.gd" id="11_5af0q"]
 [ext_resource type="Texture2D" uid="uid://bysbewkhlxv2x" path="res://assets/graphic/gui/icons/copy.svg" id="11_xf45d"]
 [ext_resource type="Texture2D" uid="uid://bsmcpf000gpka" path="res://assets/graphic/gui/icons/cut.svg" id="12_0bogp"]
-[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/labs/mechanic.tscn" id="13_fy0sy"]
 [ext_resource type="Texture2D" uid="uid://ffwovj1rssrg" path="res://assets/graphic/gui/icons/paste.svg" id="13_savgf"]
 [ext_resource type="Texture2D" uid="uid://dy11akgrbt2ps" path="res://assets/graphic/gui/icons/delete.svg" id="14_1duld"]
 [ext_resource type="PackedScene" uid="uid://def2bkc3wpx2e" path="res://src/main/gui/gui_cursor.tscn" id="14_u1iqx"]
@@ -615,9 +614,6 @@ mouse_filter = 1
 theme = ExtResource("10_r6tdi")
 
 [node name="Lab" type="Node2D" parent="Node2D/Enviroment"]
-
-[node name="Mechanic" parent="Node2D/Enviroment/Lab" instance=ExtResource("13_fy0sy")]
-position = Vector2(0, 700)
 
 [node name="Camera" type="Node2D" parent="Node2D"]
 

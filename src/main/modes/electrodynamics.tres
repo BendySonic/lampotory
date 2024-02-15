@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ModeResource" load_steps=2 format=3 uid="uid://jcq8l8lnvhrf"]
+
+[ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_354pw"]
+
+[resource]
+script = ExtResource("1_354pw")
+mode_name = ""
+item_resources = Array[Resource("res://src/resources/item_resource.gd")]([])

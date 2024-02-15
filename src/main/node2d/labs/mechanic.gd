@@ -15,11 +15,12 @@ func _on_static_body_2d_mouse_exited():
 	is_mouse_inside = false
 
 func _draw():
+	var y_offset = Vector2(0, 700)
 	var arrow_x_offset = Vector2(0, -500)
 	var arrow_y_offset = Vector2(0, -2500)
 	for i in range(-shape_meter_size, shape_meter_size + 1):
 		# Arrow
-		var arrow_pos = Vector2(i * 100, 0) + arrow_x_offset
+		var arrow_pos = Vector2(i * 100, 0) + arrow_x_offset + y_offset
 		draw_line(arrow_pos, arrow_pos + Vector2(0, 20), Color.WEB_GRAY, 5)
 		# Small arrow
 		if not i == shape_meter_size:
@@ -27,9 +28,9 @@ func _draw():
 				var small_arrow_pos = arrow_pos + Vector2(j * 10, 0)
 				draw_line(small_arrow_pos, small_arrow_pos + Vector2(0, 10), Color.GRAY, 2.5)
 		# Grid
-		var line_pos_x = Vector2(i * 100, 0) + arrow_x_offset
+		var line_pos_x = Vector2(i * 100, 0) + arrow_x_offset + y_offset
 		draw_line(line_pos_x, line_pos_x - Vector2(0, 4000), Color(0.9, 0.9, 0.9), 2)
-		var line_pos_y = Vector2(-2000, i * 100) + arrow_y_offset
+		var line_pos_y = Vector2(-2000, i * 100) + arrow_y_offset + y_offset
 		draw_line(line_pos_y, line_pos_y + Vector2(4000, 0), Color(0.9, 0.9, 0.9), 2)
 		# Arrow label
 		var label = Label.new()
@@ -52,7 +53,7 @@ func _draw():
 	label.label_settings = LabelSettings.new()
 	label.label_settings.font_size = 40
 	label.size = Vector2(20, 10)
-	label.position = Vector2(-label.size.x / 2, -440)
+	label.position = Vector2(-label.size.x / 2, -440) + y_offset
 	label.pivot_offset += label.size / 2
 	label.scale /= 2
 	label.modulate = Color.WEB_GRAY

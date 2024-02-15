@@ -34,7 +34,7 @@ var releative_drag_position: Vector2
 var is_display_vector: bool = false
 
 @onready var bodies_node: Node = get_node("Bodies")
-@onready var lab: Node = get_node("Enviroment/Lab/Mechanic")
+@onready var lab_node: Node = get_node("Enviroment/Lab")
 @onready var camera: Camera2D = get_node("Camera/Camera2D")
 @onready var cursor: GUICursor = get_node("GUICursor"):
 	get = get_cursor
@@ -163,7 +163,11 @@ func load_project(name: String):#file_path: String):
 		bodies.remove_child(body)
 		bodies_node.add_child(body, true)
 	bodies.queue_free()
-	#endregion
+
+func set_mode(mode: ModeResource):
+	var new_lab = mode["lab_scene"].instantiate()
+	lab_node.add_child(new_lab)
+#endregion
 
 
 #region Player
@@ -273,13 +277,9 @@ func connect_body_signals(body: NormalBody):
 	body.connect("body_deselected", _on_body_deselected)
 #endregion
 
+
 func display_vector(toggled_on: bool):
 	is_display_vector = toggled_on
 
 func get_cursor():
 	return cursor
-
-#region Foreground
-func is_lab_mouse_inside() -> bool:
-	return lab.is_mouse_inside()
-#endregion
