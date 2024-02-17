@@ -1,5 +1,5 @@
 class_name PinPoint
-extends Node2D
+extends StaticBody2D
 
 signal pin_point_connected()
 signal moved_to_connect()
@@ -37,7 +37,7 @@ func _on_main_body_defined():
 	if is_connected:
 		while connected_pin_point == null:
 			connected_pin_point = get_node(connected_pin_point_path)
-		connect_pin_point(connected_pin_point)
+		connect_to(connected_pin_point)
 
 func _physics_process(delta):
 	if connect_area.has_contact:
@@ -50,12 +50,12 @@ func _physics_process(delta):
 
 func _on_static_body_held(_body):
 	if disconnect_on_hold:
-		disconnect_pin_points()
+		disconnect_all()
 
 func _on_body_unheld(_body):
-	connect_pin_points()
+	connect_all()
 
-func connect_pin_points():
+func connect_all():
 	for area in detect_area.get_overlapping_areas():
 		if area is DetectArea:
 			var pin_point = area.get_parent()
@@ -64,13 +64,13 @@ func connect_pin_points():
 				continue
 			
 			connected_pin_point = pin_point
-			await connect_pin_point(pin_point)
+			await connect_to(pin_point)
 			connected_pin_point_path = get_path_to(pin_point)
 			is_connected = true
 			pin_point.has_connect = true
 			break
 
-func connect_pin_point(pin_point: PinPoint):
+func connect_to(pin_point: PinPoint):
 	if (
 			(not is_connected and not pin_point.is_connected)
 			or (is_connected and main_body.is_loaded)
@@ -85,7 +85,7 @@ func connect_pin_point(pin_point: PinPoint):
 		main_body.collision_layer = layer_arg
 		main_body.collision_mask = mask_arg
 
-func disconnect_pin_points():
+func disconnect_all():
 	is_move_to_contact = false
 	
 	for area in detect_area.get_overlapping_areas():

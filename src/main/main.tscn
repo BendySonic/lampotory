@@ -594,6 +594,7 @@ script = ExtResource("11_5af0q")
 
 [node name="Bodies" type="Node2D" parent="Node2D"]
 process_mode = 1
+y_sort_enabled = true
 
 [node name="Enviroment" type="Node2D" parent="Node2D"]
 

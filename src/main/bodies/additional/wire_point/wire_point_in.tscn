@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb5t7ph43qqn4"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/wire_point/wire_point_in.gd" id="1_ut2xq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogcss"]
+size = Vector2(45, 45)
+
+[node name="WirePointIn" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_ut2xq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ogcss")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

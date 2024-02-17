@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3xi102tthbx4"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/wire_point/wire_point_out.gd" id="1_oj8sw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpjfe"]
+size = Vector2(45, 45)
+
+[node name="WirePointOut" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_oj8sw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cpjfe")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

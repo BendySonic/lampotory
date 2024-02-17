@@ -17,20 +17,23 @@ var speed: float = 1:
 # Data container for selected body
 var selected_body: Variant:
 	get: return selected_body
+# Data container for held body
 var held_body: Variant
-# Data containers durning body spawn
+# Data container durning body spawn
 var selected_item_data: Variant:
 	get: return selected_item_data
-
+# Data container for copied body
 var buffer_body: Variant:
 	get: return buffer_body
 
+# Camera
 var camera_drag_start_position: Vector2
 var is_camera_ready_to_drag: bool
 var is_camera_drag: bool
 var is_camera_dragged: bool
 var releative_drag_position: Vector2
 
+# Display vector
 var is_display_vector: bool = false
 
 @onready var bodies_node: Node = get_node("Bodies")

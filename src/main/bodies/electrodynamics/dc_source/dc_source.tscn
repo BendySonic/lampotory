@@ -1,0 +1,133 @@
+[gd_scene load_steps=13 format=3 uid="uid://vjyksqky6vlp"]
+
+[ext_resource type="Script" path="res://src/main/bodies/additional/basic/float_normal_body.gd" id="1_q4ojo"]
+[ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/additional/components/save_component.tscn" id="2_r4pw4"]
+[ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_5se7c"]
+[ext_resource type="Texture2D" uid="uid://b6dq3w60qiwi1" path="res://assets/graphic/gui/icons/dc_source.png" id="4_in2c7"]
+[ext_resource type="PackedScene" uid="uid://b3xi102tthbx4" path="res://src/main/bodies/additional/wire_point/wire_point_out.tscn" id="5_io5ph"]
+[ext_resource type="PackedScene" uid="uid://bb5t7ph43qqn4" path="res://src/main/bodies/additional/wire_point/wire_point_in.tscn" id="6_0cj41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2q1q"]
+size = Vector2(125, 50)
+
+[sub_resource type="QuadMesh" id="QuadMesh_23ofn"]
+size = Vector2(120, 90)
+
+[sub_resource type="QuadMesh" id="QuadMesh_4aq54"]
+size = Vector2(100, 34)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2i3oy"]
+radius = 15.0
+height = 30.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_a3qnc"]
+radius = 12.0
+height = 24.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmgky"]
+font_size = 30
+
+[node name="DCSource" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 0
+input_pickable = true
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_q4ojo")
+body_scene_path = "res://src/main/bodies/electrodynamics/test/test.tscn"
+
+[node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_r4pw4")]
+save_nodes = [NodePath("..")]
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_5se7c")]
+input_body = NodePath("..")
+hold_type = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_b2q1q")
+
+[node name="Visuals" type="Node2D" parent="."]
+z_index = -10
+position = Vector2(0, -50)
+
+[node name="Shadow" type="Polygon2D" parent="Visuals"]
+modulate = Color(0, 0, 0, 0.231373)
+polygon = PackedVector2Array(-60, 50, -50, 64, 70, 64, 70, 31, 60, 16)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.0705882, 0.596078, 0.94902, 1)
+position = Vector2(0, 5)
+mesh = SubResource("QuadMesh_23ofn")
+
+[node name="Polygon2D" type="Polygon2D" parent="Visuals"]
+color = Color(0.156863, 0.67451, 1, 1)
+polygon = PackedVector2Array(-60, -40, -60, 3, -50, 2, -50, -32)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Visuals"]
+color = Color(0.156863, 0.67451, 1, 1)
+polygon = PackedVector2Array(60, -40, 60, 3, 50, 2, 50, -32)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Visuals"]
+color = Color(0, 0.568627, 0.878431, 1)
+polygon = PackedVector2Array(-60, -40, -50, -32, 50, -32, 60, -40)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Visuals"]
+color = Color(0.294118, 0.705882, 1, 1)
+polygon = PackedVector2Array(-50, 2, -60, 3, 60, 3, 50, 2)
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.0313726, 0.521569, 0.839216, 1)
+position = Vector2(0, -15)
+mesh = SubResource("QuadMesh_4aq54")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+position = Vector2(0, 35)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_in2c7")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.745098, 0.517647, 1)
+position = Vector2(-20, -15)
+mesh = SubResource("SphereMesh_2i3oy")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.745098, 0.517647, 1)
+position = Vector2(20, -15)
+mesh = SubResource("SphereMesh_2i3oy")
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.541176, 0.368627, 1)
+position = Vector2(-20, -15)
+mesh = SubResource("SphereMesh_a3qnc")
+
+[node name="MeshInstance2D7" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.541176, 0.368627, 1)
+position = Vector2(20, -15)
+mesh = SubResource("SphereMesh_a3qnc")
+
+[node name="Label" type="Label" parent="Visuals"]
+offset_left = -29.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = 47.0
+text = "+"
+label_settings = SubResource("LabelSettings_rmgky")
+
+[node name="Label2" type="Label" parent="Visuals"]
+offset_left = 26.0
+offset_top = 40.0
+offset_right = 47.0
+offset_bottom = 82.0
+scale = Vector2(-1, -1)
+text = "-"
+label_settings = SubResource("LabelSettings_rmgky")
+
+[node name="WirePointOut" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("5_io5ph")]
+z_index = 2
+position = Vector2(-20, -65)
+main_body = NodePath("..")
+
+[node name="WirePointIn" parent="." instance=ExtResource("6_0cj41")]
+z_index = 2
+position = Vector2(20, -65)

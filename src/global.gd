@@ -1,5 +1,6 @@
 extends Node
 
+# Generic
 var project_data: Dictionary = {
 	"project_name": "",
 	"project_theme": "",
@@ -8,6 +9,10 @@ var project_data: Dictionary = {
 }
 
 var cursor: GUICursor
+
+# Electrodynamics
+var wire_source: WirePointOut
+
 
 func is_current_project_saved():
 	return project_data["is_saved"]

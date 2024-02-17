@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://db1jatmdvjbt2"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_m6lg2"]
+[ext_resource type="Texture2D" uid="uid://j01uvvlscetm" path="res://assets/graphic/gui/icons/choose.png" id="1_nho52"]
+[ext_resource type="PackedScene" uid="uid://b3qm66k6maka5" path="res://src/main/bodies/electrodynamics/lamp/lamp.tscn" id="2_j7pbn"]
+
+[resource]
+script = ExtResource("1_m6lg2")
+item_name = "lamp"
+item_tooltip = "lamp"
+item_icon = ExtResource("1_nho52")
+item_modulate = Color(0, 0, 0, 1)
+item_scene = ExtResource("2_j7pbn")
