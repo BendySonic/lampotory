@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhegvwbcuwk3r"]
+[gd_scene load_steps=17 format=3 uid="uid://bhegvwbcuwk3r"]
 
 [ext_resource type="Script" path="res://src/main/bodies/electrodynamics/switch/switch.gd" id="1_m8rvc"]
 [ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/additional/components/save_component.tscn" id="2_n214m"]
@@ -32,6 +32,9 @@ size = Vector2(60, 30)
 [sub_resource type="QuadMesh" id="QuadMesh_ileaa"]
 size = Vector2(62, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81y43"]
+size = Vector2(50, 50)
+
 [sub_resource type="Animation" id="Animation_xwyxn"]
 resource_name = "on"
 length = 0.2
@@ -45,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-3, -18), Vector2(2, -2)]
+"values": [Vector2(-14, -28), Vector2(2, -2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -57,7 +60,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-0.523599, 0.0]
+"values": [-1.0472, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4yix8"]
@@ -67,13 +70,14 @@ _data = {
 
 [node name="Switch" type="RigidBody2D"]
 input_pickable = true
+lock_rotation = true
 script = ExtResource("1_m8rvc")
 
 [node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_n214m")]
 save_nodes = [null]
 
 [node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_c3yk3")]
-input_body = NodePath("")
+input_body = NodePath("..")
 hold_type = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -86,7 +90,7 @@ position = Vector2(0, -50)
 
 [node name="Shadow" type="Polygon2D" parent="Visuals"]
 modulate = Color(0, 0, 0, 0.231373)
-polygon = PackedVector2Array(-60, 50, -50, 64, 70, 64, 70, 31, 60, 16)
+polygon = PackedVector2Array(-70, 50, -57, 64, 81, 64, 81, 20, 70, 7)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
 modulate = Color(0.0705882, 0.596078, 0.94902, 1)
@@ -142,13 +146,6 @@ modulate = Color(0.0117647, 0.407843, 0.666667, 1)
 position = Vector2(0, 2)
 mesh = SubResource("QuadMesh_x0k2u")
 
-[node name="MeshInstance2D4" type="MeshInstance2D" parent="Visuals"]
-modulate = Color(0.0392157, 0.533333, 0.858824, 1)
-z_index = 1
-position = Vector2(-3, -18)
-rotation = -0.523599
-mesh = SubResource("QuadMesh_ileaa")
-
 [node name="Polygon2D" type="Polygon2D" parent="Visuals"]
 color = Color(0.0196078, 0.470588, 0.760784, 1)
 polygon = PackedVector2Array(-39, -4, -29, -3, -28, 1, -41, 0)
@@ -157,8 +154,13 @@ polygon = PackedVector2Array(-39, -4, -29, -3, -28, 1, -41, 0)
 color = Color(0.0196078, 0.470588, 0.760784, 1)
 polygon = PackedVector2Array(39, -3, 42, 1, 33, 2, 33, -3)
 
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.0392157, 0.533333, 0.858824, 1)
+position = Vector2(-14, -28)
+rotation = -1.0472
+mesh = SubResource("QuadMesh_ileaa")
+
 [node name="WirePointOut" parent="." instance=ExtResource("4_gok22")]
-visible = false
 z_index = 2
 position = Vector2(53, -60)
 
@@ -166,7 +168,15 @@ position = Vector2(53, -60)
 z_index = 2
 position = Vector2(-53, -60)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_81y43")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_4yix8")
 }
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

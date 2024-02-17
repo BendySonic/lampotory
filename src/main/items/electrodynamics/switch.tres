@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://c7o2q77ygmq28"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_3trln"]
+[ext_resource type="Texture2D" uid="uid://dnfcus2phvmcv" path="res://assets/graphic/gui/icons/display_vector.png" id="1_oq08c"]
+[ext_resource type="PackedScene" uid="uid://bhegvwbcuwk3r" path="res://src/main/bodies/electrodynamics/switch/switch.tscn" id="2_ssn8g"]
+
+[resource]
+script = ExtResource("1_3trln")
+item_name = "switch"
+item_tooltip = "switch"
+item_icon = ExtResource("1_oq08c")
+item_modulate = Color(0, 0, 0, 1)
+item_scene = ExtResource("2_ssn8g")
