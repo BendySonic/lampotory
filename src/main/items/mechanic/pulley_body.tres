@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://c8w7yhbvmtxvx"]
+
+[ext_resource type="Texture2D" uid="uid://dn8evtn53ye52" path="res://assets/graphic/gui/icons/items/pulley.png" id="1_3xk74"]
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_edkhl"]
+[ext_resource type="PackedScene" uid="uid://7klwlvxvdohj" path="res://src/main/bodies/mechanic/pulley_body/pulley_body.tscn" id="2_7f2lg"]
+
+[resource]
+script = ExtResource("1_edkhl")
+item_name = "Механич. блок"
+item_tooltip = "Изменяет направление силы"
+item_icon = ExtResource("1_3xk74")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_7f2lg")

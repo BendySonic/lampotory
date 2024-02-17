@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://blmbopi1jfuot"]
 
 [ext_resource type="Script" path="res://src/menu/gui/gui_lab.gd" id="1_b1ltk"]
-[ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand_icon.png" id="2_g554w"]
 [ext_resource type="Texture2D" uid="uid://cy5ueejq8ke3x" path="res://assets/graphic/2d/ball.png" id="2_j6bwj"]
+[ext_resource type="Texture2D" uid="uid://blifx6djyq0e6" path="res://assets/graphic/gui/icons/sand.png" id="3_6a7nc"]
 [ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="4_nc2pl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m5gk"]
@@ -87,7 +87,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VBox/TextureRect/Control/PanelContainer:scale")
+tracks/0/path = NodePath("VBox/TextureRect/PanelContainer:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,7 +99,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VBox/TextureRect/Control/PanelContainer:visible")
+tracks/1/path = NodePath("VBox/TextureRect/PanelContainer:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -118,9 +118,14 @@ _data = {
 
 [node name="GUILab" type="MarginContainer"]
 custom_minimum_size = Vector2(165, 165)
-offset_right = 165.0
-offset_bottom = 171.0
+anchors_preset = -1
+anchor_right = 0.15
+anchor_bottom = 0.237
+offset_right = 402.0
+offset_bottom = 0.359985
 pivot_offset = Vector2(82.5, 82.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -130,11 +135,13 @@ script = ExtResource("1_b1ltk")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBox"]
 self_modulate = Color(0.815686, 0.815686, 0.815686, 1)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 texture = ExtResource("2_j6bwj")
 stretch_mode = 5
 
@@ -147,6 +154,7 @@ offset_top = -7.0
 offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_j6bwj")
 stretch_mode = 5
 
@@ -161,6 +169,7 @@ offset_right = 0.5
 offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
@@ -170,45 +179,53 @@ theme_override_constants/margin_bottom = 35
 custom_minimum_size = Vector2(75, 67)
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_g554w")
+mouse_filter = 2
+texture = ExtResource("3_6a7nc")
+expand_mode = 1
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="VBox/TextureRect"]
-z_index = 1
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="VBox/TextureRect/TextureRect"]
 
-[node name="PanelContainer" type="PanelContainer" parent="VBox/TextureRect/Control"]
-visible = false
-layout_mode = 0
-offset_left = -39.0
-offset_top = 129.0
-offset_right = 183.0
-offset_bottom = 256.0
+[node name="PanelContainer" type="PanelContainer" parent="VBox/TextureRect"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.5
+offset_top = -1.0
+offset_right = 113.5
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(111, 0)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2m5gk")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="VBox/TextureRect/Control/PanelContainer"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="VBox/TextureRect/PanelContainer"]
 self_modulate = Color(0, 0.576471, 0.964706, 1)
 position = Vector2(111, -9)
 scale = Vector2(26.75, -26.625)
 mesh = SubResource("PrismMesh_v1a6d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBox/TextureRect/Control/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/TextureRect/PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBox/TextureRect/Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBox/TextureRect/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Лаборатория механики, симулирующая школьные лабораторные работы"
 label_settings = SubResource("LabelSettings_oouqc")
 autowrap_mode = 3
 
-[node name="Create" type="Button" parent="VBox/TextureRect/Control/PanelContainer/VBoxContainer"]
+[node name="Create" type="Button" parent="VBox/TextureRect/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme = ExtResource("4_nc2pl")
 text = "Создать"
 
@@ -224,6 +241,6 @@ libraries = {
 "": SubResource("AnimationLibrary_l5fjj")
 }
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="VBox/TextureRect/Control/PanelContainer/VBoxContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="mouse_entered" from="." to="." method="_on_gui_lab_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_gui_lab_mouse_exited"]
+[connection signal="pressed" from="VBox/TextureRect/PanelContainer/VBoxContainer/Create" to="." method="_on_create_pressed"]

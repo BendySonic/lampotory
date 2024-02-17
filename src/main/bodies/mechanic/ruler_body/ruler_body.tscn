@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7q3ocl7umgkh"]
+
+[ext_resource type="Script" path="res://src/main/bodies/mechanic/ruler_body/ruler_body.gd" id="1_t4gpm"]
+[ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/additional/components/save_component.tscn" id="2_ngjud"]
+[ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_x1whj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rglv6"]
+size = Vector2(440, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mknh4"]
+custom_solver_bias = 1.0
+size = Vector2(440, 60)
+
+[node name="RulerBody" type="RigidBody2D"]
+z_index = 1000
+collision_layer = 1048576
+collision_mask = 0
+collision_priority = 2.0
+input_pickable = true
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_t4gpm")
+properties = {
+"precise_mode": false
+}
+body_scene_path = "res://src/main/bodies/ruler_body/ruler_body.tscn"
+
+[node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_ngjud")]
+save_nodes = [NodePath("..")]
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_x1whj")]
+input_body = NodePath("..")
+hold_type = 1
+is_rotatable = true
+rotate_speed = 5.0
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.14902, 0.517647, 0.972549, 1)
+z_index = -1
+mesh = SubResource("QuadMesh_rglv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mknh4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -193.0
+offset_top = -7.0
+offset_right = -153.0
+offset_bottom = 16.0
+text = "m"
+
+[connection signal="body_unheld" from="." to="." method="_on_body_unheld"]

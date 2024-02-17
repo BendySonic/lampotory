@@ -26,7 +26,6 @@ func save_data():
 	return save_data
 
 func load_data(save_data: Dictionary, body: NormalBody):
-	print(save_data)
 	if save_data.is_empty():
 		return
 	for node_path in save_data:

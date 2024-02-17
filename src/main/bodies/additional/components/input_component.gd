@@ -1,7 +1,7 @@
 class_name InputComponent
 extends Node
 
-enum HoldType {STATIC_AXIS, STATIC, PIN}
+enum HoldType {STATIC_AXIS, STATIC, PIN, STATIC_FLOAT}
 
 @export var input_body: PhysicsBody2D
 @export var hold_type: HoldType
@@ -82,12 +82,12 @@ func hold_body():
 	is_held = true
 	deselect_body()
 	# Hold work
-	if is_hold_type(HoldType.STATIC_AXIS):
+	if is_hold_type(HoldType.STATIC_AXIS) or is_hold_type(HoldType.STATIC_FLOAT):
 		input_body.collision_layer = 2
 		input_body.collision_mask = 2
 		releative_drag_position = input_body.to_local(Global.cursor.global_position)
 		input_body.set_deferred("freeze", false)
-	else:
+	if not is_hold_type(HoldType.STATIC_AXIS):
 		Global.cursor.hold_body(input_body)
 		if is_hold_type(HoldType.STATIC):
 			input_body.set_deferred("lock_rotation", true)
@@ -104,12 +104,12 @@ func unhold_body():
 	if is_held:
 		is_held = false
 		# Unhold work
-		if is_hold_type(HoldType.STATIC_AXIS):
+		if is_hold_type(HoldType.STATIC_AXIS) or is_hold_type(HoldType.STATIC_FLOAT):
 			input_body.collision_layer = 5
 			input_body.collision_mask = 1
 			releative_drag_position =  Vector2(0, 0)
 			input_body.set_deferred("freeze", true)
-		else:
+		if not is_hold_type(HoldType.STATIC_AXIS):
 			Global.cursor.unhold_body()
 			if is_hold_type(HoldType.STATIC):
 				input_body.set_deferred("lock_rotation", false)

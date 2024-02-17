@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://c3vlp6csmitmy"]
+
+[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_03h41"]
+[ext_resource type="Texture2D" uid="uid://cvrp5a783qo0f" path="res://assets/graphic/gui/icons/items/slope.png" id="1_8138f"]
+[ext_resource type="PackedScene" uid="uid://dvtobwoncjpli" path="res://src/main/bodies/mechanic/slope_body/slope_body.tscn" id="2_lpw8s"]
+
+[resource]
+script = ExtResource("1_03h41")
+item_name = "Склон"
+item_tooltip = "Перемещаемый склон с настраиваемым градусом"
+item_icon = ExtResource("1_8138f")
+item_modulate = Color(1, 1, 1, 1)
+item_scene = ExtResource("2_lpw8s")

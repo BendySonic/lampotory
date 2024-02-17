@@ -9,6 +9,9 @@ func prepare_body():
 	
 	set_deferred("freeze", true)
 	linear_velocity = Vector2(0, 0)
+	collision_layer = 5
+	collision_mask = 0
+	gravity_scale = 0
 
 
 func set_start_position():

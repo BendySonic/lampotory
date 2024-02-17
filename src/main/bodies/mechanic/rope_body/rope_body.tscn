@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg262582impk8"]
+
+[ext_resource type="Script" path="res://src/main/bodies/mechanic/rope_body/rope_body.gd" id="1_4xdxf"]
+
+[node name="RopeBody" type="Node2D"]
+script = ExtResource("1_4xdxf")
+length_limit = 90.0

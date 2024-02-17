@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="ModeResource" load_steps=2 format=3 uid="uid://jcq8l8lnvhrf"]
+[gd_resource type="Resource" script_class="ModeResource" load_steps=4 format=3 uid="uid://jcq8l8lnvhrf"]
 
+[ext_resource type="Resource" uid="uid://dlygqq0qdois7" path="res://src/main/items/electrodynamics/test.tres" id="1_2kh3w"]
 [ext_resource type="Script" path="res://src/resources/mode_resource.gd" id="1_354pw"]
+[ext_resource type="PackedScene" uid="uid://c1hpm47i5qpqu" path="res://src/main/node2d/labs/electrodynamics.tscn" id="1_atqwu"]
 
 [resource]
 script = ExtResource("1_354pw")
-mode_name = ""
-item_resources = Array[Resource("res://src/resources/item_resource.gd")]([])
+mode_name = "electrodynamics"
+lab_scene = ExtResource("1_atqwu")
+item_resources = Array[Resource("res://src/resources/item_resource.gd")]([ExtResource("1_2kh3w")])

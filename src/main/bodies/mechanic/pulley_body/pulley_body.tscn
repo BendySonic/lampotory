@@ -1,0 +1,133 @@
+[gd_scene load_steps=15 format=3 uid="uid://7klwlvxvdohj"]
+
+[ext_resource type="Script" path="res://src/main/bodies/mechanic/pulley_body/pulley_body.gd" id="1_oamd8"]
+[ext_resource type="PackedScene" uid="uid://bf36buciyowrj" path="res://src/main/bodies/additional/components/save_component.tscn" id="2_afsoj"]
+[ext_resource type="PackedScene" uid="uid://cxvdofvihr3oi" path="res://src/main/bodies/additional/components/input_component.tscn" id="3_jd0dn"]
+[ext_resource type="PackedScene" uid="uid://bs410o4h85bjo" path="res://src/main/bodies/additional/pin_point/pin_point.tscn" id="4_6jvb3"]
+[ext_resource type="PackedScene" uid="uid://cg262582impk8" path="res://src/main/bodies/mechanic/rope_body/rope_body.tscn" id="5_oyhvd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oh8me"]
+friction = 0.0
+rough = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_tcegb"]
+size = Vector2(20, 15)
+
+[sub_resource type="QuadMesh" id="QuadMesh_v1r8n"]
+size = Vector2(16, 24)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tteg8"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_0yxar"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_evqjh"]
+size = Vector2(10, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2y02p"]
+custom_solver_bias = 1.0
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjvwu"]
+custom_solver_bias = 1.0
+size = Vector2(15, 20)
+
+[sub_resource type="Curve2D" id="Curve2D_pjieg"]
+bake_interval = 20.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -24, 67, 0, 0, 0, 0, -24, 53, 0, 0, 0, 0, -24, 40, 0, 0, 0, 0, -24, 28, 0, 0, 0, 0, -24, 16, 0, 0, 0, 0, -25, 0, 0, 0, 0, 0, -22, -11, 0, 0, 0, 0, -19, -20, 0, 0, 0, 0, -10, -23, 0, 0, 0, 0, -1, -28, 0, 0, 0, 0, 10, -24, 0, 0, 0, 0, 19, -20, 0, 0, 0, 0, 22, -11, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 26, 14, 0, 0, 0, 0, 26, 27, 0, 0, 0, 0, 26, 39, 0, 0, 0, 0, 26, 53, 0, 0, 0, 0, 26, 68)
+}
+point_count = 19
+
+[node name="PulleyBody" type="RigidBody2D"]
+z_index = 30
+collision_layer = 4225
+collision_mask = 4225
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_oh8me")
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_oamd8")
+properties = {
+"weightless": false
+}
+body_scene_path = "res://src/main/bodies/pulley_body/pulley_body.tscn"
+
+[node name="SaveComponent" parent="." node_paths=PackedStringArray("save_nodes") instance=ExtResource("2_afsoj")]
+save_nodes = [NodePath(".."), NodePath("../PinPoint"), NodePath("../RopeBody")]
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("input_body") instance=ExtResource("3_jd0dn")]
+input_body = NodePath("..")
+hold_type = 1
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.737255, 0.486275, 1)
+z_index = 25
+position = Vector2(-20, 0)
+mesh = SubResource("QuadMesh_tcegb")
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.737255, 0.486275, 1)
+z_index = 25
+position = Vector2(-38, 2)
+mesh = SubResource("QuadMesh_v1r8n")
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.737255, 0.486275, 1)
+z_index = 25
+position = Vector2(20, 0)
+mesh = SubResource("QuadMesh_tcegb")
+
+[node name="MeshInstance2D7" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.737255, 0.486275, 1)
+z_index = 25
+position = Vector2(38, 2)
+mesh = SubResource("QuadMesh_v1r8n")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals"]
+mesh = SubResource("SphereMesh_tteg8")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0, 0.839216, 0.333333, 1)
+z_index = 30
+mesh = SubResource("SphereMesh_0yxar")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Visuals"]
+modulate = Color(0.843137, 0.843137, 0.843137, 1)
+position = Vector2(0, -25)
+mesh = SubResource("QuadMesh_evqjh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2y02p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(38, 0)
+shape = SubResource("RectangleShape2D_xjvwu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-38, 0)
+shape = SubResource("RectangleShape2D_xjvwu")
+
+[node name="PinPoint" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("4_6jvb3")]
+modulate = Color(0, 0.854902, 0.447059, 1)
+position = Vector2(0, -40)
+main_body = NodePath("..")
+disconnect_on_hold = true
+
+[node name="InputComponent" parent="PinPoint" node_paths=PackedStringArray("input_body") instance=ExtResource("3_jd0dn")]
+input_body = NodePath("../..")
+hold_type = 2
+
+[node name="RopeBody" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("5_oyhvd")]
+main_body = NodePath("..")
+length_limit = 175.0
+
+[node name="Path2D" type="Path2D" parent="RopeBody"]
+curve = SubResource("Curve2D_pjieg")
+
+[connection signal="body_unheld" from="." to="." method="_on_body_unheld"]

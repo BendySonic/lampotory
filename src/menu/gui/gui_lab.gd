@@ -4,12 +4,21 @@ extends Container
 signal create_pressed(object)
 
 @export var mode: String
+@export var icon: Texture2D
+@export_multiline var tooltip: String
 
 var pressed := false
 
 @onready var animation: AnimationPlayer = get_node("AnimationPlayer")
+@onready var texture: TextureRect = get_node("VBox/TextureRect/TextureRect/Margin/TextureRect")
+@onready var label: Label = get_node("VBox/Label")
+@onready var tooltip_label: Label = get_node("VBox/TextureRect/PanelContainer/VBoxContainer/Label")
 
-@onready var label = get_node("VBox/Label")
+
+func _ready():
+	texture.texture = icon
+	label.text = mode
+	tooltip_label.text = tooltip
 
 func _on_gui_lab_mouse_entered():
 	animation.play("hover")
