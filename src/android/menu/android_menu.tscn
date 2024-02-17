@@ -1,0 +1,634 @@
+[gd_scene load_steps=35 format=3 uid="uid://ddkbq7ocee5p0"]
+
+[ext_resource type="Script" path="res://src/android/menu/android_menu.gd" id="1_67wh5"]
+[ext_resource type="Texture2D" uid="uid://dpke0x7sm8vwh" path="res://assets/graphic/gui/control/white_updown.png" id="1_n213r"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
+[ext_resource type="Texture2D" uid="uid://dg5cuw20m3sdk" path="res://assets/graphic/gui/icons/projects.png" id="3_s580j"]
+[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/graphic/gui/icons/main_save.png" id="5_mg1b0"]
+[ext_resource type="PackedScene" uid="uid://blmbopi1jfuot" path="res://src/menu/gui/gui_lab.tscn" id="8_3pvbh"]
+[ext_resource type="Texture2D" uid="uid://daacw4vi75686" path="res://assets/graphic/gui/icons/search_icon.png" id="9_d6sed"]
+[ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
+[ext_resource type="Texture2D" uid="uid://80qqs2bvlln8" path="res://assets/graphic/2d/chess.png" id="10_b8www"]
+[ext_resource type="Texture2D" uid="uid://ccno24kak24l4" path="res://assets/graphic/2d/arrows.png" id="11_fc7du"]
+[ext_resource type="Texture2D" uid="uid://7q2iqo38ohlf" path="res://assets/graphic/2d/electro.png" id="12_es2f7"]
+[ext_resource type="Texture2D" uid="uid://bxp8lrm1vkdr6" path="res://assets/graphic/2d/ch.png" id="13_mpbxy"]
+[ext_resource type="PackedScene" uid="uid://b3seuxw41qcta" path="res://src/libs/tooltip.tscn" id="14_eqdgs"]
+
+[sub_resource type="Theme" id="Theme_mk0pc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeoci"]
+content_margin_right = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0.294118, 0.627451, 0.996078, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7hvm"]
+content_margin_left = 20.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.129412, 0.45098, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 10
+border_color = Color(0, 0.333333, 0.8, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 20
+expand_margin_left = 50.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_size = 2
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68tph"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.352941, 0.847059, 1)
+border_width_bottom = 3
+border_color = Color(0, 0.278431, 0.67451, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7p7vy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs6xt"]
+content_margin_left = 8.0
+bg_color = Color(0.337255, 0.619608, 0.992157, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.439216, 0.764706, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.219608)
+shadow_size = 4
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtxmm"]
+content_margin_left = 8.0
+bg_color = Color(0.137255, 0.635294, 0.984314, 1)
+border_width_bottom = 3
+border_color = Color(0, 0.478431, 0.85098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.219608)
+shadow_size = 4
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nud11"]
+content_margin_left = 15.0
+bg_color = Color(0, 0.480469, 0.914063, 1)
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+
+[sub_resource type="Theme" id="Theme_amsps"]
+Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_q7hvm")
+Button/styles/hover = SubResource("StyleBoxFlat_68tph")
+Button/styles/normal = SubResource("StyleBoxFlat_q7hvm")
+Button/styles/pressed = SubResource("StyleBoxFlat_q7hvm")
+Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
+LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
+SpinBox/icons/updown = ExtResource("1_n213r")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0epy"]
+content_margin_left = 17.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 5
+border_color = Color(0.862745, 0.87451, 0.886275, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.0823529)
+shadow_size = 1
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_pxp84"]
+Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_n0epy")
+Button/styles/hover = SubResource("StyleBoxFlat_n0epy")
+Button/styles/normal = SubResource("StyleBoxFlat_n0epy")
+Button/styles/pressed = SubResource("StyleBoxFlat_n0epy")
+Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
+LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
+SpinBox/icons/updown = ExtResource("1_n213r")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0fu2"]
+content_margin_left = 20.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.129412, 0.45098, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0, 0.333333, 0.8, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 20
+expand_margin_left = 50.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_size = 2
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_lgj82"]
+Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_q7hvm")
+Button/styles/hover = SubResource("StyleBoxFlat_q7hvm")
+Button/styles/normal = SubResource("StyleBoxFlat_q7hvm")
+Button/styles/pressed = SubResource("StyleBoxFlat_a0fu2")
+Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
+LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
+SpinBox/icons/updown = ExtResource("1_n213r")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_u1fv2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
+content_margin_left = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_orfbe"]
+font_size = 45
+font_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_821nr"]
+content_margin_right = 11.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 7
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.0705882)
+shadow_size = 1
+shadow_offset = Vector2(2, 5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2aiv"]
+content_margin_left = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gbv5a"]
+font_size = 45
+font_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_26870"]
+font_size = 30
+font_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xp1g5"]
+font_size = 30
+font_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+script = ExtResource("1_67wh5")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme = SubResource("Theme_mk0pc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
+
+[node name="Start" type="MarginContainer" parent="Panel"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="VBoxContainer" parent="Panel/Start"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Start/Panel"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Start/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 20
+
+[node name="NewButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme = SubResource("Theme_amsps")
+theme_override_font_sizes/font_size = 20
+text = "Новый проект"
+expand_icon = true
+
+[node name="MyProjectsButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme = SubResource("Theme_pxp84")
+theme_override_colors/font_color = Color(0.129412, 0.45098, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Мои проекты"
+icon = ExtResource("3_s580j")
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme = SubResource("Theme_amsps")
+theme_override_font_sizes/font_size = 20
+text = "Настройки"
+expand_icon = true
+
+[node name="Menu" type="MarginContainer" parent="Panel"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Menu"]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 30
+
+[node name="NewButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_lgj82")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_u1fv2")
+expand_icon = true
+
+[node name="MyProjectsButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = SubResource("Theme_lgj82")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_u1fv2")
+icon = ExtResource("5_mg1b0")
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 10
+theme = SubResource("Theme_lgj82")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_u1fv2")
+expand_icon = true
+
+[node name="Workspace" type="MarginContainer" parent="Panel/Menu/HBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 60
+
+[node name="New" type="VBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace"]
+visible = false
+layout_mode = 2
+
+[node name="NewMenu" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/New"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ProjectLabel" type="Label" parent="Panel/Menu/HBoxContainer/Workspace/New/NewMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
+theme_override_font_sizes/font_size = 45
+text = "Новый проект"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Menu/HBoxContainer/Workspace/New"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 25
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Menu/HBoxContainer/Workspace/New/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Control" type="Control" parent="Panel/Menu/HBoxContainer/Workspace/New/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(130, 260)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="GUILab" parent="Panel/Menu/HBoxContainer/Workspace/New/MarginContainer/GridContainer/Control" instance=ExtResource("8_3pvbh")]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.052
+offset_right = -99.0
+offset_bottom = -102.52
+scale = Vector2(1.6, 1.6)
+mode = "mechanic"
+
+[node name="MyProjects" type="VBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="ProjectMenu" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects"]
+layout_mode = 2
+
+[node name="ProjectLabel" type="Label" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pohmn")
+text = "Мои проекты"
+label_settings = SubResource("LabelSettings_orfbe")
+
+[node name="CreateProject" type="Button" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu"]
+visible = false
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.113725, 0.12549, 0.117647, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_821nr")
+text = "Создать новый"
+icon = ExtResource("9_kqmdu")
+alignment = 2
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("9_d6sed")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="SearchLine" type="LineEdit" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu/MarginContainer"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_0numr")
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Поиск"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_0numr")
+toggle_mode = false
+item_count = 1
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Самые новые"
+popup/item_0/id = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_0numr")
+follow_focus = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Menu/HBoxContainer/Workspace/MyProjects/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Settings" type="VBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d2aiv")
+text = "Настройки"
+label_settings = SubResource("LabelSettings_gbv5a")
+
+[node name="HBox2" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.0
+text = "Тёмная тема"
+label_settings = SubResource("LabelSettings_26870")
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme = ExtResource("2_0numr")
+
+[node name="HBox3" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox3"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.0
+tooltip_text = "vwwdsserd"
+text = "Эффективный режим"
+label_settings = SubResource("LabelSettings_xp1g5")
+
+[node name="Tooltip" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox3" instance=ExtResource("14_eqdgs")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip = "Повышает производительность в ущерб точности физики"
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Menu/HBoxContainer/Workspace/Settings/HBox3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.48
+theme = ExtResource("2_0numr")
+
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.537255)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+modulate = Color(0, 0.862745, 0.568627, 0.270588)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -358.0
+offset_top = -397.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("10_b8www")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+modulate = Color(0, 0.862745, 0.568627, 0.235294)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -188.0
+offset_right = 188.0
+offset_bottom = 401.0
+grow_horizontal = 2
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("11_fc7du")
+
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+modulate = Color(0, 0.862745, 0.568627, 0.188235)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = 118.0
+offset_right = 643.0
+offset_bottom = 680.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TextureRect4" type="TextureRect" parent="Control"]
+modulate = Color(0, 0.862745, 0.568627, 0.219608)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -141.0
+offset_bottom = 152.0
+grow_horizontal = 0
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="Control"]
+modulate = Color(0, 0.862745, 0.568627, 0.262745)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -91.0
+offset_right = 156.0
+offset_bottom = 91.0
+grow_vertical = 2
+rotation = 0.371755
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("13_mpbxy")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="Control"]
+modulate = Color(0.584314, 0.92549, 0.835294, 0.360784)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -281.0
+offset_bottom = 281.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("12_es2f7")
+
+[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/NewButton" to="." method="_on_new_button_toggled"]
+[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/MyProjectsButton" to="." method="_on_my_projects_button_toggled"]
+[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/SettingsButton" to="." method="_on_settings_button_toggled"]
+[connection signal="create_pressed" from="Panel/Menu/HBoxContainer/Workspace/New/MarginContainer/GridContainer/Control/GUILab" to="." method="_on_lab_pressed"]
+[connection signal="button_down" from="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu/CreateProject" to="." method="_on_create_project_button_down"]

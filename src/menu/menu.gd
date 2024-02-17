@@ -39,7 +39,6 @@ func _init():
 
 
 func _ready():
-	get_node(NodePath(OS.get_name())).set_visible(true)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, false)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 

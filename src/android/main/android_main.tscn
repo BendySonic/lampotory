@@ -1,0 +1,707 @@
+[gd_scene load_steps=33 format=3 uid="uid://w5jc46xxlkgi"]
+
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_xf1hx"]
+[ext_resource type="Script" path="res://src/android/main/gui/android_gui.gd" id="2_h04ac"]
+[ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="3_e165p"]
+[ext_resource type="Texture2D" uid="uid://upk45rvboo31" path="res://assets/graphic/gui/icons/main_file.png" id="4_nmkvl"]
+[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/graphic/gui/icons/main_save.png" id="5_r34im"]
+[ext_resource type="Texture2D" uid="uid://careumpiracnw" path="res://assets/graphic/gui/player/pause.png" id="6_ctku0"]
+[ext_resource type="Texture2D" uid="uid://cavpp7elaes7l" path="res://assets/graphic/gui/player/play.png" id="7_lm4vm"]
+[ext_resource type="Texture2D" uid="uid://wtnqwogi2ar6" path="res://assets/graphic/gui/player/rewind.png" id="8_5d733"]
+[ext_resource type="Texture2D" uid="uid://do02k6map2qys" path="res://assets/graphic/gui/player/reload.png" id="9_oxew2"]
+[ext_resource type="Texture2D" uid="uid://dnfcus2phvmcv" path="res://assets/graphic/gui/icons/display_vector.png" id="10_jlbhu"]
+[ext_resource type="Texture2D" uid="uid://dy11akgrbt2ps" path="res://assets/graphic/gui/icons/delete.svg" id="11_v8i0j"]
+[ext_resource type="PackedScene" uid="uid://b5s3e7s5hhejp" path="res://src/main/lua/lua.tscn" id="12_nuikj"]
+[ext_resource type="Theme" uid="uid://dcsdd6xcoyhoq" path="res://assets/godot/themes/blue.tres" id="13_bjooe"]
+[ext_resource type="Texture2D" uid="uid://bysbewkhlxv2x" path="res://assets/graphic/gui/icons/copy.svg" id="14_erwrk"]
+[ext_resource type="Texture2D" uid="uid://bsmcpf000gpka" path="res://assets/graphic/gui/icons/cut.svg" id="15_32f7b"]
+[ext_resource type="Texture2D" uid="uid://ffwovj1rssrg" path="res://assets/graphic/gui/icons/paste.svg" id="16_rudss"]
+[ext_resource type="Texture2D" uid="uid://kilf3we4x304" path="res://assets/graphic/gui/icons/exit_icon.png" id="17_idcbs"]
+[ext_resource type="Script" path="res://src/main/node2d/node2d.gd" id="18_0hj0x"]
+[ext_resource type="PackedScene" uid="uid://ll40qltxjh1o" path="res://src/main/node2d/labs/mechanic.tscn" id="19_3to40"]
+[ext_resource type="PackedScene" uid="uid://def2bkc3wpx2e" path="res://src/main/gui/gui_cursor.tscn" id="20_0pma1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb8je"]
+content_margin_right = 15.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 8
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c1c"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 5
+corner_radius_top_right = 60
+shadow_offset = Vector2(8, 0)
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80iel"]
+content_margin_left = 15.0
+bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 0.2)
+corner_radius_top_right = 60
+
+[sub_resource type="FontVariation" id="FontVariation_rgot6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gdtfd"]
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mojyg"]
+content_margin_left = 15.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 10
+corner_radius_top_left = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flvai"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 6
+corner_radius_top_left = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.0235294)
+shadow_size = 5
+shadow_offset = Vector2(-5, -5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1s73"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 6
+corner_radius_top_left = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.0235294)
+shadow_size = 5
+shadow_offset = Vector2(-5, -5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tm53v"]
+bg_color = Color(0.0705882, 0.47451, 0.952941, 1)
+border_width_bottom = 7
+border_color = Color(0.0313726, 0.396078, 0.815686, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.101961)
+shadow_size = 1
+shadow_offset = Vector2(2, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k07dg"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 7
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.101961)
+shadow_size = 1
+shadow_offset = Vector2(3, 6)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4ypp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6mtfb"]
+
+[node name="Main" type="Node"]
+process_mode = 3
+script = ExtResource("1_xf1hx")
+metadata/_edit_vertical_guides_ = [-132.0]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_h04ac")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 80
+
+[node name="MenuWindow" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jb8je")
+
+[node name="Panel" type="HBoxContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/MenuWindow"]
+layout_mode = 2
+
+[node name="Edit" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/MenuWindow/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="EditButton" type="MenuButton" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/MenuWindow/Panel/Edit"]
+modulate = Color(0.137255, 0.635294, 0.984314, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_e165p")
+icon = ExtResource("4_nmkvl")
+expand_icon = true
+item_count = 2
+popup/item_0/text = "Меню"
+popup/item_0/id = 0
+popup/item_1/text = "Настройки проекта"
+popup/item_1/id = 1
+
+[node name="Save" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/MenuWindow/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="SaveButton" type="MenuButton" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/MenuWindow/Panel/Save"]
+modulate = Color(0.137255, 0.635294, 0.984314, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_e165p")
+icon = ExtResource("5_r34im")
+expand_icon = true
+item_count = 1
+popup/item_0/text = "Сохранить"
+popup/item_0/id = 0
+
+[node name="Container" type="Container" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsWindow" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(350, 400)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("3_e165p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_v5c1c")
+
+[node name="ItemsWindowBox" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow"]
+layout_mode = 2
+
+[node name="Head" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("3_e165p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_80iel")
+
+[node name="HeadLabel" type="Label" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Head"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_fonts/font = SubResource("FontVariation_rgot6")
+theme_override_font_sizes/font_size = 40
+text = "Объекты
+"
+label_settings = SubResource("LabelSettings_gdtfd")
+
+[node name="Body" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BodyBox" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body"]
+layout_mode = 2
+
+[node name="Search" type="HBoxContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+layout_mode = 2
+
+[node name="SearchLine" type="LineEdit" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox/Search"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_e165p")
+theme_override_colors/font_color = Color(0, 0.784314, 0.447059, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0.592157, 0.372549, 1)
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Поиск"
+
+[node name="Items" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items"]
+layout_mode = 2
+
+[node name="ItemsBox" type="GridContainer" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow/ItemsWindowBox/Body/BodyBox/Items/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 140
+columns = 2
+
+[node name="Container" type="Container" parent="GUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Container" type="Container" parent="GUI/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="PlayerWindow" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_mojyg")
+
+[node name="Player" type="HBoxContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Play" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="PlayButton" type="TextureButton" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/Play"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_ctku0")
+texture_pressed = ExtResource("7_lm4vm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SpeedUp" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SpeedUpButton" type="TextureButton" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/SpeedUp"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("8_5d733")
+texture_pressed = ExtResource("8_5d733")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Reload" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="ReloadButton" type="TextureButton" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/Reload"]
+modulate = Color(0, 0.803922, 0.447059, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture_normal = ExtResource("9_oxew2")
+texture_pressed = ExtResource("9_oxew2")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ToolsWindow" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 20
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_e165p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_flvai")
+
+[node name="DisplayVectorButton" type="TextureButton" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("10_jlbhu")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_e165p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1s73")
+
+[node name="ClearButton" type="TextureButton" parent="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer2"]
+modulate = Color(0.0705882, 0.47451, 0.952941, 1)
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("11_v8i0j")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 70
+
+[node name="Lua" parent="GUI/MarginContainer/MarginContainer" instance=ExtResource("12_nuikj")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="ActionsWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(0, 40)
+offset_left = 4.0
+offset_top = 1811.0
+offset_right = 304.0
+offset_bottom = 1851.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+theme = ExtResource("13_bjooe")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tm53v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/ActionsWindow"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/ActionsWindow/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="CopyButton" type="TextureButton" parent="GUI/ActionsWindow/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(19, 18.5)
+layout_mode = 2
+tooltip_text = "Копировать
+"
+texture_normal = ExtResource("14_erwrk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="GUI/ActionsWindow/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="CutButton" type="TextureButton" parent="GUI/ActionsWindow/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(20, 18.5)
+layout_mode = 2
+tooltip_text = "Вырезать (Копировать и удалить)"
+texture_normal = ExtResource("15_32f7b")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer3" type="MarginContainer" parent="GUI/ActionsWindow/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="PasteButton" type="TextureButton" parent="GUI/ActionsWindow/HBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(21, 18.5)
+layout_mode = 2
+tooltip_text = "Вставить
+"
+texture_normal = ExtResource("16_rudss")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer4" type="MarginContainer" parent="GUI/ActionsWindow/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 5
+
+[node name="DeleteButton" type="TextureButton" parent="GUI/ActionsWindow/HBoxContainer/MarginContainer4"]
+custom_minimum_size = Vector2(19, 18.5)
+layout_mode = 2
+tooltip_text = "Удалить
+"
+texture_normal = ExtResource("11_v8i0j")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="PropertiesWindow" type="PanelContainer" parent="GUI"]
+custom_minimum_size = Vector2(300, 50)
+offset_left = 4.0
+offset_top = 1863.0
+offset_right = 304.0
+offset_bottom = 1917.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("3_e165p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k07dg")
+
+[node name="Body" type="MarginContainer" parent="GUI/PropertiesWindow"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 12
+
+[node name="NoPropertiesLabel" type="Label" parent="GUI/PropertiesWindow/Body"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "У тела нет свойств"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="GUI/PropertiesWindow/Body"]
+layout_mode = 2
+columns = 2
+
+[node name="SaveWindow" type="PanelContainer" parent="GUI"]
+offset_left = 335.0
+offset_top = 1811.0
+offset_right = 785.0
+offset_bottom = 2014.0
+theme = ExtResource("3_e165p")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/SaveWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SaveWindow/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="PanelContainer" parent="GUI/SaveWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_a4ypp")
+
+[node name="Label" type="Label" parent="GUI/SaveWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("3_e165p")
+theme_override_font_sizes/font_size = 18
+text = "Сохранить проект"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="GUI/SaveWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.1
+texture_normal = ExtResource("17_idcbs")
+stretch_mode = 5
+
+[node name="ProjectNameEdit" type="LineEdit" parent="GUI/SaveWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Название проекта"
+
+[node name="ProjectDescriptionEdit" type="LineEdit" parent="GUI/SaveWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Описание проекта"
+
+[node name="Label2" type="Label" parent="GUI/SaveWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_e165p")
+text = "Лаборатория механики"
+horizontal_alignment = 1
+
+[node name="SaveProjectButton" type="Button" parent="GUI/SaveWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("13_bjooe")
+text = "Сохранить"
+
+[node name="EditWindow" type="PanelContainer" parent="GUI"]
+anchors_preset = -1
+anchor_right = 0.351
+anchor_bottom = 0.371
+offset_left = 811.0
+offset_top = 1811.0
+offset_right = 824.9
+offset_bottom = 1824.88
+theme = ExtResource("3_e165p")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/EditWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/EditWindow/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/EditWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6mtfb")
+
+[node name="Label" type="Label" parent="GUI/EditWindow/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.196078, 0.196078, 0.196078, 1)
+theme_override_font_sizes/font_size = 18
+text = "Редактировать проект"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="GUI/EditWindow/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.1
+texture_normal = ExtResource("17_idcbs")
+stretch_mode = 5
+
+[node name="ProjectNameEdit" type="LineEdit" parent="GUI/EditWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_e165p")
+placeholder_text = "Название проекта"
+
+[node name="ProjectDescriptionEdit" type="LineEdit" parent="GUI/EditWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_e165p")
+placeholder_text = "Описание проекта"
+
+[node name="FileLabel" type="Label" parent="GUI/EditWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Расположение: C:/
+Дата создания:
+Дата сохранения:
+Лаборатория механики"
+
+[node name="SaveButton" type="Button" parent="GUI/EditWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("13_bjooe")
+text = "Сохранить"
+
+[node name="SaveAsWindow" type="FileDialog" parent="GUI"]
+title = "Сохранить проект как..."
+initial_position = 2
+size = Vector2i(600, 400)
+theme = ExtResource("3_e165p")
+theme_override_colors/folder_icon_color = Color(0.341176, 1, 0.878431, 1)
+ok_button_text = "Сохранить"
+cancel_button_text = "Отмена"
+access = 2
+use_native_dialog = true
+
+[node name="Node2D" type="Node2D" parent="."]
+top_level = true
+z_index = 1000
+z_as_relative = false
+script = ExtResource("18_0hj0x")
+
+[node name="Bodies" type="Node2D" parent="Node2D"]
+process_mode = 1
+
+[node name="Enviroment" type="Node2D" parent="Node2D"]
+
+[node name="Background" type="Node2D" parent="Node2D/Enviroment"]
+
+[node name="Background" type="CanvasLayer" parent="Node2D/Enviroment/Background"]
+layer = -2
+
+[node name="Panel" type="Panel" parent="Node2D/Enviroment/Background/Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("3_e165p")
+
+[node name="Lab" type="Node2D" parent="Node2D/Enviroment"]
+
+[node name="Mechanic" parent="Node2D/Enviroment/Lab" instance=ExtResource("19_3to40")]
+position = Vector2(0, 700)
+
+[node name="Camera" type="Node2D" parent="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D/Camera"]
+zoom = Vector2(1.6, 1.6)
+limit_left = -2500
+limit_top = -4000
+limit_right = 2500
+limit_bottom = 500
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="GUICursor" parent="Node2D" instance=ExtResource("20_0pma1")]
+
+[connection signal="mouse_exited" from="GUI/MarginContainer/HBoxContainer/VBoxContainer2/ItemsWindow" to="GUI" method="_on_items_window_mouse_exited"]
+[connection signal="toggled" from="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/Play/PlayButton" to="GUI" method="_on_play_toggled"]
+[connection signal="toggled" from="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/SpeedUp/SpeedUpButton" to="GUI" method="_on_speed_up_button_toggled"]
+[connection signal="pressed" from="GUI/MarginContainer/HBoxContainer2/VBoxContainer/PlayerWindow/Player/Reload/ReloadButton" to="GUI" method="_on_reload_pressed"]
+[connection signal="toggled" from="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer/DisplayVectorButton" to="GUI" method="_on_display_vector_button_toggled"]
+[connection signal="pressed" from="GUI/MarginContainer/HBoxContainer2/VBoxContainer/ToolsWindow/HBoxContainer/PanelContainer2/ClearButton" to="GUI" method="_on_clear_button_pressed"]
+[connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer/CopyButton" to="GUI" method="_on_copy_button_down"]
+[connection signal="button_up" from="GUI/ActionsWindow/HBoxContainer/MarginContainer/CopyButton" to="GUI" method="_on_copy_button_up"]
+[connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer2/CutButton" to="GUI" method="_on_cut_button_down"]
+[connection signal="button_up" from="GUI/ActionsWindow/HBoxContainer/MarginContainer2/CutButton" to="GUI" method="_on_cut_button_up"]
+[connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer3/PasteButton" to="GUI" method="_on_paste_button_down"]
+[connection signal="button_up" from="GUI/ActionsWindow/HBoxContainer/MarginContainer3/PasteButton" to="GUI" method="_on_paste_button_up"]
+[connection signal="button_down" from="GUI/ActionsWindow/HBoxContainer/MarginContainer4/DeleteButton" to="GUI" method="_on_delete_button_down"]
+[connection signal="button_up" from="GUI/ActionsWindow/HBoxContainer/MarginContainer4/DeleteButton" to="GUI" method="_on_delete_button_up"]
+[connection signal="pressed" from="GUI/SaveWindow/MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="GUI" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="GUI/SaveWindow/MarginContainer/VBoxContainer/SaveProjectButton" to="GUI" method="_on_save_project_button_pressed"]
+[connection signal="pressed" from="GUI/EditWindow/MarginContainer/VBoxContainer/PanelContainer/ExitButton" to="GUI" method="_on_exit_button_pressed"]
