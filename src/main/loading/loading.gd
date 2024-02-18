@@ -13,6 +13,6 @@ func prepare():
 		"Windows":
 			main = await ResourceLoader.load("res://src/main/main.tscn")
 		"Android":
-			main = await ResourceLoader.load("res://src/android/main/android_main.tscn")
+			main = await ResourceLoader.load("res://src/main/main.tscn")
 	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_packed(main)

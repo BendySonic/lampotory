@@ -35,7 +35,7 @@ window/size/extend_to_title=true
 window/energy_saving/keep_screen_on=false
 window/stretch/aspect="ignore"
 window/per_pixel_transparency/allowed=true
-window/handheld/orientation=1
+window/handheld/orientation=5
 
 [editor]
 

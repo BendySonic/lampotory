@@ -23,7 +23,7 @@ signal clear_pressed()
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ItemsWindow/"
-const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ItemsBox"
+const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ScrollContainer/ItemsBox"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
 const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/GridContainer/"
@@ -52,6 +52,7 @@ const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectDescriptionEdit"
 const EDIT_WINDOW = "EditWindow/"
 
 # Children
+@onready var container: MarginContainer = get_node("MarginContainer")
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
 @onready var items_box := get_node(ITEMS_BOX) as GridContainer
 
@@ -84,6 +85,7 @@ const EDIT_WINDOW = "EditWindow/"
 
 
 func _ready():
+	fit_to_mobile()
 	save_button.get_popup().connect("id_pressed", _on_save_button_id_pressed)
 	edit_button.get_popup().connect("id_pressed", _on_edit_button_id_pressed)
 
@@ -288,6 +290,15 @@ func hide_edit_window():
 func _on_exit_button_pressed():
 	hide_save_window()
 	hide_edit_window()
+
+
+func fit_to_mobile():
+	if OS.get_name() == "Android":
+		container.scale *= 1.7
+		container.size = DisplayServer.screen_get_size() / 1.7
+		items_window.custom_minimum_size.y = DisplayServer.screen_get_size().y * 0.2
+		items_window.size.y = DisplayServer.screen_get_size().y * 0.2
+		items_window.size_flags_vertical = Control.SIZE_SHRINK_END
 
 
 # NOTE:

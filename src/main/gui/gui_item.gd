@@ -10,7 +10,7 @@ var item_data: ItemResource:
 	get: return item_data
 
 @onready var icon = get_node("MarginContainer/VBoxContainer/TextureRect")
-@onready var label = get_node("MarginContainer/VBoxContainer/Control/Label")
+@onready var label = get_node("MarginContainer/VBoxContainer/Label")
 
 
 
