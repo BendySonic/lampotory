@@ -45,6 +45,8 @@ func _ready():
 	gui.connect("display_vector_toggled", _on_display_vector_pressed)
 	gui.connect("clear_pressed", _on_clear_pressed)
 	
+	gui.connect("camera_blocked", _on_camera_blocked)
+	
 	gui.create_items(mode_data.item_resources)
 	
 	node2d.connect("void_pressed", _on_void_pressed)
@@ -102,6 +104,9 @@ func _on_display_vector_pressed(toggled_on: bool):
 
 func _on_clear_pressed():
 	node2d.clear_bodies()
+
+func _on_camera_blocked():
+	node2d.block_camera()
 
 func _on_body_held(_body: NormalBody):
 	_clear_select()

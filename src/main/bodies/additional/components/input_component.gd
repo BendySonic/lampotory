@@ -85,6 +85,11 @@ func hold_body():
 	if is_hold_type(HoldType.STATIC_AXIS):
 		input_body.collision_layer = 2
 		input_body.collision_mask = 2
+		# ANDROID ##############################
+		if OS.get_name() == "Android":
+			Global.cursor.global_position = Global.cursor.get_global_mouse_position()
+			await get_tree().create_timer(0.05).timeout
+		########################################
 		releative_drag_position = input_body.to_local(Global.cursor.global_position)
 		input_body.set_deferred("freeze", false)
 	else:

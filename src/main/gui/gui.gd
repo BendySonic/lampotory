@@ -20,10 +20,13 @@ signal open_project_pressed()
 signal display_vector_toggled(toggled_on: bool)
 signal clear_pressed()
 
+signal camera_blocked()
+
 const GUI_PATH = "res://src/main/gui/"
 
 const ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ScrollContainer/ItemsBox"
+const SHOW_ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ShowItemsWindow/"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
 const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/GridContainer/"
@@ -55,6 +58,8 @@ const EDIT_WINDOW = "EditWindow/"
 @onready var container: MarginContainer = get_node("MarginContainer")
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
 @onready var items_box := get_node(ITEMS_BOX) as GridContainer
+
+@onready var show_items_window := get_node(SHOW_ITEMS_WINDOW)
 
 @onready var properties_window := get_node(PROPERTIES_WINDOW) as Control
 @onready var properties_box := get_node(PROPERTIES_BOX) as GridContainer
@@ -96,12 +101,11 @@ func _on_item_pressed(item_data: ItemResource):
 func _on_item_released():
 	emit_signal("item_released")
 
-
 func _on_items_window_gui_input(event):
-	var rect = Rect2(Vector2(0, 0), items_window.size - Vector2(0, 0))
-	if not rect.has_point(event.position):
+	var inner_rect = Rect2(Vector2(25, 25), items_window.size - Vector2(50, 50))
+	var outer_rect = Rect2(Vector2(-5, -5), items_window.size + Vector2(10, 10))
+	if not inner_rect.has_point(event.position) and outer_rect.has_point(event.position):
 		emit_signal("items_window_mouse_exited")
-
 
 func _on_play_toggled(button_pressed: bool):
 	emit_signal("play_toggled", button_pressed)
@@ -154,7 +158,22 @@ func create_items(item_resources: Array[ItemResource]):
 		new_item.connect("item_pressed", _on_item_pressed)
 		new_item.connect("item_released", _on_item_released)
 		items_box.add_child(new_item)
+
+func _on_show_items_window_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			items_window.set_visible(true)
+			show_items_window.set_visible(false)
+
+func _on_hide_pressed():
+	items_window.set_visible(false)
+	show_items_window.set_visible(true)
+
+func _on_show_pressed():
+	items_window.set_visible(true)
+	show_items_window.set_visible(false)
 #endregion
+
 
 
 #region Select

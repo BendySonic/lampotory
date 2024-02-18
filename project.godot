@@ -20,7 +20,7 @@ boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://assets/logo/icon.png"
+config/icon="res://assets/logo/close_icon.png"
 
 [autoload]
 
