@@ -1,16 +1,15 @@
-[gd_scene load_steps=37 format=3 uid="uid://ddkbq7ocee5p0"]
+[gd_scene load_steps=25 format=3 uid="uid://ddkbq7ocee5p0"]
 
 [ext_resource type="Script" path="res://src/android/menu/android_menu.gd" id="1_67wh5"]
-[ext_resource type="Texture2D" uid="uid://dpke0x7sm8vwh" path="res://assets/graphic/gui/control/white_updown.png" id="1_n213r"]
 [ext_resource type="Theme" uid="uid://dvkde7fnq2ulu" path="res://assets/godot/themes/white.tres" id="2_0numr"]
-[ext_resource type="Texture2D" uid="uid://dg5cuw20m3sdk" path="res://assets/graphic/gui/icons/projects.png" id="3_s580j"]
-[ext_resource type="Texture2D" uid="uid://chlffxfr1ubpq" path="res://assets/graphic/gui/icons/menu_new.png" id="4_t7ewr"]
-[ext_resource type="Texture2D" uid="uid://bgin4a464lscb" path="res://assets/graphic/gui/icons/main_save.png" id="5_mg1b0"]
-[ext_resource type="Texture2D" uid="uid://dqs7jxngdcfu3" path="res://assets/graphic/gui/icons/menu_white_settings.png" id="6_ectim"]
+[ext_resource type="PackedScene" uid="uid://cs8vgaxhy1b5e" path="res://src/menu/gui/gui_left_button.tscn" id="7_dp6bd"]
+[ext_resource type="Texture2D" uid="uid://cw3k6830ejfmx" path="res://assets/graphic/gui/icons/menu_lab.png" id="8_1c5oe"]
 [ext_resource type="PackedScene" uid="uid://blmbopi1jfuot" path="res://src/menu/gui/gui_lab.tscn" id="8_3pvbh"]
+[ext_resource type="Texture2D" uid="uid://c567arhwjxava" path="res://assets/graphic/gui/icons/menu_home.png" id="9_43xc7"]
 [ext_resource type="Texture2D" uid="uid://daacw4vi75686" path="res://assets/graphic/gui/icons/search_icon.png" id="9_d6sed"]
 [ext_resource type="Texture2D" uid="uid://bqp60x8ot04rh" path="res://assets/graphic/gui/icons/project_more.png" id="9_kqmdu"]
 [ext_resource type="Texture2D" uid="uid://80qqs2bvlln8" path="res://assets/graphic/2d/chess.png" id="10_b8www"]
+[ext_resource type="Texture2D" uid="uid://dtp541t10ey63" path="res://assets/graphic/gui/icons/menu_settings.png" id="10_wxwli"]
 [ext_resource type="Texture2D" uid="uid://ccno24kak24l4" path="res://assets/graphic/2d/arrows.png" id="11_fc7du"]
 [ext_resource type="Texture2D" uid="uid://7q2iqo38ohlf" path="res://assets/graphic/2d/electro.png" id="12_es2f7"]
 [ext_resource type="Texture2D" uid="uid://bxp8lrm1vkdr6" path="res://assets/graphic/2d/ch.png" id="13_mpbxy"]
@@ -22,180 +21,6 @@
 content_margin_right = 0.0
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(0.294118, 0.627451, 0.996078, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7hvm"]
-content_margin_left = 20.0
-content_margin_top = 15.0
-content_margin_right = 10.0
-content_margin_bottom = 15.0
-bg_color = Color(0.129412, 0.45098, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 10
-border_color = Color(0, 0.333333, 0.8, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 20
-expand_margin_left = 50.0
-expand_margin_bottom = 5.0
-shadow_color = Color(0, 0, 0, 0.164706)
-shadow_size = 2
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68tph"]
-content_margin_left = 10.0
-content_margin_top = 5.0
-content_margin_right = 10.0
-content_margin_bottom = 5.0
-bg_color = Color(0, 0.352941, 0.847059, 1)
-border_width_bottom = 3
-border_color = Color(0, 0.278431, 0.67451, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7p7vy"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs6xt"]
-content_margin_left = 8.0
-bg_color = Color(0.337255, 0.619608, 0.992157, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0.439216, 0.764706, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.219608)
-shadow_size = 4
-shadow_offset = Vector2(4, 4)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtxmm"]
-content_margin_left = 8.0
-bg_color = Color(0.137255, 0.635294, 0.984314, 1)
-border_width_bottom = 3
-border_color = Color(0, 0.478431, 0.85098, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.219608)
-shadow_size = 4
-shadow_offset = Vector2(4, 4)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nud11"]
-content_margin_left = 15.0
-bg_color = Color(0, 0.480469, 0.914063, 1)
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 0.2)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-
-[sub_resource type="Theme" id="Theme_amsps"]
-Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/styles/focus = SubResource("StyleBoxFlat_q7hvm")
-Button/styles/hover = SubResource("StyleBoxFlat_68tph")
-Button/styles/normal = SubResource("StyleBoxFlat_q7hvm")
-Button/styles/pressed = SubResource("StyleBoxFlat_q7hvm")
-Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
-LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
-LineEdit/colors/font_color = Color(1, 1, 1, 1)
-LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
-LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
-SpinBox/icons/updown = ExtResource("1_n213r")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0epy"]
-content_margin_left = 17.0
-content_margin_top = 5.0
-content_margin_right = 10.0
-content_margin_bottom = 5.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 5
-border_color = Color(0.862745, 0.87451, 0.886275, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_bottom = 5.0
-shadow_color = Color(0, 0, 0, 0.0823529)
-shadow_size = 1
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Theme" id="Theme_pxp84"]
-Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/styles/focus = SubResource("StyleBoxFlat_n0epy")
-Button/styles/hover = SubResource("StyleBoxFlat_n0epy")
-Button/styles/normal = SubResource("StyleBoxFlat_n0epy")
-Button/styles/pressed = SubResource("StyleBoxFlat_n0epy")
-Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
-LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
-LineEdit/colors/font_color = Color(1, 1, 1, 1)
-LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
-LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
-SpinBox/icons/updown = ExtResource("1_n213r")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0fu2"]
-content_margin_left = 20.0
-content_margin_top = 15.0
-content_margin_right = 10.0
-content_margin_bottom = 15.0
-bg_color = Color(0.129412, 0.45098, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 3
-border_color = Color(0, 0.333333, 0.8, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 20
-expand_margin_left = 50.0
-expand_margin_bottom = 5.0
-shadow_color = Color(0, 0, 0, 0.164706)
-shadow_size = 2
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Theme" id="Theme_lgj82"]
-Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/styles/focus = SubResource("StyleBoxFlat_q7hvm")
-Button/styles/hover = SubResource("StyleBoxFlat_q7hvm")
-Button/styles/normal = SubResource("StyleBoxFlat_q7hvm")
-Button/styles/pressed = SubResource("StyleBoxFlat_a0fu2")
-Label/styles/normal = SubResource("StyleBoxEmpty_7p7vy")
-LineEdit/colors/caret_color = Color(0.717647, 0.717647, 0.717647, 1)
-LineEdit/colors/font_color = Color(1, 1, 1, 1)
-LineEdit/colors/selection_color = Color(0, 0.376471, 0.858824, 1)
-LineEdit/styles/focus = SubResource("StyleBoxFlat_qs6xt")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_qtxmm")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_nud11")
-SpinBox/icons/updown = ExtResource("1_n213r")
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_u1fv2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
 content_margin_left = 10.0
@@ -233,6 +58,12 @@ font_color = Color(0.117647, 0.117647, 0.117647, 1)
 font_size = 30
 font_color = Color(0.117647, 0.117647, 0.117647, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgwl0"]
+bg_color = Color(1, 1, 1, 1)
+shadow_color = Color(0, 0, 0, 0.0627451)
+shadow_size = 20
+shadow_offset = Vector2(0, -10)
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -257,99 +88,13 @@ mouse_filter = 1
 theme = SubResource("Theme_mk0pc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_eeoci")
 
-[node name="Start" type="MarginContainer" parent="Panel"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 100
-
-[node name="Panel" type="VBoxContainer" parent="Panel/Start"]
-layout_mode = 2
-theme_override_constants/separation = 100
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Start/Panel"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/margin_bottom = 100
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Start/Panel/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/separation = 20
-
-[node name="NewButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-theme = SubResource("Theme_amsps")
-theme_override_font_sizes/font_size = 20
-text = "Новый проект"
-expand_icon = true
-
-[node name="MyProjectsButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-theme = SubResource("Theme_pxp84")
-theme_override_colors/font_color = Color(0.129412, 0.45098, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "Мои проекты"
-icon = ExtResource("3_s580j")
-expand_icon = true
-
-[node name="SettingsButton" type="Button" parent="Panel/Start/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-theme = SubResource("Theme_amsps")
-theme_override_font_sizes/font_size = 20
-text = "Настройки"
-expand_icon = true
-
 [node name="Menu" type="MarginContainer" parent="Panel"]
 z_index = 1
 layout_mode = 2
 theme_override_constants/margin_top = 70
-theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Menu"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/Menu"]
 layout_mode = 2
-
-[node name="Buttons" type="VBoxContainer" parent="Panel/Menu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-theme_override_constants/separation = 30
-
-[node name="NewButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = SubResource("Theme_lgj82")
-toggle_mode = true
-button_pressed = true
-button_group = SubResource("ButtonGroup_u1fv2")
-icon = ExtResource("4_t7ewr")
-expand_icon = true
-
-[node name="MyProjectsButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme = SubResource("Theme_lgj82")
-toggle_mode = true
-button_group = SubResource("ButtonGroup_u1fv2")
-icon = ExtResource("5_mg1b0")
-expand_icon = true
-
-[node name="SettingsButton" type="Button" parent="Panel/Menu/HBoxContainer/Buttons"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 10
-theme = SubResource("Theme_lgj82")
-toggle_mode = true
-button_group = SubResource("ButtonGroup_u1fv2")
-icon = ExtResource("6_ectim")
-expand_icon = true
 
 [node name="Workspace" type="MarginContainer" parent="Panel/Menu/HBoxContainer"]
 z_index = 1
@@ -527,6 +272,40 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.48
 theme = ExtResource("2_0numr")
 
+[node name="PanelContainer" type="PanelContainer" parent="Panel/Menu/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_dgwl0")
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 30
+
+[node name="GUILeftButton" parent="Panel/Menu/HBoxContainer/PanelContainer/Buttons" instance=ExtResource("7_dp6bd")]
+layout_mode = 2
+down_text = "Проекты"
+up_icon = ExtResource("8_1c5oe")
+icon_size = Vector2(70, 70)
+text_size = 32
+
+[node name="GUILeftButton2" parent="Panel/Menu/HBoxContainer/PanelContainer/Buttons" instance=ExtResource("7_dp6bd")]
+layout_mode = 2
+down_text = "Новый"
+up_icon = ExtResource("9_43xc7")
+icon_size = Vector2(70, 70)
+text_size = 32
+
+[node name="GUILeftButton3" parent="Panel/Menu/HBoxContainer/PanelContainer/Buttons" instance=ExtResource("7_dp6bd")]
+layout_mode = 2
+down_text = "Настройки"
+up_icon = ExtResource("10_wxwli")
+icon_size = Vector2(70, 70)
+text_size = 32
+
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.282353)
 layout_mode = 1
@@ -635,8 +414,5 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("12_es2f7")
 
-[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/NewButton" to="." method="_on_new_button_toggled"]
-[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/MyProjectsButton" to="." method="_on_my_projects_button_toggled"]
-[connection signal="toggled" from="Panel/Menu/HBoxContainer/Buttons/SettingsButton" to="." method="_on_settings_button_toggled"]
 [connection signal="create_pressed" from="Panel/Menu/HBoxContainer/Workspace/New/MarginContainer/GridContainer/Control/GUILab" to="." method="_on_lab_pressed"]
 [connection signal="button_down" from="Panel/Menu/HBoxContainer/Workspace/MyProjects/ProjectMenu/CreateProject" to="." method="_on_create_project_button_down"]
