@@ -90,10 +90,6 @@ load={
 ]
 }
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/localization/local.en.translation", "res://assets/localization/local.ru.translation")

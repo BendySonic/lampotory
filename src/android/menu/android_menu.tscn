@@ -362,7 +362,6 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 60
 
 [node name="New" type="VBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace"]
-visible = false
 layout_mode = 2
 
 [node name="NewMenu" type="HBoxContainer" parent="Panel/Menu/HBoxContainer/Workspace/New"]

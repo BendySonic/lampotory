@@ -25,11 +25,12 @@ var selected_item_data: Variant:
 var buffer_body: Variant:
 	get: return buffer_body
 
-var camera_drag_start_position: Vector2
 var is_camera_ready_to_drag: bool
 var is_camera_drag: bool
 var is_camera_dragged: bool
+var camera_drag_start_position: Vector2
 var releative_drag_position: Vector2
+var camera_speed: float
 
 var is_display_vector: bool = false
 
@@ -42,44 +43,66 @@ var is_display_vector: bool = false
 
 
 func _ready():
+	if OS.get_name() == "Windows":
+		camera_speed = 1
+	elif OS.get_name() == "Android":
+		camera_speed = 2
 	Global.cursor = cursor
 
-#region Input
+#region Camera
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_released():
 			if not is_any_body_mouse_inside() and not is_camera_dragged:
 				emit_signal("void_pressed", event)
 			is_camera_dragged = false
-#endregion
 
-# Camera
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.is_pressed():
-				is_camera_ready_to_drag = true
-				camera_drag_start_position = event.global_position
-			elif event.is_released():
-				is_camera_ready_to_drag = false
-				is_camera_drag = false
+			manage_camera_drag(event)
+		# Camera zoom
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			if not camera.zoom > Vector2(2, 2) and held_body == null:
-				camera.zoom *= Vector2(1.05, 1.05)
+			manage_camera_zoom(true)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and held_body == null:
-			if not camera.zoom < Vector2(0.5, 0.5):
-				camera.zoom /= Vector2(1.05, 1.05)
+			manage_camera_zoom(false)
 	if event is InputEventMouseMotion:
-		if is_camera_ready_to_drag and (event.global_position - camera_drag_start_position).length() > 20:
-			is_camera_drag = true
-			releative_drag_position = camera.to_local(cursor.global_position)
-			is_camera_dragged = true
+		change_camera_position(event)
+	
+	if event is InputEventScreenTouch:
+		manage_camera_drag(event)
+	if event is InputEventScreenDrag:
+		change_camera_position(event)
 
 func _process(delta):
-	# Camera
+	drag_camera_to_position()
+
+func manage_camera_drag(event):
+	if event.is_pressed():
+		is_camera_ready_to_drag = true
+		camera_drag_start_position = event.position
+	elif event.is_released():
+		is_camera_ready_to_drag = false
+		is_camera_drag = false
+
+func manage_camera_zoom(is_zoom_in: bool):
+	if is_zoom_in:
+		if not camera.zoom > Vector2(2, 2) and held_body == null:
+			camera.zoom *= Vector2(1.05, 1.05)
+	else:
+		if not camera.zoom < Vector2(0.5, 0.5) and held_body == null:
+			camera.zoom /= Vector2(1.05, 1.05)
+
+func change_camera_position(event):
+	if is_camera_ready_to_drag and (event.position - camera_drag_start_position).length() > 20:
+		is_camera_drag = true
+		releative_drag_position = camera.to_local(cursor.global_position)
+		is_camera_dragged = true
+
+func drag_camera_to_position():
 	if is_camera_drag:
 		camera.global_position += (-camera.to_local(cursor.global_position) +
-				releative_drag_position)
+				releative_drag_position) * camera_speed
 		if camera.global_position.x > 2000:
 			camera.global_position.x = 2000
 		if camera.global_position.x < -2000:
@@ -90,8 +113,11 @@ func _process(delta):
 			camera.global_position.y = -4000
 		releative_drag_position += (camera.to_local(cursor.global_position) - 
 				releative_drag_position)
+#endregion
 
-# Draw forces
+
+
+#region Draw forces
 func _physics_process(delta):
 	# Forces
 	queue_redraw()
@@ -110,6 +136,8 @@ func _draw():
 					gravity_force_position + Vector2(10, -10),
 					gravity_force_position, Color.LIME_GREEN, 5, true)
 			draw_circle(gravity_force_position + Vector2(0, -1), 4, Color.LIME_GREEN)
+#endregion
+
 
 
 #region Body input
@@ -132,6 +160,7 @@ func _on_body_deselected(body: NormalBody):
 #endregion
 
 
+
 #region ItemsWindow
 func item_pressed(item_data: ItemResource):
 	selected_item_data = item_data
@@ -139,6 +168,7 @@ func item_pressed(item_data: ItemResource):
 func item_released():
 	selected_item_data = null
 #endregion
+
 
 
 #region Saver
@@ -166,6 +196,7 @@ func load_project(name: String):#file_path: String):
 	#endregion
 
 
+
 #region Player
 func play(button_pressed: bool):
 	state = States.PLAY if button_pressed else States.PAUSE
@@ -178,6 +209,7 @@ func reload():
 	state = States.PLAY
 	await load_project(Global.project_data["project_name"])
 #endregion
+
 
 
 #region Bodies
@@ -257,6 +289,7 @@ func is_any_body_selected():
 			return true
 	return false
 #endregion
+
 
 
 #region New body

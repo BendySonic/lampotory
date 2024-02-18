@@ -96,10 +96,12 @@ func _on_item_pressed(item_data: ItemResource):
 func _on_item_released():
 	emit_signal("item_released")
 
-func _on_items_window_mouse_exited():
-	var local_mouse_position = items_window.get_local_mouse_position()
-	if not Rect2(Vector2(), items_window.size).has_point(local_mouse_position):
+
+func _on_items_window_gui_input(event):
+	var rect = Rect2(Vector2(0, 0), items_window.size - Vector2(0, 0))
+	if not rect.has_point(event.position):
 		emit_signal("items_window_mouse_exited")
+
 
 func _on_play_toggled(button_pressed: bool):
 	emit_signal("play_toggled", button_pressed)
@@ -316,4 +318,3 @@ func fit_to_mobile():
 		#cursor_layer.remove_child(child)
 		#child.queue_free()
 #endregion
-
