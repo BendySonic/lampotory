@@ -47,11 +47,11 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_yvog3"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_lnsmb"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_fu5y3"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vhojj"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_cxugt"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_3xdwr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
 content_margin_left = 10.0
@@ -150,7 +150,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_yvog3")
+button_group = SubResource("ButtonGroup_lnsmb")
 down_text = "new"
 up_icon = ExtResource("5_t4c6l")
 text_size = 18
@@ -160,7 +160,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_fu5y3")
+button_group = SubResource("ButtonGroup_vhojj")
 down_text = "my_projects"
 up_icon = ExtResource("6_iimh4")
 text_size = 16
@@ -170,7 +170,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 10
 toggle_mode = true
-button_group = SubResource("ButtonGroup_cxugt")
+button_group = SubResource("ButtonGroup_3xdwr")
 down_text = "settings"
 up_icon = ExtResource("7_c5npk")
 text_size = 18
