@@ -7,10 +7,10 @@ const SAVE_DIR = "saves/"
 
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 
-var PANEL
-var WORKSPACE
-var BUTTONS
-var MY_PROJECT_GRID_CONTAINER
+var PANEL = "Panel/"
+var WORKSPACE = PANEL + "Panel/Workspace/"
+var BUTTONS = PANEL + "Panel/Menu/Menu/Menu/Buttons/"
+var MY_PROJECT_GRID_CONTAINER = WORKSPACE + "MyProjects/ScrollContainer/GridContainer"
 
 @onready var panel: PanelContainer = get_node(PANEL)
 
@@ -24,18 +24,6 @@ var MY_PROJECT_GRID_CONTAINER
 @onready var my_projects_container := get_node(WORKSPACE + "MyProjects")
 @onready var my_projects_grid_container := get_node(MY_PROJECT_GRID_CONTAINER)
 @onready var settings_container := get_node(WORKSPACE + "Settings")
-
-func _init():
-	PANEL = OS.get_name() + "/Panel/"
-	WORKSPACE = PANEL + "Panel/Workspace/"
-	
-	match OS.get_name():
-		"Android":
-			BUTTONS = PANEL + "Panel/Menu/Menu/Menu/Margin/Buttons/"
-		"Windows":
-			BUTTONS = PANEL + "Panel/Menu/Menu/Menu/Buttons/"
-	
-	MY_PROJECT_GRID_CONTAINER = WORKSPACE + "MyProjects/ScrollContainer/GridContainer"
 
 
 func _ready():
