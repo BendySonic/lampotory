@@ -33,6 +33,7 @@ func _ready():
 		zoom_speed = 1.01
 
 func _unhandled_input(event):
+	print("OK")
 	# PC
 	# Drag
 	if event is InputEventMouseButton:

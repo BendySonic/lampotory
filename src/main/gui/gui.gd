@@ -27,6 +27,7 @@ const GUI_PATH = "res://src/main/gui/"
 const ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ItemsWindow/"
 const ITEMS_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ScrollContainer/ItemsBox"
 const SHOW_ITEMS_WINDOW = "MarginContainer/VBoxContainer2/ShowItemsWindow/"
+const SCROLL_BOX = ITEMS_WINDOW + "ItemsWindowBox/Body/BodyBox/Items/ScrollContainer/"
 
 const PROPERTIES_WINDOW = "PropertiesWindow/"
 const PROPERTIES_BOX = PROPERTIES_WINDOW + "Body/GridContainer/"
@@ -58,6 +59,7 @@ const EDIT_WINDOW = "EditWindow/"
 @onready var container: MarginContainer = get_node("MarginContainer")
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
 @onready var items_box := get_node(ITEMS_BOX) as GridContainer
+@onready var scroll_box := get_node(SCROLL_BOX) as ScrollContainer
 
 @onready var show_items_window := get_node(SHOW_ITEMS_WINDOW)
 
@@ -96,9 +98,11 @@ func _ready():
 
 #region Input
 func _on_item_pressed(item_data: ItemResource):
+	scroll_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	emit_signal("item_pressed", item_data)
 
 func _on_item_released():
+	scroll_box.mouse_filter = Control.MOUSE_FILTER_PASS
 	emit_signal("item_released")
 
 func _on_items_window_gui_input(event):
