@@ -41,8 +41,7 @@ window/handheld/orientation=5
 
 movie_writer/speaker_mode=1
 movie_writer/mjpeg_quality=0.65
-movie_writer/movie_file="C:/Users/nurba/video2.avi"
-movie_writer/fps=24
+movie_writer/movie_file="C:/Users/nurba/video3.avi"
 
 [editor_plugins]
 
