@@ -16,15 +16,18 @@ line_spacing = -3.0
 font_size = 14
 
 [node name="Tooltip" type="TextureRect"]
+custom_minimum_size = Vector2(20, 20)
 anchors_preset = -1
-anchor_right = 0.015
-anchor_bottom = 0.024
-offset_right = 0.5
-offset_bottom = -0.280001
+anchor_right = 0.02
+anchor_bottom = 0.028
+offset_bottom = -0.16
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
 texture = ExtResource("1_w6da4")
 expand_mode = 3
 stretch_mode = 5
@@ -38,10 +41,11 @@ anchor_left = 0.765
 anchor_top = 0.706
 anchor_right = 6.118
 anchor_bottom = 1.647
-offset_left = -0.00500107
-offset_top = -0.00200081
-offset_right = 168.994
-offset_bottom = 35.001
+offset_left = 1.995
+offset_top = 2.998
+offset_right = 170.994
+offset_bottom = 38.001
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oroie")
 
 [node name="Label" type="Label" parent="PanelContainer"]

@@ -13,6 +13,11 @@ func _on_mouse_exited():
 
 
 func _on_gui_input(event):
+	print("WTH")
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			panel.set_visible(true)
+
+
+func _on_mouse_entered():
+	print("WEEWWD")
