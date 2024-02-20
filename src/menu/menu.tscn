@@ -45,11 +45,11 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_xpxok"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_04ci7"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_6q4xc"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vglub"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_b6lw5"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_eplqk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
 content_margin_left = 10.0
@@ -139,7 +139,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_xpxok")
+button_group = SubResource("ButtonGroup_04ci7")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
 icon_size = Vector2(50, 50)
@@ -150,7 +150,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_6q4xc")
+button_group = SubResource("ButtonGroup_vglub")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
 icon_size = Vector2(50, 50)
@@ -161,7 +161,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 10
 toggle_mode = true
-button_group = SubResource("ButtonGroup_b6lw5")
+button_group = SubResource("ButtonGroup_eplqk")
 down_text = "Настройки"
 up_icon = ExtResource("7_c5npk")
 icon_size = Vector2(50, 50)
