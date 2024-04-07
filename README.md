@@ -7,4 +7,4 @@ The project wants to provide a convenient and free tool for studying physics and
 Let's make education even more accessible! Project at the stage of **alpha**. Made with **Godot engine 4.2**.
 
 ****About developer****
-* Telegram - @buzilin
+* Telegram - @mister_buzzy
