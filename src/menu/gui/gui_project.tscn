@@ -61,11 +61,11 @@ theme_override_font_sizes/font_size = 16
 text = "Имя моего проекта"
 text_overrun_behavior = 3
 
-[node name="Theme" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Path" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.431373, 0.74902, 1, 1)
 theme_override_font_sizes/font_size = 14
-text = "Тема моего проекта"
+text = "Путь моего проекта"
 text_overrun_behavior = 3
 
 [node name="Edit" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]

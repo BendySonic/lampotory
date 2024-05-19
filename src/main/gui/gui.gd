@@ -14,8 +14,8 @@ signal cut_pressed()
 signal paste_pressed()
 signal delete_pressed()
 
-signal save_project_pressed(name: String, theme: String)
-signal open_project_pressed()
+signal save_project_pressed(path: String, name: String, theme: String)
+signal open_project_pressed(path: String)
 
 signal display_vector_toggled(toggled_on: bool)
 signal clear_pressed()
@@ -55,6 +55,8 @@ const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectDescriptionEdit"
 
 const EDIT_WINDOW = "EditWindow/"
 
+const FILE_WINDOW = "FileWindow/"
+
 # Children
 @onready var container: MarginContainer = get_node("MarginContainer")
 @onready var items_window := get_node(ITEMS_WINDOW) as Control
@@ -86,9 +88,13 @@ const EDIT_WINDOW = "EditWindow/"
 @onready var project_theme_edit = get_node(PROJECT_THEME_EDIT) as LineEdit
 
 @onready var edit_window = get_node(EDIT_WINDOW) as PanelContainer
+
+@onready var file_window = get_node(FILE_WINDOW) as FileDialog
 # Resources
 @onready var item_scene := preload(GUI_PATH + "gui_item.tscn")
 @onready var property_scene := preload(GUI_PATH + "gui_property.tscn")
+
+var local: bool
 
 
 func _ready():
@@ -129,11 +135,21 @@ func _on_save_button_id_pressed(id: int):
 		if Global.project_data.is_saved:
 			emit_signal(
 					"save_project_pressed", 
-					Global.project_data.project_name,
-					Global.project_data.project_theme
+					"user://saves/" + Global.project_data["project_name"] + ".dlmp",
+					Global.project_data["project_name"],
+					Global.project_data["project_theme"]
 			)
 		else:
+			local = true
 			show_save_window()
+	elif id == 1:
+		file_window.title = "Сохранить проект как..."
+		file_window.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+		show_file_window()
+	elif id == 2:
+		file_window.title = "Открыть проект как..."
+		file_window.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		show_file_window()
 
 func _on_edit_button_id_pressed(id: int):
 	if id == 0:
@@ -150,6 +166,39 @@ func _on_display_vector_button_toggled(toggled_on):
 
 func _on_clear_button_pressed():
 	emit_signal("clear_pressed")
+
+func _on_save_project_button_pressed():
+	emit_signal(
+			"save_project_pressed",
+			"user://saves/" + project_name_edit.get_text(),
+			project_name_edit.get_text(),
+			project_theme_edit.get_text()
+	)
+
+func _on_file_window_file_selected(path):
+	var name_ = path.rsplit("\\")[path.rsplit("\\").size() - 1]
+	var name = name_.split(".")[0]
+	if file_window.file_mode == FileDialog.FILE_MODE_SAVE_FILE:
+		print("SAVE: ", file_window.current_file)
+		emit_signal(
+					"save_project_pressed", 
+					path + ".dlmp",
+					name,
+					Global.project_data["project_theme"]
+		)
+		print("SAVE: ", file_window.current_file)
+	elif file_window.file_mode == FileDialog.FILE_MODE_OPEN_FILE:
+		emit_signal(
+					"open_project_pressed", 
+					path
+		)
+		emit_signal(
+					"save_project_pressed", 
+					"user://saves/" + name + ".dlmp",
+					name,
+					Global.project_data["project_theme"]
+		)
+		print("OPEN")
 #endregion
 
 
@@ -293,13 +342,6 @@ func show_save_window():
 
 func hide_save_window():
 	save_window.set_visible(false)
-
-func _on_save_project_button_pressed():
-	emit_signal(
-			"save_project_pressed", 
-			project_name_edit.get_text(),
-			project_theme_edit.get_text()
-	)
 #endregion
 
 #region EditWindow
@@ -311,6 +353,9 @@ func show_edit_window():
 func hide_edit_window():
 	edit_window.set_visible(false)
 #endregion
+
+func show_file_window():
+	file_window.set_visible(true)
 
 func _on_exit_button_pressed():
 	hide_save_window()

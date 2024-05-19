@@ -6,13 +6,13 @@ var project_data: Dictionary
 @onready var name_label: Label = get_node(
 		"PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Name"
 )
-@onready var theme_label: Label = get_node(
-		"PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Theme"
+@onready var path_label: Label = get_node(
+		"PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Path"
 )
 
 func _ready():
 	name_label.text = project_data["project_name"]
-	theme_label.text = project_data["project_theme"]
+	path_label.text = project_data["project_path"]
 
 
 func _on_edit_button_pressed():

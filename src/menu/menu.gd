@@ -3,7 +3,7 @@ extends Control
 # Class for menu
 
 
-const SAVE_DIR = "saves/"
+const SAVE_DIR = "user://saves/"
 
 @onready var gui_project_scene := preload("res://src/menu/gui/gui_project.tscn")
 
@@ -27,6 +27,7 @@ var MY_PROJECT_GRID_CONTAINER = WORKSPACE + "MyProjects/ScrollContainer/GridCont
 
 
 func _ready():
+	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, false)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 

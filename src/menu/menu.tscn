@@ -45,11 +45,11 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_04ci7"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_gfmqd"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_vglub"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2mpnc"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_eplqk"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_ndxlk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
 content_margin_left = 10.0
@@ -139,7 +139,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_04ci7")
+button_group = SubResource("ButtonGroup_gfmqd")
 down_text = "Новый"
 up_icon = ExtResource("5_t4c6l")
 icon_size = Vector2(50, 50)
@@ -150,7 +150,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_vglub")
+button_group = SubResource("ButtonGroup_2mpnc")
 down_text = "Мои проекты"
 up_icon = ExtResource("6_iimh4")
 icon_size = Vector2(50, 50)
@@ -161,7 +161,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 10
 toggle_mode = true
-button_group = SubResource("ButtonGroup_eplqk")
+button_group = SubResource("ButtonGroup_ndxlk")
 down_text = "Настройки"
 up_icon = ExtResource("7_c5npk")
 icon_size = Vector2(50, 50)
@@ -220,6 +220,11 @@ theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pohmn")
 text = "Мои проекты"
+
+[node name="Tooltip" parent="Panel/Panel/Workspace/MyProjects/ProjectMenu" instance=ExtResource("14_eqdgs")]
+z_index = 10
+layout_mode = 2
+tooltip = "Локальное хранилище, располагающееся по адресу: \"%APPDATA%\\Godot\\app_userdata\\lampotory\\saves\\\""
 
 [node name="CreateProject" type="Button" parent="Panel/Panel/Workspace/MyProjects/ProjectMenu"]
 visible = false

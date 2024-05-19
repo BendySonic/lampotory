@@ -9,10 +9,6 @@ func _ready():
 func prepare():
 	await get_tree().create_timer(0.1).timeout
 	var main: PackedScene
-	match OS.get_name():
-		"Windows":
-			main = await ResourceLoader.load("res://src/main/main.tscn")
-		"Android":
-			main = await ResourceLoader.load("res://src/main/main.tscn")
+	main = await ResourceLoader.load("res://src/main/main.tscn")
 	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_packed(main)

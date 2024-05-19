@@ -25,15 +25,14 @@ var zoom_speed: float
 
 
 func _ready():
-	if OS.get_name() == "Windows":
-		camera_speed = 1
-		zoom_speed = 1.05
-	elif OS.get_name() == "Android":
+	if OS.get_name() == "Android":
 		camera_speed = 2
 		zoom_speed = 1.01
+	else:
+		camera_speed = 1
+		zoom_speed = 1.05
 
 func _unhandled_input(event):
-	print("OK")
 	# PC
 	# Drag
 	if event is InputEventMouseButton:

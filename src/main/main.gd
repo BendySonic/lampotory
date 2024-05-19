@@ -24,7 +24,7 @@ func _enter_tree():
 
 func _ready():
 	if Global.project_data["is_saved"]:
-		await node2d.load_project(Global.project_data["project_name"])
+		await node2d.load_project(Global.project_data["project_path"])
 	set_mode(project_modes[Global.project_data["project_mode"]])
 	
 	gui.connect("item_pressed", _on_item_pressed)
@@ -93,11 +93,12 @@ func _on_delete_pressed():
 	node2d.delete_selected_body()
 	_clear_select()
 
-func _on_save_project_pressed(name: String, theme: String):
-	node2d.save_project(name, theme)
+func _on_save_project_pressed(path: String, name: String, theme: String):
+	print("NAME1: ", name)
+	node2d.save_project(path, name, theme)
 
-func _on_open_project_pressed():
-	await node2d.load_project("Привет")
+func _on_open_project_pressed(path: String):
+	node2d.load_project(path)
 
 func _on_display_vector_pressed(toggled_on: bool):
 	node2d.display_vector(toggled_on)

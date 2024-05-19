@@ -110,13 +110,15 @@ func item_released():
 
 
 #region Saver
-func save_project(name: String, theme: String):
+func save_project(path: String, name: String, theme: String):
+	print("NAMEEEE: ", name)
 	Global.project_data["project_name"] = name
 	Global.project_data["project_theme"] = theme
+	Global.project_data["project_path"] = path
 	Global.project_data["is_saved"] = true
-	LampFileManager.save_file(bodies_node, name)
+	LampFileManager.save_file(bodies_node, path)
 
-func load_project(name: String):#file_path: String):
+func load_project(path: String):#file_path: String):
 	if not Global.project_data["is_saved"]:
 		return
 	# Clear workspace
@@ -124,7 +126,7 @@ func load_project(name: String):#file_path: String):
 		bodies_node.remove_child(body)
 		body.queue_free()
 	# Load project
-	var bodies = LampFileManager.load_file(Global.project_data["project_name"])
+	var bodies = LampFileManager.load_file(path)
 	await(get_tree().create_timer(0.3).timeout)
 	for body in bodies.get_children():
 		connect_body_signals(body)
@@ -145,7 +147,7 @@ func play(button_pressed: bool):
 
 func reload():
 	state = States.PLAY
-	await load_project(Global.project_data["project_name"])
+	load_project(Global.project_data["project_path"])
 #endregion
 
 
