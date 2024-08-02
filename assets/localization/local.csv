@@ -7,3 +7,42 @@ width,Width,Длина
 height,Height,Высота
 precise_mode,Precies mode,Высокоточный режим
 friction,Friction,Трение
+new_project,New project,Новый проект
+mechanics,Mechanics,Механика
+electrodynamics,Electrodynamics,Электродинамика
+new,New,Новый
+my_projects,My projects,Мои проекты
+search,Search,Поиск
+most_new,Most new,Самые новые
+settings,Settings,Настройки
+efficient_mode,Efficient mode,Эффективный режим
+dark_theme,Dark theme,Тёмная тема
+mechanics_info,Mechanics laboratory simulating school laboratory work,"Лаборатория механики, симулирующая школьные лабораторные работы"
+create,Create,Создать
+menu,Menu,Меню
+project_settings,Project settings,Настройки проекта
+save,Save,Сохранить
+export,Export,Экспорт
+import,Import,Импорт
+block_body,Wood block,Деревянный брусок
+dynamometer,Dynamometer,Динамометр
+hebel,Lever,Рычаг
+pulley,Pulley,Механич. Блок
+ruler,Ruler,Линейка
+slope,Slope,Склон
+tripod,Tripod,Штатив
+objects,Objects,Объекты
+lua_hello,"Hi, I'm Lua, this lab's virtual assistant!","Привет, я Луа, виртуальный помощник твоей лаборатории!"
+dictionary,Dictionary,Справочник
+help,Help,Помощь
+lua_dictionary,"Ask me a question about physical definitions: 'mass', 'velocity', 'force'.","Задай мне вопрос о физических определениях: 'масса', 'скорость', 'сила'."
+loading,Loading…,Загрузка…
+loading_text,Loading our laboratory!,Загружаем нашу лабораторию!
+no_properties,Body has no properties!,У тела нет свойств!
+save_project,Save project,Сохранить проект
+project_name,Project name,Название проекта
+project_description,Project description,Описание проекта
+mechanics_lab,Laboratory of mechanics,Лаборатория механики
+project_edit,Project edit,Редактировать проект
+lua_write_me,Write me!,Напиши мне!
+return,Return,Назад

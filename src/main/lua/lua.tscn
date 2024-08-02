@@ -504,7 +504,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(85, 75)
 layout_mode = 2
 size_flags_horizontal = 1
-down_text = "Справочник"
+down_text = "dictionary"
 up_icon = ExtResource("4_nklj4")
 icon_size = Vector2(40, 40)
 text_size = 12
@@ -513,7 +513,7 @@ text_size = 12
 custom_minimum_size = Vector2(85, 75)
 layout_mode = 2
 size_flags_horizontal = 1
-down_text = "Помощь"
+down_text = "help"
 up_icon = ExtResource("5_he7cl")
 icon_size = Vector2(20, 30)
 text_size = 12
@@ -523,7 +523,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("7_32y31")
-text = "Назад"
+text = "return"
 
 [node name="Warning" type="PanelContainer" parent="."]
 visible = false
@@ -557,7 +557,7 @@ scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(107, 12)
 theme = ExtResource("3_5y306")
 theme_override_font_sizes/font_size = 14
-text = "Напиши мне!"
+placeholder_text = "lua_write_me"
 
 [node name="MessageAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

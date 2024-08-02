@@ -15,6 +15,7 @@ signal paste_pressed()
 signal delete_pressed()
 
 signal save_project_pressed(path: String, name: String, theme: String)
+signal edit_project_pressed(old_path: String, new_path: String, name: String, theme: String)
 signal open_project_pressed(path: String)
 
 signal display_vector_toggled(toggled_on: bool)
@@ -50,10 +51,13 @@ const SAVE_BUTTON = MENU_BOX + "Save/SaveButton"
 
 const SAVE_WINDOW = "SaveWindow/"
 const SAVE_BOX = SAVE_WINDOW + "MarginContainer/VBoxContainer/"
-const PROJECT_NAME_EDIT = SAVE_BOX + "ProjectNameEdit"
-const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectDescriptionEdit"
+const PROJECT_NAME_SAVE = SAVE_BOX + "ProjectNameSave"
+const PROJECT_THEME_SAVE = SAVE_BOX + "ProjectDescriptionSave"
 
 const EDIT_WINDOW = "EditWindow/"
+const EDIT_BOX = EDIT_WINDOW + "MarginContainer/VBoxContainer/"
+const PROJECT_NAME_EDIT = SAVE_BOX + "ProjectNameEdit"
+const PROJECT_THEME_EDIT = SAVE_BOX + "ProjectDescriptionEdit"
 
 const FILE_WINDOW = "FileWindow/"
 
@@ -84,17 +88,18 @@ const FILE_WINDOW = "FileWindow/"
 @onready var edit_button := get_node(EDIT_BUTTON) as MenuButton
 
 @onready var save_window = get_node(SAVE_WINDOW) as PanelContainer
-@onready var project_name_edit = get_node(PROJECT_NAME_EDIT) as LineEdit
-@onready var project_theme_edit = get_node(PROJECT_THEME_EDIT) as LineEdit
+@onready var project_name_save = get_node(PROJECT_NAME_SAVE) as LineEdit
+@onready var project_theme_save = get_node(PROJECT_THEME_SAVE) as LineEdit
 
 @onready var edit_window = get_node(EDIT_WINDOW) as PanelContainer
+@onready var project_name_edit = get_node(PROJECT_NAME_EDIT) as LineEdit
+@onready var project_theme_edit = get_node(PROJECT_THEME_EDIT) as LineEdit
 
 @onready var file_window = get_node(FILE_WINDOW) as FileDialog
 # Resources
 @onready var item_scene := preload(GUI_PATH + "gui_item.tscn")
 @onready var property_scene := preload(GUI_PATH + "gui_property.tscn")
 
-var local: bool
 
 
 func _ready():
@@ -117,6 +122,7 @@ func _on_items_window_gui_input(event):
 	if not inner_rect.has_point(event.position) and outer_rect.has_point(event.position):
 		emit_signal("items_window_mouse_exited")
 
+# Player
 func _on_play_toggled(button_pressed: bool):
 	emit_signal("play_toggled", button_pressed)
 
@@ -130,63 +136,46 @@ func _on_speed_up_button_toggled(button_pressed: bool):
 	else:
 		Engine.time_scale = 1.0
 
-func _on_save_button_id_pressed(id: int):
-	if id == 0:
-		if Global.project_data.is_saved:
-			emit_signal(
-					"save_project_pressed", 
-					"user://saves/" + Global.project_data["project_name"] + ".dlmp",
-					Global.project_data["project_name"],
-					Global.project_data["project_theme"]
-			)
-		else:
-			local = true
-			show_save_window()
-	elif id == 1:
-		file_window.title = "Сохранить проект как..."
-		file_window.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-		show_file_window()
-	elif id == 2:
-		file_window.title = "Открыть проект как..."
-		file_window.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-		show_file_window()
-
-func _on_edit_button_id_pressed(id: int):
-	if id == 0:
-		Global.project_data["project_name"] = ""
-		Global.project_data["project_theme"] = ""
-		Global.project_data["project_mode"] = ""
-		Global.project_data["is_saved"] = false
-		get_tree().change_scene_to_file("res://src/menu/menu.tscn")
-	if id == 1:
-		show_edit_window()
-
+# Tools
 func _on_display_vector_button_toggled(toggled_on):
 	emit_signal("display_vector_toggled", toggled_on)
 
 func _on_clear_button_pressed():
 	emit_signal("clear_pressed")
 
+# Save/Load/Edit project
+func _on_save_button_id_pressed(id: int):
+	if id == 0:
+		save_project()
+	elif id == 1:
+		export_project()
+	elif id == 2:
+		import_project()
+
+func _on_edit_button_id_pressed(id: int):
+	if id == 0:
+		return_to_menu()
+	if id == 1:
+		edit_project()
+
 func _on_save_project_button_pressed():
 	emit_signal(
 			"save_project_pressed",
-			"user://saves/" + project_name_edit.get_text(),
-			project_name_edit.get_text(),
-			project_theme_edit.get_text()
+			"user://saves/" + project_name_save.get_text(),
+			project_name_save.get_text(),
+			project_theme_save.get_text()
 	)
 
 func _on_file_window_file_selected(path):
 	var name_ = path.rsplit("\\")[path.rsplit("\\").size() - 1]
 	var name = name_.split(".")[0]
 	if file_window.file_mode == FileDialog.FILE_MODE_SAVE_FILE:
-		print("SAVE: ", file_window.current_file)
 		emit_signal(
 					"save_project_pressed", 
 					path + ".dlmp",
 					name,
 					Global.project_data["project_theme"]
 		)
-		print("SAVE: ", file_window.current_file)
 	elif file_window.file_mode == FileDialog.FILE_MODE_OPEN_FILE:
 		emit_signal(
 					"open_project_pressed", 
@@ -198,12 +187,45 @@ func _on_file_window_file_selected(path):
 					name,
 					Global.project_data["project_theme"]
 		)
-		print("OPEN")
+
+func save_project():
+	if Global.project_data.is_saved:
+			emit_signal(
+					"save_project_pressed", 
+					"user://saves/" + Global.project_data["project_name"] + ".dlmp",
+					Global.project_data["project_name"],
+					Global.project_data["project_theme"]
+			)
+	else:
+		show_save_window()
+
+func export_project():
+	file_window.title = "Сохранить проект как..."
+	file_window.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+	show_file_window()
+
+func import_project():
+	file_window.title = "Открыть проект как..."
+	file_window.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	show_file_window()
+
+func return_to_menu():
+	Global.project_data["project_name"] = ""
+	Global.project_data["project_theme"] = ""
+	Global.project_data["project_mode"] = ""
+	Global.project_data["is_saved"] = false
+	get_tree().change_scene_to_file("res://src/menu/menu.tscn")
+
+func edit_project():
+	project_name_edit = Global.project_data["project_name"]
+	project_theme_edit = Global.project_data["project_theme"]
+	show_edit_window()
 #endregion
 
 
 
 #region ItemsWindow
+# Items for body choose
 func create_items(item_resources: Array[ItemResource]):
 	for item_data in item_resources:
 		var new_item = item_scene.instantiate()
@@ -230,6 +252,7 @@ func _on_show_pressed():
 
 
 #region Select
+# Body select, actions (copy, paste, cut) and bodu properties
 func clear_select():
 	delete_actions()
 	delete_properties()
@@ -259,6 +282,7 @@ func create_actions_with_body(body: NormalBody):
 func delete_actions():
 	actions_window.set_visible(false)
 
+# Can use CLAMP() to limit position of actions widnow
 func limit_actions():
 	if (
 		actions_window.get_global_position().x > 
@@ -362,6 +386,7 @@ func _on_exit_button_pressed():
 	hide_edit_window()
 
 
+# ANDROID ZONE, TEST
 func fit_to_mobile():
 	if OS.get_name() == "Android":
 		container.scale *= 1.7
@@ -369,20 +394,3 @@ func fit_to_mobile():
 		items_window.custom_minimum_size.y = DisplayServer.screen_get_size().y * 0.2
 		items_window.size.y = DisplayServer.screen_get_size().y * 0.2
 		items_window.size_flags_vertical = Control.SIZE_SHRINK_END
-
-
-# NOTE:
-# Don't use: legacy code --->>>
-
-#region Cursor
-#func create_cursor(item_data: ItemResource):
-	#delete_cursor()
-	#var cursor: GUICursor = cursor_scene.instantiate()
-	#cursor.init(item_data)
-	#cursor_layer.add_child(cursor)
-
-#func delete_cursor():
-	#for child in cursor_layer.get_children():
-		#cursor_layer.remove_child(child)
-		#child.queue_free()
-#endregion

@@ -16,7 +16,7 @@ enum Player {PLAY, PAUSE}
 
 static var count: int = 0
 # Save system
-var save_data: Dictionary
+var loaded_data: Dictionary
 var is_loaded := false
 
 # Data
@@ -49,9 +49,9 @@ func create_body():
 func create_copy_body(properties_arg: Dictionary):
 	self.properties = properties_arg.duplicate()
 
-func load_body(save_data_arg: Dictionary):
+func load_body(loaded_data_arg: Dictionary):
 	self.is_loaded = true
-	self.save_data = save_data_arg
+	self.loaded_data = loaded_data_arg
 
 func _notification(what):
 	if what == NOTIFICATION_POSTINITIALIZE:
@@ -60,7 +60,7 @@ func _notification(what):
 		count -= 1
 
 func _ready():
-	save_component.load_data(save_data, self)
+	save_component.load_data(loaded_data, self)
 	reload_data()
 	prepare_body()
 	connect("data_edited", _on_data_edited)
@@ -123,6 +123,7 @@ func set_unhold():
 func is_held() -> bool:
 	return (is_state(States.STATIC_HOLD) or is_state(States.PIN_HOLD))
 #endregion
+
 
 #region Select
 func select_body():

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_03h41")
-item_name = "Склон"
+item_name = "slope"
 item_tooltip = "Перемещаемый склон с настраиваемым градусом"
 item_icon = ExtResource("1_8138f")
 item_modulate = Color(1, 1, 1, 1)

@@ -92,6 +92,7 @@ load={
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/localization/local.en.translation", "res://assets/localization/local.ru.translation")
+locale/test="en"
 
 [layer_names]
 

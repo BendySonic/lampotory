@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_5j6ac")
-item_name = "Деревянный брусок"
+item_name = "block_body"
 item_tooltip = "Обычный прямоугольный деревянный брусок."
 item_icon = ExtResource("1_scogn")
 item_modulate = Color(1, 1, 1, 1)

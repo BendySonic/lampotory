@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_mv22b")
-item_name = "Рычаг"
+item_name = "hebel"
 item_tooltip = "Рычаг, вращающийся по правилу моментов"
 item_icon = ExtResource("1_aqnix")
 item_modulate = Color(1, 1, 1, 1)

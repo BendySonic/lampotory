@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_7rk22")
-item_name = "Линейка"
+item_name = "ruler"
 item_tooltip = "Измеряет расстояние в метрах"
 item_icon = ExtResource("1_6eqbq")
 item_modulate = Color(1, 1, 1, 1)

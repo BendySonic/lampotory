@@ -59,7 +59,7 @@ func _on_lua_toggled(toggled_on):
 		if mode == Modes.DICTIONARY or mode == Modes.HELP:
 			edit_animation_player.play("show")
 		if mode == Modes.NONE:
-			print_message("Привет, я Луа, виртуальный помощник твоей лаборатории!")
+			print_message(tr("lua_hello"))
 	else:
 		message_animation_player.play_backwards("show")
 		warning_animation_player.play("show")
@@ -68,8 +68,7 @@ func _on_lua_toggled(toggled_on):
 
 
 func _on_book_button_pressed():
-	print_message("Задай мне вопрос о физических определениях! " +
-			"Например, 'масса', 'скорость', 'сила'.")
+	print_message(tr("lua_dictionary"))
 	book_button.set_visible(false)
 	help_button.set_visible(false)
 	return_button.set_visible(true)
@@ -77,7 +76,7 @@ func _on_book_button_pressed():
 	edit_animation_player.play("show")
 
 func _on_return_button_pressed():
-	print_message("Привет, я Луа, виртуальный помощник твоей лаборатории!")
+	print_message(tr("lua_hello"))
 	book_button.set_visible(true)
 	help_button.set_visible(true)
 	return_button.set_visible(false)

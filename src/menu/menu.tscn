@@ -45,11 +45,11 @@ corner_radius_top_right = 40
 shadow_color = Color(0, 0, 0, 0.176471)
 shadow_offset = Vector2(10, 10)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gfmqd"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_hcf8b"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_2mpnc"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_l37p8"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ndxlk"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_bw8am"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pohmn"]
 content_margin_left = 10.0
@@ -139,8 +139,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_gfmqd")
-down_text = "Новый"
+button_group = SubResource("ButtonGroup_hcf8b")
+down_text = "new"
 up_icon = ExtResource("5_t4c6l")
 icon_size = Vector2(50, 50)
 text_size = 18
@@ -150,8 +150,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-button_group = SubResource("ButtonGroup_2mpnc")
-down_text = "Мои проекты"
+button_group = SubResource("ButtonGroup_l37p8")
+down_text = "my_projects"
 up_icon = ExtResource("6_iimh4")
 icon_size = Vector2(50, 50)
 text_size = 16
@@ -161,8 +161,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 10
 toggle_mode = true
-button_group = SubResource("ButtonGroup_ndxlk")
-down_text = "Настройки"
+button_group = SubResource("ButtonGroup_bw8am")
+down_text = "settings"
 up_icon = ExtResource("7_c5npk")
 icon_size = Vector2(50, 50)
 text_size = 18
@@ -188,7 +188,7 @@ theme_override_constants/separation = 15
 layout_mode = 2
 theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
 theme_override_font_sizes/font_size = 22
-text = "Новый проект"
+text = "new_project"
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/Workspace/New"]
 layout_mode = 2
@@ -219,7 +219,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.145098, 0.156863, 0.14902, 1)
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pohmn")
-text = "Мои проекты"
+text = "my_projects"
 
 [node name="Tooltip" parent="Panel/Panel/Workspace/MyProjects/ProjectMenu" instance=ExtResource("14_eqdgs")]
 z_index = 10
@@ -255,7 +255,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_0numr")
 theme_override_font_sizes/font_size = 16
-placeholder_text = "Поиск"
+placeholder_text = "search"
 
 [node name="OptionButton" type="OptionButton" parent="Panel/Panel/Workspace/MyProjects/ProjectMenu"]
 layout_mode = 2
@@ -264,7 +264,7 @@ toggle_mode = false
 item_count = 1
 selected = 0
 allow_reselect = true
-popup/item_0/text = "Самые новые"
+popup/item_0/text = "most_new"
 popup/item_0/id = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Panel/Workspace/MyProjects"]
@@ -288,7 +288,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/Panel/Workspace/Settings/HBox"]
 layout_mode = 2
 mouse_filter = 1
-text = "Настройки"
+text = "settings"
 label_settings = SubResource("LabelSettings_gbv5a")
 
 [node name="HBox3" type="HBoxContainer" parent="Panel/Panel/Workspace/Settings"]
@@ -300,7 +300,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "vwwdsserd"
 mouse_filter = 1
-text = "Эффективный режим"
+text = "efficient_mode"
 label_settings = SubResource("LabelSettings_gbv5a")
 
 [node name="Tooltip" parent="Panel/Panel/Workspace/Settings/HBox3" instance=ExtResource("14_eqdgs")]
@@ -319,7 +319,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.0
-text = "Тёмная тема"
+text = "dark_theme"
 label_settings = SubResource("LabelSettings_gbv5a")
 
 [node name="CheckButton" type="CheckButton" parent="Panel/Panel/Workspace/Settings/HBox2"]

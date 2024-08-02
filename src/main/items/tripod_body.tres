@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_fh3pc")
-item_name = "Штатив"
+item_name = "tripod"
 item_tooltip = "Прибор для крепления предметов на определенноё высоте от поверхности."
 item_icon = ExtResource("1_cqwl8")
 item_modulate = Color(1, 1, 1, 1)
