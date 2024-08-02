@@ -8,3 +8,5 @@ Let's make education even more accessible! Project at the stage of **alpha**. Ma
 
 ****About developer****
 * Telegram - @mister_buzzy
+* Discord - mrbuzzy
+* itch-io - https://buzzydev.itch.io
