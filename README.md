@@ -7,6 +7,7 @@ The project wants to provide a convenient and free tool for studying physics and
 Let's make education even more accessible! Project at the stage of **alpha**. Made with **Godot engine 4.2**.
 
 ****About developer****
+Author: BendySonic (BuzzeDev, mrbuzzy, mister_buzzy)
 * Telegram - @mister_buzzy
 * Discord - mrbuzzy
 * itch-io - https://buzzydev.itch.io
