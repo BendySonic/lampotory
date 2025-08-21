@@ -11,5 +11,5 @@ Please use my work with attribution. Not for commercial use.
 ****About developer****
 * Author: BendySonic (itsmebuzzy, mrbuzzy)
 * ФИО: НДБ
-* itch-io - https://itsmebuzzy.itch.io
+* itch-io - https://itsmebuzzy.itch.io/lampotory
 * https://rutube.ru/video/d65e9aab7dbd6f248b4d93f1661759b6/
