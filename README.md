@@ -9,7 +9,6 @@ Let's make education even more accessible! Project at the stage of **alpha**. Ma
 Please use my work with attribution. Not for commercial use.
 
 ****About developer****
-* Author: BendySonic (BuzzeDev, mrbuzzy, mister_buzzy)
-* Telegram - @mister_buzzy
-* Discord - mrbuzzy
-* itch-io - https://buzzydev.itch.io
+* Author: BendySonic (itsmebuzzy, mrbuzzy)
+* ФИО: НДБ
+* itch-io - https://itsmebuzzy.itch.io
